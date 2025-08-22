@@ -46,7 +46,7 @@ const resources = {
       productsTitle: 'Nuestros Productos',
       productsSubtitle: 'Descubre nuestra línea exclusiva de suplementos nutricionales y productos premium diseñados en Mallorca para potenciar tu bienestar y rendimiento en toda España.',
       productsComingSoon: 'Próximamente Disponibles',
-      productsComingSoonDesc: 'Estamos finalizando los últimos detalles para el lanzamiento de nuestra tienda online española. Muy pronto podrás adquirir todos estos suplementos premium y productos de bienestar directamente desde nuestra plataforma, con envío a toda España.',
+      productsComingSoonDesc: 'Estamos finalizando los últimos detalles para el lanzamiento de nuestra tienda online. Muy pronto podrás adquirir todos estos suplementos premium y productos de bienestar directamente desde nuestra plataforma, con envío a toda España.',
       productsAvailableSoon: 'Próximamente Disponible',
       productsInterested: '¿Interesado en nuestros productos?',
       productsInterestedDesc: 'Mantente al tanto de nuestras novedades desde Manacor, Mallorca, y sé el primero en conocer cuando nuestros suplementos nutricionales estén disponibles para la venta en España. Cada producto MANPOWERS está respaldado por nuestra garantía de calidad premium y años de experiencia en el sector del bienestar.',
@@ -63,8 +63,22 @@ const resources = {
       // Footer
       footerCompany: 'Empresa líder en suplementos premium y productos de bienestar desde Manacor, Mallorca.',
       footerContact: 'Contacto',
-      footerAddress: 'Manacor, Mallorca, España',
-      footerCopyright: '© 2024 MANPOWERS. Todos los derechos reservados.'
+      footerAddress: 'Carrer Ferrers, 6, 07500 Manacor, Illes Balears',
+      footerCopyright: '© MANPOWERS. Todos los derechos reservados.',
+      
+      // Page Title
+      pageTitle: 'MANPOWERS - Suplementos Premium y Productos de Bienestar | España',
+      
+      // Amazon Buttons
+      buyOn: 'Comprar en',
+      buyOn100ml: '100ml',
+      buyOn50ml: '50ml',
+      
+      // Breadcrumbs
+      home: 'Inicio',
+      products: 'Productos',
+      about: 'Nosotros',
+      contact: 'Contacto'
     }
   },
   en: {
@@ -109,7 +123,7 @@ const resources = {
       productsTitle: 'Our Products',
       productsSubtitle: 'Discover our exclusive line of nutritional supplements and premium products designed in Mallorca to enhance your wellness and performance throughout Spain.',
       productsComingSoon: 'Coming Soon',
-      productsComingSoonDesc: 'We are finalizing the last details for the launch of our Spanish online store. Very soon you will be able to purchase all these premium supplements and wellness products directly from our platform, with shipping throughout Spain.',
+      productsComingSoonDesc: 'We are finalizing the last details for the launch of our online store. Very soon you will be able to purchase all these premium supplements and wellness products directly from our platform, with shipping throughout Spain.',
       productsAvailableSoon: 'Available Soon',
       productsInterested: 'Interested in our products?',
       productsInterestedDesc: 'Stay tuned for our news from Manacor, Mallorca, and be the first to know when our nutritional supplements are available for sale in Spain. Every MANPOWERS product is backed by our premium quality guarantee and years of experience in the wellness sector.',
@@ -126,8 +140,22 @@ const resources = {
       // Footer
       footerCompany: 'Leading company in premium supplements and wellness products from Manacor, Mallorca.',
       footerContact: 'Contact',
-      footerAddress: 'Manacor, Mallorca, Spain',
-      footerCopyright: '© 2024 MANPOWERS. All rights reserved.'
+      footerAddress: 'Carrer Ferrers, 6, 07500 Manacor, Illes Balears',
+      footerCopyright: '© MANPOWERS. All rights reserved.',
+      
+      // Page Title
+      pageTitle: 'MANPOWERS - Premium Supplements and Wellness Products | Spain',
+      
+      // Amazon Buttons
+      buyOn: 'Buy on',
+      buyOn100ml: '100ml',
+      buyOn50ml: '50ml',
+      
+      // Breadcrumbs
+      home: 'Home',
+      products: 'Products',
+      about: 'About',
+      contact: 'Contact'
     }
   }
 };

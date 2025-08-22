@@ -38,7 +38,7 @@ const Products: React.FC = () => {
   ];
 
   return (
-    <section className="bg-gradient-to-b from-gray-950 to-black text-white py-20 px-4">
+    <section id="products" className="bg-gradient-to-b from-gray-950 to-black text-white py-20 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Título principal */}
         <div className="text-center mb-16">
@@ -72,7 +72,7 @@ const Products: React.FC = () => {
               <div className="h-64 overflow-hidden relative bg-gradient-to-br from-gray-900 to-black">
                 <img
                   src={product.image}
-                  alt={product.name}
+                  alt={`${product.name} - Suplemento premium MANPOWERS disponible en España`}
                   className="h-full w-full object-cover drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]"
                 />
               </div>
@@ -87,11 +87,42 @@ const Products: React.FC = () => {
                 </p>
               </div>
 
-              {/* Badge de "Próximamente" */}
+              {/* Badge de "Próximamente" o Botones de Amazon */}
               <div className="px-6 pb-6">
-                <div className="bg-gradient-to-r from-gray-700 to-gray-600 text-white text-center py-3 px-4 rounded-lg font-semibold">
-                  {t('productsAvailableSoon')}
-                </div>
+                {product.id === 3 ? (
+                  // Botones de Amazon para el protector solar
+                  <div className="space-y-3">
+                    <a
+                      href="https://www.amazon.es/dp/B0FMRZL91K"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center space-x-2 w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-4 rounded-lg text-center transition-all duration-300 shadow-[0_4px_10px_rgba(234,88,12,0.3)]"
+                    >
+                      <span className="flex items-center space-x-1">
+                          <span>{t('buyOn')}</span>
+                          <img src="/Amazon_Logo_2.webp" alt="Amazon" className="h-4 w-auto" />
+                          <span className='ml-1'>{t('buyOn100ml')}</span>
+                        </span>
+                    </a>
+                    <a
+                      href="https://www.amazon.es/dp/B0FMRYF82L"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center space-x-2 w-full  bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-4 rounded-lg text-center transition-all duration-300 shadow-[0_4px_10px_rgba(234,88,12,0.3)]"
+                    >
+                      <span className="flex items-center space-x-1">
+                          <span>{t('buyOn')}</span>
+                          <img src="/Amazon_Logo_2.webp" alt="Amazon" className="h-4 w-auto" />
+                          <span className='ml-1'>{t('buyOn50ml')}</span>
+                        </span>
+                    </a>
+                  </div>
+                ) : (
+                  // Badge "Próximamente" para otros productos
+                  <div className="bg-gradient-to-r from-gray-700 to-gray-600 text-white text-center py-3 px-4 rounded-lg font-semibold">
+                    {t('productsAvailableSoon')}
+                  </div>
+                )}
               </div>
             </div>
           ))}

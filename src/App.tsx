@@ -4,8 +4,12 @@ import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import AboutUs from "./sections/aboutUs";
 import Products from "./sections/products";
+import useLanguageUpdater from "./hooks/useLanguageUpdater";
 
 function App() {
+  // Hook para actualizar idioma y título dinámicamente
+  useLanguageUpdater();
+
   return (
     <div className="">
       <Header />
