@@ -70,7 +70,7 @@ const resources = {
       pageTitle: 'MANPOWERS - Suplementos Premium y Productos de Bienestar | España',
       
       // Amazon Buttons
-      buyOn: 'Comprar en',
+      buyOn: 'Comprar',
       buyOn100ml: '100ml',
       buyOn50ml: '50ml',
       
@@ -147,7 +147,7 @@ const resources = {
       pageTitle: 'MANPOWERS - Premium Supplements and Wellness Products | Spain',
       
       // Amazon Buttons
-      buyOn: 'Buy on',
+      buyOn: 'Buy',
       buyOn100ml: '100ml',
       buyOn50ml: '50ml',
       

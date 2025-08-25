@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import useScrollAnimation, { useStaggeredAnimation } from '../../hooks/useScrollAnimation';
 
 interface Product {
   id: number;
@@ -11,6 +12,10 @@ interface Product {
 
 const Products: React.FC = () => {
   const { t } = useTranslation();
+  const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation();
+  const { ref: bannerRef, isVisible: bannerVisible } = useScrollAnimation();
+  const { containerRef: productsRef, visibleItems: productVisible } = useStaggeredAnimation(3, 200);
+  const { ref: finalRef, isVisible: finalVisible } = useScrollAnimation();
   
   // Datos de productos
   const products: Product[] = [
@@ -41,7 +46,14 @@ const Products: React.FC = () => {
     <section id="products" className="bg-gradient-to-b from-gray-950 to-black text-white py-20 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Título principal */}
-        <div className="text-center mb-16">
+        <div 
+          ref={titleRef as React.RefObject<HTMLDivElement>}
+          className={`text-center mb-16 transition-all duration-1000 ${
+            titleVisible 
+              ? 'opacity-100 translate-y-0' 
+              : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h2 className="text-4xl md:text-6xl font-bold mb-6 drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]">
             {t('productsTitle')}
           </h2>
@@ -52,7 +64,14 @@ const Products: React.FC = () => {
         </div>
 
         {/* Mensaje de próximo lanzamiento */}
-        <div className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-xl border border-gray-700 mb-16 max-w-4xl mx-auto text-center">
+        <div 
+          ref={bannerRef as React.RefObject<HTMLDivElement>}
+          className={`bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-xl border border-gray-700 mb-16 max-w-4xl mx-auto text-center transition-all duration-1000 delay-200 ${
+            bannerVisible 
+              ? 'opacity-100 translate-y-0' 
+              : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h3 className="text-2xl font-bold text-white mb-3">
             {t('productsComingSoon')}
           </h3>
@@ -62,11 +81,15 @@ const Products: React.FC = () => {
         </div>
 
         {/* Grid de productos */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {products.map((product) => (
+        <div ref={productsRef as React.RefObject<HTMLDivElement>} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {products.map((product, index) => (
             <div
               key={product.id}
-              className="bg-gradient-to-br from-gray-800 via-gray-900 to-black rounded-xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.5)] transform transition-all duration-300 hover:scale-105 hover:shadow-[0_12px_40px_rgba(255,255,255,0.1)] border border-gray-700"
+              className={`bg-gradient-to-br from-gray-800 via-gray-900 to-black rounded-xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.5)] transform transition-all duration-1000 hover:scale-105 hover:shadow-[0_12px_40px_rgba(255,255,255,0.1)] border border-gray-700 ${
+                productVisible[index] 
+                  ? 'opacity-100 translate-y-0 scale-100' 
+                  : 'opacity-0 translate-y-12 scale-95'
+              }`}
             >
               {/* Imagen del producto */}
               <div className="h-64 overflow-hidden relative bg-gradient-to-br from-gray-900 to-black">
@@ -100,8 +123,7 @@ const Products: React.FC = () => {
                     >
                       <span className="flex items-center space-x-1">
                           <span>{t('buyOn')}</span>
-                          <img src="/Amazon_Logo_2.webp" alt="Amazon" className="h-4 w-auto" />
-                          <span className='ml-1'>{t('buyOn100ml')}</span>
+                          <span>{t('buyOn100ml')}</span>
                         </span>
                     </a>
                     <a
@@ -112,8 +134,7 @@ const Products: React.FC = () => {
                     >
                       <span className="flex items-center space-x-1">
                           <span>{t('buyOn')}</span>
-                          <img src="/Amazon_Logo_2.webp" alt="Amazon" className="h-4 w-auto" />
-                          <span className='ml-1'>{t('buyOn50ml')}</span>
+                          <span>{t('buyOn50ml')}</span>
                         </span>
                     </a>
                   </div>
@@ -130,7 +151,14 @@ const Products: React.FC = () => {
 
         {/* Mensaje final */}
         <div className="text-center mt-16">
-          <div className="bg-gradient-to-r from-gray-900 to-black p-8 rounded-xl border border-gray-700 max-w-4xl mx-auto">
+          <div 
+            ref={finalRef as React.RefObject<HTMLDivElement>}
+            className={`bg-gradient-to-r from-gray-900 to-black p-8 rounded-xl border border-gray-700 max-w-4xl mx-auto transition-all duration-1000 delay-600 ${
+              finalVisible 
+                ? 'opacity-100 translate-y-0' 
+                : 'opacity-0 translate-y-8'
+            }`}
+          >
             <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
               {t('productsInterested')}
             </h3>
