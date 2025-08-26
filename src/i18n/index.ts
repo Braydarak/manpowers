@@ -78,7 +78,10 @@ const resources = {
       home: 'Inicio',
       products: 'Productos',
       about: 'Nosotros',
-      contact: 'Contacto'
+      contact: 'Contacto',
+      
+      // Products Mobile
+      productsMobileAvailableSoon: 'Próximamente'
     }
   },
   en: {
@@ -155,7 +158,10 @@ const resources = {
       home: 'Home',
       products: 'Products',
       about: 'About',
-      contact: 'Contact'
+      contact: 'Contact',
+      
+      // Products Mobile
+      productsMobileAvailableSoon: 'Coming Soon'
     }
   }
 };
