@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import useScrollAnimation, { useStaggeredAnimation } from '../../hooks/useScrollAnimation';
 import useIsMobile from '../../hooks/useIsMobile';
 import useAutoCarousel from '../../hooks/useAutoCarousel';
-import productsData from '../../data/products.json';
 
 interface Product {
   id: number;
@@ -32,8 +31,26 @@ const Products: React.FC = () => {
   const { ref: finalRef, isVisible: finalVisible } = useScrollAnimation();
   const isMobile = useIsMobile();
   
-  // Datos de productos desde JSON
-  const products: Product[] = productsData.products as Product[];
+  // Estado para los productos
+  const [products, setProducts] = useState<Product[]>([]);
+  // Loading state removed since it wasn't being used in the UI
+  
+  // Cargar productos desde el archivo público
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const response = await fetch('/data/products.json');
+        const data = await response.json();
+        setProducts(data.products);
+      } catch (error) {
+        console.error('Error loading products:', error);
+      } finally {
+        // Loading state was removed since it wasn't being used
+      }
+    };
+    
+    loadProducts();
+  }, []);
   const { containerRef: productsRef, visibleItems: productVisible } = useStaggeredAnimation(products.length, 150);
   const currentLanguage = i18n.language as 'es' | 'en';
   
@@ -192,7 +209,6 @@ const Products: React.FC = () => {
                                      >
                                        <span className="flex items-center space-x-2">
                                          <span>{t('buyOn')}</span>
-                                         <img src="/Amazon_Logo_2.webp" alt="Amazon" className="h-4 w-auto" />
                                          <span>{t('buyOn100ml')}</span>
                                        </span>
                                      </a>
@@ -206,7 +222,6 @@ const Products: React.FC = () => {
                                      >
                                        <span className="flex items-center space-x-2">
                                          <span>{t('buyOn')}</span>
-                                         <img src="/Amazon_Logo_2.webp" alt="Amazon" className="h-4 w-auto" />
                                          <span>{t('buyOn50ml')}</span>
                                        </span>
                                      </a>
@@ -432,7 +447,6 @@ const Products: React.FC = () => {
                               >
                                 <span className="flex items-center space-x-1">
                                   <span>{t('buyOn')}</span>
-                                  <img src="/Amazon_Logo_2.webp" alt="Amazon" className="h-4 w-auto" />
                                   <span>{t('buyOn50ml')}</span>
                                 </span>
                               </a>

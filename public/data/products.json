@@ -1,0 +1,176 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": {
+        "es": "MAN POWERS Maca Forte 10:1 - 5000",
+        "en": "MAN POWERS Maca Forte 10:1 - 5000"
+      },
+      "description": {
+        "es": "Suplemento premium elaborado a partir de raíz de Maca Andina concentrada, que ofrece una potencia de 5000mg por cápsula. Su fórmula está diseñada para brindarte energía explosiva, resistencia física y un mayor enfoque mental.",
+        "en": "Premium supplement made from concentrated Andean Maca root, offering a potency of 5000mg per capsule. Its formula is designed to provide explosive energy, physical endurance and enhanced mental focus."
+      },
+      "image": "/products/MACA 500.png",
+      "category": "suplementos",
+      "available": false
+    },
+    {
+      "id": 2,
+      "name": {
+        "es": "Omega 3 - Puro aceite de pescado",
+        "en": "Omega 3 - Pure fish oil"
+      },
+      "description": {
+        "es": "Omega 3 puro aceite de pescado, enriquecido con Vitamina E. Esencial para la salud cardiovascular, función cerebral y bienestar general.",
+        "en": "Pure fish oil Omega 3, enriched with Vitamin E. Essential for cardiovascular health, brain function and overall wellness."
+      },
+      "image": "/products/OMEGA 3 CAPSULAS.png",
+      "category": "suplementos",
+      "available": false
+    },
+    {
+      "id": 3,
+      "name": {
+        "es": "MAN Protector Solar Facial y Corporal SPF 50+",
+        "en": "MAN Facial and Body Sunscreen SPF 50+"
+      },
+      "description": {
+        "es": "Tu aliado perfecto para el verano. Este innovador protector solar SPF 50+ te ofrece una protección total frente a los rayos UVA/UVB, combinada con un acelerador del bronceado. Su fórmula avanzada está enriquecida con Ácido Hialurónico.",
+        "en": "Your perfect summer ally. This innovative SPF 50+ sunscreen offers total protection against UVA/UVB rays, combined with a tanning accelerator. Its advanced formula is enriched with Hyaluronic Acid."
+      },
+      "image": "/products/MAN PROTECTOR SOLAR.png",
+      "category": "cuidado",
+      "available": true,
+      "amazonLinks": {
+        "100ml": "https://www.amazon.es/dp/B0FMRZL91K",
+        "50ml": "https://www.amazon.es/dp/B0FMRYF82L"
+      }
+    },
+    {
+      "id": 4,
+      "name": {
+        "es": "Creatina Monohidrato Premium",
+        "en": "Premium Creatine Monohydrate"
+      },
+      "description": {
+        "es": "Creatina monohidrato de máxima pureza para aumentar la fuerza, potencia y masa muscular. Ideal para entrenamientos de alta intensidad y deportes de fuerza.",
+        "en": "Maximum purity creatine monohydrate to increase strength, power and muscle mass. Ideal for high-intensity training and strength sports."
+      },
+      "image": "/products/creatina.png",
+      "category": "suplementos",
+      "available": false
+    },
+    {
+      "id": 5,
+      "name": {
+        "es": "Huesos Fuertes - Calcio + Vitamina D3",
+        "en": "Strong Bones - Calcium + Vitamin D3"
+      },
+      "description": {
+        "es": "Fórmula avanzada con calcio y vitamina D3 para fortalecer huesos y dientes. Esencial para mantener la densidad ósea y prevenir la osteoporosis.",
+        "en": "Advanced formula with calcium and vitamin D3 to strengthen bones and teeth. Essential for maintaining bone density and preventing osteoporosis."
+      },
+      "image": "/products/huesos fuertes.png",
+      "category": "suplementos",
+      "available": false
+    },
+    {
+      "id": 6,
+      "name": {
+        "es": "Gel de Aloe Vera Puro",
+        "en": "Pure Aloe Vera Gel"
+      },
+      "description": {
+        "es": "Gel de aloe vera 100% puro para hidratar, calmar y regenerar la piel. Ideal para quemaduras solares, irritaciones y cuidado diario de la piel.",
+        "en": "100% pure aloe vera gel to hydrate, soothe and regenerate skin. Ideal for sunburns, irritations and daily skin care."
+      },
+      "image": "/products/aleo vera gel.png",
+      "category": "cuidado",
+      "available": false
+    },
+    {
+      "id": 7,
+      "name": {
+        "es": "Champú Anti-Caída Fortalecedor",
+        "en": "Anti-Hair Loss Strengthening Shampoo"
+      },
+      "description": {
+        "es": "Champú especializado para combatir la caída del cabello y fortalecer desde la raíz. Enriquecido con biotina, keratina y extractos naturales.",
+        "en": "Specialized shampoo to combat hair loss and strengthen from the root. Enriched with biotin, keratin and natural extracts."
+      },
+      "image": "/products/Champu Anti Caida.png",
+      "category": "cuidado",
+      "available": false
+    },
+    {
+      "id": 8,
+      "name": {
+        "es": "Crema para Masajes Relajante",
+        "en": "Relaxing Massage Cream"
+      },
+      "description": {
+        "es": "Crema de masaje con aceites esenciales para relajar músculos tensos y aliviar el estrés. Textura suave que se absorbe fácilmente.",
+        "en": "Massage cream with essential oils to relax tense muscles and relieve stress. Smooth texture that absorbs easily."
+      },
+      "image": "/products/Crema Masajes.png",
+      "category": "cuidado",
+      "available": false
+    },
+    {
+      "id": 9,
+      "name": {
+        "es": "Crema para Pies con Aceite de Espliego",
+        "en": "Lavender Oil Foot Cream"
+      },
+      "description": {
+        "es": "Crema relajante, hidratante y desodorante para tus pies con aceite de espliego. Ideal para deportistas y personas activas que buscan cuidado y relajación.",
+        "en": "Relaxing, moisturizing and deodorizing foot cream with lavender oil. Ideal for athletes and active people seeking care and relaxation."
+      },
+      "image": "/products/crema pies.png",
+      "category": "cuidado",
+      "available": false
+    },
+    {
+      "id": 10,
+      "name": {
+        "es": "Crema Anti-Rozaduras Deportivo",
+        "en": "Sports Anti-Chafing Cream"
+      },
+      "description": {
+        "es": "Stick anti-rozaduras de aplicación fácil para prevenir irritaciones durante el ejercicio. Resistente al agua y sudor.",
+        "en": "Easy-to-apply anti-chafing cream to prevent irritation during exercise. Water and sweat resistant."
+      },
+      "image": "/products/AntiRozaduras.png",
+      "category": "deportes",
+      "available": false
+    },
+    {
+      "id": 11,
+      "name": {
+        "es": "Agarre Táctico Profesional",
+        "en": "Professional Tactical Grip"
+      },
+      "description": {
+        "es": "Agarre táctico de alta calidad para mejorar el rendimiento en deportes y actividades que requieren precisión y control.",
+        "en": "High-quality tactical grip to improve performance in sports and activities requiring precision and control."
+      },
+      "image": "/products/agarre tactico.png",
+      "category": "deportes",
+      "available": false
+    },
+    {
+      "id": 12,
+      "name": {
+        "es": "Agarre Técnico Avanzado",
+        "en": "Advanced Technical Grip"
+      },
+      "description": {
+        "es": "Agarre técnico diseñado para deportistas profesionales que buscan el máximo control y precisión en sus movimientos.",
+        "en": "Technical grip designed for professional athletes seeking maximum control and precision in their movements."
+      },
+      "image": "/products/agarre tecnico.png",
+      "category": "deportes",
+      "available": false
+    }
+  ]
+}
