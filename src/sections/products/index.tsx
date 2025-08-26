@@ -419,7 +419,6 @@ const Products: React.FC = () => {
                               >
                                 <span className="flex items-center space-x-1">
                                   <span>{t('buyOn')}</span>
-                                  <img src="/Amazon_Logo_2.webp" alt="Amazon" className="h-4 w-auto" />
                                   <span>{t('buyOn100ml')}</span>
                                 </span>
                               </a>
