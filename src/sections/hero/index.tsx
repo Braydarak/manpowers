@@ -45,6 +45,15 @@ const Hero: React.FC = () => {
       {/* Contenido del Hero */}
       <div className="relative z-30 flex flex-col items-center justify-center min-h-screen text-white px-4 pt-20">
         <div className="max-w-4xl mx-auto text-center">
+          {/* Logo */}
+          <div className="mb-8">
+            <img
+              src="/MAN-LOGO-BLANCO.png"
+              alt="MANPOWERS Logo"
+              className="h-16 md:h-20 lg:h-24 mx-auto drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+            />
+          </div>
+          
           {/* Subtítulo */}
           <h2
             ref={subtitleRef as React.RefObject<HTMLHeadingElement>}
