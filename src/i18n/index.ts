@@ -11,17 +11,16 @@ const resources = {
       email: 'info@manpowers.es',
       
       // Hero Section
-      heroTitle: 'MANPOWERS',
-      heroSubtitle: 'Eficacia y Protección para tu Piel',
-      heroDescription: 'Descubre nuestra línea de productos premium enfocados en la eficacia y protección de la piel. Comprometidos con un mundo más sostenible usando envases de plástico y vidrio reciclables desde Madrid, España.',
+      heroSubtitle: 'Potencia tu Rendimiento Deportivo',
+      heroDescription: 'Descubre nuestra línea de suplementos deportivos premium diseñados para maximizar tu rendimiento atlético. Productos especializados para deportistas comprometidos con la excelencia desde Madrid, España.',
       heroButton: 'Conoce Nuestra Historia',
       
       // About Us Section
       aboutTitle: 'Nuestra Historia',
-      aboutSubtitle: 'Desde Madrid, España, creamos productos eficaces para la protección de la piel',
+      aboutSubtitle: 'Desde Madrid, España, creamos suplementos deportivos de élite para atletas',
       aboutOriginsTitle: 'Nuestros Orígenes',
-      aboutOrigins1: 'MANPOWERS nació en Madrid, España, con una misión clara: desarrollar productos eficaces para la protección y cuidado de la piel.',
-      aboutOrigins2: 'Desde nuestros inicios en la capital española, nos hemos comprometido con la sostenibilidad, utilizando envases de plástico y vidrio reciclables, y procesos que respetan tanto tu piel como el medio ambiente.',
+      aboutOrigins1: 'MANPOWERS nació en Madrid, España, con una misión clara: desarrollar suplementos deportivos de máxima calidad para potenciar el rendimiento atlético.',
+      aboutOrigins2: 'Desde nuestros inicios en la capital española, nos hemos especializado en nutrición deportiva avanzada, creando productos que ayudan a los atletas a alcanzar su máximo potencial.',
       aboutValuesTitle: 'Nuestros Valores',
       aboutQuality: 'Calidad Premium',
       aboutQualityDesc: 'Utilizamos solo los mejores ingredientes y procesos de fabricación.',
@@ -30,23 +29,23 @@ const resources = {
       aboutCommitment: 'Compromiso Total',
       aboutCommitmentDesc: 'Nos dedicamos completamente al bienestar de nuestros clientes.',
       aboutMissionTitle: 'Nuestra Misión',
-      aboutMission: 'Desarrollar productos eficaces para la protección de la piel, utilizando envases sostenibles de plástico y vidrio reciclables, contribuyendo a un mundo más responsable con el medio ambiente.',
+      aboutMission: 'Desarrollar suplementos deportivos de élite que maximicen el rendimiento atlético, utilizando ingredientes de máxima pureza y fórmulas científicamente respaldadas para deportistas de alto nivel.',
       aboutVisionTitle: 'Nuestra Visión',
-      aboutVision: 'Ser la marca líder en protección de la piel, reconocida por nuestra eficacia, sostenibilidad y compromiso con un futuro más verde mediante envases reciclables.',
+      aboutVision: 'Utilizar tecnología avanzada para desarrollar productos innovadores que maximicen el rendimiento atlético y ayuden a los deportistas a alcanzar su máximo potencial a través de la ciencia y la innovación.',
       aboutStatsTitle: 'Más sobre nosotros',
       aboutYears: 'Años de Experiencia',
       aboutClients: 'Clientes Satisfechos',
       aboutProducts: 'Productos Premium',
       aboutQualityGuarantee: 'Calidad Garantizada',
       aboutCommitmentTitle: 'Nuestro Compromiso Contigo',
-      aboutCommitmentText: 'En MANPOWERS, la protección de tu piel y el cuidado del planeta son nuestras prioridades. Cada producto utiliza envases reciclables y fórmulas eficaces para garantizar resultados excepcionales.',
-      aboutSuccess: 'Tu piel protegida, nuestro planeta cuidado',
+      aboutCommitmentText: 'En MANPOWERS, tu rendimiento deportivo es nuestra prioridad. Cada suplemento está formulado con ingredientes de élite y pasa por rigurosos controles de calidad para garantizar resultados excepcionales.',
+      aboutSuccess: 'Tu máximo rendimiento, nuestro compromiso',
       
       // Products Section
-      productsTitle: 'Nuestros Productos',
-      productsSubtitle: 'Descubre nuestra gama de productos eficaces para la protección de la piel en envases sostenibles',
+      productsTitle: 'Nuestros Suplementos',
+      productsSubtitle: 'Descubre nuestra gama de suplementos deportivos de élite diseñados para maximizar tu rendimiento atlético',
       productsComingSoon: 'Próximamente Disponibles',
-      productsComingSoonDesc: 'Estamos finalizando los últimos detalles para el lanzamiento de nuestra tienda online. Muy pronto podrás adquirir nuestros productos en envases reciclables.',
+      productsComingSoonDesc: 'Estamos finalizando los últimos detalles para el lanzamiento de nuestra tienda online. Muy pronto podrás adquirir nuestros suplementos deportivos premium.',
       productsAvailableSoon: 'Próximamente Disponible',
       productsInterested: '¿Interesado en nuestros productos?',
       productsInterestedDesc: 'Mantente al tanto de nuestras novedades desde Madrid, España, y sé el primero en conocer cuando nuestros suplementos nutricionales estén disponibles para la venta en España. Cada producto MANPOWERS está respaldado por nuestra garantía de calidad premium y años de experiencia en el sector del bienestar.',
@@ -85,12 +84,12 @@ const resources = {
       
       // Locations Section
       locationsTitle: 'Nuestras Ubicaciones',
-      locationsSubtitle: 'Nos encontramos en dos ubicaciones estratégicas para ofrecerte el mejor servicio y productos de protección para la piel.',
+      locationsSubtitle: 'Nos encontramos en dos ubicaciones estratégicas para ofrecerte el mejor servicio y suplementos deportivos de élite.',
       locationsMadridTitle: 'Madrid',
       locationsMadridType: 'Sede Principal',
       locationsMallorcaTitle: 'Mallorca',
       locationsMallorcaType: 'Oficina Regional',
-      locationsMessage: 'Visítanos en cualquiera de nuestras ubicaciones o contáctanos para más información sobre nuestros productos sostenibles.'
+      locationsMessage: 'Visítanos en cualquiera de nuestras ubicaciones o contáctanos para más información sobre nuestros suplementos deportivos.'
     }
   },
   en: {
@@ -101,16 +100,16 @@ const resources = {
       
       // Hero Section
       heroTitle: 'MANPOWERS',
-      heroSubtitle: 'Efficacy and Skin Protection',
-      heroDescription: 'Discover our premium product line focused on skin efficacy and protection. Committed to a more sustainable world using recyclable plastic and glass containers from Madrid, Spain.',
+      heroSubtitle: 'Power Your Athletic Performance',
+      heroDescription: 'Discover our premium sports supplement line designed to maximize your athletic performance. Specialized products for athletes committed to excellence from Madrid, Spain.',
       heroButton: 'Learn Our Story',
       
       // About Us Section
       aboutTitle: 'Our Story',
-      aboutSubtitle: 'From Madrid, Spain, we create effective products for skin protection',
+      aboutSubtitle: 'From Madrid, Spain, we create elite sports supplements for athletes',
       aboutOriginsTitle: 'Our Origins',
-      aboutOrigins1: 'MANPOWERS was born in Madrid, Spain, with a clear mission: to develop effective products for skin protection and care.',
-      aboutOrigins2: 'Since our beginnings in the Spanish capital, we have been committed to sustainability, using recyclable plastic and glass containers, and processes that respect both your skin and the environment.',
+      aboutOrigins1: 'MANPOWERS was born in Madrid, Spain, with a clear mission: to develop premium sports supplements to enhance athletic performance.',
+      aboutOrigins2: 'Since our beginnings in the Spanish capital, we have specialized in advanced sports nutrition, creating products that help athletes reach their maximum potential.',
       aboutValuesTitle: 'Our Values',
       aboutQuality: 'Premium Quality',
       aboutQualityDesc: 'We use only the best ingredients and manufacturing processes.',
@@ -119,23 +118,23 @@ const resources = {
       aboutCommitment: 'Total Commitment',
       aboutCommitmentDesc: 'We are completely dedicated to our customers\' wellbeing.',
       aboutMissionTitle: 'Our Mission',
-      aboutMission: 'To develop effective products for skin protection, using sustainable recyclable plastic and glass containers, contributing to a more environmentally responsible world.',
+      aboutMission: 'To develop elite sports supplements that maximize athletic performance, using the highest purity ingredients and scientifically backed formulas for high-level athletes.',
       aboutVisionTitle: 'Our Vision',
-      aboutVision: 'To be the leading brand in skin protection, recognized for our efficacy, sustainability and commitment to a greener future through recyclable packaging.',
+      aboutVision: 'To use advanced technology to develop innovative products that maximize athletic performance and help athletes reach their maximum potential through science and innovation.',
       aboutStatsTitle: 'More about us',
       aboutYears: 'Years of Experience',
       aboutClients: 'Satisfied Customers',
       aboutProducts: 'Premium Products',
       aboutQualityGuarantee: 'Quality Guaranteed',
       aboutCommitmentTitle: 'Our Commitment to You',
-      aboutCommitmentText: 'At MANPOWERS, protecting your skin and caring for the planet are our priorities. Every product uses recyclable containers and effective formulas to guarantee exceptional results.',
-      aboutSuccess: 'Your protected skin, our cared planet',
+      aboutCommitmentText: 'At MANPOWERS, your athletic performance is our priority. Every supplement is formulated with elite ingredients and undergoes rigorous quality controls to guarantee exceptional results.',
+      aboutSuccess: 'Your maximum performance, our commitment',
       
       // Products Section
-      productsTitle: 'Our Products',
-      productsSubtitle: 'Discover our range of effective skin protection products in sustainable packaging',
+      productsTitle: 'Our Supplements',
+      productsSubtitle: 'Discover our range of elite sports supplements designed to maximize your athletic performance',
       productsComingSoon: 'Coming Soon',
-      productsComingSoonDesc: 'We are finalizing the last details for the launch of our online store. Very soon you will be able to purchase our products in recyclable containers.',
+      productsComingSoonDesc: 'We are finalizing the last details for the launch of our online store. Very soon you will be able to purchase our premium sports supplements.',
       productsAvailableSoon: 'Available Soon',
       productsInterested: 'Interested in our products?',
       productsInterestedDesc: 'Stay tuned for our news from Madrid, Spain, and be the first to know when our nutritional supplements are available for sale in Spain. Every MANPOWERS product is backed by our premium quality guarantee and years of experience in the wellness sector.',
@@ -174,12 +173,12 @@ const resources = {
       
       // Locations Section
       locationsTitle: 'Our Locations',
-      locationsSubtitle: 'We are located in two strategic locations to offer you the best service and skin protection products.',
+      locationsSubtitle: 'We are located in two strategic locations to offer you the best service and elite sports supplements.',
       locationsMadridTitle: 'Madrid',
       locationsMadridType: 'Main Headquarters',
       locationsMallorcaTitle: 'Mallorca',
       locationsMallorcaType: 'Regional Office',
-      locationsMessage: 'Visit us at any of our locations or contact us for more information about our sustainable products.'
+      locationsMessage: 'Visit us at any of our locations or contact us for more information about our sports supplements.'
     }
   }
 };
