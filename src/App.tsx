@@ -1,27 +1,18 @@
 import "./App.css";
-import Hero from "./sections/hero";
-import Header from "./components/header/Header";
-import Footer from "./components/footer/Footer";
-import AboutUs from "./sections/aboutUs";
-import Products from "./sections/products";
-import Locations from "./sections/locations";
-import useLanguageUpdater from "./hooks/useLanguageUpdater";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import SportsPage from "./pages/SportsPage";
+import ProductsPage from "./pages/ProductsPage";
 
 function App() {
-  // Hook para actualizar idioma y título dinámicamente
-  useLanguageUpdater();
-
   return (
-    <div className="">
-      <Header />
-      <main className="flex-grow">
-        <Hero />
-        <AboutUs />
-        <Products />
-        <Locations />
-      </main>
-      <Footer />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/sports" element={<SportsPage />} />
+        <Route path="/products/:sportId" element={<ProductsPage />} />
+      </Routes>
+    </Router>
   );
 }
 

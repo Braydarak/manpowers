@@ -1,0 +1,39 @@
+{
+  "sports": [
+    {
+      "name": "sports.archery",
+      "backgroundImage": "/src/assets/tiro.jpeg",
+      "description": "sports.archeryDesc", 
+      "slogan": "sports.archerySlogan",
+      "sportId": "archery"
+    },
+    {
+      "name": "sports.fencing",
+      "backgroundImage": "/src/assets/esgrima.jpg",
+      "description": "sports.fencingDesc",
+      "slogan": "sports.fencingSlogan", 
+      "sportId": "fencing"
+    },
+    {
+      "name": "sports.golf",
+      "backgroundImage": "/src/assets/golf.jpg",
+      "description": "sports.golfDesc",
+      "slogan": "sports.golfSlogan",
+      "sportId": "golf"
+    },
+    {
+      "name": "sports.cycling", 
+      "backgroundImage": "/src/assets/ciclismo.jpg",
+      "description": "sports.cyclingDesc",
+      "slogan": "sports.cyclingSlogan",
+      "sportId": "cycling"
+    },
+    {
+      "name": "sports.waterSports",
+      "backgroundImage": "/src/assets/nautica.jpg", 
+      "description": "sports.waterSportsDesc",
+      "slogan": "sports.waterSportsSlogan",
+      "sportId": "sailing"
+    }
+  ]
+}

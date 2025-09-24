@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const Header: React.FC = () => {
-// Remove unused router since it's not being used anywhere in the component
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
   const [language, setLanguage] = useState<string>(i18n.language || 'es');
   const [menuOpen, setMenuOpen] = useState<boolean>(false); // Estado para controlar el menú hamburguesa
   const [isMobile, setIsMobile] = useState<boolean>(false); // Estado para detectar si es dispositivo móvil
@@ -25,8 +26,9 @@ const Header: React.FC = () => {
     setMenuOpen(!menuOpen);
   };
 
-  // Función para hacer scroll al inicio de la página
-  const scrollToTop = () => {
+  // Función para navegar al inicio y hacer scroll al top
+  const handleLogoClick = () => {
+    navigate('/');
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
@@ -66,7 +68,7 @@ const Header: React.FC = () => {
     <header className="bg-gradient-to-b from-gray-900 to-black text-white py-4 px-6 w-full border-b border-gray-700 shadow-lg fixed top-0 z-50">
       <div className="max-w-7xl mx-auto flex justify-between items-center h-full">
         {/* Logo */}
-        <h1 className="cursor-pointer" onClick={scrollToTop}>
+        <h1 className="cursor-pointer" onClick={handleLogoClick}>
           <img 
             src="/MAN-LOGO-BLANCO.png" 
             alt="MANPOWERS - Suplementos Premium" 

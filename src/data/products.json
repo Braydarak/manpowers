@@ -12,7 +12,8 @@
       },
       "image": "/products/MACA 500.png",
       "category": "suplementos",
-      "available": false
+      "sportId": "gym",
+      "available": true
     },
     {
       "id": 2,
@@ -26,7 +27,8 @@
       },
       "image": "/products/OMEGA 3 CAPSULAS.png",
       "category": "suplementos",
-      "available": false
+      "sportId": "gym",
+      "available": true
     },
     {
       "id": 3,
@@ -38,8 +40,9 @@
         "es": "Tu aliado perfecto para el verano. Este innovador protector solar SPF 50+ te ofrece una protección total frente a los rayos UVA/UVB, combinada con un acelerador del bronceado. Su fórmula avanzada está enriquecida con Ácido Hialurónico.",
         "en": "Your perfect summer ally. This innovative SPF 50+ sunscreen offers total protection against UVA/UVB rays, combined with a tanning accelerator. Its advanced formula is enriched with Hyaluronic Acid."
       },
-      "image": "/products/MAN PROTECTOR SOLAR.png",
+      "image": "/products/protector-solar.png",
       "category": "cuidado",
+      "sportId": "multisport",
       "available": true,
       "amazonLinks": {
         "100ml": "https://www.amazon.es/dp/B0FMRZL91K",
@@ -58,7 +61,8 @@
       },
       "image": "/products/creatina.png",
       "category": "suplementos",
-      "available": false
+      "sportId": "gym",
+      "available": true
     },
     {
       "id": 5,
@@ -72,7 +76,8 @@
       },
       "image": "/products/huesos fuertes.png",
       "category": "suplementos",
-      "available": false
+      "sportId": "gym",
+      "available": true
     },
     {
       "id": 6,
@@ -86,7 +91,8 @@
       },
       "image": "/products/aleo vera gel.png",
       "category": "cuidado",
-      "available": false
+      "sportId": "multisport",
+      "available": true
     },
     {
       "id": 7,
@@ -98,9 +104,10 @@
         "es": "Champú especializado para combatir la caída del cabello y fortalecer desde la raíz. Enriquecido con biotina, keratina y extractos naturales.",
         "en": "Specialized shampoo to combat hair loss and strengthen from the root. Enriched with biotin, keratin and natural extracts."
       },
-      "image": "/products/Champu Anti Caida.png",
+      "image": "/products/Champu anticaida.png",
       "category": "cuidado",
-      "available": false
+      "sportId": "archery",
+      "available": true
     },
     {
       "id": 8,
@@ -114,7 +121,8 @@
       },
       "image": "/products/Crema Masajes.png",
       "category": "cuidado",
-      "available": false
+      "sportId": "sailing",
+      "available": true
     },
     {
       "id": 9,
@@ -128,7 +136,8 @@
       },
       "image": "/products/crema pies.png",
       "category": "cuidado",
-      "available": false
+      "sportId": "sailing",
+      "available": true
     },
     {
       "id": 10,
@@ -142,7 +151,8 @@
       },
       "image": "/products/AntiRozaduras.png",
       "category": "deportes",
-      "available": false
+      "sportId": "cycling",
+      "available": true
     },
     {
       "id": 11,
@@ -151,26 +161,71 @@
         "en": "Professional Tactical Grip"
       },
       "description": {
-        "es": "Agarre táctico de alta calidad para mejorar el rendimiento en deportes y actividades que requieren precisión y control.",
+        "es": "¿Buscas mejorar tu precisión y control con el arma? Nuestro gel de agarre revolucionario te dará ese agarre extra que necesitas para dominar cada tiro. Con una fórmula especial que mantiene tus manos firmes y secas, podrás mantener un control total sobre tu arma. ¡Olvídate de los deslizamientos y céntrate en dar en el blanco! Además, cuida tus manos con ingredientes naturales que las mantienen suaves y protegidas durante toda tu sesión de tiro.",
         "en": "High-quality tactical grip to improve performance in sports and activities requiring precision and control."
       },
       "image": "/products/agarre tactico.png",
       "category": "deportes",
-      "available": false
+      "sportId": "archery",
+      "available": true
     },
     {
       "id": 12,
       "name": {
-        "es": "Agarre Técnico Avanzado",
-        "en": "Advanced Technical Grip"
+        "es": "Crema Efecto Frío",
+        "en": "Cooling Cream"
       },
       "description": {
-        "es": "Agarre técnico diseñado para deportistas profesionales que buscan el máximo control y precisión en sus movimientos.",
-        "en": "Technical grip designed for professional athletes seeking maximum control and precision in their movements."
+        "es": "¿Necesitas relajar tus músculos despúes de una partida? Nuestra crema efecto frío es la solución perfecta. Esta crema hidratante y relajante ayuda a calmar las tensiones musculares, reduciendo el estrés y mejorando la precisión en deportes como el arquero. Con ingredientes naturales y una fórmula avanzada, nuestra crema es segura y efectiva para todos los niveles de ejercicio. ¡Descubre el poder de relajar y mejorar tu rendimiento con nuestra crema efecto frío!",
+        "en": "Cooling cream to relax muscles after a game. This cream hydrates, soothes and relieves muscle tension, reducing stress and improving precision in sports such as archery. With natural ingredients and an advanced formula, this cream is safe and effective for all exercise levels. Discover the power of cooling and improve your performance with our cooling cream!"
       },
-      "image": "/products/agarre tecnico.png",
+      "image": "/products/crema efecto frio.png",
       "category": "deportes",
-      "available": false
+      "sportId": "archery",
+      "available": true
+    },
+    {
+      "id": 13,
+      "name": {
+        "es": "Cremigel Masaje Muscular",
+        "en": "Muscle Massage Cream-Gel"
+      },
+      "description": {
+        "es": "Cremigel Masaje Muscular es una crema de masaje que ayuda a relajar y hidratar los músculos. Es especialmente diseñada para atletas profesionales que buscan mejorar su precisión y control en sus movimientos. Con una fórmula avanzada que contiene ingredientes naturales, esta crema ayuda a reducir la tensión muscular y mejorar la precisión en deportes como el arquero. ¡Descubre el poder de relajar y mejorar tu rendimiento con Cremigel Masaje Muscular!",
+        "en": "Cremigel Muscle Massage Cream-Gel is a massage cream that helps relax and hydrate muscles. It is especially designed for professional athletes who seek to improve their precision and control in their movements. With an advanced formula that contains natural ingredients, this cream helps reduce muscle tension and improve precision in sports such as archery. Discover the power of relieving and improving your performance with Cremigel Muscle Massage Cream-Gel!"
+      },
+      "image": "/products/cremigel tiro.png",
+      "category": "deportes",
+      "sportId": "archery",
+      "available": true
+    },
+     {
+      "id": 14,
+      "name": {
+        "es": "Gel efecto calor",
+        "en": "Heat Effect Gel"
+      },
+      "description": {
+        "es": "¡Prepara tus músculos para la acción con nuestro Gel Efecto Calor! Formulado especialmente para un calentamiento efectivo, este gel proporciona una sensación térmica gradual que ayuda a preparar tus articulaciones y músculos antes del ejercicio. Su fórmula avanzada con ingredientes activos naturales no solo genera calor, sino que también ofrece protección articular, reduciendo el riesgo de lesiones. Ideal para rutinas de calentamiento en cualquier deporte o actividad física. ¡Maximiza tu rendimiento desde el primer momento con una preparación muscular óptima!",
+        "en": "Prepare your muscles for action with our Heat Effect Gel! Specially formulated for effective warm-up, this gel provides a gradual thermal sensation that helps prepare your joints and muscles before exercise. Its advanced formula with natural active ingredients not only generates heat but also offers joint protection, reducing the risk of injury. Perfect for warm-up routines in any sport or physical activity."
+      },
+      "image": "/products/gelefectocalor.png",
+      "sportId": "archery",
+      "available": true
+    },
+         {
+      "id": 15,
+      "name": {
+        "es": "Gel efecto calor",
+        "en": "Heat Effect Gel"
+      },
+      "description": {
+        "es": "¡Prepara tus músculos para la acción con nuestro Gel Efecto Calor! Formulado especialmente para un calentamiento efectivo, este gel proporciona una sensación térmica gradual que ayuda a preparar tus articulaciones y músculos antes del ejercicio. Su fórmula avanzada con ingredientes activos naturales no solo genera calor, sino que también ofrece protección articular, reduciendo el riesgo de lesiones. Ideal para rutinas de calentamiento en cualquier deporte o actividad física. ¡Maximiza tu rendimiento desde el primer momento con una preparación muscular óptima!",
+        "en": "Prepare your muscles for action with our Heat Effect Gel! Specially formulated for effective warm-up, this gel provides a gradual thermal sensation that helps prepare your joints and muscles before exercise. Its advanced formula with natural active ingredients not only generates heat but also offers joint protection, reducing the risk of injury. Perfect for warm-up routines in any sport or physical activity."
+      },
+      "image": "/products/agua-de-citronela.png",
+      "sportId": "archery",
+      "available": true
     }
   ]
 }

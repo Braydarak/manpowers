@@ -12,8 +12,8 @@ const resources = {
       
       // Hero Section
       heroSubtitle: 'Potencia tu Rendimiento Deportivo',
-      heroDescription: 'Descubre nuestra línea de suplementos deportivos premium diseñados para maximizar tu rendimiento atlético. Productos especializados para deportistas comprometidos con la excelencia desde Madrid, España.',
-      heroButton: 'Conoce Nuestra Historia',
+      heroDescription: 'Explora nuestra gama de suplementos deportivos adaptados a tu disciplina. Descubre abajo los productos especializados para tu deporte y maximiza tu rendimiento',
+      heroSportsButton: 'Ver todos los deportes',
       
       // About Us Section
       aboutTitle: 'Nuestra Historia',
@@ -89,7 +89,70 @@ const resources = {
       locationsMadridType: 'Sede Principal',
       locationsMallorcaTitle: 'Mallorca',
       locationsMallorcaType: 'Oficina Regional',
-      locationsMessage: 'Visítanos en cualquiera de nuestras ubicaciones o contáctanos para más información sobre nuestros suplementos deportivos.'
+      locationsMessage: 'Visítanos en cualquiera de nuestras ubicaciones o contáctanos para más información sobre nuestros suplementos deportivos.',
+      
+      // Sports Categories Section
+      sportsTitle: 'Deportes',
+      sportsSubtitle: 'Desarrollamos productos especializados para los siguientes deportes',
+      sportsButton: 'Ver Productos',
+      
+      // Sports names and descriptions
+      'sports.archery': 'Tiro',
+      'sports.archeryDesc': 'Suplementos para mejorar la concentración, estabilidad y precisión en deportes de tiro.',
+      'sports.archerySlogan': 'Precisión y concentración absoluta',
+      
+      'sports.fencing': 'Esgrima',
+      'sports.fencingDesc': 'Productos diseñados para potenciar la agilidad, reflejos y resistencia en esgrima.',
+      'sports.fencingSlogan': 'Elegancia y destreza en cada movimiento',
+      
+      'sports.golf': 'Golf',
+      'sports.golfDesc': 'Suplementación especializada para mantener la concentración y resistencia durante rondas largas.',
+      'sports.golfSlogan': 'Perfección en cada swing',
+      
+      'sports.cycling': 'Ciclismo',
+      'sports.cyclingDesc': 'Productos específicos para ciclistas que necesitan energía sostenida y recuperación muscular.',
+      'sports.cyclingSlogan': 'Velocidad y resistencia sin límites',
+      
+      'sports.waterSports': 'Náutica',
+      'sports.waterSportsDesc': 'Suplementos para deportes náuticos enfocados en resistencia y fuerza en ambientes marinos.',
+      'sports.waterSportsSlogan': 'Domina las aguas con confianza',
+      
+      // Legacy sport translations (keeping for compatibility)
+      sportShootingTitle: 'Tiro',
+      sportShootingDescription: 'Suplementos para mejorar la concentración, estabilidad y precisión en deportes de tiro.',
+      sportFencingTitle: 'Esgrima',
+      sportFencingDescription: 'Productos diseñados para potenciar la agilidad, reflejos y resistencia en esgrima.',
+      sportGolfTitle: 'Golf',
+      sportGolfDescription: 'Suplementación especializada para mantener la concentración y resistencia durante rondas largas.',
+      sportCyclingTitle: 'Ciclismo',
+      sportCyclingDescription: 'Productos específicos para ciclistas que necesitan energía sostenida y recuperación muscular.',
+      sportNauticalTitle: 'Náutica',
+      sportNauticalDescription: 'Suplementos para deportes náuticos enfocados en resistencia y fuerza en ambientes marinos.',
+      
+      // ProductsPage specific translations
+      backToSports: 'Volver a Deportes',
+      
+      // Sports specific translations
+      'sports.buy': 'Comprar',
+      'sports.comingSoon': 'Próximamente',
+      'sports.imageNotAvailable': 'Imagen no disponible',
+      'sports.productsInDevelopment': 'Productos en desarrollo',
+      'sports.workingOnProducts': 'Estamos trabajando en productos específicos para.',
+      'sports.soonNews': '¡Pronto tendremos novedades!',
+      'sports.exploreOtherSports': 'Explorar Otros Deportes',
+      'sports.sailing': 'Náutica',
+      'sports.backToSports': 'Volver a Deportes',
+      'sports.productsFor': 'Productos para',
+      'sports.discoverSelection': 'Descubre nuestra selección especializada de productos para',
+      
+      // Legacy translations (keeping for compatibility)
+      imageNotAvailable: 'Imagen no disponible',
+      buy: 'Comprar',
+      comingSoon: 'Próximamente',
+      productsInDevelopment: 'Productos en desarrollo',
+      workingOnProducts: 'Estamos trabajando en productos específicos para.',
+       soonNews: '¡Pronto tendremos novedades!',
+       exploreOtherSports: 'Explorar Otros Deportes'
     }
   },
   en: {
@@ -99,10 +162,10 @@ const resources = {
       email: 'info@manpowers.es',
       
       // Hero Section
-      heroTitle: 'MANPOWERS',
-      heroSubtitle: 'Power Your Athletic Performance',
-      heroDescription: 'Discover our premium sports supplement line designed to maximize your athletic performance. Specialized products for athletes committed to excellence from Madrid, Spain.',
+      heroSubtitle: 'Boost Your Athletic Performance',
+      heroDescription: 'Discover our premium line of sports supplements designed to maximize your athletic performance. Specialized products for athletes committed to excellence from Madrid, Spain.',
       heroButton: 'Learn Our Story',
+      heroSportsButton: 'View Sports',
       
       // About Us Section
       aboutTitle: 'Our Story',
@@ -173,12 +236,77 @@ const resources = {
       
       // Locations Section
       locationsTitle: 'Our Locations',
-      locationsSubtitle: 'We are located in two strategic locations to offer you the best service and elite sports supplements.',
-      locationsMadridTitle: 'Madrid',
+      locationsSubtitle: 'Find our sports supplementation products at these strategic locations',
+      locationMadridTitle: 'Madrid',
+      locationMadridDescription: 'Main distribution center for elite sports supplements in the Spanish capital.',
       locationsMadridType: 'Main Headquarters',
-      locationsMallorcaTitle: 'Mallorca',
+      locationMallorcaTitle: 'Mallorca',
+      locationMallorcaDescription: 'Specialized distribution point for sports supplementation for high-performance athletes in the Balearic Islands.',
       locationsMallorcaType: 'Regional Office',
-      locationsMessage: 'Visit us at any of our locations or contact us for more information about our sports supplements.'
+      locationsMessage: 'Visit us at any of our locations or contact us for more information about our sports supplements.',
+      
+      // Sports Categories Section
+      sportsTitle: 'Sports',
+      sportsSubtitle: 'Discover our specialized products for each sports discipline',
+      sportsButton: 'View Products',
+      
+      // Sports names and descriptions
+      'sports.archery': 'Shooting',
+      'sports.archeryDesc': 'Supplements to improve concentration, stability and precision in shooting sports.',
+      'sports.archerySlogan': 'Absolute precision and concentration',
+      
+      'sports.fencing': 'Fencing',
+      'sports.fencingDesc': 'Products designed to enhance agility, reflexes and endurance in fencing.',
+      'sports.fencingSlogan': 'Elegance and skill in every movement',
+      
+      'sports.golf': 'Golf',
+      'sports.golfDesc': 'Specialized supplementation to maintain concentration and endurance during long rounds.',
+      'sports.golfSlogan': 'Perfection in every swing',
+      
+      'sports.cycling': 'Cycling',
+      'sports.cyclingDesc': 'Specific products for cyclists who need sustained energy and muscle recovery.',
+      'sports.cyclingSlogan': 'Speed and endurance without limits',
+      
+      'sports.waterSports': 'Nautical',
+      'sports.waterSportsDesc': 'Supplements for nautical sports focused on endurance and strength in marine environments.',
+      'sports.waterSportsSlogan': 'Master the waters with confidence',
+      
+      // Legacy sport translations (keeping for compatibility)
+      sportShootingTitle: 'Shooting',
+      sportShootingDescription: 'Supplements to improve concentration, stability and precision in shooting sports.',
+      sportFencingTitle: 'Fencing',
+      sportFencingDescription: 'Products designed to enhance agility, reflexes and endurance in fencing.',
+      sportGolfTitle: 'Golf',
+      sportGolfDescription: 'Specialized supplementation to maintain concentration and endurance during long rounds.',
+      sportCyclingTitle: 'Cycling',
+      sportCyclingDescription: 'Specific products for cyclists who need sustained energy and muscle recovery.',
+      sportNauticalTitle: 'Nautical',
+      sportNauticalDescription: 'Supplements for nautical sports focused on endurance and strength in marine environments.',
+      
+      // ProductsPage specific translations
+      backToSports: 'Back to Sports',
+      
+      // Sports specific translations
+      'sports.buy': 'Buy',
+      'sports.comingSoon': 'Coming Soon',
+      'sports.imageNotAvailable': 'Image not available',
+      'sports.productsInDevelopment': 'Products in development',
+      'sports.workingOnProducts': 'We are working on specific products for.',
+      'sports.soonNews': 'We will have news soon!',
+      'sports.exploreOtherSports': 'Explore Other Sports',
+      'sports.sailing': 'Nautical',
+      'sports.backToSports': 'Back to Sports',
+      'sports.productsFor': 'Products for',
+      'sports.discoverSelection': 'Discover our specialized selection of products for',
+      
+      // Legacy translations (keeping for compatibility)
+      imageNotAvailable: 'Image not available',
+      buy: 'Buy',
+      comingSoon: 'Coming Soon',
+      productsInDevelopment: 'Products in development',
+      workingOnProducts: 'We are working on specific products for.',
+       soonNews: 'We will have news soon!',
+       exploreOtherSports: 'Explore Other Sports'
     }
   }
 };
