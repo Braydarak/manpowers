@@ -12,7 +12,7 @@
       },
       "image": "/products/MACA 500.png",
       "category": "suplementos",
-      "sportId": "gym",
+      "sportId": "multisport",
       "available": true
     },
     {
@@ -27,7 +27,7 @@
       },
       "image": "/products/OMEGA 3 CAPSULAS.png",
       "category": "suplementos",
-      "sportId": "gym",
+      "sportId": "multisport",
       "available": true
     },
     {
@@ -61,7 +61,7 @@
       },
       "image": "/products/creatina.png",
       "category": "suplementos",
-      "sportId": "gym",
+      "sportId": "multisport",
       "available": true
     },
     {
@@ -76,7 +76,7 @@
       },
       "image": "/products/huesos fuertes.png",
       "category": "suplementos",
-      "sportId": "gym",
+      "sportId": "multisport",
       "available": true
     },
     {

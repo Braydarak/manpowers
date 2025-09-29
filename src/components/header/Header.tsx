@@ -102,7 +102,8 @@ const Header: React.FC = () => {
             </svg>
             <span>{t('email')}</span>
           </div>
-          
+
+      
           {/* Selector de idioma */}
           <div className="flex items-center space-x-2 ml-0 md:ml-6">
             <button 
@@ -118,6 +119,16 @@ const Header: React.FC = () => {
               EN
             </button>
           </div>
+              {/* Botón TAMD Cosmetics */}
+          <a 
+            href="https://tamdcosmetics.com/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="bg-[#DAB889] hover:bg-[#C5A678] text-black px-4 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+          >
+            TAMD Cosmetics
+          </a>
+          
         </div>
       </div>
 
@@ -150,6 +161,16 @@ const Header: React.FC = () => {
             </svg>
             <span>{t('email')}</span>
           </div>
+
+          {/* Botón TAMD Cosmetics */}
+          <a 
+            href="https://tamdcosmetics.com/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="bg-[#DAB889] hover:bg-[#C5A678] text-black px-6 py-3 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl w-full text-center"
+          >
+            TAMD Cosmetics
+          </a>
           
           {/* Selector de idioma */}
           <div className="flex items-center space-x-4 mt-6">
