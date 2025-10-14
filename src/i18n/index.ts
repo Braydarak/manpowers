@@ -322,7 +322,7 @@ i18n
       escapeValue: false
     },
     detection: {
-      order: ['localStorage', 'navigator', 'htmlTag'],
+      order: ['htmlTag', 'localStorage', 'navigator'],
       caches: ['localStorage']
     }
   });

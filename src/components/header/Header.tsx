@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const Header: React.FC = () => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
-  const [language, setLanguage] = useState<string>(i18n.language || 'es');
+  const [language, setLanguage] = useState<string>(i18n.resolvedLanguage?.split('-')[0] || 'es');
   const [menuOpen, setMenuOpen] = useState<boolean>(false); // Estado para controlar el menú hamburguesa
   const [isMobile, setIsMobile] = useState<boolean>(false); // Estado para detectar si es dispositivo móvil
 
@@ -15,11 +15,24 @@ const Header: React.FC = () => {
   const handleLanguageChange = (lang: string) => {
     setLanguage(lang);
     i18n.changeLanguage(lang);
+    // Sync <html lang> for detectors and accessibility
+    if (document?.documentElement) {
+      document.documentElement.lang = lang;
+    }
     // Cerrar el menú móvil al cambiar idioma
     if (isMobile && menuOpen) {
       setMenuOpen(false);
     }
   };
+
+  // Mantener el estado de idioma normalizado cuando i18n cambia
+  useEffect(() => {
+    const baseLang = i18n.resolvedLanguage?.split('-')[0] || 'es';
+    setLanguage(baseLang);
+    if (document?.documentElement) {
+      document.documentElement.lang = baseLang;
+    }
+  }, [i18n.language, i18n.resolvedLanguage]);
 
   // Función para abrir/cerrar el menú hamburguesa
   const toggleMenu = () => {
