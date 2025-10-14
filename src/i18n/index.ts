@@ -322,8 +322,9 @@ i18n
       escapeValue: false
     },
     detection: {
-      order: ['htmlTag', 'localStorage', 'navigator'],
-      caches: ['localStorage']
+      // No persistir el idioma para evitar problemas con el lang por defecto
+      order: ['htmlTag', 'navigator'],
+      caches: []
     }
   });
 
