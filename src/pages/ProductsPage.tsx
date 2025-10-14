@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import useLanguageUpdater from "../hooks/useLanguageUpdater";
-import productsData from "../data/products.json";
+import productsData from "../../public/products.json";
 
 interface Product {
   id: number;
@@ -57,10 +57,7 @@ const ProductsPage: React.FC = () => {
       };
       setSportName(sportNames[sportId] || sportId);
     }
-  }, [sportId, t, i18n.language]);
-
-  console.log(sportName, sportId);
-  
+  }, [sportId, t, i18n.language]);  
 
   const handleBackToSports = () => {
     navigate('/sports');

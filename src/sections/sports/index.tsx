@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
-import sportsDataFile from '../../data/sports.json';
+import sportsDataFile from '../../../public/sports.json';
 
 const Sports: React.FC = () => {
   const { t } = useTranslation();

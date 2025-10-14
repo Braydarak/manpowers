@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import useScrollAnimation from "../../hooks/useScrollAnimation";
-import sportsData from "../../data/sports.json";
+import sportsData from "../../../public/sports.json";
 import { Target, Sword, LandPlot, Bike, Anchor } from "lucide-react";
 
 const Hero: React.FC = () => {
