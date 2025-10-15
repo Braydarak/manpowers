@@ -17,13 +17,14 @@ interface Product {
     en: string;
   };
   image: string;
-  category: string;
+  category?: string | { es: string; en: string };
   sportId: string;
   available: boolean;
   amazonLinks?: {
     [key: string]: string;
   };
   price?: string;
+  size?: string;
 }
 
 interface ProductsData {
@@ -45,7 +46,16 @@ const ProductsPage: React.FC = () => {
       const filteredProducts = (productsData as ProductsData).products.filter(
         (product: Product) => product.sportId === sportId || product.sportId === "multisport"
       );
-      setProducts(filteredProducts);
+
+      // Ordenar: primero los específicos del deporte, luego los multisport
+      const sortedProducts = filteredProducts.sort((a: Product, b: Product) => {
+        const aIsSpecific = a.sportId === sportId;
+        const bIsSpecific = b.sportId === sportId;
+        if (aIsSpecific === bIsSpecific) return 0;
+        return aIsSpecific ? -1 : 1;
+      });
+
+      setProducts(sortedProducts);
 
       // Obtener el nombre del deporte
       const sportNames: { [key: string]: string } = {
@@ -57,7 +67,7 @@ const ProductsPage: React.FC = () => {
       };
       setSportName(sportNames[sportId] || sportId);
     }
-  }, [sportId, t, i18n.language]);  
+  }, [sportId, t, i18n.language]);
 
   const handleBackToSports = () => {
     navigate('/sports');
@@ -110,12 +120,28 @@ const ProductsPage: React.FC = () => {
           <div className="max-w-7xl mx-auto">
             {products.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {products.map((product) => (
+                {products.map((product) => {
+                  const primarySize = product.size;
+                  const priceLabel = product.price ? `${product.price} €` : undefined;
+                  
+                  return (
                   <div
                     key={product.id}
                     className="bg-gray-800 rounded-lg overflow-hidden border border-gray-700 hover:border-yellow-400 transition-all duration-300 hover:transform hover:scale-105 flex flex-col h-full min-h-[500px]"
                   >
-                    <div className="h-64 bg-gray-700 flex items-center justify-center overflow-hidden flex-shrink-0">
+                    <div className="relative h-64 bg-gray-700 flex items-center justify-center overflow-hidden flex-shrink-0">
+                      {/* Size badge (top-left) */}
+                      {primarySize && (
+                        <span className="absolute top-2 left-2 text-xs bg-black/70 text-white px-2 py-1 rounded-full">
+                          {primarySize}
+                        </span>
+                      )}
+                      {/* Price badge (top-right) */}
+                      {priceLabel && (
+                        <span className="absolute top-2 right-2 text-xs bg-yellow-500 text-black px-2 py-1 rounded-full font-bold">
+                          {priceLabel}
+                        </span>
+                      )}
                       <img
                         src={product.image}
                         alt={product.name[currentLanguage]}
@@ -134,11 +160,15 @@ const ProductsPage: React.FC = () => {
                       <div className="flex-grow">
                         <div className="flex items-center justify-between mb-2">
                           <span className="text-xs font-semibold text-yellow-400 uppercase tracking-wide">
-                            {product.category}
+                            {product.category
+                              ? (typeof product.category === 'string'
+                                  ? product.category
+                                  : product.category[currentLanguage])
+                              : ''}
                           </span>
                           {product.available && (
                             <span className="text-xs bg-green-600 text-white px-2 py-1 rounded-full">
-                              Disponible
+                              {t('sports.available')}
                             </span>
                           )}
                         </div>
@@ -185,7 +215,8 @@ const ProductsPage: React.FC = () => {
                       </div>
                     </div>
                   </div>
-                ))}
+                  );
+                })}
               </div>
             ) : (
               <div className="text-center py-20">

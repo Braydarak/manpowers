@@ -98,7 +98,7 @@ const Hero: React.FC = () => {
             
             {/* Texto separador */}
             <span className="text-white/70 text-sm sm:text-base lg:text-lg font-medium">
-              O entra directamente a tu deporte
+              {t('heroDirectToSport')}
             </span>
 
             {/* Botones individuales de deportes */}
