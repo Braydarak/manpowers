@@ -134,6 +134,7 @@ const resources = {
       
       // Sports specific translations
       'sports.buy': 'Comprar',
+      'sports.addToCart': 'Añadir al carrito',
       'sports.comingSoon': 'Próximamente',
       'sports.imageNotAvailable': 'Imagen no disponible',
       'sports.productsInDevelopment': 'Productos en desarrollo',
@@ -288,6 +289,7 @@ const resources = {
       
       // Sports specific translations
       'sports.buy': 'Buy',
+      'sports.addToCart': 'Add to Cart',
       'sports.comingSoon': 'Coming Soon',
       'sports.imageNotAvailable': 'Image not available',
       'sports.productsInDevelopment': 'Products in development',
