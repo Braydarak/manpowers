@@ -10,7 +10,7 @@
         "es": "Suplemento premium elaborado a partir de raíz de Maca Andina concentrada, que ofrece una potencia de 5000mg por cápsula. Su fórmula está diseñada para brindarte energía explosiva, resistencia física y un mayor enfoque mental.",
         "en": "Premium supplement made from concentrated Andean Maca root, offering a potency of 5000mg per capsule. Its formula is designed to provide explosive energy, physical endurance and enhanced mental focus."
       },
-      "image": "/products/MACA 500.png",
+      "image": "/products/MACA-500.jpg",
       "category": "suplementos",
       "sportId": "multisport",
       "available": true
@@ -25,7 +25,7 @@
         "es": "Omega 3 puro aceite de pescado, enriquecido con Vitamina E. Esencial para la salud cardiovascular, función cerebral y bienestar general.",
         "en": "Pure fish oil Omega 3, enriched with Vitamin E. Essential for cardiovascular health, brain function and overall wellness."
       },
-      "image": "/products/OMEGA 3 CAPSULAS.png",
+      "image": "/products/OMEGA-3.jpg",
       "category": "suplementos",
       "sportId": "multisport",
       "available": true
@@ -40,7 +40,7 @@
         "es": "Tu aliado perfecto para el verano. Este innovador protector solar SPF 50+ te ofrece una protección total frente a los rayos UVA/UVB, combinada con un acelerador del bronceado. Su fórmula avanzada está enriquecida con Ácido Hialurónico.",
         "en": "Your perfect summer ally. This innovative SPF 50+ sunscreen offers total protection against UVA/UVB rays, combined with a tanning accelerator. Its advanced formula is enriched with Hyaluronic Acid."
       },
-      "image": "/products/protector-solar.png",
+      "image": "/products/MAN-PROTECTOR-SOLAR.jpg",
       "category": "cuidado",
       "sportId": "multisport",
       "available": true,
@@ -59,24 +59,24 @@
         "es": "Creatina monohidrato de máxima pureza para aumentar la fuerza, potencia y masa muscular. Ideal para entrenamientos de alta intensidad y deportes de fuerza.",
         "en": "Maximum purity creatine monohydrate to increase strength, power and muscle mass. Ideal for high-intensity training and strength sports."
       },
-      "image": "/products/creatina.png",
+      "image": "/products/CREATINA.jpg",
       "category": "suplementos",
       "sportId": "multisport",
       "available": true
     },
-    {
+        {
       "id": 5,
       "name": {
-        "es": "Huesos Fuertes - Calcio + Vitamina D3",
-        "en": "Strong Bones - Calcium + Vitamin D3"
+        "es": "Crema Anti-Rozaduras",
+        "en": "Anti-Chafing Cream"
       },
       "description": {
-        "es": "Fórmula avanzada con calcio y vitamina D3 para fortalecer huesos y dientes. Esencial para mantener la densidad ósea y prevenir la osteoporosis.",
-        "en": "Advanced formula with calcium and vitamin D3 to strengthen bones and teeth. Essential for maintaining bone density and preventing osteoporosis."
+        "es": "Crema anti-rozaduras de aplicación fácil para prevenir irritaciones durante el ejercicio. Resistente al agua y sudor.",
+        "en": "anti-chafing cream to prevent irritation during exercise. Water and sweat resistant."
       },
-      "image": "/products/huesos fuertes.png",
-      "category": "suplementos",
-      "sportId": "multisport",
+      "image": "/products/CREMA-ANTI-ROZADURAS.jpg",
+      "category": "cuidado",
+      "sportId": "fencing",
       "available": true
     },
     {
@@ -89,7 +89,7 @@
         "es": "Gel de aloe vera 100% puro para hidratar, calmar y regenerar la piel. Ideal para quemaduras solares, irritaciones y cuidado diario de la piel.",
         "en": "100% pure aloe vera gel to hydrate, soothe and regenerate skin. Ideal for sunburns, irritations and daily skin care."
       },
-      "image": "/products/aleo vera gel.png",
+      "image": "/products/GEL-DE-ALOE-VERA.jpg",
       "category": "cuidado",
       "sportId": "multisport",
       "available": true
@@ -223,8 +223,8 @@
         "es": "¡Prepara tus músculos para la acción con nuestro Gel Efecto Calor! Formulado especialmente para un calentamiento efectivo, este gel proporciona una sensación térmica gradual que ayuda a preparar tus articulaciones y músculos antes del ejercicio. Su fórmula avanzada con ingredientes activos naturales no solo genera calor, sino que también ofrece protección articular, reduciendo el riesgo de lesiones. Ideal para rutinas de calentamiento en cualquier deporte o actividad física. ¡Maximiza tu rendimiento desde el primer momento con una preparación muscular óptima!",
         "en": "Prepare your muscles for action with our Heat Effect Gel! Specially formulated for effective warm-up, this gel provides a gradual thermal sensation that helps prepare your joints and muscles before exercise. Its advanced formula with natural active ingredients not only generates heat but also offers joint protection, reducing the risk of injury. Perfect for warm-up routines in any sport or physical activity."
       },
-      "image": "/products/agua-de-citronela.png",
-      "sportId": "archery",
+      "image": "/products/CREMA-EFECTO-CALOR.jpg",
+      "sportId": "fencing",
       "available": true
     },
            {
@@ -238,8 +238,53 @@
         "en": "Cremigel Massage Gel is a massage cream that helps relax and hydrate muscles. It is especially designed for professional athletes who seek to improve their precision and control in their movements. With an advanced formula that contains natural ingredients, this cream helps reduce muscle tension and improve precision in sports such as archery. Discover the power of relieving and improving your performance with Cremigel Female Massage Gel!"
       },
             "category": "cuidado",
-      "image": "/products/cremigel-esgrima.png",
+      "image": "/products/CREMIGEL-MASAJE-MUSCULAR.jpg",
       "sportId": "fencing",
+      "available": true
+    },
+               {
+      "id": 17,
+      "name": {
+        "es": "Calcio + Magnesio Vitamina K",
+        "en": "Calcium + Magnesium Vitamin K"
+      },
+      "description": {
+        "es": "Calcio + Magnesio Vitamina K es una combinación de nutrientes esenciales para el bienestar del cuerpo. El calcio ayuda a fortalecer los músculos y las articulaciones, mientras que el magnesio mejora la función muscular y la sensación de cuerpo. La vitamina K es crucial para el funcionamiento del sistema nervioso y muscular, y ayuda a prevenir lesiones y enfermedades. Esta combinación nutricional es esencial para mejorar el rendimiento deportivo y prevenir lesiones en atletas profesionales.",
+        "en": "Calcium + Magnesium Vitamin K is a combination of essential nutrients for body wellness. Calcium helps strengthen muscles and joints, while magnesium improves muscular function and body sensation. Vitamin K is crucial for the functioning of the nervous system and muscles, and helps prevent injuries and diseases. This nutritional combination is essential for improving sports performance and preventing injuries in professional athletes."
+      },
+            "category": "suplementos",
+      "image": "/products/CALCIO-MAGNESIO-VITAMINA-K-MAN-POWERS.jpg",
+      "sportId": "multisport",
+      "available": true
+    },
+        {
+      "id": 18,
+      "name": {
+        "es": "Crema Efecto Frío",
+        "en": "Cooling Cream"
+      },
+      "description": {
+        "es": "¿Necesitas relajar tus músculos despúes de una partida? Nuestra crema efecto frío es la solución perfecta. Esta crema hidratante y relajante ayuda a calmar las tensiones musculares, reduciendo el estrés y mejorando la precisión en deportes como el arquero. Con ingredientes naturales y una fórmula avanzada, nuestra crema es segura y efectiva para todos los niveles de ejercicio. ¡Descubre el poder de relajar y mejorar tu rendimiento con nuestra crema efecto frío!",
+        "en": "Cooling cream to relax muscles after a game. This cream hydrates, soothes and relieves muscle tension, reducing stress and improving precision in sports such as archery. With natural ingredients and an advanced formula, this cream is safe and effective for all exercise levels. Discover the power of cooling and improve your performance with our cooling cream!"
+      },
+      "image": "/products/CREMA-EFECTO-FRIO.jpg",
+      "category": "deportes",
+      "sportId": "fencing",
+      "available": true
+    },
+        {
+      "id": 19,
+      "name": {
+        "es": "Agarre técnico Profesional",
+        "en": "Professional Technical Grip"
+      },
+      "description": {
+        "es": "¿Buscas mejorar tu precisión y control con el palo? Nuestro gel de agarre revolucionario te dará ese agarre extra que necesitas para dominar cada swing. Con una fórmula especial que mantiene tus manos firmes y secas, podrás mantener un control total sobre el palo. ¡Olvídate de los deslizamientos y céntrate en la bola! Además, cuida tus manos con ingredientes naturales que las mantienen suaves y protegidas durante toda tu partida.",
+        "en": "Searching for a professional technical grip? Our revolutionary gel will give you that extra grip you need to dominate every swing. With a special formula that keeps your hands firm and secure, you can maintain complete control over the ball. Forget about sliding and focus on the ball! Additionally, care for your hands with natural ingredients that keep them soft and protected throughout your game."
+      },
+      "image": "/products/GEL-AGARRE-TECNICO.jpg",
+      "category": "deportes",
+      "sportId": "golf",
       "available": true
     }
   ]

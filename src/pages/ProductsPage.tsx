@@ -65,11 +65,24 @@ const ProductsPage: React.FC = () => {
 
   const currentLanguage = i18n.language as 'es' | 'en';
 
+  // Añadir al carrito: despacha evento que consume CartWidget
+  const handleAddToCart = (product: Product) => {
+    const priceNumber = product.price ? parseFloat(product.price) : undefined;
+    const detail = {
+      id: String(product.id),
+      name: product.name[currentLanguage],
+      price: priceNumber,
+      image: product.image,
+      quantity: 1,
+    };
+    window.dispatchEvent(new CustomEvent('cart:add', { detail }));
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-950 to-black">
       <Header />
       
-      <main className="pt-20">
+      <main className="pt-24 md:pt-28">
         {/* Breadcrumb y Header */}
         <section className="bg-gradient-to-r from-gray-900 to-gray-800 py-12">
           <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
@@ -149,14 +162,24 @@ const ProductsPage: React.FC = () => {
                               rel="noopener noreferrer"
                               className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-black font-bold py-2 px-4 rounded-lg hover:from-yellow-500 hover:to-yellow-400 transition-all duration-300 text-center text-sm"
                             >
-                            {product.available ? t('sports.buy') : t('sports.comingSoon')} {size}
+                              {t('sports.buy')} {size}
                             </a>
                           ))
                         ) : (
                           <button
                             className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-black font-bold py-2 px-4 rounded-lg hover:from-yellow-500 hover:to-yellow-400 transition-all duration-300 text-center text-sm"
+                            disabled={!product.available}
                           >
                             {product.available ? t('sports.buy') : t('sports.comingSoon')}
+                          </button>
+                        )}
+
+                        {product.available && (
+                          <button
+                            onClick={() => handleAddToCart(product)}
+                            className="bg-black hover:bg-gray-900 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300 text-center text-sm"
+                          >
+                            {t('sports.addToCart')}
                           </button>
                         )}
                       </div>
