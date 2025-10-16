@@ -50,7 +50,7 @@ const resources = {
       productsAvailableSoon: 'Próximamente Disponible',
       productsInterested: '¿Interesado en nuestros productos?',
       productsInterestedDesc: 'Mantente al tanto de nuestras novedades desde Madrid, España, y sé el primero en conocer cuando nuestros suplementos nutricionales estén disponibles para la venta en España. Cada producto MANPOWERS está respaldado por nuestra garantía de calidad premium y años de experiencia en el sector del bienestar.',
-      productsWhatsapp: 'Contáctanos por WhatsApp',
+
       
       // Product Names and Descriptions
       macaName: 'MAN POWERS Maca Forte 10:1 - 5000',
@@ -152,12 +152,7 @@ const resources = {
       'cart.total': 'Total',
       'cart.clear': 'Vaciar',
       'cart.checkout': 'Pagar',
-      'cart.modal.title': 'Tienda en desarrollo',
-      'cart.modal.desc': 'Por el momento puedes enviar tu pedido por WhatsApp. Revisaremos tu mensaje y te responderemos.',
       'cart.modal.close': 'Cerrar',
-      'cart.modal.sendWhatsApp': 'Enviar por WhatsApp',
-      'cart.whatsapp.header': 'Hola, quiero pedir estos productos desde MANPOWERS:',
-      'cart.whatsapp.thanks': 'Gracias.',
       'sports.imageNotAvailable': 'Imagen no disponible',
       'sports.productsInDevelopment': 'Productos en desarrollo',
       'sports.workingOnProducts': 'Estamos trabajando en productos específicos para.',
@@ -225,7 +220,7 @@ const resources = {
       productsAvailableSoon: 'Available Soon',
       productsInterested: 'Interested in our products?',
       productsInterestedDesc: 'Stay tuned for our news from Madrid, Spain, and be the first to know when our nutritional supplements are available for sale in Spain. Every MANPOWERS product is backed by our premium quality guarantee and years of experience in the wellness sector.',
-      productsWhatsapp: 'Contact us on WhatsApp',
+
       
       // Product Names and Descriptions
       macaName: 'MAN POWERS Maca Forte 10:1 - 5000',
@@ -329,12 +324,7 @@ const resources = {
       'cart.total': 'Total',
       'cart.clear': 'Empty',
       'cart.checkout': 'Checkout',
-      'cart.modal.title': 'Store under development',
-      'cart.modal.desc': 'For now you can send your order via WhatsApp. We will review your message and reply to you.',
       'cart.modal.close': 'Close',
-      'cart.modal.sendWhatsApp': 'Send via WhatsApp',
-      'cart.whatsapp.header': 'Hello, I want to order these products from MANPOWERS:',
-      'cart.whatsapp.thanks': 'Thank you.',
       'sports.imageNotAvailable': 'Image not available',
       'sports.productsInDevelopment': 'Products in development',
       'sports.workingOnProducts': 'We are working on specific products for.',
