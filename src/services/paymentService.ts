@@ -43,6 +43,11 @@ class PaymentService {
    */
   async createPayment(request: PaymentRequest): Promise<PaymentResponse> {
     try {
+      const paymentRequest = {
+        ...request,
+        amount: Math.round(request.amount * 100) // Convertir a centavos
+      };
+
       const response = await fetch(`${this.baseUrl}/create.php`, {
         method: 'POST',
         mode: this.isDevelopment ? 'cors' : 'same-origin',
@@ -51,7 +56,7 @@ class PaymentService {
           'X-API-Token': this.apiToken,
           'X-Requested-With': 'XMLHttpRequest',
         },
-        body: JSON.stringify(request),
+        body: JSON.stringify(paymentRequest),
       });
 
       if (!response.ok) {
