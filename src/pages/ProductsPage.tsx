@@ -4,32 +4,9 @@ import { useTranslation } from "react-i18next";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import useLanguageUpdater from "../hooks/useLanguageUpdater";
-import productsData from "../../public/products.json";
+import productsService, { type Product } from "../services/productsService";
 
-interface Product {
-  id: number;
-  name: {
-    es: string;
-    en: string;
-  };
-  description: {
-    es: string;
-    en: string;
-  };
-  image: string;
-  category?: string | { es: string; en: string };
-  sportId: string;
-  available: boolean;
-  amazonLinks?: {
-    [key: string]: string;
-  };
-  price?: string;
-  size?: string;
-}
 
-interface ProductsData {
-  products: Product[];
-}
 
 const ProductsPage: React.FC = () => {
   const { sportId } = useParams<{ sportId: string }>();
@@ -37,36 +14,55 @@ const ProductsPage: React.FC = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState<Product[]>([]);
   const [sportName, setSportName] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>("");
   
   useLanguageUpdater();
 
   useEffect(() => {
-    if (sportId && t) {
-      // Filtrar productos por sportId específico y productos multisport
-      const filteredProducts = (productsData as ProductsData).products.filter(
-        (product: Product) => product.sportId === sportId || product.sportId === "multisport"
-      );
+    const loadProducts = async () => {
+      if (sportId && t) {
+        setLoading(true);
+        setError("");
+        
+        try {
+          // Cargar productos desde el backend
+          const allProducts = await productsService.getProducts();
+          
+          // Filtrar productos por sportId específico y productos multisport
+          const filteredProducts = allProducts.filter(
+            (product: Product) => product.sportId === sportId || product.sportId === "multisport"
+          );
 
-      // Ordenar: primero los específicos del deporte, luego los multisport
-      const sortedProducts = filteredProducts.sort((a: Product, b: Product) => {
-        const aIsSpecific = a.sportId === sportId;
-        const bIsSpecific = b.sportId === sportId;
-        if (aIsSpecific === bIsSpecific) return 0;
-        return aIsSpecific ? -1 : 1;
-      });
+          // Ordenar: primero los específicos del deporte, luego los multisport
+          const sortedProducts = filteredProducts.sort((a: Product, b: Product) => {
+            const aIsSpecific = a.sportId === sportId;
+            const bIsSpecific = b.sportId === sportId;
+            if (aIsSpecific === bIsSpecific) return 0;
+            return aIsSpecific ? -1 : 1;
+          });
 
-      setProducts(sortedProducts);
+          setProducts(sortedProducts);
 
-      // Obtener el nombre del deporte
-      const sportNames: { [key: string]: string } = {
-        archery: t('sports.archery'),
-        cycling: t('sports.cycling'),
-        fencing: t('sports.fencing'),
-        golf: t('sports.golf'),
-        sailing: t('sports.sailing')
-      };
-      setSportName(sportNames[sportId] || sportId);
-    }
+          // Obtener el nombre del deporte
+          const sportNames: { [key: string]: string } = {
+            archery: t('sports.archery'),
+            cycling: t('sports.cycling'),
+            fencing: t('sports.fencing'),
+            golf: t('sports.golf'),
+            sailing: t('sports.sailing')
+          };
+          setSportName(sportNames[sportId] || sportId);
+        } catch (err) {
+          console.error('Error loading products:', err);
+          setError('Error al cargar los productos');
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
+
+    loadProducts();
   }, [sportId, t, i18n.language]);
 
   const handleBackToSports = () => {
@@ -77,11 +73,10 @@ const ProductsPage: React.FC = () => {
 
   // Añadir al carrito: despacha evento que consume CartWidget
   const handleAddToCart = (product: Product) => {
-    const priceNumber = product.price ? parseFloat(product.price) : undefined;
     const detail = {
       id: String(product.id),
       name: product.name[currentLanguage],
-      price: priceNumber,
+      price: product.price, // Ya es un número en el nuevo formato
       image: product.image,
       quantity: 1,
     };
@@ -118,11 +113,28 @@ const ProductsPage: React.FC = () => {
         {/* Productos */}
         <section className="py-20 px-4 md:px-8 lg:px-12">
           <div className="max-w-7xl mx-auto">
-            {products.length > 0 ? (
+            {loading ? (
+              <div className="text-center py-20">
+                <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-yellow-400 mx-auto mb-4"></div>
+                <p className="text-gray-400 text-lg">Cargando productos...</p>
+              </div>
+            ) : error ? (
+              <div className="text-center py-20">
+                <div className="text-6xl mb-4">⚠️</div>
+                <h2 className="text-3xl font-bold text-white mb-4">Error al cargar productos</h2>
+                <p className="text-gray-400 text-lg mb-8">{error}</p>
+                <button
+                  onClick={() => window.location.reload()}
+                  className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-black font-bold py-3 px-8 rounded-lg hover:from-yellow-500 hover:to-yellow-400 transition-all duration-300"
+                >
+                  Reintentar
+                </button>
+              </div>
+            ) : products.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {products.map((product) => {
                   const primarySize = product.size;
-                  const priceLabel = product.price ? `${product.price} €` : undefined;
+                  const priceLabel = product.price_formatted || (product.price ? `${product.price} €` : undefined);
                   
                   return (
                   <div

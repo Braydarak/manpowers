@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ShoppingCart, X } from 'lucide-react';
+import { ShoppingCart, X, CreditCard } from 'lucide-react';
+import { paymentService } from '../../services/paymentService';
 
 type CartItem = {
   id: string;
@@ -12,11 +13,23 @@ type CartItem = {
 
 const STORAGE_KEY = 'cart';
 
+// Helper function to convert European price format to number
+const parsePrice = (price: string | number | undefined): number => {
+  if (typeof price === 'number') return price;
+  if (typeof price === 'string') {
+    // Convert European format "36,30" to 36.30
+    return parseFloat(price.replace(',', '.')) || 0;
+  }
+  return 0;
+};
+
 const CartWidget: React.FC<{ className?: string }> = () => {
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState<CartItem[]>([]);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [toastMsg, setToastMsg] = useState<string | null>(null);
+  const [isProcessingPayment, setIsProcessingPayment] = useState(false);
+  const [paymentError, setPaymentError] = useState<string | null>(null);
   const { t } = useTranslation();
 
   // Cargar carrito desde localStorage
@@ -93,27 +106,9 @@ const CartWidget: React.FC<{ className?: string }> = () => {
   }, [toastMsg]);
 
   const totalItems = useMemo(() => items.reduce((acc, i) => acc + i.quantity, 0), [items]);
-  const totalPrice = useMemo(() => items.reduce((acc, i) => acc + (i.price ? i.price * i.quantity : 0), 0), [items]);
+  const totalPrice = useMemo(() => items.reduce((acc, i) => acc + (parsePrice(i.price) * i.quantity), 0), [items]);
 
-  const WHATSAPP_NUMBER = '34670372239';
 
-  const buildWhatsAppMessage = () => {
-    const lines: string[] = [];
-    lines.push(t('cart.whatsapp.header'));
-    items.forEach((i) => {
-      const line = `- ${i.name} x${i.quantity}` + (i.price ? ` (€${(i.price * i.quantity).toFixed(2)})` : '');
-      lines.push(line);
-    });
-    lines.push(`${t('cart.total')}: €${totalPrice.toFixed(2)}`);
-    lines.push(t('cart.whatsapp.thanks'));
-    return lines.join('\n');
-  };
-
-  const openWhatsApp = () => {
-    const message = buildWhatsAppMessage();
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-    window.open(url, '_blank');
-  };
 
   const increment = (id: string) => {
     setItems((prev) => prev.map((i) => (i.id === id ? { ...i, quantity: i.quantity + 1 } : i)));
@@ -131,6 +126,36 @@ const CartWidget: React.FC<{ className?: string }> = () => {
   };
 
   const clearCart = () => setItems([]);
+
+  const processPayment = async () => {
+    if (items.length === 0) {
+      setPaymentError('El carrito está vacío');
+      return;
+    }
+
+    setIsProcessingPayment(true);
+    setPaymentError(null);
+
+    try {
+      const paymentData = await paymentService.processCartPayment(items);
+      
+      // Cerrar el modal de checkout
+      setCheckoutOpen(false);
+      setOpen(false);
+      
+      // Redirigir al formulario de pago de Redsys
+      paymentService.redirectToPayment(paymentData);
+      
+      // Limpiar el carrito después del pago exitoso
+      clearCart();
+      
+    } catch (error) {
+      console.error('Error al procesar el pago:', error);
+      setPaymentError(error instanceof Error ? error.message : 'Error al procesar el pago');
+    } finally {
+      setIsProcessingPayment(false);
+    }
+  };
 
   return (
     <div className='m-0'>
@@ -182,7 +207,7 @@ const CartWidget: React.FC<{ className?: string }> = () => {
                     <div className="flex items-center justify-between">
                       <span className="font-semibold">{item.name}</span>
                       {item.price !== undefined ? (
-                        <span className="text-white font-semibold">€{(item.price ?? 0).toFixed(2)}</span>
+                        <span className="text-white font-semibold">€{parsePrice(item.price).toFixed(2)}</span>
                       ) : (
                         <span className="text-gray-400 text-sm">{t('cart.noPrice')}</span>
                       )}
@@ -221,27 +246,66 @@ const CartWidget: React.FC<{ className?: string }> = () => {
           </div>
       </aside>
 
-      {/* Modal de Checkout por WhatsApp */}
+      {/* Modal de Checkout */}
       {checkoutOpen && (
         <>
-          <div className="fixed inset-0 bg-black/60 z-[110]" onClick={() => setCheckoutOpen(false)} />
+          <div className="fixed inset-0 bg-black/70 z-[110]" onClick={() => setCheckoutOpen(false)} />
           <div className="fixed inset-0 z-[120] flex items-center justify-center p-4">
-            <div className="w-full max-w-md bg-white text-black rounded-xl shadow-2xl">
-              <div className="flex items-center justify-between px-5 py-4 border-b border-gray-200">
-                <h3 className="text-lg font-bold">{t('cart.modal.title')}</h3>
-                <button onClick={() => setCheckoutOpen(false)} aria-label={t('cart.modal.close')} className="text-gray-500 hover:text-black">
+            <div className="w-full max-w-md bg-gradient-to-b from-gray-900 to-black text-white rounded-xl shadow-2xl border border-gray-700">
+              <div className="flex items-center justify-between px-5 py-4 border-b border-gray-700">
+                <h3 className="text-lg font-bold text-white">Finalizar Compra</h3>
+                <button onClick={() => setCheckoutOpen(false)} aria-label={t('cart.modal.close')} className="text-gray-300 hover:text-white transition-colors">
                   <X className="w-5 h-5" />
                 </button>
               </div>
-              <div className="px-5 py-4 space-y-3">
-                <p className="text-sm text-gray-700">{t('cart.modal.desc')}</p>
-                <div className="bg-gray-100 rounded-lg p-3 text-sm whitespace-pre-wrap">
-                  {buildWhatsAppMessage()}
+              
+              <div className="px-5 py-4 space-y-4">
+                <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg p-3 border border-gray-700">
+                  <h4 className="font-semibold mb-2 text-white">Resumen del pedido</h4>
+                  <div className="space-y-1 text-sm">
+                    {items.map((item) => (
+                      <div key={item.id} className="flex justify-between text-gray-300">
+                        <span>{item.name} x{item.quantity}</span>
+                        <span>€{((item.price || 0) * item.quantity).toFixed(2)}</span>
+                      </div>
+                    ))}
+                    <div className="border-t border-gray-600 pt-1 font-semibold flex justify-between text-white">
+                      <span>Total:</span>
+                      <span>€{totalPrice.toFixed(2)}</span>
+                    </div>
+                  </div>
                 </div>
+
+                {paymentError && (
+                  <div className="bg-red-900/50 border border-red-700 rounded-lg p-3">
+                    <p className="text-red-300 text-sm">{paymentError}</p>
+                  </div>
+                )}
+
+                <div className="space-y-3">
+                  {/* Pago con tarjeta (Redsys) */}
+                  <button
+                    onClick={processPayment}
+                    disabled={isProcessingPayment || items.length === 0}
+                    className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 disabled:from-gray-600 disabled:to-gray-700 text-white font-semibold rounded-lg px-4 py-3 transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
+                  >
+                    <CreditCard className="w-5 h-5" />
+                    {isProcessingPayment ? 'Procesando...' : 'Pagar con Tarjeta'}
+                  </button>
+                </div>
+
+                <p className="text-xs text-gray-400 text-center">
+                  El pago con tarjeta es procesado de forma segura por Redsys
+                </p>
               </div>
-              <div className="px-5 py-4 border-t border-gray-200 flex gap-3">
-                <button onClick={() => setCheckoutOpen(false)} className="flex-1 bg-black hover:bg-gray-900 text-white rounded-lg px-4 py-2 transition-colors">{t('cart.modal.close')}</button>
-                <button onClick={openWhatsApp} className="flex-1 bg-black hover:bg-gray-900 text-white font-semibold rounded-lg px-4 py-2 transition-colors">{t('cart.modal.sendWhatsApp')}</button>
+              
+              <div className="px-5 py-4 border-t border-gray-700">
+                <button 
+                  onClick={() => setCheckoutOpen(false)} 
+                  className="w-full bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white rounded-lg px-4 py-2 transition-all duration-200 border border-gray-600"
+                >
+                  Cancelar
+                </button>
               </div>
             </div>
           </div>
