@@ -26,8 +26,27 @@ const ProductsPage: React.FC = () => {
         setError("");
         
         try {
-          // Cargar productos desde el backend
-          const allProducts = await productsService.getProducts();
+          let allProducts: Product[] = [];
+          
+          try {
+            // Intentar cargar productos desde el backend
+            allProducts = await productsService.getProducts();
+          } catch (backendError) {
+            console.warn('Backend no disponible, usando datos locales:', backendError);
+          }
+          
+          // Si el backend no devuelve productos, usar el archivo JSON local
+          if (allProducts.length === 0) {
+            const response = await fetch('/products.json');
+            const data = await response.json();
+            allProducts = data.products.map((product: { price: string | number }) => ({
+              ...product,
+              // Convertir precio de string a number
+              price: typeof product.price === 'string' 
+                ? parseFloat(product.price.replace(',', '.')) 
+                : product.price
+            }));
+          }
           
           // Filtrar productos por sportId específico y productos multisport
           const filteredProducts = allProducts.filter(

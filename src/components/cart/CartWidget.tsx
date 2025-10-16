@@ -15,10 +15,12 @@ const STORAGE_KEY = 'cart';
 
 // Helper function to convert European price format to number
 const parsePrice = (price: string | number | undefined): number => {
-  if (typeof price === 'number') return price;
+  if (typeof price === 'number') return isNaN(price) ? 0 : price;
   if (typeof price === 'string') {
     // Convert European format "36,30" to 36.30
-    return parseFloat(price.replace(',', '.')) || 0;
+    const cleanPrice = price.replace(',', '.').replace(/[^\d.-]/g, '');
+    const parsed = parseFloat(cleanPrice);
+    return isNaN(parsed) ? 0 : parsed;
   }
   return 0;
 };
@@ -137,7 +139,19 @@ const CartWidget: React.FC<{ className?: string }> = () => {
     setPaymentError(null);
 
     try {
-      const paymentData = await paymentService.processCartPayment(items);
+      // Debug: Verificar los datos del carrito antes de enviar
+      console.log('Items en el carrito:', items);
+      console.log('Total calculado en CartWidget:', totalPrice);
+      
+      // Procesar items para asegurar que los precios sean números
+      const processedItems = items.map(item => ({
+        ...item,
+        price: parsePrice(item.price)
+      }));
+      
+      console.log('Items procesados:', processedItems);
+      
+      const paymentData = await paymentService.processCartPayment(processedItems);
       
       // Cerrar el modal de checkout
       setCheckoutOpen(false);
@@ -263,12 +277,16 @@ const CartWidget: React.FC<{ className?: string }> = () => {
                 <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg p-3 border border-gray-700">
                   <h4 className="font-semibold mb-2 text-white">Resumen del pedido</h4>
                   <div className="space-y-1 text-sm">
-                    {items.map((item) => (
-                      <div key={item.id} className="flex justify-between text-gray-300">
-                        <span>{item.name} x{item.quantity}</span>
-                        <span>€{((item.price || 0) * item.quantity).toFixed(2)}</span>
-                      </div>
-                    ))}
+                    {items.map((item) => {
+                      const itemPrice = parsePrice(item.price);
+                      const itemTotal = itemPrice * item.quantity;
+                      return (
+                        <div key={item.id} className="flex justify-between text-gray-300">
+                          <span>{item.name} x{item.quantity}</span>
+                          <span>€{itemTotal.toFixed(2)}</span>
+                        </div>
+                      );
+                    })}
                     <div className="border-t border-gray-600 pt-1 font-semibold flex justify-between text-white">
                       <span>Total:</span>
                       <span>€{totalPrice.toFixed(2)}</span>

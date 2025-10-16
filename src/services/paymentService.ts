@@ -115,10 +115,18 @@ class PaymentService {
       throw new Error('El carrito está vacío');
     }
 
+    // Debug: Verificar los items recibidos
+    console.log('PaymentService - Items recibidos:', items);
+    
     // Calcular el total
     const amount = items.reduce((total, item) => {
-      return total + (item.price || 0) * item.quantity;
+      const itemPrice = item.price || 0;
+      const itemTotal = itemPrice * item.quantity;
+      console.log(`Item: ${item.name}, Price: ${itemPrice}, Quantity: ${item.quantity}, Total: ${itemTotal}`);
+      return total + itemTotal;
     }, 0);
+
+    console.log('PaymentService - Amount calculado:', amount);
 
     if (amount <= 0) {
       throw new Error('El importe total debe ser mayor que 0');
