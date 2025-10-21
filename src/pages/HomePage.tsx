@@ -4,6 +4,7 @@ import Footer from "../components/footer/Footer";
 import Hero from "../sections/hero";
 import AboutUs from "../sections/aboutUs";
 import Locations from "../sections/locations";
+import Events from "../sections/events/Events";
 import useLanguageUpdater from "../hooks/useLanguageUpdater";
 
 const HomePage: React.FC = () => {
@@ -17,6 +18,7 @@ const HomePage: React.FC = () => {
         <Hero />
         <AboutUs />
         <Locations />
+        <Events />
       </main>
       <Footer />
     </div>

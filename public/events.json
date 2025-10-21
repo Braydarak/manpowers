@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "title": "Campeonato de Tiro",
+        "date": "2024-05-20",
+        "location": "Madrid, España",
+        "description": "Campeonato nacional de tiro deportivo que tuvo lugar el pasado mes de Mayo.",
+        "image": "/tiro.jpeg"
+    },
+    {
+        "id": 2,
+        "title": "Copa del Mundo de Esgrima",
+        "date": "2025-11-06",
+        "location": "Palma, Mallorca",
+        "description": "Copa del Mundo de Esgrima, el 6 al 9 de Noviembre.",
+        "image": "/esgrima.jpg"
+    }
+]

@@ -8,9 +8,8 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://manpowers.es/backend',
+        target: 'https://manpowers.es/test', // Apunta a tu backend de producción/pruebas
         changeOrigin: true,
-        secure: true,
         rewrite: (path) => path.replace(/^\/api/, '')
       }
     }

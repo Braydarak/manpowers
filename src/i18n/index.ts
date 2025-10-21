@@ -20,7 +20,7 @@ const resources = {
       aboutTitle: 'Nuestra Historia',
       aboutSubtitle: 'Desde Madrid, España, creamos suplementos deportivos de élite para atletas',
       aboutOriginsTitle: 'Nuestros Orígenes',
-      aboutOrigins1: 'MANPOWERS nació en Madrid, España, con una misión clara: desarrollar suplementos deportivos de máxima calidad para potenciar el rendimiento atlético.',
+      aboutOrigins1: 'MΛNPOWERS nació en Madrid, España, con una misión clara: desarrollar suplementos deportivos de máxima calidad para potenciar el rendimiento atlético.',
       aboutOrigins2: 'Desde nuestros inicios en la capital española, nos hemos especializado en nutrición deportiva avanzada, creando productos que ayudan a los atletas a alcanzar su máximo potencial.',
       aboutValuesTitle: 'Nuestros Valores',
       aboutQuality: 'Calidad Premium',
@@ -39,7 +39,7 @@ const resources = {
       aboutProducts: 'Productos Premium',
       aboutQualityGuarantee: 'Calidad Garantizada',
       aboutCommitmentTitle: 'Nuestro Compromiso Contigo',
-      aboutCommitmentText: 'En MANPOWERS, tu rendimiento deportivo es nuestra prioridad. Cada suplemento está formulado con ingredientes de élite y pasa por rigurosos controles de calidad para garantizar resultados excepcionales.',
+      aboutCommitmentText: 'En MΛNPOWERS, tu rendimiento deportivo es nuestra prioridad. Cada suplemento está formulado con ingredientes de élite y pasa por rigurosos controles de calidad para garantizar resultados excepcionales.',
       aboutSuccess: 'Tu máximo rendimiento, nuestro compromiso',
       
       // Products Section
@@ -64,10 +64,10 @@ const resources = {
       footerCompany: 'Empresa líder en suplementos premium y productos de bienestar desde Madrid, España.',
       footerContact: 'Contacto',
       footerAddress: 'C. Severo Ochoa, 5, 28860 Paracuellos de Jarama, Madrid',
-      footerCopyright: '© MANPOWERS. Todos los derechos reservados.',
+      footerCopyright: '© MΛNPOWERS. Todos los derechos reservados.',
       
       // Page Title
-      pageTitle: 'MANPOWERS - Suplementos Premium y Productos de Bienestar | España',
+      pageTitle: 'MΛNPOWERS - Suplementos Premium y Productos de Bienestar | España',
       
       // Amazon Buttons
       buyOn: 'Comprar',
@@ -145,13 +145,17 @@ const resources = {
       'cart.close': 'Cerrar carrito',
       'cart.empty': 'Tu carrito está vacío.',
       'cart.noImage': 'Sin imagen',
-      'cart.noPrice': 'Sin precio',
+      'cart.noPrice': 'Precio no disponible',
       'cart.decreaseQty': 'Disminuir cantidad',
       'cart.increaseQty': 'Aumentar cantidad',
       'cart.remove': 'Quitar',
       'cart.total': 'Total',
       'cart.clear': 'Vaciar',
       'cart.checkout': 'Pagar',
+      'cart.paymentSuccess': '¡Pago realizado con éxito!',
+      'cart.paymentErrorTitle': 'Error en el pago',
+      'cart.paymentErrorGeneric': 'Ha ocurrido un error inesperado. Por favor, inténtalo de nuevo.',
+      'cart.paymentCancelled': 'El pago ha sido cancelado.',
       'cart.modal.close': 'Cerrar',
       'sports.imageNotAvailable': 'Imagen no disponible',
       'sports.productsInDevelopment': 'Productos en desarrollo',
@@ -190,7 +194,7 @@ const resources = {
       aboutTitle: 'Our Story',
       aboutSubtitle: 'From Madrid, Spain, we create elite sports supplements for athletes',
       aboutOriginsTitle: 'Our Origins',
-      aboutOrigins1: 'MANPOWERS was born in Madrid, Spain, with a clear mission: to develop premium sports supplements to enhance athletic performance.',
+      aboutOrigins1: 'MΛNPOWERS was born in Madrid, Spain, with a clear mission: to develop premium sports supplements to enhance athletic performance.',
       aboutOrigins2: 'Since our beginnings in the Spanish capital, we have specialized in advanced sports nutrition, creating products that help athletes reach their maximum potential.',
       aboutValuesTitle: 'Our Values',
       aboutQuality: 'Premium Quality',
@@ -209,7 +213,7 @@ const resources = {
       aboutProducts: 'Premium Products',
       aboutQualityGuarantee: 'Quality Guaranteed',
       aboutCommitmentTitle: 'Our Commitment to You',
-      aboutCommitmentText: 'At MANPOWERS, your athletic performance is our priority. Every supplement is formulated with elite ingredients and undergoes rigorous quality controls to guarantee exceptional results.',
+      aboutCommitmentText: 'At MΛNPOWERS, your athletic performance is our priority. Every supplement is formulated with elite ingredients and undergoes rigorous quality controls to guarantee exceptional results.',
       aboutSuccess: 'Your maximum performance, our commitment',
       
       // Products Section
@@ -234,10 +238,10 @@ const resources = {
       footerCompany: 'Leading company in premium supplements and wellness products from Madrid, Spain.',
       footerContact: 'Contact',
       footerAddress: 'C. Severo Ochoa, 5, 28860 Paracuellos de Jarama, Madrid',
-      footerCopyright: '© MANPOWERS. All rights reserved.',
+      footerCopyright: '© MΛNPOWERS. All rights reserved.',
       
       // Page Title
-      pageTitle: 'MANPOWERS - Premium Supplements and Wellness Products | Spain',
+      pageTitle: 'MΛNPOWERS - Premium Supplements and Wellness Products | Spain',
       
       // Amazon Buttons
       buyOn: 'Buy',
