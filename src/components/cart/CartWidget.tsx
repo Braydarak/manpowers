@@ -207,7 +207,7 @@ const CartWidget: React.FC<{ className?: string }> = () => {
         
         if (tokenElement?.value) {
           setPaymentStep('processing');
-          processPayment(tokenElement.value);
+          processPayment(tokenElement.value, currentOrder);
         } else if (errorElement?.value) {
           setPaymentError('Error en el formulario de pago');
         }
@@ -244,20 +244,25 @@ const CartWidget: React.FC<{ className?: string }> = () => {
       setMerchantCode(data.merchantCode);
       setTerminal(data.terminal);
 
+      setCurrentOrder(data.order);
+      setRedsysSrc(data.redsysJs);
+      setMerchantCode(data.merchantCode);
+      setTerminal(data.terminal);
+
     } catch {
       setPaymentError('Error iniciando el pago');
       setPaymentStep('summary');
     }
   };
 
-  const processPayment = async (opId: string) => {
+  const processPayment = async (opId: string, order: string) => {
     try {
       const response = await fetch('/backend/insiteCharge.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           operationId: opId,
-          order: currentOrder,
+          order: order, // Usar el parámetro
           amount: Math.round(totalPrice * 100).toString()
         })
       });
