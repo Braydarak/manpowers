@@ -102,6 +102,19 @@ const ProductsPage: React.FC = () => {
     window.dispatchEvent(new CustomEvent('cart:add', { detail }));
   };
 
+  const handleBuyNow = (product: Product) => {
+    const detail = {
+      id: String(product.id),
+      name: product.name[currentLanguage],
+      price: product.price,
+      image: product.image,
+      quantity: 1,
+      buyNow: true,
+      openCheckout: true,
+    };
+    window.dispatchEvent(new CustomEvent('cart:add', { detail }));
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-950 to-black">
       <Header />
@@ -230,11 +243,12 @@ const ProductsPage: React.FC = () => {
                           <button
                             className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-black font-bold py-2 px-4 rounded-lg hover:from-yellow-500 hover:to-yellow-400 transition-all duration-300 text-center text-sm"
                             disabled={!product.available}
+                            onClick={() => product.available && handleBuyNow(product)}
                           >
                             {product.available ? t('sports.buy') : t('sports.comingSoon')}
                           </button>
                         )}
-
+                        
                         {product.available && (
                           <button
                             onClick={() => handleAddToCart(product)}

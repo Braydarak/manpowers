@@ -1,9 +1,27 @@
 RewriteEngine On
 RewriteCond %{REQUEST_URI} ^/defaultsite$
 RewriteRule ^.*$ / [R=301,L]
+
+Options -MultiViews
+
+RewriteCond %{REQUEST_URI} !^/backend/ [NC]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ /index.html [L]
+
+# Redsys InSite
+SetEnv REDSYS_ENV sandbox
+SetEnv REDSYS_REST_URL https://sis-t.redsys.es:25443/sis/rest/trataPeticionRESTInsite
+SetEnv REDSYS_MERCHANT_URL https://manpowers.es/backend/merchantNotify.php
+SetEnv REDSYS_MERCHANT_CODE 367858511
+SetEnv REDSYS_TERMINAL 1
+SetEnv REDSYS_CURRENCY 978
+SetEnv REDSYS_TRANSACTION_TYPE 0
+SetEnv REDSYS_URL_OK https://manpowers.es/
+SetEnv REDSYS_URL_KO https://manpowers.es/
+SetEnv REDSYS_MERCHANT_KEY sq7HjrUOBfKmC576ILgskD5srU870gJ7
 ############################################################
-# Desactivar caché en Apache (IONOS)
-# Esto fuerza a que el servidor no almacene en caché las respuestas
+
 ############################################################
 
 <IfModule mod_headers.c>

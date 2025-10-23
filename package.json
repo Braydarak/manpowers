@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "sign": "node backend/generateSignature.js",
+    "php:sign": "php backend/generateSignature.php"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.12",
