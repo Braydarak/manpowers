@@ -115,7 +115,39 @@ const CartWidget: React.FC<{ className?: string }> = () => {
 
   const totalItems = useMemo(() => items.reduce((acc, i) => acc + i.quantity, 0), [items]);
   const checkoutList = checkoutItems ?? items;
-  const totalPrice = useMemo(() => checkoutList.reduce((acc, i) => acc + (parsePrice(i.price) * i.quantity), 0), [checkoutList]);
+  const [subtotal, setSubtotal] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [discount, setDiscount] = useState(0);
+  const [promoCode, setPromoCode] = useState("");
+  const [promoError, setPromoError] = useState("");
+
+  useEffect(() => {
+    const newSubtotal = checkoutList.reduce((acc, i) => acc + (parsePrice(i.price) * i.quantity), 0);
+    setSubtotal(newSubtotal);
+  }, [checkoutList]);
+
+  useEffect(() => {
+    const finalPrice = subtotal * (1 - discount / 100);
+    setTotalPrice(finalPrice);
+  }, [subtotal, discount]);
+
+  const applyPromoCode = async () => {
+    try {
+      const response = await fetch('https://manpowers.es/backend/api/promo.php');
+      const promos = await response.json();
+      if (promos[promoCode]) {
+        setDiscount(promos[promoCode]);
+        setPromoError("");
+      } else {
+        setDiscount(0);
+        setPromoError("Código de promoción no válido");
+      }
+    } catch {
+      setDiscount(0);
+      setPromoError("Error al validar el código de promoción");
+    }
+  };
+
 
 
 
@@ -383,11 +415,42 @@ const CartWidget: React.FC<{ className?: string }> = () => {
                             </div>
                           );
                         })}
-                        <div className="border-t border-gray-600 pt-1 font-semibold flex justify-between text-white">
-                          <span>Total:</span>
-                          <span>€{totalPrice.toFixed(2)}</span>
+                        <div className="border-t border-gray-600 pt-2 space-y-2">
+                          <div className="flex justify-between text-sm">
+                            <span>Subtotal:</span>
+                            <span>€{subtotal.toFixed(2)}</span>
+                          </div>
+                          {discount > 0 && (
+                            <div className="flex justify-between text-sm text-green-400">
+                              <span>Descuento:</span>
+                              <span>-{discount}%</span>
+                            </div>
+                          )}
+                          <div className="font-semibold flex justify-between text-white">
+                            <span>Total:</span>
+                            <span>€{totalPrice.toFixed(2)}</span>
+                          </div>
                         </div>
                       </div>
+                    </div>
+                    <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg p-3 border border-gray-700">
+                      <h4 className="font-semibold mb-2 text-white">Código de Descuento</h4>
+                      <div className="flex gap-2">
+                        <input 
+                          type="text" 
+                          value={promoCode}
+                          onChange={(e) => setPromoCode(e.target.value)}
+                          placeholder="Introduce tu código"
+                          className="flex-1 bg-gray-700 text-white rounded-md px-3 py-2 text-sm border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        />
+                        <button 
+                          onClick={applyPromoCode}
+                          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md px-4 py-2 text-sm transition-colors"
+                        >
+                          Aplicar
+                        </button>
+                      </div>
+                      {promoError && <p className="text-red-400 text-xs mt-2">{promoError}</p>}
                     </div>
                     {paymentError && (
                       <div className="bg-red-900/50 border border-red-700 rounded-lg p-3">

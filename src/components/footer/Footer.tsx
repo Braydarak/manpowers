@@ -12,9 +12,9 @@ const Footer: React.FC = () => {
         {/* Columna 1: Logo e información */}
         <div className="w-full md:w-auto mb-8 md:mb-0">
           <img 
-            src="/MAN-LOGO-BLANCO.png" 
-            alt="MANPOWERS Logo" 
-            className="h-12 mb-4 drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]"
+            src="/MAN-LOGO-BLANCO.png"
+            alt="MΛNPOWERS Logo"
+            className="h-10 mr-4"
           />
           <p className="text-gray-400 mb-4 max-w-xs">
             {t('footerCompany')}
