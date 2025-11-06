@@ -1,7 +1,5 @@
 # MANPOWERS - Sitio Web Oficial
 
-*[English version below](#english-version)*
-
 ## 🇪🇸 Versión en Español
 
 ### 📋 Descripción
