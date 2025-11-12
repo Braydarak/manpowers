@@ -12,6 +12,11 @@ export default defineConfig({
         changeOrigin: true,
         secure: true,
         rewrite: (path) => path.replace(/^\/api/, '')
+      },
+      '/backend': {
+        target: 'https://manpowers.es',
+        changeOrigin: true,
+        secure: true
       }
     }
   }
