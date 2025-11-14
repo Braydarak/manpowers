@@ -34,6 +34,7 @@ const ProductDetailPage: React.FC = () => {
   const [error, setError] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [shareOpen, setShareOpen] = useState<boolean>(false);
+  const [checkoutOpenGlobal, setCheckoutOpenGlobal] = useState<boolean>(false);
 
   useLanguageUpdater();
 
@@ -86,6 +87,17 @@ const ProductDetailPage: React.FC = () => {
 
     loadProduct();
   }, [id]);
+
+  useEffect(() => {
+    const onCheckoutToggle = (e: Event) => {
+      const ce = e as CustomEvent<boolean>;
+      setCheckoutOpenGlobal(Boolean(ce.detail));
+    };
+    window.addEventListener('cart:checkoutOpen', onCheckoutToggle as EventListener);
+    return () => {
+      window.removeEventListener('cart:checkoutOpen', onCheckoutToggle as EventListener);
+    };
+  }, []);
 
   useEffect(() => {
     if (product && product.amazonLinks) {
@@ -151,7 +163,7 @@ const ProductDetailPage: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-b from-gray-950 to-black text-white">
       <Header />
-      <main className="flex-grow pt-24 md:pt-28">
+      <main className="flex-grow pt-10 md:pt-28">
         <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
           {loading ? (
             <div className="py-24">
@@ -298,7 +310,7 @@ const ProductDetailPage: React.FC = () => {
                 </div>
               </div>
 
-              {product.available && (
+              {product.available && !checkoutOpenGlobal && (
                 <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
                   <div className="bg-black/80 backdrop-blur border-t border-gray-800 px-4 py-3 flex items-center justify-between">
                     <div className="font-bold">{product.price_formatted ? product.price_formatted : `€ ${Number(product.price).toFixed(2)}`}</div>
