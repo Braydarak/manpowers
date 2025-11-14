@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import SportsPage from "./pages/SportsPage";
 import ProductsPage from "./pages/ProductsPage";
+import ProductDetailPage from "./pages/ProductDetailPage";
 import PaymentResultPage from "./pages/PaymentResultPage";
 import CookieConsent from "./components/cookieConsent";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
@@ -16,6 +17,8 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/sports" element={<SportsPage />} />
         <Route path="/products/:sportId" element={<ProductsPage />} />
+        <Route path="/products/:sportId/:id" element={<ProductDetailPage />} />
+        <Route path="/product/:id" element={<ProductDetailPage />} />
         <Route path="/payment-result" element={<PaymentResultPage />} />
         <Route path="/pago-ok" element={<PaymentResultPage />} />
         <Route path="/pago-ko" element={<PaymentResultPage />} />

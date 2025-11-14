@@ -115,6 +115,11 @@ const ProductsPage: React.FC = () => {
     window.dispatchEvent(new CustomEvent('cart:add', { detail }));
   };
 
+  const openProductDetail = (id: number) => {
+    if (!sportId) return;
+    navigate(`/products/${sportId}/${id}`);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-950 to-black">
       <Header />
@@ -171,7 +176,15 @@ const ProductsPage: React.FC = () => {
                   return (
                   <div
                     key={product.id}
-                    className="bg-gray-800 rounded-lg overflow-hidden border border-gray-700 hover:border-yellow-400 transition-all duration-300 hover:transform hover:scale-105 flex flex-col h-full min-h-[500px]"
+                    className="bg-gray-800 rounded-lg overflow-hidden border border-gray-700 hover:border-yellow-400 transition-all duration-300 hover:transform hover:scale-105 flex flex-col h-full min-h-[500px] cursor-pointer"
+                    onClick={() => openProductDetail(product.id)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        openProductDetail(product.id);
+                      }
+                    }}
                   >
                     <div className="relative h-64 bg-gray-700 flex items-center justify-center overflow-hidden flex-shrink-0">
                       {/* Size badge (top-left) */}
@@ -235,6 +248,7 @@ const ProductsPage: React.FC = () => {
                               target="_blank"
                               rel="noopener noreferrer"
                               className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-black font-bold py-2 px-4 rounded-lg hover:from-yellow-500 hover:to-yellow-400 transition-all duration-300 text-center text-sm"
+                              onClick={(e) => e.stopPropagation()}
                             >
                               {t('sports.buy')} {size}
                             </a>
@@ -243,7 +257,10 @@ const ProductsPage: React.FC = () => {
                           <button
                             className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-black font-bold py-2 px-4 rounded-lg hover:from-yellow-500 hover:to-yellow-400 transition-all duration-300 text-center text-sm"
                             disabled={!product.available}
-                            onClick={() => product.available && handleBuyNow(product)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              if (product.available) handleBuyNow(product);
+                            }}
                           >
                             {product.available ? t('sports.buy') : t('sports.comingSoon')}
                           </button>
@@ -251,7 +268,10 @@ const ProductsPage: React.FC = () => {
                         
                         {product.available && (
                           <button
-                            onClick={() => handleAddToCart(product)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleAddToCart(product);
+                            }}
                             className="bg-black hover:bg-gray-900 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300 text-center text-sm"
                           >
                             {t('sports.addToCart')}

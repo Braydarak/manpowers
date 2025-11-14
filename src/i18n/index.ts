@@ -230,6 +230,13 @@ const resources = {
       "sports.discoverSelection":
         "Descubre nuestra selección especializada de productos para",
 
+      "product.share": "Compartir",
+      "product.linkCopied": "Enlace copiado",
+      "product.selectSize": "Selecciona talla",
+      "product.shareWhatsapp": "Enviar por WhatsApp",
+      "product.copyLink": "Copiar enlace",
+      "sports.backToSpecific": "Volver a {{sport}}",
+
       // PaymentResultPage
       "payment.success.title": "¡Pago completado con éxito!",
       "payment.success.description":
@@ -491,6 +498,13 @@ const resources = {
       "sports.productsFor": "Products for",
       "sports.discoverSelection":
         "Discover our specialized selection of products for",
+
+      "product.share": "Share",
+      "product.linkCopied": "Link copied",
+      "product.selectSize": "Select size",
+      "product.shareWhatsapp": "Send via WhatsApp",
+      "product.copyLink": "Copy link",
+      "sports.backToSpecific": "Back to {{sport}}",
 
       // PaymentResultPage
       "payment.success.title": "Payment completed successfully!",

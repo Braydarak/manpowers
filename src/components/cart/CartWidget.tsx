@@ -134,6 +134,14 @@ const CartWidget: React.FC<{ className?: string }> = () => {
       window.removeEventListener("cart:add", handler as EventListener);
   }, [autoCardOnOpen, t]);
 
+  useEffect(() => {
+    try {
+      window.dispatchEvent(new CustomEvent('cart:checkoutOpen', { detail: checkoutOpen }));
+    } catch {
+      // ignore
+    }
+  }, [checkoutOpen]);
+
   // Ocultar el toast automáticamente
   useEffect(() => {
     if (!toastMsg) return;
