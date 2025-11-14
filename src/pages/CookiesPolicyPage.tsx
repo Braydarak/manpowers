@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 
 const CookiesPolicyPage: React.FC = () => {
+  const [enter, setEnter] = useState(false);
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setEnter(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-b from-gray-950 to-black text-white">
       <Header />
-      <main className="flex-grow pt-24 md:pt-28">
+      <main className={`flex-grow pt-24 md:pt-28 transition-all duration-500 ${enter ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
         <div className="max-w-4xl mx-auto px-4 md:px-8 lg:px-12 py-16">
           <h1 className="text-3xl font-bold mb-6">Política de Cookies</h1>
           <p className="text-gray-300 mb-4">

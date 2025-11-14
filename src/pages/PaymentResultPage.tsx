@@ -7,6 +7,7 @@ import emailjs from '@emailjs/browser';
 import { useTranslation } from 'react-i18next';
 
 function PaymentResultPage() {
+  const [enter, setEnter] = useState(false);
   const [searchParams] = useSearchParams();
   const location = useLocation();
   const { t } = useTranslation();
@@ -43,6 +44,11 @@ function PaymentResultPage() {
   useEffect(() => {
     // Input de reenvío eliminado; usamos el email de sessionStorage directamente
   }, [paymentSuccess]);
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setEnter(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   const handleManualResend = async () => {
     setResending(true);
@@ -199,7 +205,7 @@ function PaymentResultPage() {
   return (
     <div className="flex flex-col min-h-screen mt-30 bg-gradient-to-b from-gray-950 to-black text-white">
       <Header />
-      <main className="flex-grow pt-24 md:pt-28">
+      <main className={`flex-grow pt-24 md:pt-28 transition-all duration-500 ${enter ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
         <div className="max-w-4xl mx-auto px-4 md:px-8 lg:px-12 py-16">
           {paymentSuccess ? (
             <div className="bg-gray-800 border border-green-500 rounded-lg p-8 shadow-2xl text-center">
