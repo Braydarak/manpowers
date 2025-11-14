@@ -9,6 +9,7 @@ import productsService, { type Product } from "../services/productsService";
 
 
 const ProductsPage: React.FC = () => {
+  const [enter, setEnter] = useState(false);
   const { sportId } = useParams<{ sportId: string }>();
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
@@ -84,6 +85,15 @@ const ProductsPage: React.FC = () => {
     loadProducts();
   }, [sportId, t, i18n.language]);
 
+  useEffect(() => {
+    if (!loading) {
+      const id = requestAnimationFrame(() => setEnter(true));
+      return () => cancelAnimationFrame(id);
+    } else {
+      setEnter(false);
+    }
+  }, [loading]);
+
   const handleBackToSports = () => {
     navigate('/sports');
   };
@@ -124,7 +134,7 @@ const ProductsPage: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-b from-gray-950 to-black">
       <Header />
       
-      <main className="pt-24 md:pt-28">
+      <main className={`pt-24 md:pt-28 transition-all duration-500 ${enter ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
         {/* Breadcrumb y Header */}
         <section className="bg-gradient-to-r from-gray-900 to-gray-800 py-12">
           <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">

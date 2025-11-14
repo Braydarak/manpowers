@@ -24,6 +24,7 @@ type ProductJson = {
 };
 
 const ProductDetailPage: React.FC = () => {
+  const [enter, setEnter] = useState(false);
   const { sportId: sportParam, id } = useParams<{ sportId?: string; id: string }>();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
@@ -100,6 +101,15 @@ const ProductDetailPage: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    if (!loading) {
+      const id = requestAnimationFrame(() => setEnter(true));
+      return () => cancelAnimationFrame(id);
+    } else {
+      setEnter(false);
+    }
+  }, [loading]);
+
+  useEffect(() => {
     if (product && product.amazonLinks) {
       const keys = Object.keys(product.amazonLinks);
       if (keys.length > 0) setSelectedSize(keys[0]);
@@ -163,7 +173,7 @@ const ProductDetailPage: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-b from-gray-950 to-black text-white">
       <Header />
-      <main className="flex-grow pt-10 md:pt-28">
+      <main className={`flex-grow pt-10 md:pt-28 transition-all duration-500 ${enter ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
         <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
           {loading ? (
             <div className="py-24">
@@ -210,7 +220,7 @@ const ProductDetailPage: React.FC = () => {
               </section>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-                <div className="group bg-gray-900/60 rounded-xl overflow-hidden border border-gray-800 shadow-2xl">
+                <div className={`group bg-gray-900/60 rounded-xl overflow-hidden border border-gray-800 shadow-2xl transition-all duration-500 ${enter ? 'opacity-100 translate-y-0 delay-100' : 'opacity-0 translate-y-3'}`}>
                   <div className="relative aspect-[4/3] bg-black">
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <img
@@ -228,7 +238,7 @@ const ProductDetailPage: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-6">
+                <div className={`flex flex-col gap-6 transition-all duration-500 ${enter ? 'opacity-100 translate-y-0 delay-150' : 'opacity-0 translate-y-3'}`}>
                   <div className="flex items-center gap-3">
                     <span className="text-xs font-semibold text-yellow-400 uppercase tracking-wide">
                       {product.category
@@ -276,7 +286,7 @@ const ProductDetailPage: React.FC = () => {
                     </div>
                   )}
 
-                  <div className="flex flex-col sm:flex-row gap-3">
+                  <div className={`flex flex-col sm:flex-row gap-3 transition-all duration-500 ${enter ? 'opacity-100 translate-y-0 delay-200' : 'opacity-0 translate-y-3'}`}>
                     {product.available && product.amazonLinks && selectedSize ? (
                       <a
                         href={product.amazonLinks[selectedSize]}
