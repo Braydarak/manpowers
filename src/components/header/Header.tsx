@@ -156,6 +156,13 @@ const Header: React.FC = () => {
           >
             TAMD Cosmetics
           </a>
+          {/* Botón Colaboradores */}
+          <button
+            onClick={() => navigate('/colaboradores')}
+            className="border border-white/60 text-white px-4 py-2 rounded-lg font-semibold transition-all duration-300 hover:bg-white hover:text-black"
+          >
+            {t('headerCollaborators')}
+          </button>
                     <div className="flex flex-col">
             <div className="flex items-center hover:text-gray-100 transition-colors duration-300">
               <svg
@@ -270,6 +277,13 @@ const Header: React.FC = () => {
           >
             TAMD Cosmetics
           </a>
+          {/* Botón Colaboradores (móvil) */}
+          <button
+            onClick={() => { navigate('/colaboradores'); setMenuOpen(false); }}
+            className="border border-white/60 text-white px-6 py-3 rounded-lg font-semibold text-lg transition-all duration-300 hover:bg-white hover:text-black w-full text-center"
+          >
+            {t('headerCollaborators')}
+          </button>
 
           {/* Selector de idioma */}
           <div className="flex items-center space-x-4 mt-6">

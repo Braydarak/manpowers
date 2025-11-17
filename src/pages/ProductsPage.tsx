@@ -5,6 +5,7 @@ import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import useLanguageUpdater from "../hooks/useLanguageUpdater";
 import productsService, { type Product } from "../services/productsService";
+import { updateSEOTags } from "../utils/seoConfig";
 
 
 
@@ -19,6 +20,25 @@ const ProductsPage: React.FC = () => {
   const [error, setError] = useState<string>("");
   
   useLanguageUpdater();
+
+  useEffect(() => {
+    if (!sportId) return;
+    const currentLanguage = (i18n.language as 'es' | 'en') || 'es';
+    const sport = sportName || sportId;
+    const title = `Productos de ${sport} | MANPOWERS`;
+    const description = `Catálogo de ${sport} en MANPOWERS. ${products.slice(0, 3).map(p => p.name[currentLanguage]).join(', ')}`;
+    const keywords = `${sport}, MANPOWERS, suplementos, ${products.slice(0, 3).map(p => (typeof p.category === 'string' ? p.category : p.category[currentLanguage])).join(', ')}`;
+    const ogImage = products[0]?.image ? products[0].image : '/MAN-LOGO-BLANCO.png';
+    updateSEOTags({
+      title,
+      description,
+      keywords,
+      ogTitle: title,
+      ogDescription: description,
+      ogImage,
+      canonicalUrl: `https://manpowers.es/products/${sportId}`
+    });
+  }, [sportId, sportName, products, i18n.language]);
 
   useEffect(() => {
     const loadProducts = async () => {

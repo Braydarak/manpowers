@@ -5,11 +5,16 @@ import Hero from "../sections/hero";
 import AboutUs from "../sections/aboutUs";
 import Locations from "../sections/locations";
 import useLanguageUpdater from "../hooks/useLanguageUpdater";
+import { updateSEOTags, seoConfigs } from "../utils/seoConfig";
 
 const HomePage: React.FC = () => {
   const [enter, setEnter] = useState(false);
   // Hook para actualizar idioma y título dinámicamente
   useLanguageUpdater();
+
+  useEffect(() => {
+    updateSEOTags(seoConfigs.home);
+  }, []);
 
   // Limpiar datos de compra en sessionStorage al volver a Home
   useEffect(() => {

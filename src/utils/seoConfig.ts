@@ -18,13 +18,21 @@ export const seoConfigs = {
     ogImage: '/MAN-LOGO-BLANCO.png',
     canonicalUrl: 'https://manpowers.es/'
   },
+  sports: {
+    title: 'Deportes | MANPOWERS',
+    description: 'Explora deportes y categorías: tiro con arco, golf, ciclismo, esgrima y náutica. Productos y geles de agarre MANPOWERS.',
+    keywords: 'deportes, tiro con arco, golf, ciclismo, esgrima, náutica, MANPOWERS',
+    ogTitle: 'Deportes | MANPOWERS',
+    ogDescription: 'Explora nuestras categorías y accesorios para deportistas.',
+    canonicalUrl: 'https://manpowers.es/sports'
+  },
   products: {
     title: 'Productos MANPOWERS - Suplementos Premium | Mallorca España',
     description: 'Catálogo completo de productos MANPOWERS: Maca Forte 5000mg, Omega 3 puro, Protector Solar SPF 50+. Suplementos premium desde Mallorca para toda España.',
     keywords: 'maca forte, omega 3, protector solar SPF 50, suplementos premium, productos MANPOWERS, Mallorca, España, maca andina 5000mg',
     ogTitle: 'Productos MANPOWERS - Suplementos Premium',
     ogDescription: 'Catálogo completo de suplementos nutricionales premium desde Mallorca.',
-    canonicalUrl: 'https://manpowers.es/productos'
+    canonicalUrl: 'https://manpowers.es/products'
   },
   about: {
     title: 'Sobre MANPOWERS - Historia y Misión | Empresa de Mallorca',

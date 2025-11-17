@@ -3,11 +3,15 @@ import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import Sports from "../sections/sports";
 import useLanguageUpdater from "../hooks/useLanguageUpdater";
+import { updateSEOTags, seoConfigs } from "../utils/seoConfig";
 
 const SportsPage: React.FC = () => {
   const [enter, setEnter] = useState(false);
   // Hook para actualizar idioma y título dinámicamente
   useLanguageUpdater();
+  useEffect(() => {
+    updateSEOTags(seoConfigs.sports);
+  }, []);
   useEffect(() => {
     const id = requestAnimationFrame(() => setEnter(true));
     return () => cancelAnimationFrame(id);

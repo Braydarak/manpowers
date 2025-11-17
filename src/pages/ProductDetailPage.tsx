@@ -6,6 +6,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import useLanguageUpdater from "../hooks/useLanguageUpdater";
 import productsService, { type Product } from "../services/productsService";
+import { updateSEOTags } from "../utils/seoConfig";
 
 // Tipado del JSON local para evitar 'any' en el fallback
 type ProductJson = {
@@ -38,6 +39,23 @@ const ProductDetailPage: React.FC = () => {
   const [checkoutOpenGlobal, setCheckoutOpenGlobal] = useState<boolean>(false);
 
   useLanguageUpdater();
+
+  useEffect(() => {
+    if (!product) return;
+    const title = `${product.name[currentLanguage]} | MANPOWERS`;
+    const description = product.description[currentLanguage];
+    const keywords = `${product.name[currentLanguage]}, ${typeof product.category === 'string' ? product.category : product.category[currentLanguage]}, MANPOWERS`;
+    const ogImage = product.image || "/MAN-LOGO-BLANCO.png";
+    updateSEOTags({
+      title,
+      description,
+      keywords,
+      ogTitle: title,
+      ogDescription: description,
+      ogImage,
+      canonicalUrl: `https://manpowers.es/product/${id}`
+    });
+  }, [product, currentLanguage, id]);
 
   useEffect(() => {
     const loadProduct = async () => {

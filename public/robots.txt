@@ -1,5 +1,5 @@
 User-agent: *
-Disallow: /
-Allow: /$
+Allow: /
+Disallow: /backend/
 
 Sitemap: https://manpowers.es/sitemap.xml
