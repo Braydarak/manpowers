@@ -2,6 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import useScrollAnimation from "../../hooks/useScrollAnimation";
+import VideoSlider from "../../components/slider/VideoSlider";
 import sportsData from "../../../public/sports.json";
 import { Target, Sword, LandPlot, Bike, Anchor } from "lucide-react";
 
@@ -30,20 +31,8 @@ const Hero: React.FC = () => {
 
   return (
     <section className="relative min-h-screen w-full overflow-hidden">
-      {/* Video de fondo */}
-      <video
-        className="absolute top-0 left-0 w-full h-full object-cover z-10"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        webkit-playsinline="true"
-        controls={false}
-      >
-        <source src="/video.mp4" type="video/mp4" />
-        Tu navegador no soporta el elemento de video.
-      </video>
+      {/* Video de fondo (slider) */}
+      <VideoSlider />
 
       {/* Overlay oscuro para mejorar la legibilidad del texto */}
       <div className="absolute inset-0 bg-black/40 sm:bg-black/45 lg:bg-black/50 z-20" />
