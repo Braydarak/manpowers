@@ -137,7 +137,7 @@ const Footer: React.FC = () => {
                 href="/privacidad"
                 className="text-gray-400 hover:text-white transition-colors"
               >
-                Política de Privacidad
+                {t('footerPrivacy')}
               </a>
             </li>
             <li>
@@ -145,7 +145,7 @@ const Footer: React.FC = () => {
                 href="/cookies"
                 className="text-gray-400 hover:text-white transition-colors"
               >
-                Política de Cookies
+                {t('footerCookies')}
               </a>
             </li>
           </ul>
