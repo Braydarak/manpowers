@@ -87,7 +87,7 @@ const resources = {
         acceptedCards: "Tarjetas aceptadas",
       },
       shipping: {
-        tipsa: "Envíos gestionados por",
+        tipsa: "Envíos realizados a través de",
       },
       returns: {
         fourteenDays: "Devoluciones en 14 días naturales",
