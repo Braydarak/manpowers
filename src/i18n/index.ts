@@ -52,6 +52,14 @@ const resources = {
         "En MANPOWERS, tu rendimiento deportivo es nuestra prioridad. Cada suplemento está formulado con ingredientes de élite y pasa por rigurosos controles de calidad para garantizar resultados excepcionales.",
       aboutSuccess: "Tu máximo rendimiento, nuestro compromiso",
 
+      accordion: {
+        description: "Descripción",
+        objectives: "Objetivos",
+        nutritionalValues: "Valores nutricionales",
+        application: "Aplicación",
+        recommendations: "Recomendaciones",
+      },
+
       // Products Section
       productsTitle: "Nuestros Suplementos",
       productsSubtitle:
@@ -63,6 +71,11 @@ const resources = {
       productsInterested: "¿Interesado en nuestros productos?",
       productsInterestedDesc:
         "Mantente al tanto de nuestras novedades desde Madrid, España, y sé el primero en conocer cuando nuestros suplementos nutricionales estén disponibles para la venta en España. Cada producto MANPOWERS está respaldado por nuestra garantía de calidad premium y años de experiencia en el sector del bienestar.",
+
+      recommendedTogether: {
+        title: "Recomendado para comprar juntos",
+        total: "Precio total",
+      },
 
       // Product Names and Descriptions
       macaName: "MAN POWERS Maca Forte 10:1 - 5000",
@@ -394,6 +407,14 @@ const resources = {
         "At MANPOWERS, your athletic performance is our priority. Every supplement is formulated with elite ingredients and undergoes rigorous quality controls to guarantee exceptional results.",
       aboutSuccess: "Your maximum performance, our commitment",
 
+      accordion: {
+        description: "Description",
+        objectives: "Objectives",
+        nutritionalValues: "Nutritional values",
+        application: "Application",
+        recommendations: "Recommendations",
+      },
+
       // Products Section
       productsTitle: "Our Supplements",
       productsSubtitle:
@@ -405,6 +426,11 @@ const resources = {
       productsInterested: "Interested in our products?",
       productsInterestedDesc:
         "Stay tuned for our news from Madrid, Spain, and be the first to know when our nutritional supplements are available for sale in Spain. Every MANPOWERS product is backed by our premium quality guarantee and years of experience in the wellness sector.",
+
+      recommendedTogether: {
+        title: "Frequently bought together",
+        total: "Total price",
+      },
 
       // Product Names and Descriptions
       macaName: "MAN POWERS Maca Forte 10:1 - 5000",

@@ -8,6 +8,22 @@ interface Product {
     es: string;
     en: string;
   };
+  objectives?: {
+    es: string[];
+    en: string[];
+  };
+  nutritionalValues?: {
+    es: string;
+    en: string;
+  };
+  application?: {
+    es: string;
+    en: string;
+  };
+  recommendations?: {
+    es: string;
+    en: string;
+  };
   price: number;
   price_formatted: string;
   size: string;
@@ -22,6 +38,8 @@ interface Product {
   amazonLinks?: {
     [key: string]: string;
   };
+  rating?: number;
+  votes?: number;
 }
 
 interface ProductsResponse {

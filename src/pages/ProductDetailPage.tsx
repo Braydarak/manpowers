@@ -7,12 +7,17 @@ import { useTranslation } from "react-i18next";
 import useLanguageUpdater from "../hooks/useLanguageUpdater";
 import productsService, { type Product } from "../services/productsService";
 import { updateSEOTags } from "../utils/seoConfig";
+import Accordion from "../components/accordion";
+import RecommendedTogether from "../components/recommended-together";
+import Faq from "../components/faq";
+import RelatedProducts from "../components/related-products";
 
 // Tipado del JSON local para evitar 'any' en el fallback
 type ProductJson = {
   id: number;
   name: Product['name'];
   description: Product['description'];
+  objectives?: { es: string[]; en: string[] };
   price: string | number;
   price_formatted?: string;
   size: string;
@@ -22,6 +27,11 @@ type ProductJson = {
   available: boolean;
   sku?: string;
   amazonLinks?: { [key: string]: string };
+  nutritionalValues?: { es: string; en: string };
+  application?: { es: string; en: string };
+  recommendations?: { es: string; en: string };
+  rating?: number;
+  votes?: number;
 };
 
 const ProductDetailPage: React.FC = () => {
@@ -37,6 +47,7 @@ const ProductDetailPage: React.FC = () => {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [shareOpen, setShareOpen] = useState<boolean>(false);
   const [checkoutOpenGlobal, setCheckoutOpenGlobal] = useState<boolean>(false);
+  const [faqItems, setFaqItems] = useState<{ id: string; question: string; answer: string }[]>([]);
 
   useLanguageUpdater();
 
@@ -75,6 +86,7 @@ const ProductDetailPage: React.FC = () => {
             id: p.id,
             name: p.name,
             description: p.description,
+            objectives: p.objectives,
             price: typeof p.price === 'string' ? parseFloat(p.price.replace(',', '.')) : p.price,
             price_formatted: p.price_formatted ?? '',
             size: p.size,
@@ -84,6 +96,11 @@ const ProductDetailPage: React.FC = () => {
             available: p.available,
             sku: p.sku ?? '',
             amazonLinks: p.amazonLinks,
+            nutritionalValues: p.nutritionalValues,
+            application: p.application,
+            recommendations: p.recommendations,
+            rating: p.rating,
+            votes: p.votes,
           }));
           const localFound = normalized.find((p: Product) => String(p.id) === String(id));
           if (localFound) {
@@ -106,6 +123,23 @@ const ProductDetailPage: React.FC = () => {
 
     loadProduct();
   }, [id]);
+
+  useEffect(() => {
+    const loadFaqs = async () => {
+      if (!id) return;
+      try {
+        const response = await fetch('/products.json');
+        const data = await response.json();
+        const p = (data.products || []).find((x: ProductJson) => String(x.id) === String(id));
+        const langItems = Array.isArray(p?.faqs?.[currentLanguage]) ? p.faqs[currentLanguage] : [];
+        const items = (langItems as { question: string; answer: string }[]).slice(0, 4).map((it, idx) => ({ id: `f${idx + 1}`, question: it.question, answer: it.answer }));
+        setFaqItems(items);
+      } catch {
+        setFaqItems([]);
+      }
+    };
+    loadFaqs();
+  }, [id, currentLanguage]);
 
   useEffect(() => {
     const onCheckoutToggle = (e: Event) => {
@@ -257,7 +291,7 @@ const ProductDetailPage: React.FC = () => {
                 </div>
 
                 <div className={`flex flex-col gap-6 transition-all duration-500 ${enter ? 'opacity-100 translate-y-0 delay-150' : 'opacity-0 translate-y-3'}`}>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3 flex-wrap">
                     <span className="text-xs font-semibold text-yellow-400 uppercase tracking-wide">
                       {product.category
                         ? (typeof product.category === 'string'
@@ -277,15 +311,58 @@ const ProductDetailPage: React.FC = () => {
                     {product.name[currentLanguage]}
                   </h1>
 
+                  {typeof product.rating === 'number' && product.rating > 0 && (
+                    <div className="flex items-center gap-2">
+                      {(() => {
+                        const r = Number(product.rating || 0);
+                        const full = Math.floor(r);
+                        const half = r - full >= 0.5;
+                        const empty = 5 - full - (half ? 1 : 0);
+                        const Star = (props: { key?: number; className?: string }) => (
+                          <svg {...props} viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.163L12 18.897l-7.335 3.864 1.401-8.163L.132 9.211l8.2-1.193z"/>
+                          </svg>
+                        );
+                        return (
+                          <>
+                            {Array.from({ length: full }).map((_, i) => (
+                              <Star key={i} className="w-5 h-5 text-yellow-400" />
+                            ))}
+                            {half && (
+                              <span className="relative w-5 h-5 inline-block">
+                                <Star className="w-5 h-5 text-gray-500" />
+                                <span className="absolute inset-0 overflow-hidden" style={{ width: '50%' }}>
+                                  <Star className="w-5 h-5 text-yellow-400" />
+                                </span>
+                              </span>
+                            )}
+                            {Array.from({ length: empty }).map((_, i) => (
+                              <Star key={i} className="w-5 h-5 text-gray-500" />
+                            ))}
+                          </>
+                        );
+                      })()}
+                      <span className="text-sm text-gray-300">
+                        {typeof product.votes === 'number' ? `(${product.votes})` : ''}
+                      </span>
+                    </div>
+                  )}
+
                   <div className="flex items-center gap-4">
                     <span className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent">
                       {product.price_formatted ? product.price_formatted : `€ ${Number(product.price).toFixed(2)}`}
                     </span>
                   </div>
 
-                  <p className="text-gray-300 text-base leading-relaxed">
-                    {product.description[currentLanguage]}
-                  </p>
+                <div className="text-xs text-gray-400">
+                  {currentLanguage === 'es' ? 'IVA incl. + gastos de envío' : 'VAT incl. + shipping'} · {currentLanguage === 'es' ? 'Plazo de entrega 3–5 días laborables' : 'Delivery time 3–5 business days'}
+                </div>
+
+                  <div className="text-sm text-gray-300">
+                    {currentLanguage === 'es' ? 'Tamaño del contenido:' : 'Content size:'} {product.size}
+                  </div>
+
+
 
                   {product.available && product.amazonLinks && (
                     <div className="flex flex-col gap-3">
@@ -334,15 +411,57 @@ const ProductDetailPage: React.FC = () => {
                     )}
                   </div>
 
+                  
 
-                </div>
+                  
+
               </div>
+            </div>
 
-              {product.available && !checkoutOpenGlobal && (
-                <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
-                  <div className="bg-black/80 backdrop-blur border-t border-gray-800 px-4 py-3 flex items-center justify-between">
-                    <div className="font-bold">{product.price_formatted ? product.price_formatted : `€ ${Number(product.price).toFixed(2)}`}</div>
-                    <div className="flex gap-2">
+            <div className={`mt-10 transition-all mb-10 duration-500 ${enter ? 'opacity-100 translate-y-0 delay-200' : 'opacity-0 translate-y-3'}`}>
+              <Accordion
+                description={product.description[currentLanguage]}
+                objectives={product.objectives ? (
+                  <ul className="list-disc ml-5 space-y-1">
+                    {product.objectives[currentLanguage].map((o, i) => (
+                      <li key={i}>{o}</li>
+                    ))}
+                  </ul>
+                ) : undefined}
+                nutritionalValues={product.nutritionalValues ? product.nutritionalValues[currentLanguage] : undefined}
+                application={product.application ? product.application[currentLanguage] : undefined}
+                recommendations={product.recommendations ? product.recommendations[currentLanguage] : undefined}
+                defaultOpenId="descripcion"
+              />
+            </div>
+
+            
+
+            {typeof product.rating === 'number' && typeof product.votes === 'number' && product.rating > 0 && product.votes > 0 && (
+              <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                  __html: JSON.stringify({
+                    '@context': 'https://schema.org',
+                    '@type': 'Product',
+                    name: typeof product.name === 'string' ? product.name : product.name[currentLanguage],
+                    image: product.image,
+                    sku: product.sku,
+                    aggregateRating: {
+                      '@type': 'AggregateRating',
+                      ratingValue: Number(product.rating).toFixed(1),
+                      reviewCount: product.votes,
+                    },
+                  }),
+                }}
+              />
+            )}
+
+            {product.available && !checkoutOpenGlobal && (
+              <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
+                <div className="bg-black/80 backdrop-blur border-t border-gray-800 px-4 py-3 flex items-center justify-between">
+                  <div className="font-bold">{product.price_formatted ? product.price_formatted : `€ ${Number(product.price).toFixed(2)}`}</div>
+                  <div className="flex gap-2">
                       {product.amazonLinks && selectedSize ? (
                         <a
                           href={product.amazonLinks[selectedSize]}
@@ -371,8 +490,32 @@ const ProductDetailPage: React.FC = () => {
                 </div>
               )}
             </>
+
           ) : null}
+
+          
         </div>
+        {product && (
+          <>
+            <div className="w-full bg-gray-900/60 border-t border-gray-800">
+              <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-8">
+                <div className="text-2xl md:text-3xl font-extrabold mb-6 text-center bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent">{t('recommendedTogether.title')}</div>
+                <RecommendedTogether currentId={product.id} sportId={product.sportId} language={currentLanguage} />
+              </div>
+            </div>
+            <div className="w-full bg-gray-900/60 border-t border-gray-800">
+              <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-8">
+                <div className="text-2xl md:text-3xl font-extrabold mb-6 text-center bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent">Preguntas más frecuentes</div>
+                <Faq language={currentLanguage} items={faqItems} />
+              </div>
+            </div>
+            <div className="w-full bg-gray-900/60 border-t border-gray-800">
+              <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-8 mb-20">
+                <RelatedProducts sportId={product.sportId} currentId={product.id} language={currentLanguage} title={currentLanguage === 'es' ? 'Productos relacionados' : 'Related products'} />
+              </div>
+            </div>
+          </>
+        )}
       </main>
       <Footer />
       <ShareModal
@@ -384,5 +527,7 @@ const ProductDetailPage: React.FC = () => {
     </div>
   );
 };
+
+ 
 
 export default ProductDetailPage;
