@@ -77,6 +77,22 @@ const resources = {
         total: "Precio total",
       },
 
+      faq: {
+        title: "Preguntas más frecuentes",
+      },
+
+      payments: {
+        methods: "Métodos de pago",
+        processedByRedsys: "Pagos procesados por Redsys",
+        acceptedCards: "Tarjetas aceptadas",
+      },
+      shipping: {
+        tipsa: "Envíos gestionados por",
+      },
+      returns: {
+        fourteenDays: "Devoluciones en 14 días naturales",
+      },
+
       // Product Names and Descriptions
       macaName: "MAN POWERS Maca Forte 10:1 - 5000",
       macaDescription:
@@ -430,6 +446,22 @@ const resources = {
       recommendedTogether: {
         title: "Frequently bought together",
         total: "Total price",
+      },
+
+      faq: {
+        title: "Frequently Asked Questions",
+      },
+
+      payments: {
+        methods: "Payment methods",
+        processedByRedsys: "Payments processed by Redsys",
+        acceptedCards: "Accepted cards",
+      },
+      shipping: {
+        tipsa: "Shipping handled by TIPSA",
+      },
+      returns: {
+        fourteenDays: "Returns within 14 calendar days",
       },
 
       // Product Names and Descriptions
