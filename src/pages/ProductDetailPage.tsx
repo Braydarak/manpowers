@@ -11,18 +11,19 @@ import Accordion from "../components/accordion";
 import RecommendedTogether from "../components/recommended-together";
 import Faq from "../components/faq";
 import RelatedProducts from "../components/related-products";
+import useAutoCarousel from "../hooks/useAutoCarousel";
 
 // Tipado del JSON local para evitar 'any' en el fallback
 type ProductJson = {
   id: number;
-  name: Product['name'];
-  description: Product['description'];
+  name: Product["name"];
+  description: Product["description"];
   objectives?: { es: string[]; en: string[] };
   price: string | number;
   price_formatted?: string;
   size: string;
   image: string;
-  category: Product['category'] | string;
+  category: Product["category"] | string;
   sportId: string;
   available: boolean;
   sku?: string;
@@ -36,10 +37,13 @@ type ProductJson = {
 
 const ProductDetailPage: React.FC = () => {
   const [enter, setEnter] = useState(false);
-  const { sportId: sportParam, id } = useParams<{ sportId?: string; id: string }>();
+  const { sportId: sportParam, id } = useParams<{
+    sportId?: string;
+    id: string;
+  }>();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
-  const currentLanguage = (i18n.language as 'es' | 'en') || 'es';
+  const currentLanguage = (i18n.language as "es" | "en") || "es";
 
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -47,15 +51,30 @@ const ProductDetailPage: React.FC = () => {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [shareOpen, setShareOpen] = useState<boolean>(false);
   const [checkoutOpenGlobal, setCheckoutOpenGlobal] = useState<boolean>(false);
-  const [faqItems, setFaqItems] = useState<{ id: string; question: string; answer: string }[]>([]);
+  const [faqItems, setFaqItems] = useState<
+    { id: string; question: string; answer: string }[]
+  >([]);
 
   useLanguageUpdater();
+
+  const {
+    currentIndex,
+    containerRef,
+    handleMouseEnter,
+    handleMouseLeave,
+    handleTouchStart,
+    handleTouchEnd,
+  } = useAutoCarousel({ itemCount: 3, visibleItems: 1, autoScrollInterval: 3500, pauseOnHover: false });
 
   useEffect(() => {
     if (!product) return;
     const title = `${product.name[currentLanguage]} | MANPOWERS`;
     const description = product.description[currentLanguage];
-    const keywords = `${product.name[currentLanguage]}, ${typeof product.category === 'string' ? product.category : product.category[currentLanguage]}, MANPOWERS`;
+    const keywords = `${product.name[currentLanguage]}, ${
+      typeof product.category === "string"
+        ? product.category
+        : product.category[currentLanguage]
+    }, MANPOWERS`;
     const ogImage = product.image || "/MAN-LOGO-BLANCO.png";
     updateSEOTags({
       title,
@@ -64,7 +83,7 @@ const ProductDetailPage: React.FC = () => {
       ogTitle: title,
       ogDescription: description,
       ogImage,
-      canonicalUrl: `https://manpowers.es/product/${id}`
+      canonicalUrl: `https://manpowers.es/product/${id}`,
     });
   }, [product, currentLanguage, id]);
 
@@ -76,37 +95,49 @@ const ProductDetailPage: React.FC = () => {
 
       try {
         // Primero intentamos desde backend por id
-        const productsById = await productsService.getProducts({ id: Number(id) });
+        const productsById = await productsService.getProducts({
+          id: Number(id),
+        });
 
         if (!productsById || productsById.length === 0) {
           // Fallback al JSON local
-          const response = await fetch('/products.json');
+          const response = await fetch("/products.json");
           const data = await response.json();
-          const normalized: Product[] = (data.products as ProductJson[]).map((p: ProductJson) => ({
-            id: p.id,
-            name: p.name,
-            description: p.description,
-            objectives: p.objectives,
-            price: typeof p.price === 'string' ? parseFloat(p.price.replace(',', '.')) : p.price,
-            price_formatted: p.price_formatted ?? '',
-            size: p.size,
-            image: p.image,
-            category: typeof p.category === 'string' ? { es: p.category, en: p.category } : p.category,
-            sportId: p.sportId,
-            available: p.available,
-            sku: p.sku ?? '',
-            amazonLinks: p.amazonLinks,
-            nutritionalValues: p.nutritionalValues,
-            application: p.application,
-            recommendations: p.recommendations,
-            rating: p.rating,
-            votes: p.votes,
-          }));
-          const localFound = normalized.find((p: Product) => String(p.id) === String(id));
+          const normalized: Product[] = (data.products as ProductJson[]).map(
+            (p: ProductJson) => ({
+              id: p.id,
+              name: p.name,
+              description: p.description,
+              objectives: p.objectives,
+              price:
+                typeof p.price === "string"
+                  ? parseFloat(p.price.replace(",", "."))
+                  : p.price,
+              price_formatted: p.price_formatted ?? "",
+              size: p.size,
+              image: p.image,
+              category:
+                typeof p.category === "string"
+                  ? { es: p.category, en: p.category }
+                  : p.category,
+              sportId: p.sportId,
+              available: p.available,
+              sku: p.sku ?? "",
+              amazonLinks: p.amazonLinks,
+              nutritionalValues: p.nutritionalValues,
+              application: p.application,
+              recommendations: p.recommendations,
+              rating: p.rating,
+              votes: p.votes,
+            })
+          );
+          const localFound = normalized.find(
+            (p: Product) => String(p.id) === String(id)
+          );
           if (localFound) {
             setProduct(localFound);
           } else {
-            setError('Producto no encontrado');
+            setError("Producto no encontrado");
           }
         } else {
           // Si el backend devuelve más de uno, tomamos el primero
@@ -114,8 +145,8 @@ const ProductDetailPage: React.FC = () => {
           setProduct(p);
         }
       } catch (err) {
-        console.error('Error cargando producto por id:', err);
-        setError('Error al cargar el producto');
+        console.error("Error cargando producto por id:", err);
+        setError("Error al cargar el producto");
       } finally {
         setLoading(false);
       }
@@ -128,11 +159,21 @@ const ProductDetailPage: React.FC = () => {
     const loadFaqs = async () => {
       if (!id) return;
       try {
-        const response = await fetch('/products.json');
+        const response = await fetch("/products.json");
         const data = await response.json();
-        const p = (data.products || []).find((x: ProductJson) => String(x.id) === String(id));
-        const langItems = Array.isArray(p?.faqs?.[currentLanguage]) ? p.faqs[currentLanguage] : [];
-        const items = (langItems as { question: string; answer: string }[]).slice(0, 4).map((it, idx) => ({ id: `f${idx + 1}`, question: it.question, answer: it.answer }));
+        const p = (data.products || []).find(
+          (x: ProductJson) => String(x.id) === String(id)
+        );
+        const langItems = Array.isArray(p?.faqs?.[currentLanguage])
+          ? p.faqs[currentLanguage]
+          : [];
+        const items = (langItems as { question: string; answer: string }[])
+          .slice(0, 4)
+          .map((it, idx) => ({
+            id: `f${idx + 1}`,
+            question: it.question,
+            answer: it.answer,
+          }));
         setFaqItems(items);
       } catch {
         setFaqItems([]);
@@ -146,9 +187,15 @@ const ProductDetailPage: React.FC = () => {
       const ce = e as CustomEvent<boolean>;
       setCheckoutOpenGlobal(Boolean(ce.detail));
     };
-    window.addEventListener('cart:checkoutOpen', onCheckoutToggle as EventListener);
+    window.addEventListener(
+      "cart:checkoutOpen",
+      onCheckoutToggle as EventListener
+    );
     return () => {
-      window.removeEventListener('cart:checkoutOpen', onCheckoutToggle as EventListener);
+      window.removeEventListener(
+        "cart:checkoutOpen",
+        onCheckoutToggle as EventListener
+      );
     };
   }, []);
 
@@ -187,7 +234,7 @@ const ProductDetailPage: React.FC = () => {
       image: product.image,
       quantity: 1,
     };
-    window.dispatchEvent(new CustomEvent('cart:add', { detail }));
+    window.dispatchEvent(new CustomEvent("cart:add", { detail }));
   };
 
   const handleBuyNow = () => {
@@ -201,7 +248,7 @@ const ProductDetailPage: React.FC = () => {
       buyNow: true,
       openCheckout: true,
     };
-    window.dispatchEvent(new CustomEvent('cart:add', { detail }));
+    window.dispatchEvent(new CustomEvent("cart:add", { detail }));
   };
 
   const handleShare = () => {
@@ -210,14 +257,14 @@ const ProductDetailPage: React.FC = () => {
 
   const sportLabelName = (() => {
     const s = sportParam || product?.sportId;
-    if (!s) return '';
+    if (!s) return "";
     const names: { [key: string]: string } = {
-      archery: t('sports.archery'),
-      cycling: t('sports.cycling'),
-      fencing: t('sports.fencing'),
-      golf: t('sports.golf'),
-      sailing: t('sports.sailing'),
-      waterSports: t('sports.waterSports'),
+      archery: t("sports.archery"),
+      cycling: t("sports.cycling"),
+      fencing: t("sports.fencing"),
+      golf: t("sports.golf"),
+      sailing: t("sports.sailing"),
+      waterSports: t("sports.waterSports"),
     };
     return names[s] || s;
   })();
@@ -225,7 +272,11 @@ const ProductDetailPage: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-b from-gray-950 to-black text-white">
       <Header />
-      <main className={`flex-grow pt-10 md:pt-28 transition-all duration-500 ${enter ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+      <main
+        className={`flex-grow pt-10 md:pt-28 transition-all duration-500 ${
+          enter ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
           {loading ? (
             <div className="py-24">
@@ -246,7 +297,7 @@ const ProductDetailPage: React.FC = () => {
                 onClick={handleBack}
                 className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-black font-bold py-2 px-6 rounded-lg hover:from-yellow-500 hover:to-yellow-400 transition-all duration-300"
               >
-                {t('cart.back')}
+                {t("cart.back")}
               </button>
             </div>
           ) : product ? (
@@ -257,22 +308,38 @@ const ProductDetailPage: React.FC = () => {
                     onClick={goToSport}
                     className="text-yellow-400 hover:text-yellow-300 flex items-center gap-2 transition-colors"
                   >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M15 19l-7-7 7-7"
+                      />
                     </svg>
-                    {t('sports.backToSpecific', { sport: sportLabelName })}
+                    {t("sports.backToSpecific", { sport: sportLabelName })}
                   </button>
                   <button
                     onClick={handleShare}
                     className="text-sm bg-gray-800 hover:bg-gray-700 text-white px-3 py-1 rounded-lg border border-gray-700"
                   >
-                    {t('product.share')}
+                    {t("product.share")}
                   </button>
                 </div>
               </section>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-                <div className={`group bg-gray-900/60 rounded-xl overflow-hidden border border-gray-800 shadow-2xl transition-all duration-500 ${enter ? 'opacity-100 translate-y-0 delay-100' : 'opacity-0 translate-y-3'}`}>
+                <div
+                  className={`group bg-gray-900/60 rounded-xl overflow-hidden border border-gray-800 shadow-2xl transition-all duration-500 ${
+                    enter
+                      ? "opacity-100 translate-y-0 delay-100"
+                      : "opacity-0 translate-y-3"
+                  }`}
+                >
                   <div className="relative aspect-[4/3] bg-black">
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <img
@@ -281,7 +348,7 @@ const ProductDetailPage: React.FC = () => {
                       className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105 group-hover:rotate-[0.5deg]"
                       onError={(e) => {
                         const target = e.currentTarget;
-                        target.style.display = 'none';
+                        target.style.display = "none";
                         if (target.parentElement) {
                           target.parentElement.innerHTML = `<span class='block p-6 text-gray-400'>Imagen no disponible</span>`;
                         }
@@ -290,20 +357,30 @@ const ProductDetailPage: React.FC = () => {
                   </div>
                 </div>
 
-                <div className={`flex flex-col gap-6 transition-all duration-500 ${enter ? 'opacity-100 translate-y-0 delay-150' : 'opacity-0 translate-y-3'}`}>
+                <div
+                  className={`flex flex-col gap-6 transition-all duration-500 ${
+                    enter
+                      ? "opacity-100 translate-y-0 delay-150"
+                      : "opacity-0 translate-y-3"
+                  }`}
+                >
                   <div className="flex items-center gap-3 flex-wrap">
                     <span className="text-xs font-semibold text-yellow-400 uppercase tracking-wide">
                       {product.category
-                        ? (typeof product.category === 'string'
-                            ? product.category
-                            : product.category[currentLanguage])
-                        : ''}
+                        ? typeof product.category === "string"
+                          ? product.category
+                          : product.category[currentLanguage]
+                        : ""}
                     </span>
                     {product.sku && (
-                      <span className="text-xs bg-gray-800 text-gray-300 px-2 py-1 rounded-full">SKU {product.sku}</span>
+                      <span className="text-xs bg-gray-800 text-gray-300 px-2 py-1 rounded-full">
+                        SKU {product.sku}
+                      </span>
                     )}
                     {product.available && (
-                      <span className="text-xs bg-green-600 text-white px-2 py-1 rounded-full">{t('sports.available')}</span>
+                      <span className="text-xs bg-green-600 text-white px-2 py-1 rounded-full">
+                        {t("sports.available")}
+                      </span>
                     )}
                   </div>
 
@@ -311,27 +388,40 @@ const ProductDetailPage: React.FC = () => {
                     {product.name[currentLanguage]}
                   </h1>
 
-                  {typeof product.rating === 'number' && product.rating > 0 && (
+                  {typeof product.rating === "number" && product.rating > 0 && (
                     <div className="flex items-center gap-2">
                       {(() => {
                         const r = Number(product.rating || 0);
                         const full = Math.floor(r);
                         const half = r - full >= 0.5;
                         const empty = 5 - full - (half ? 1 : 0);
-                        const Star = (props: { key?: number; className?: string }) => (
-                          <svg {...props} viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.163L12 18.897l-7.335 3.864 1.401-8.163L.132 9.211l8.2-1.193z"/>
+                        const Star = (props: {
+                          key?: number;
+                          className?: string;
+                        }) => (
+                          <svg
+                            {...props}
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                          >
+                            <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.163L12 18.897l-7.335 3.864 1.401-8.163L.132 9.211l8.2-1.193z" />
                           </svg>
                         );
                         return (
                           <>
                             {Array.from({ length: full }).map((_, i) => (
-                              <Star key={i} className="w-5 h-5 text-yellow-400" />
+                              <Star
+                                key={i}
+                                className="w-5 h-5 text-yellow-400"
+                              />
                             ))}
                             {half && (
                               <span className="relative w-5 h-5 inline-block">
                                 <Star className="w-5 h-5 text-gray-500" />
-                                <span className="absolute inset-0 overflow-hidden" style={{ width: '50%' }}>
+                                <span
+                                  className="absolute inset-0 overflow-hidden"
+                                  style={{ width: "50%" }}
+                                >
                                   <Star className="w-5 h-5 text-yellow-400" />
                                 </span>
                               </span>
@@ -343,36 +433,53 @@ const ProductDetailPage: React.FC = () => {
                         );
                       })()}
                       <span className="text-sm text-gray-300">
-                        {typeof product.votes === 'number' ? `(${product.votes})` : ''}
+                        {typeof product.votes === "number"
+                          ? `(${product.votes})`
+                          : ""}
                       </span>
                     </div>
                   )}
 
                   <div className="flex items-center gap-4">
                     <span className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent">
-                      {product.price_formatted ? product.price_formatted : `€ ${Number(product.price).toFixed(2)}`}
+                      {product.price_formatted
+                        ? product.price_formatted
+                        : `€ ${Number(product.price).toFixed(2)}`}
                     </span>
                   </div>
 
-                <div className="text-xs text-gray-400">
-                  {currentLanguage === 'es' ? 'IVA incl. + gastos de envío' : 'VAT incl. + shipping'} · {currentLanguage === 'es' ? 'Plazo de entrega 3–5 días laborables' : 'Delivery time 3–5 business days'}
-                </div>
-
-                  <div className="text-sm text-gray-300">
-                    {currentLanguage === 'es' ? 'Tamaño del contenido:' : 'Content size:'} {product.size}
+                  <div className="text-xs text-gray-400">
+                    {currentLanguage === "es"
+                      ? "IVA incl. + gastos de envío"
+                      : "VAT incl. + shipping"}{" "}
+                    ·{" "}
+                    {currentLanguage === "es"
+                      ? "Plazo de entrega 3–5 días laborables"
+                      : "Delivery time 3–5 business days"}
                   </div>
 
-
+                  <div className="text-sm text-gray-300">
+                    {currentLanguage === "es"
+                      ? "Tamaño del contenido:"
+                      : "Content size:"}{" "}
+                    {product.size}
+                  </div>
 
                   {product.available && product.amazonLinks && (
                     <div className="flex flex-col gap-3">
-                      <span className="text-sm text-gray-400">{t('product.selectSize')}</span>
+                      <span className="text-sm text-gray-400">
+                        {t("product.selectSize")}
+                      </span>
                       <div className="flex flex-wrap gap-2">
                         {Object.keys(product.amazonLinks).map((size) => (
                           <button
                             key={size}
                             onClick={() => setSelectedSize(size)}
-                            className={`${selectedSize === size ? 'bg-yellow-500 text-black' : 'bg-gray-800 text-gray-200'} font-semibold px-3 py-1 rounded-lg border border-gray-700`}
+                            className={`${
+                              selectedSize === size
+                                ? "bg-yellow-500 text-black"
+                                : "bg-gray-800 text-gray-200"
+                            } font-semibold px-3 py-1 rounded-lg border border-gray-700`}
                           >
                             {size}
                           </button>
@@ -381,15 +488,23 @@ const ProductDetailPage: React.FC = () => {
                     </div>
                   )}
 
-                  <div className={`flex flex-col sm:flex-row gap-3 transition-all duration-500 ${enter ? 'opacity-100 translate-y-0 delay-200' : 'opacity-0 translate-y-3'}`}>
-                    {product.available && product.amazonLinks && selectedSize ? (
+                  <div
+                    className={`flex flex-col sm:flex-row gap-3 transition-all duration-500 ${
+                      enter
+                        ? "opacity-100 translate-y-0 delay-200"
+                        : "opacity-0 translate-y-3"
+                    }`}
+                  >
+                    {product.available &&
+                    product.amazonLinks &&
+                    selectedSize ? (
                       <a
                         href={product.amazonLinks[selectedSize]}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-black font-bold py-3 px-6 rounded-lg hover:from-yellow-500 hover:to-yellow-400 transition-all duration-300 text-center"
                       >
-                        {t('sports.buy')} {selectedSize}
+                        {t("sports.buy")} {selectedSize}
                       </a>
                     ) : (
                       <button
@@ -397,7 +512,9 @@ const ProductDetailPage: React.FC = () => {
                         disabled={!product.available}
                         onClick={() => product.available && handleBuyNow()}
                       >
-                        {product.available ? t('sports.buy') : t('sports.comingSoon')}
+                        {product.available
+                          ? t("sports.buy")
+                          : t("sports.comingSoon")}
                       </button>
                     )}
 
@@ -406,62 +523,191 @@ const ProductDetailPage: React.FC = () => {
                         onClick={handleAddToCart}
                         className="bg-black hover:bg-gray-900 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300"
                       >
-                        {t('sports.addToCart')}
+                        {t("sports.addToCart")}
                       </button>
                     )}
                   </div>
-
-                  
-
-                  
-
+                </div>
               </div>
-            </div>
 
-            <div className={`mt-10 transition-all mb-10 duration-500 ${enter ? 'opacity-100 translate-y-0 delay-200' : 'opacity-0 translate-y-3'}`}>
-              <Accordion
-                description={product.description[currentLanguage]}
-                objectives={product.objectives ? (
-                  <ul className="list-disc ml-5 space-y-1">
-                    {product.objectives[currentLanguage].map((o, i) => (
-                      <li key={i}>{o}</li>
-                    ))}
-                  </ul>
-                ) : undefined}
-                nutritionalValues={product.nutritionalValues ? product.nutritionalValues[currentLanguage] : undefined}
-                application={product.application ? product.application[currentLanguage] : undefined}
-                recommendations={product.recommendations ? product.recommendations[currentLanguage] : undefined}
-                defaultOpenId="descripcion"
-              />
-            </div>
+              <div
+                className={`mt-10 transition-all mb-10 duration-500 ${
+                  enter
+                    ? "opacity-100 translate-y-0 delay-200"
+                    : "opacity-0 translate-y-3"
+                }`}
+              >
+                <Accordion
+                  description={product.description[currentLanguage]}
+                  objectives={
+                    product.objectives ? (
+                      <ul className="list-disc ml-5 space-y-1">
+                        {product.objectives[currentLanguage].map((o, i) => (
+                          <li key={i}>{o}</li>
+                        ))}
+                      </ul>
+                    ) : undefined
+                  }
+                  nutritionalValues={
+                    product.nutritionalValues
+                      ? product.nutritionalValues[currentLanguage]
+                      : undefined
+                  }
+                  application={
+                    product.application
+                      ? product.application[currentLanguage]
+                      : undefined
+                  }
+                  recommendations={
+                    product.recommendations
+                      ? product.recommendations[currentLanguage]
+                      : undefined
+                  }
+                  defaultOpenId="descripcion"
+                />
+                <div className="hidden">
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm md:text-base font-semibold text-white">
+                        {t("payments.methods")}
+                      </span>
+                      <span className="text-xs md:text-sm text-gray-400">
+                        {t("payments.processedByRedsys")}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <span className="sr-only">Visa</span>
+                      <svg
+                        aria-hidden="true"
+                        className="h-6 w-auto"
+                        viewBox="0 0 64 24"
+                      >
+                        <rect
+                          x="0"
+                          y="0"
+                          width="64"
+                          height="24"
+                          rx="4"
+                          fill="#1A1F71"
+                        />
+                        <text
+                          x="10"
+                          y="16"
+                          fill="#ffffff"
+                          fontSize="12"
+                          fontWeight="700"
+                        >
+                          VISA
+                        </text>
+                      </svg>
+                      <span className="sr-only">Mastercard</span>
+                      <svg
+                        aria-hidden="true"
+                        className="h-6 w-auto"
+                        viewBox="0 0 64 24"
+                      >
+                        <rect
+                          x="0"
+                          y="0"
+                          width="64"
+                          height="24"
+                          rx="4"
+                          fill="#000000"
+                        />
+                        <circle cx="28" cy="12" r="8" fill="#EB001B" />
+                        <circle cx="36" cy="12" r="8" fill="#F79E1B" />
+                      </svg>
+                      <span className="sr-only">American Express</span>
+                      <svg
+                        aria-hidden="true"
+                        className="h-6 w-auto"
+                        viewBox="0 0 64 24"
+                      >
+                        <rect
+                          x="0"
+                          y="0"
+                          width="64"
+                          height="24"
+                          rx="4"
+                          fill="#2E77BC"
+                        />
+                        <text
+                          x="6"
+                          y="16"
+                          fill="#ffffff"
+                          fontSize="10"
+                          fontWeight="700"
+                        >
+                          AMEX
+                        </text>
+                      </svg>
+                      <span className="sr-only">Maestro</span>
+                      <svg
+                        aria-hidden="true"
+                        className="h-6 w-auto"
+                        viewBox="0 0 64 24"
+                      >
+                        <rect
+                          x="0"
+                          y="0"
+                          width="64"
+                          height="24"
+                          rx="4"
+                          fill="#000000"
+                        />
+                        <circle cx="30" cy="12" r="8" fill="#EB001B" />
+                        <circle cx="38" cy="12" r="8" fill="#0099DF" />
+                      </svg>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <span className="text-sm md:text-base font-semibold text-white">
+                        {t("shipping.tipsa")}
+                      </span>
+                      <img
+                        src="/tipsa.png"
+                        alt="TIPSA"
+                        className="h-6 md:h-7 w-auto"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-            
+              {typeof product.rating === "number" &&
+                typeof product.votes === "number" &&
+                product.rating > 0 &&
+                product.votes > 0 && (
+                  <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                      __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "Product",
+                        name:
+                          typeof product.name === "string"
+                            ? product.name
+                            : product.name[currentLanguage],
+                        image: product.image,
+                        sku: product.sku,
+                        aggregateRating: {
+                          "@type": "AggregateRating",
+                          ratingValue: Number(product.rating).toFixed(1),
+                          reviewCount: product.votes,
+                        },
+                      }),
+                    }}
+                  />
+                )}
 
-            {typeof product.rating === 'number' && typeof product.votes === 'number' && product.rating > 0 && product.votes > 0 && (
-              <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{
-                  __html: JSON.stringify({
-                    '@context': 'https://schema.org',
-                    '@type': 'Product',
-                    name: typeof product.name === 'string' ? product.name : product.name[currentLanguage],
-                    image: product.image,
-                    sku: product.sku,
-                    aggregateRating: {
-                      '@type': 'AggregateRating',
-                      ratingValue: Number(product.rating).toFixed(1),
-                      reviewCount: product.votes,
-                    },
-                  }),
-                }}
-              />
-            )}
-
-            {product.available && !checkoutOpenGlobal && (
-              <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
-                <div className="bg-black/80 backdrop-blur border-t border-gray-800 px-4 py-3 flex items-center justify-between">
-                  <div className="font-bold">{product.price_formatted ? product.price_formatted : `€ ${Number(product.price).toFixed(2)}`}</div>
-                  <div className="flex gap-2">
+              {product.available && !checkoutOpenGlobal && (
+                <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
+                  <div className="bg-black/80 backdrop-blur border-t border-gray-800 px-4 py-3 flex items-center justify-between">
+                    <div className="font-bold">
+                      {product.price_formatted
+                        ? product.price_formatted
+                        : `€ ${Number(product.price).toFixed(2)}`}
+                    </div>
+                    <div className="flex gap-2">
                       {product.amazonLinks && selectedSize ? (
                         <a
                           href={product.amazonLinks[selectedSize]}
@@ -469,49 +715,119 @@ const ProductDetailPage: React.FC = () => {
                           rel="noopener noreferrer"
                           className="bg-yellow-500 text-black font-bold px-4 py-2 rounded-lg"
                         >
-                          {t('sports.buy')}
+                          {t("sports.buy")}
                         </a>
                       ) : (
                         <button
                           onClick={handleBuyNow}
                           className="bg-yellow-500 text-black font-bold px-4 py-2 rounded-lg"
                         >
-                          {t('sports.buy')}
+                          {t("sports.buy")}
                         </button>
                       )}
                       <button
                         onClick={handleAddToCart}
                         className="bg-gray-900 text-white font-bold px-4 py-2 rounded-lg"
                       >
-                        {t('sports.addToCart')}
+                        {t("sports.addToCart")}
                       </button>
                     </div>
                   </div>
                 </div>
               )}
             </>
-
           ) : null}
-
-          
+        </div>
+        <div className="w-full bg-gradient-to-r from-yellow-600 to-yellow-500">
+          <div className="max-w-full mx-auto px-2 sm:px-4 md:px-8 py-2">
+            <div className="md:hidden overflow-hidden">
+              <div
+                ref={containerRef}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
+                className="w-full overflow-hidden"
+              >
+                <div
+                  className="flex w-full"
+                  style={{ transform: `translateX(-${currentIndex * 100}%)`, transition: 'transform 500ms ease' }}
+                >
+                  <div className="w-full flex items-center justify-center gap-2 px-2 shrink-0">
+                    <span className="text-xs sm:text-sm font-semibold text-black whitespace-nowrap">{t('shipping.tipsa')}</span>
+                    <img src="/tipsa.png" alt="TIPSA" className="h-5 sm:h-6 w-auto" />
+                  </div>
+                  <div className="w-full flex items-center justify-center gap-2 px-2 shrink-0">
+                    <span className="hidden sm:inline text-sm font-semibold text-black whitespace-nowrap">{t('payments.methods')}</span>
+                    <div className="flex items-center gap-2">
+                      <svg aria-hidden="true" className="h-5 w-auto" viewBox="0 0 64 24"><rect x="0" y="0" width="64" height="24" rx="4" fill="#1A1F71" /><image x="8" y="4" height="16" href="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" /></svg>
+                      <svg aria-hidden="true" className="h-5 w-auto" viewBox="0 0 64 24"><rect x="0" y="0" width="64" height="24" rx="4" fill="#000000" /><circle cx="28" cy="12" r="8" fill="#EB001B" /><circle cx="36" cy="12" r="8" fill="#F79E1B" /></svg>
+                      <svg aria-hidden="true" className="h-5 w-auto" viewBox="0 0 64 24"><rect x="0" y="0" width="64" height="24" rx="4" fill="#2E77BC" /><text x="6" y="16" fill="#ffffff" fontSize="10" fontWeight="700">AMEX</text></svg>
+                      <svg aria-hidden="true" className="h-5 w-auto" viewBox="0 0 64 24"><rect x="0" y="0" width="64" height="24" rx="4" fill="#000000" /><circle cx="30" cy="12" r="8" fill="#EB001B" /><circle cx="38" cy="12" r="8" fill="#0099DF" /></svg>
+                    </div>
+                    <span className="hidden sm:inline text-xs text-black/80 whitespace-nowrap">{t('payments.processedByRedsys')}</span>
+                  </div>
+                  <div className="w-full flex items-center justify-center gap-2 px-2 shrink-0">
+                    <span className="text-xs sm:text-sm font-semibold text-black whitespace-nowrap">{t('returns.fourteenDays')}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="hidden md:flex items-center justify-between gap-4 flex-nowrap whitespace-nowrap">
+              <div className="flex items-center pl-6 basis-1/3 min-w-0 justify-start">
+                <span className="text-base font-semibold text-black whitespace-nowrap">{t('shipping.tipsa')}</span>
+                <img src="/tipsa.png" alt="TIPSA" className="h-7 w-auto" />
+              </div>
+              <div className="flex items-center gap-3 basis-1/3 min-w-0 justify-center overflow-x-hidden">
+                <span className="text-base font-semibold text-black whitespace-nowrap">{t('payments.methods')}</span>
+                <div className="flex items-center gap-2">
+                  <svg aria-hidden="true" className="h-5 w-auto" viewBox="0 0 64 24"><rect x="0" y="0" width="64" height="24" rx="4" fill="#1A1F71" /><image x="8" y="4" height="16" href="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" /></svg>
+                  <svg aria-hidden="true" className="h-5 w-auto" viewBox="0 0 64 24"><rect x="0" y="0" width="64" height="24" rx="4" fill="#000000" /><circle cx="28" cy="12" r="8" fill="#EB001B" /><circle cx="36" cy="12" r="8" fill="#F79E1B" /></svg>
+                  <svg aria-hidden="true" className="h-5 w-auto" viewBox="0 0 64 24"><rect x="0" y="0" width="64" height="24" rx="4" fill="#2E77BC" /><text x="6" y="16" fill="#ffffff" fontSize="10" fontWeight="700">AMEX</text></svg>
+                  <svg aria-hidden="true" className="h-5 w-auto" viewBox="0 0 64 24"><rect x="0" y="0" width="64" height="24" rx="4" fill="#000000" /><circle cx="30" cy="12" r="8" fill="#EB001B" /><circle cx="38" cy="12" r="8" fill="#0099DF" /></svg>
+                </div>
+                <span className="text-sm md:text-base text-black/80 whitespace-nowrap">{t('payments.processedByRedsys')}</span>
+              </div>
+              <div className="flex items-center pr-6 lg:pr-12 basis-1/3 min-w-0 justify-end">
+                <span className="text-base font-semibold text-black whitespace-nowrap">{t('returns.fourteenDays')}</span>
+              </div>
+            </div>
+          </div>
         </div>
         {product && (
           <>
             <div className="w-full border-t border-gray-800">
               <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-8">
-                <div className="text-2xl md:text-3xl font-extrabold mb-6 text-center bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent">{t('recommendedTogether.title')}</div>
-                <RecommendedTogether currentId={product.id} sportId={product.sportId} language={currentLanguage} />
+                <div className="text-2xl md:text-3xl font-extrabold mb-6 text-center bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent">
+                  {t("recommendedTogether.title")}
+                </div>
+                <RecommendedTogether
+                  currentId={product.id}
+                  sportId={product.sportId}
+                  language={currentLanguage}
+                />
               </div>
             </div>
             <div className="w-full border-t border-gray-800">
               <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-8">
-                <div className="text-2xl md:text-3xl font-extrabold mb-6 text-center bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent">Preguntas más frecuentes</div>
+                <div className="text-2xl md:text-3xl font-extrabold mb-6 text-center bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent">
+                  {t("faq.title")}
+                </div>
                 <Faq language={currentLanguage} items={faqItems} />
               </div>
             </div>
             <div className="w-full border-t border-gray-800">
               <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-8 mb-20">
-                <RelatedProducts sportId={product.sportId} currentId={product.id} language={currentLanguage} title={currentLanguage === 'es' ? 'Productos relacionados' : 'Related products'} />
+                <RelatedProducts
+                  sportId={product.sportId}
+                  currentId={product.id}
+                  language={currentLanguage}
+                  title={
+                    currentLanguage === "es"
+                      ? "Productos relacionados"
+                      : "Related products"
+                  }
+                />
               </div>
             </div>
           </>
@@ -521,13 +837,11 @@ const ProductDetailPage: React.FC = () => {
       <ShareModal
         open={shareOpen}
         onClose={() => setShareOpen(false)}
-        url={typeof window !== 'undefined' ? window.location.href : ''}
+        url={typeof window !== "undefined" ? window.location.href : ""}
         productName={product ? product.name[currentLanguage] : undefined}
       />
     </div>
   );
 };
-
- 
 
 export default ProductDetailPage;
