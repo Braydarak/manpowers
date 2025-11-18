@@ -8,7 +8,7 @@ const Locations: React.FC = () => {
   const { ref: locationsRef, isVisible: locationsVisible } = useScrollAnimation();
 
   return (
-    <section className="bg-gradient-to-b from-black to-gray-950 text-white py-20 px-4">
+    <section className="text-white py-20 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Título */}
         <div

@@ -14,7 +14,7 @@ const AboutUs: React.FC = () => {
   const { count: qualityCount, ref: qualityRef } = useCountUp({ end: 100, duration: 2500 });
   
   return (
-    <section id="about-us" className="bg-gradient-to-b from-black to-gray-950 text-white py-20 px-4">
+    <section id="about-us" className="text-white py-20 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Título principal */}
         <div 
