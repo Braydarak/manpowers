@@ -56,7 +56,7 @@ const Accordion: React.FC<AccordionProps> = ({
               </svg>
             </button>
             {isOpen && (
-              <div className="px-4 md:px-6 pb-5 text-gray-300 text-sm md:text-base leading-relaxed">
+              <div className="px-4 md:px-6 pb-5 pt-5 text-gray-300 text-sm md:text-base leading-relaxed">
                 {content}
               </div>
             )}

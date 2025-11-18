@@ -497,19 +497,19 @@ const ProductDetailPage: React.FC = () => {
         </div>
         {product && (
           <>
-            <div className="w-full bg-gray-900/60 border-t border-gray-800">
+            <div className="w-full border-t border-gray-800">
               <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-8">
                 <div className="text-2xl md:text-3xl font-extrabold mb-6 text-center bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent">{t('recommendedTogether.title')}</div>
                 <RecommendedTogether currentId={product.id} sportId={product.sportId} language={currentLanguage} />
               </div>
             </div>
-            <div className="w-full bg-gray-900/60 border-t border-gray-800">
+            <div className="w-full border-t border-gray-800">
               <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-8">
                 <div className="text-2xl md:text-3xl font-extrabold mb-6 text-center bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent">Preguntas más frecuentes</div>
                 <Faq language={currentLanguage} items={faqItems} />
               </div>
             </div>
-            <div className="w-full bg-gray-900/60 border-t border-gray-800">
+            <div className="w-full border-t border-gray-800">
               <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-8 mb-20">
                 <RelatedProducts sportId={product.sportId} currentId={product.id} language={currentLanguage} title={currentLanguage === 'es' ? 'Productos relacionados' : 'Related products'} />
               </div>
