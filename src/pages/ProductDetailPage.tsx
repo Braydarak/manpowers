@@ -760,7 +760,7 @@ const ProductDetailPage: React.FC = () => {
                   <div className="w-full flex items-center justify-center gap-2 px-2 shrink-0">
                     <span className="hidden sm:inline text-sm font-semibold text-black whitespace-nowrap">{t('payments.methods')}</span>
                     <div className="flex items-center gap-2">
-                      <svg aria-hidden="true" className="h-5 w-auto" viewBox="0 0 64 24"><rect x="0" y="0" width="64" height="24" rx="4" fill="#1A1F71" /><image x="8" y="4" height="16" href="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" /></svg>
+                      <svg aria-hidden="true" className="h-5 w-auto" viewBox="0 0 64 24"><rect x="0" y="0" width="64" height="24" rx="4" fill="#1A1F71" /><text x="10" y="16" fill="#ffffff" fontSize="12" fontWeight="700">VISA</text></svg>
                       <svg aria-hidden="true" className="h-5 w-auto" viewBox="0 0 64 24"><rect x="0" y="0" width="64" height="24" rx="4" fill="#000000" /><circle cx="28" cy="12" r="8" fill="#EB001B" /><circle cx="36" cy="12" r="8" fill="#F79E1B" /></svg>
                       <svg aria-hidden="true" className="h-5 w-auto" viewBox="0 0 64 24"><rect x="0" y="0" width="64" height="24" rx="4" fill="#2E77BC" /><text x="6" y="16" fill="#ffffff" fontSize="10" fontWeight="700">AMEX</text></svg>
                       <svg aria-hidden="true" className="h-5 w-auto" viewBox="0 0 64 24"><rect x="0" y="0" width="64" height="24" rx="4" fill="#000000" /><circle cx="30" cy="12" r="8" fill="#EB001B" /><circle cx="38" cy="12" r="8" fill="#0099DF" /></svg>
@@ -781,7 +781,7 @@ const ProductDetailPage: React.FC = () => {
               <div className="flex items-center gap-3 basis-1/3 min-w-0 justify-center overflow-x-hidden">
                 <span className="text-base font-semibold text-black whitespace-nowrap">{t('payments.methods')}</span>
                 <div className="flex items-center gap-2">
-                  <svg aria-hidden="true" className="h-5 w-auto" viewBox="0 0 64 24"><rect x="0" y="0" width="64" height="24" rx="4" fill="#1A1F71" /><image x="8" y="4" height="16" href="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" /></svg>
+                  <svg aria-hidden="true" className="h-5 w-auto" viewBox="0 0 64 24"><rect x="0" y="0" width="64" height="24" rx="4" fill="#1A1F71" /><text x="10" y="16" fill="#ffffff" fontSize="12" fontWeight="700">VISA</text></svg>
                   <svg aria-hidden="true" className="h-5 w-auto" viewBox="0 0 64 24"><rect x="0" y="0" width="64" height="24" rx="4" fill="#000000" /><circle cx="28" cy="12" r="8" fill="#EB001B" /><circle cx="36" cy="12" r="8" fill="#F79E1B" /></svg>
                   <svg aria-hidden="true" className="h-5 w-auto" viewBox="0 0 64 24"><rect x="0" y="0" width="64" height="24" rx="4" fill="#2E77BC" /><text x="6" y="16" fill="#ffffff" fontSize="10" fontWeight="700">AMEX</text></svg>
                   <svg aria-hidden="true" className="h-5 w-auto" viewBox="0 0 64 24"><rect x="0" y="0" width="64" height="24" rx="4" fill="#000000" /><circle cx="30" cy="12" r="8" fill="#EB001B" /><circle cx="38" cy="12" r="8" fill="#0099DF" /></svg>
