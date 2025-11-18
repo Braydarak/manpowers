@@ -740,7 +740,7 @@ const ProductDetailPage: React.FC = () => {
         </div>
         <div className="w-full bg-gradient-to-r from-yellow-600 to-yellow-500">
           <div className="max-w-full mx-auto px-2 sm:px-4 md:px-8 py-2">
-            <div className="md:hidden overflow-hidden">
+            <div className="block min-[1900px]:hidden overflow-hidden">
               <div
                 ref={containerRef}
                 onMouseEnter={handleMouseEnter}
@@ -768,12 +768,17 @@ const ProductDetailPage: React.FC = () => {
                     <span className="hidden sm:inline text-xs text-black/80 whitespace-nowrap">{t('payments.processedByRedsys')}</span>
                   </div>
                   <div className="w-full flex items-center justify-center gap-2 px-2 shrink-0">
+                    <svg aria-hidden="true" className="h-5 w-5 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 12a9 9 0 10-3.35 6.94" />
+                      <path d="M21 12l-4 0" />
+                      <path d="M21 12l-2-2" />
+                    </svg>
                     <span className="text-xs sm:text-sm font-semibold text-black whitespace-nowrap">{t('returns.fourteenDays')}</span>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="hidden md:flex items-center justify-between gap-4 flex-nowrap whitespace-nowrap">
+            <div className="hidden min-[1900px]:flex items-center justify-between gap-4 flex-nowrap whitespace-nowrap">
               <div className="flex items-center pl-6 basis-1/3 min-w-0 justify-start">
                 <span className="text-base font-semibold text-black whitespace-nowrap">{t('shipping.tipsa')}</span>
                 <img src="/tipsa.png" alt="TIPSA" className="h-7 w-auto" />
@@ -788,7 +793,12 @@ const ProductDetailPage: React.FC = () => {
                 </div>
                 <span className="text-sm md:text-base text-black/80 whitespace-nowrap">{t('payments.processedByRedsys')}</span>
               </div>
-              <div className="flex items-center pr-6 lg:pr-12 basis-1/3 min-w-0 justify-end">
+              <div className="flex items-center gap-2 pr-6 lg:pr-12 basis-1/3 min-w-0 justify-end">
+                <svg aria-hidden="true" className="h-6 w-6 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 12a9 9 0 10-3.35 6.94" />
+                  <path d="M21 12l-4 0" />
+                  <path d="M21 12l-2-2" />
+                </svg>
                 <span className="text-base font-semibold text-black whitespace-nowrap">{t('returns.fourteenDays')}</span>
               </div>
             </div>
