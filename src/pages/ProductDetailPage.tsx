@@ -37,9 +37,10 @@ type ProductJson = {
 
 const ProductDetailPage: React.FC = () => {
   const [enter, setEnter] = useState(false);
-  const { sportId: sportParam, id } = useParams<{
+  const { sportId: sportParam, id, slug } = useParams<{
     sportId?: string;
-    id: string;
+    id?: string;
+    slug?: string;
   }>();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
@@ -76,6 +77,7 @@ const ProductDetailPage: React.FC = () => {
         : product.category[currentLanguage]
     }, MANPOWERS`;
     const ogImage = product.image || "/MAN-LOGO-BLANCO.png";
+    const canonicalPath = typeof window !== 'undefined' ? window.location.pathname : (slug ? `/product/${slug}` : `/product/${id}`);
     updateSEOTags({
       title,
       description,
@@ -83,67 +85,74 @@ const ProductDetailPage: React.FC = () => {
       ogTitle: title,
       ogDescription: description,
       ogImage,
-      canonicalUrl: `https://manpowers.es/product/${id}`,
+      canonicalUrl: `https://manpowers.es${canonicalPath}`,
     });
-  }, [product, currentLanguage, id]);
+  }, [product, currentLanguage, id, slug]);
 
   useEffect(() => {
+    const toSlug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').replace(/-{2,}/g, '-');
     const loadProduct = async () => {
-      if (!id) return;
+      if (!id && !slug) return;
       setLoading(true);
       setError("");
 
       try {
-        // Primero intentamos desde backend por id
-        const productsById = await productsService.getProducts({
-          id: Number(id),
-        });
-
-        if (!productsById || productsById.length === 0) {
-          // Fallback al JSON local
-          const response = await fetch("/products.json");
-          const data = await response.json();
-          const normalized: Product[] = (data.products as ProductJson[]).map(
-            (p: ProductJson) => ({
-              id: p.id,
-              name: p.name,
-              description: p.description,
-              objectives: p.objectives,
-              price:
-                typeof p.price === "string"
-                  ? parseFloat(p.price.replace(",", "."))
-                  : p.price,
-              price_formatted: p.price_formatted ?? "",
-              size: p.size,
-              image: p.image,
-              category:
-                typeof p.category === "string"
-                  ? { es: p.category, en: p.category }
-                  : p.category,
-              sportId: p.sportId,
-              available: p.available,
-              sku: p.sku ?? "",
-              amazonLinks: p.amazonLinks,
-              nutritionalValues: p.nutritionalValues,
-              application: p.application,
-              recommendations: p.recommendations,
-              rating: p.rating,
-              votes: p.votes,
-            })
-          );
-          const localFound = normalized.find(
-            (p: Product) => String(p.id) === String(id)
-          );
-          if (localFound) {
-            setProduct(localFound);
-          } else {
-            setError("Producto no encontrado");
+        if (id) {
+          const productsById = await productsService.getProducts({ id: Number(id) });
+          if (productsById && productsById.length > 0) {
+            setProduct(productsById[0]);
+            return;
           }
-        } else {
-          // Si el backend devuelve más de uno, tomamos el primero
-          const p = productsById[0];
-          setProduct(p);
         }
+
+        const response = await fetch("/products.json");
+        const data = await response.json();
+        const normalized: Product[] = (data.products as ProductJson[]).map(
+          (p: ProductJson) => ({
+            id: p.id,
+            name: p.name,
+            description: p.description,
+            objectives: p.objectives,
+            price:
+              typeof p.price === "string"
+                ? parseFloat(p.price.replace(",", "."))
+                : p.price,
+            price_formatted: p.price_formatted ?? "",
+            size: p.size,
+            image: p.image,
+            category:
+              typeof p.category === "string"
+                ? { es: p.category, en: p.category }
+                : p.category,
+            sportId: p.sportId,
+            available: p.available,
+            sku: p.sku ?? "",
+            amazonLinks: p.amazonLinks,
+            nutritionalValues: p.nutritionalValues,
+            application: p.application,
+            recommendations: p.recommendations,
+            rating: p.rating,
+            votes: p.votes,
+          })
+        );
+
+        if (id) {
+          const byId = normalized.find((p: Product) => String(p.id) === String(id));
+          if (byId) {
+            setProduct(byId);
+            return;
+          }
+        }
+
+        if (slug) {
+          const base = sportParam ? normalized.filter((p) => p.sportId === sportParam || p.sportId === 'multisport') : normalized;
+          const found = base.find((p) => toSlug(p.name.es) === slug || toSlug(p.name.en) === slug);
+          if (found) {
+            setProduct(found);
+            return;
+          }
+        }
+        setError("Producto no encontrado");
       } catch (err) {
         console.error("Error cargando producto por id:", err);
         setError("Error al cargar el producto");
@@ -153,7 +162,7 @@ const ProductDetailPage: React.FC = () => {
     };
 
     loadProduct();
-  }, [id]);
+  }, [id, slug, sportParam]);
 
   useEffect(() => {
     const loadFaqs = async () => {

@@ -5,7 +5,7 @@ import { type Product } from '../../services/productsService';
 type Props = {
   product: Product;
   language: 'es' | 'en';
-  onOpen?: (id: number) => void;
+  onOpen?: (product: Product) => void;
   onAddToCart?: (product: Product) => void;
   onBuyNow?: (product: Product) => void;
   showAmazonLinks?: boolean;
@@ -26,7 +26,7 @@ const ProductCard: React.FC<Props> = ({
   const { t } = useTranslation();
 
   const handleOpen = () => {
-    onOpen?.(product.id);
+    onOpen?.(product);
   };
 
   const handleAdd = (e: React.MouseEvent) => {

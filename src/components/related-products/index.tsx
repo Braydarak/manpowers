@@ -152,9 +152,11 @@ const RelatedProducts: React.FC<Props> = ({ sportId, currentId, language, title 
     setTimeout(updateArrows, 350);
   };
 
-  const openDetail = (id: number) => {
+  const toSlug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').replace(/-{2,}/g, '-');
+  const openDetail = (p: Product) => {
     if (!sportId) return;
-    navigate(`/products/${sportId}/${id}`);
+    const slug = toSlug(p.name[language]);
+    navigate(`/products/${sportId}/${slug}`);
   };
 
   const addToCart = (p: Product) => {
@@ -228,7 +230,7 @@ const RelatedProducts: React.FC<Props> = ({ sportId, currentId, language, title 
               items.map((p) => (
                 <div
                   key={p.id}
-                  onClick={() => openDetail(p.id)}
+                  onClick={() => openDetail(p)}
                   className="rp-card min-w-[88vw] md:min-w-[256px] bg-gray-900/60 border border-gray-800 rounded-xl p-3 hover:bg-gray-900 transition-colors cursor-pointer snap-center md:snap-start flex flex-col"
                 >
                   <div className="aspect-[4/3] bg-black rounded-lg overflow-hidden">

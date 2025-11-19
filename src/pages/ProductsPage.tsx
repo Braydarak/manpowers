@@ -165,9 +165,11 @@ const ProductsPage: React.FC = () => {
     window.dispatchEvent(new CustomEvent("cart:add", { detail }));
   };
 
-  const openProductDetail = (id: number) => {
+  const toSlug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').replace(/-{2,}/g, '-');
+  const openProductDetail = (product: Product) => {
     if (!sportId) return;
-    navigate(`/products/${sportId}/${id}`);
+    const slug = toSlug(product.name[currentLanguage]);
+    navigate(`/products/${sportId}/${slug}`);
   };
 
   return (

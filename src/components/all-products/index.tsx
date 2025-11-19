@@ -137,9 +137,11 @@ const AllProducts: React.FC<Props> = ({ language, title }) => {
     setTimeout(updateArrows, 350);
   };
 
+  const toSlug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').replace(/-{2,}/g, '-');
   const openDetail = (p: Product) => {
     if (!p?.sportId) return;
-    navigate(`/products/${p.sportId}/${p.id}`);
+    const slug = toSlug(p.name[language]);
+    navigate(`/products/${p.sportId}/${slug}`);
   };
 
   const addToCart = (p: Product) => {

@@ -132,8 +132,10 @@ const ProductSearch: React.FC<{ className?: string; fullScreen?: boolean; onClos
   const onSelect = (p: Product) => {
     setOpen(false);
     setQuery("");
-    if (p.sportId) navigate(`/products/${p.sportId}/${p.id}`);
-    else navigate(`/product/${p.id}`);
+    const toSlug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').replace(/-{2,}/g, '-');
+    const slug = toSlug(p.name[lang]);
+    if (p.sportId) navigate(`/products/${p.sportId}/${slug}`);
+    else navigate(`/product/${slug}`);
   };
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
