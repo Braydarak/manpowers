@@ -10,35 +10,35 @@ export interface SEOConfig {
 
 export const seoConfigs = {
   home: {
-    title: 'MANPOWERS - Suplementos Premium desde Mallorca | España',
+    title: 'MΛN POWERS - Suplementos Premium desde Mallorca | España',
     description: 'Descubre MANPOWERS, empresa líder en suplementos nutricionales premium desde Manacor, Mallorca. Maca Andina, Omega 3, protector solar y más productos de bienestar para toda España.',
     keywords: 'suplementos nutricionales, maca andina, omega 3, protector solar, Mallorca, Manacor, España, bienestar, salud, productos premium, MANPOWERS',
-    ogTitle: 'MANPOWERS - Suplementos Premium desde Mallorca',
+    ogTitle: 'MΛN POWERS - Suplementos Premium desde Mallorca',
     ogDescription: 'Empresa líder en suplementos nutricionales premium desde Manacor, Mallorca. Productos de bienestar para toda España.',
     ogImage: '/MAN-LOGO-BLANCO.png',
     canonicalUrl: 'https://manpowers.es/'
   },
   sports: {
-    title: 'Deportes | MANPOWERS',
+    title: 'Deportes | MΛN POWERS',
     description: 'Explora deportes y categorías: tiro con arco, golf, ciclismo, esgrima y náutica. Productos y geles de agarre MANPOWERS.',
     keywords: 'deportes, tiro con arco, golf, ciclismo, esgrima, náutica, MANPOWERS',
-    ogTitle: 'Deportes | MANPOWERS',
+    ogTitle: 'Deportes | MΛN POWERS',
     ogDescription: 'Explora nuestras categorías y accesorios para deportistas.',
     canonicalUrl: 'https://manpowers.es/sports'
   },
   products: {
-    title: 'Productos MANPOWERS - Suplementos Premium | Mallorca España',
+    title: 'Productos MΛN POWERS - Suplementos Premium | Mallorca España',
     description: 'Catálogo completo de productos MANPOWERS: Maca Forte 5000mg, Omega 3 puro, Protector Solar SPF 50+. Suplementos premium desde Mallorca para toda España.',
     keywords: 'maca forte, omega 3, protector solar SPF 50, suplementos premium, productos MANPOWERS, Mallorca, España, maca andina 5000mg',
-    ogTitle: 'Productos MANPOWERS - Suplementos Premium',
+    ogTitle: 'Productos MΛN POWERS - Suplementos Premium',
     ogDescription: 'Catálogo completo de suplementos nutricionales premium desde Mallorca.',
     canonicalUrl: 'https://manpowers.es/products'
   },
   about: {
-    title: 'Sobre MANPOWERS - Historia y Misión | Empresa de Mallorca',
+    title: 'Sobre MΛN POWERS - Historia y Misión | Empresa de Mallorca',
     description: 'Conoce la historia de MANPOWERS, empresa fundada en Manacor, Mallorca. Nuestra misión, visión y compromiso con la calidad en suplementos nutricionales para España.',
     keywords: 'MANPOWERS historia, empresa Mallorca, Manacor, misión visión, calidad premium, suplementos España, fundación empresa',
-    ogTitle: 'Sobre MANPOWERS - Historia y Misión',
+    ogTitle: 'Sobre MΛN POWERS - Historia y Misión',
     ogDescription: 'Conoce la historia y misión de MANPOWERS, empresa de suplementos premium desde Mallorca.',
     canonicalUrl: 'https://manpowers.es/nosotros'
   }

@@ -62,7 +62,7 @@ const ProductDetailPage: React.FC = () => {
 
   useEffect(() => {
     if (!product) return;
-    const title = `${(product.name[currentLanguage] || product.name.es)} | MANPOWERS`;
+    const title = `${(product.name[currentLanguage] || product.name.es)} | MΛN POWERS`;
     const description = product.description[currentLanguage] || product.description.es;
     const keywords = `${(product.name[currentLanguage] || product.name.es)}, ${
       typeof product.category === "string"

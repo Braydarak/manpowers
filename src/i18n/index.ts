@@ -137,7 +137,7 @@ const resources = {
 
       // Page Title
       pageTitle:
-        "MANPOWERS - Suplementos Premium y Productos de Bienestar | España",
+        "MΛN POWERS - Suplementos Premium y Productos de Bienestar | España",
 
       // Amazon Buttons
       buyOn: "Comprar",
@@ -501,7 +501,7 @@ const resources = {
       "collabDashboard.sales": "Vendes",
       "collabDashboard.error": "No s'han pogut carregar les estadístiques. Mostrant dades base.",
       pageTitle:
-        "MANPOWERS - Suplements Premium i Productes de Benestar | Espanya",
+        "MΛN POWERS - Suplements Premium i Productes de Benestar | Espanya",
       buyOn: "Comprar",
       buyOn100ml: "100ml",
       buyOn50ml: "50ml",
@@ -791,7 +791,7 @@ const resources = {
 
       // Page Title
       pageTitle:
-        "MANPOWERS - Premium Supplements and Wellness Products | Spain",
+        "MΛN POWERS - Premium Supplements and Wellness Products | Spain",
 
       // Amazon Buttons
       buyOn: "Buy",
