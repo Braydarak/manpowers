@@ -25,12 +25,12 @@ const ProductsPage: React.FC = () => {
     const baseLang = i18n.resolvedLanguage?.split('-')[0] || i18n.language?.split('-')[0] || 'es';
     const currentLanguage: 'es' | 'en' | 'ca' = baseLang === 'en' ? 'en' : (baseLang === 'ca' ? 'ca' : 'es');
     const sport = sportName || sportId;
-    const title = `Productos de ${sport} | MANPOWERS`;
-    const description = `Catálogo de ${sport} en MANPOWERS. ${products
+    const title = `Productos de ${sport} | MΛN POWERS`;
+    const description = `Catálogo de ${sport} en MΛN POWERS. ${products
       .slice(0, 3)
       .map((p) => p.name[currentLanguage])
       .join(", ")}`;
-    const keywords = `${sport}, MANPOWERS, suplementos, ${products
+    const keywords = `${sport}, MΛN POWERS, suplementos, ${products
       .slice(0, 3)
       .map((p) =>
         typeof p.category === "string"

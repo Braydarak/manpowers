@@ -44,7 +44,7 @@ const Hero: React.FC = () => {
         <div className="mb-4 sm:mb-6 lg:mb-8 xl:mb-10">
           <img
             src="/MAN-LOGO-BLANCO.png"
-            alt="ManPowers Logo"
+            alt="MΛN POWERS Logo"
             className="h-16 sm:h-20 lg:h-24 xl:h-32 2xl:h-36 w-auto drop-shadow-2xl"
           />
         </div>

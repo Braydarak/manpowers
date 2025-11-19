@@ -10,7 +10,7 @@ type CaTrans = {
 
 const translations: { [id: number]: CaTrans } = {
   1: {
-    name: { ca: "MAN POWERS Maca Forte 10:1 - 5000" },
+    name: { ca: "MΛN POWERS Maca Forte 10:1 - 5000" },
     description: { ca: "Suplement premium elaborat a partir d'arrel de Maca andina concentrada, que ofereix una potència de 5000 mg per càpsula. La seva fórmula està dissenyada per aportar energia explosiva, resistència física i més enfocament mental." },
     category: { ca: "suplements" },
   },
@@ -20,7 +20,7 @@ const translations: { [id: number]: CaTrans } = {
     category: { ca: "suplements" },
   },
   3: {
-    name: { ca: "MAN Protector Solar Facial i Corporal SPF 50+" },
+    name: { ca: "MΛN POWERS Protector Solar Facial i Corporal SPF 50+" },
     description: { ca: "El teu aliat perfecte per a l'estiu. Aquest protector solar SPF 50+ ofereix protecció total davant els raigs UVA/UVB, combinada amb un accelerador del bronzejat. Fórmula avançada enriquida amb Àcid Hialurònic." },
     category: { ca: "cura" },
   },

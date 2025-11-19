@@ -115,7 +115,7 @@ const Header: React.FC = () => {
         <h1 className="cursor-pointer" onClick={handleLogoClick}>
           <img
             src="/MAN-LOGO-BLANCO.png"
-            alt="MANPOWERS - Suplementos Premium"
+            alt="MΛN POWERS - Suplementos Premium"
             className="h-16 md:h-26 drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-transform duration-300 hover:scale-105"
           />
         </h1>

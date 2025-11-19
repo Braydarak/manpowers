@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
         <div className="w-full md:w-auto mb-8 md:mb-0">
           <img
             src="/MAN-LOGO-BLANCO.png"
-            alt="MΛNPOWERS Logo"
+            alt="MΛN POWERS Logo"
             className="h-10 mr-4"
           />
           <p className="text-gray-400 mb-4 max-w-xs">{t("footerCompany")}</p>

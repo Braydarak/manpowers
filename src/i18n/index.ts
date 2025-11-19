@@ -23,7 +23,7 @@ const resources = {
         "Desde Madrid, España, creamos suplementos deportivos de élite para atletas",
       aboutOriginsTitle: "Nuestros Orígenes",
       aboutOrigins1:
-        "MANPOWERS nació en Madrid, España, con una misión clara: desarrollar suplementos deportivos de máxima calidad para potenciar el rendimiento atlético.",
+        "MΛN POWERS nació en Madrid, España, con una misión clara: desarrollar suplementos deportivos de máxima calidad para potenciar el rendimiento atlético.",
       aboutOrigins2:
         "Desde nuestros inicios en la capital española, nos hemos especializado en nutrición deportiva avanzada, creando productos que ayudan a los atletas a alcanzar su máximo potencial.",
       aboutValuesTitle: "Nuestros Valores",
@@ -49,7 +49,7 @@ const resources = {
       aboutQualityGuarantee: "Calidad Garantizada",
       aboutCommitmentTitle: "Nuestro Compromiso Contigo",
       aboutCommitmentText:
-        "En MANPOWERS, tu rendimiento deportivo es nuestra prioridad. Cada suplemento está formulado con ingredientes de élite y pasa por rigurosos controles de calidad para garantizar resultados excepcionales.",
+        "En MΛN POWERS, tu rendimiento deportivo es nuestra prioridad. Cada suplemento está formulado con ingredientes de élite y pasa por rigurosos controles de calidad para garantizar resultados excepcionales.",
       aboutSuccess: "Tu máximo rendimiento, nuestro compromiso",
 
       accordion: {
@@ -70,7 +70,7 @@ const resources = {
       productsAvailableSoon: "Próximamente Disponible",
       productsInterested: "¿Interesado en nuestros productos?",
       productsInterestedDesc:
-        "Mantente al tanto de nuestras novedades desde Madrid, España, y sé el primero en conocer cuando nuestros suplementos nutricionales estén disponibles para la venta en España. Cada producto MANPOWERS está respaldado por nuestra garantía de calidad premium y años de experiencia en el sector del bienestar.",
+        "Mantente al tanto de nuestras novedades desde Madrid, España, y sé el primero en conocer cuando nuestros suplementos nutricionales estén disponibles para la venta en España. Cada producto MΛN POWERS está respaldado por nuestra garantía de calidad premium y años de experiencia en el sector del bienestar.",
 
       recommendedTogether: {
         title: "Recomendado para comprar juntos",
@@ -94,13 +94,13 @@ const resources = {
       },
 
       // Product Names and Descriptions
-      macaName: "MAN POWERS Maca Forte 10:1 - 5000",
+      macaName: "MΛN POWERS Maca Forte 10:1 - 5000",
       macaDescription:
         "Suplemento premium elaborado a partir de raíz de Maca Andina concentrada, que ofrece una potencia de 5000mg por cápsula. Su fórmula está diseñada para brindarte energía explosiva, resistencia física y un mayor enfoque mental.",
       omegaName: "Omega 3 - Puro aceite de pescado",
       omegaDescription:
         "Omega 3 puro aceite de pescado, enriquecido con Vitamina E. Esencial para la salud cardiovascular, función cerebral y bienestar general.",
-      solarName: "MAN Protector Solar Facial y Corporal SPF 50+",
+      solarName: "MΛN POWERS Protector Solar Facial y Corporal SPF 50+",
       solarDescription:
         "Tu aliado perfecto para el verano. Este innovador protector solar SPF 50+ te ofrece una protección total frente a los rayos UVA/UVB, combinada con un acelerador del bronceado. Su fórmula avanzada está enriquecida con Ácido Hialurónico.",
 
@@ -109,7 +109,7 @@ const resources = {
         "Empresa líder en suplementos premium y productos de bienestar desde Madrid, España.",
       footerContact: "Contacto",
       footerAddress: "C. Severo Ochoa, 5, 28860 Paracuellos de Jarama, Madrid",
-      footerCopyright: "© MANPOWERS. Todos los derechos reservados.",
+      footerCopyright: "© MΛN POWERS. Todos los derechos reservados.",
       footerPrivacy: "Política de Privacidad",
       footerCookies: "Política de Cookies",
       headerCollaborators: "Colaboradores",
@@ -327,9 +327,9 @@ const resources = {
       exploreOtherSports: "Explorar Otros Deportes",
       // Privacy Policy
       "privacy.title": "Política de Privacidad",
-      "privacy.intro": "En MANPOWERS, respetamos tu privacidad y cumplimos con el Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018 (LOPDGDD).",
+      "privacy.intro": "En MΛN POWERS, respetamos tu privacidad y cumplimos con el Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018 (LOPDGDD).",
       "privacy.controllerTitle": "Responsable del tratamiento",
-      "privacy.controllerText": "MANPOWERS, C. Severo Ochoa, 5, 28860 Paracuellos de Jarama, Madrid. Email: info@manpowers.es.",
+      "privacy.controllerText": "MΛN POWERS, C. Severo Ochoa, 5, 28860 Paracuellos de Jarama, Madrid. Email: info@manpowers.es.",
       "privacy.purposesTitle": "Finalidades del tratamiento",
       "privacy.purposesText": "Gestionar pedidos y pagos, atención al cliente, comunicaciones relacionadas con los productos, mejora de la experiencia y cumplimiento de obligaciones legales.",
       "privacy.legalBasisTitle": "Legitimación",
@@ -399,7 +399,7 @@ const resources = {
         "Des de Madrid, Espanya, creem suplements esportius d'elit per a atletes",
       aboutOriginsTitle: "Els nostres Orígens",
       aboutOrigins1:
-        "MANPOWERS va néixer a Madrid, Espanya, amb una missió clara: desenvolupar suplements esportius de màxima qualitat per potenciar el rendiment atlètic.",
+        "MΛN POWERS va néixer a Madrid, Espanya, amb una missió clara: desenvolupar suplements esportius de màxima qualitat per potenciar el rendiment atlètic.",
       aboutOrigins2:
         "Des dels nostres inicis a la capital espanyola, ens hem especialitzat en nutrició esportiva avançada, creant productes que ajuden els atletes a assolir el seu màxim potencial.",
       aboutValuesTitle: "Els nostres Valors",
@@ -425,7 +425,7 @@ const resources = {
       aboutQualityGuarantee: "Qualitat Garantida",
       aboutCommitmentTitle: "El nostre Compromís amb Tu",
       aboutCommitmentText:
-        "A MANPOWERS, el teu rendiment esportiu és la nostra prioritat. Cada suplement està formulat amb ingredients d'elit i passa per rigorosos controls de qualitat per garantir resultats excepcionals.",
+        "A MΛN POWERS, el teu rendiment esportiu és la nostra prioritat. Cada suplement està formulat amb ingredients d'elit i passa per rigorosos controls de qualitat per garantir resultats excepcionals.",
       aboutSuccess: "El teu màxim rendiment, el nostre compromís",
       accordion: {
         description: "Descripció",
@@ -443,7 +443,7 @@ const resources = {
       productsAvailableSoon: "Pròximament Disponible",
       productsInterested: "Interessat en els nostres productes?",
       productsInterestedDesc:
-        "Mantén-te al corrent de les nostres novetats des de Madrid, Espanya, i sigues el primer a conèixer quan els nostres suplements nutricionals estiguin disponibles per a la venda a Espanya. Cada producte MANPOWERS està avalat per la nostra garantia de qualitat premium i anys d'experiència en el sector del benestar.",
+        "Mantén-te al corrent de les nostres novetats des de Madrid, Espanya, i sigues el primer a conèixer quan els nostres suplements nutricionals estiguin disponibles per a la venda a Espanya. Cada producte MΛN POWERS està avalat per la nostra garantia de qualitat premium i anys d'experiència en el sector del benestar.",
       recommendedTogether: {
         title: "Recomanat per comprar junts",
         total: "Preu total",
@@ -462,7 +462,7 @@ const resources = {
       returns: {
         fourteenDays: "Devolucions en 14 dies naturals",
       },
-      macaName: "MAN POWERS Maca Forte 10:1 - 5000",
+      macaName: "MΛN POWERS Maca Forte 10:1 - 5000",
       macaDescription:
         "Suplement premium elaborat a partir d'arrel de Maca andina concentrada, que ofereix una potència de 5000mg per càpsula. La seva fórmula està dissenyada per aportar energia explosiva, resistència física i major enfocament mental.",
       omegaName: "Omega 3 - Oli de peix pur",
@@ -475,7 +475,7 @@ const resources = {
         "Empresa líder en suplements premium i productes de benestar des de Madrid, Espanya.",
       footerContact: "Contacte",
       footerAddress: "C. Severo Ochoa, 5, 28860 Paracuellos de Jarama, Madrid",
-      footerCopyright: "© MANPOWERS. Tots els drets reservats.",
+      footerCopyright: "© MΛN POWERS. Tots els drets reservats.",
       footerPrivacy: "Política de Privacitat",
       footerCookies: "Política de Cookies",
       headerCollaborators: "Col·laboradors",
@@ -677,7 +677,7 @@ const resources = {
         "From Madrid, Spain, we create elite sports supplements for athletes",
       aboutOriginsTitle: "Our Origins",
       aboutOrigins1:
-        "MANPOWERS was born in Madrid, Spain, with a clear mission: to develop premium sports supplements to enhance athletic performance.",
+        "MΛN POWERS was born in Madrid, Spain, with a clear mission: to develop premium sports supplements to enhance athletic performance.",
       aboutOrigins2:
         "Since our beginnings in the Spanish capital, we have specialized in advanced sports nutrition, creating products that help athletes reach their maximum potential.",
       aboutValuesTitle: "Our Values",
@@ -702,7 +702,7 @@ const resources = {
       aboutQualityGuarantee: "Quality Guaranteed",
       aboutCommitmentTitle: "Our Commitment to You",
       aboutCommitmentText:
-        "At MANPOWERS, your athletic performance is our priority. Every supplement is formulated with elite ingredients and undergoes rigorous quality controls to guarantee exceptional results.",
+        "At MΛN POWERS, your athletic performance is our priority. Every supplement is formulated with elite ingredients and undergoes rigorous quality controls to guarantee exceptional results.",
       aboutSuccess: "Your maximum performance, our commitment",
 
       accordion: {
@@ -723,7 +723,7 @@ const resources = {
       productsAvailableSoon: "Available Soon",
       productsInterested: "Interested in our products?",
       productsInterestedDesc:
-        "Stay tuned for our news from Madrid, Spain, and be the first to know when our nutritional supplements are available for sale in Spain. Every MANPOWERS product is backed by our premium quality guarantee and years of experience in the wellness sector.",
+        "Stay tuned for our news from Madrid, Spain, and be the first to know when our nutritional supplements are available for sale in Spain. Every MΛN POWERS product is backed by our premium quality guarantee and years of experience in the wellness sector.",
 
       recommendedTogether: {
         title: "Frequently bought together",
@@ -747,13 +747,13 @@ const resources = {
       },
 
       // Product Names and Descriptions
-      macaName: "MAN POWERS Maca Forte 10:1 - 5000",
+      macaName: "MΛN POWERS Maca Forte 10:1 - 5000",
       macaDescription:
         "Premium supplement made from concentrated Andean Maca root, offering a potency of 5000mg per capsule. Its formula is designed to provide explosive energy, physical endurance and greater mental focus.",
       omegaName: "Omega 3 - Pure fish oil",
       omegaDescription:
         "Pure fish oil Omega 3, enriched with Vitamin E. Essential for cardiovascular health, brain function and general wellbeing.",
-      solarName: "MAN Facial and Body Sunscreen SPF 50+",
+      solarName: "MΛN POWERS Facial and Body Sunscreen SPF 50+",
       solarDescription:
         "Your perfect summer ally. This innovative SPF 50+ sunscreen offers total protection against UVA/UVB rays, combined with a tanning accelerator. Its advanced formula is enriched with Hyaluronic Acid.",
 
@@ -762,7 +762,7 @@ const resources = {
         "Leading company in premium supplements and wellness products from Madrid, Spain.",
       footerContact: "Contact",
       footerAddress: "C. Severo Ochoa, 5, 28860 Paracuellos de Jarama, Madrid",
-      footerCopyright: "© MANPOWERS. All rights reserved.",
+      footerCopyright: "© MΛN POWERS. All rights reserved.",
       footerPrivacy: "Privacy Policy",
       footerCookies: "Cookies Policy",
       headerCollaborators: "Collaborators",
@@ -988,9 +988,9 @@ const resources = {
       exploreOtherSports: "Explore Other Sports",
       // Privacy Policy
       "privacy.title": "Privacy Policy",
-      "privacy.intro": "At MANPOWERS, we respect your privacy and comply with GDPR and applicable Spanish laws.",
+      "privacy.intro": "At MΛN POWERS, we respect your privacy and comply with GDPR and applicable Spanish laws.",
       "privacy.controllerTitle": "Data Controller",
-      "privacy.controllerText": "MANPOWERS, C. Severo Ochoa, 5, 28860 Paracuellos de Jarama, Madrid. Email: info@manpowers.es.",
+      "privacy.controllerText": "MΛN POWERS, C. Severo Ochoa, 5, 28860 Paracuellos de Jarama, Madrid. Email: info@manpowers.es.",
       "privacy.purposesTitle": "Processing Purposes",
       "privacy.purposesText": "Manage orders and payments, customer support, product-related communications, service improvement, and legal compliance.",
       "privacy.legalBasisTitle": "Legal Basis",

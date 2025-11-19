@@ -68,7 +68,7 @@ const ProductDetailPage: React.FC = () => {
       typeof product.category === "string"
         ? product.category
         : (product.category[currentLanguage] || product.category.es)
-    }, MANPOWERS`;
+    }, MΛN POWERS`;
     const ogImage = product.image || "/MAN-LOGO-BLANCO.png";
     const canonicalPath = typeof window !== 'undefined' ? window.location.pathname : (slug ? `/product/${slug}` : `/product/${id}`);
     updateSEOTags({
