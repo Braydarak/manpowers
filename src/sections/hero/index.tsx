@@ -5,6 +5,7 @@ import useScrollAnimation from "../../hooks/useScrollAnimation";
 import VideoSlider from "../../components/slider/VideoSlider";
 import sportsData from "../../../public/sports.json";
 import { Target, Sword, LandPlot, Bike, Anchor } from "lucide-react";
+import InfoStripe from "../../components/info/InfoStripe";
 
 const Hero: React.FC = () => {
   const { t } = useTranslation();
@@ -30,6 +31,7 @@ const Hero: React.FC = () => {
   };
 
   return (
+    <>
     <section className="relative min-h-screen w-full overflow-hidden">
       {/* Video de fondo (slider) */}
       <VideoSlider />
@@ -131,6 +133,8 @@ const Hero: React.FC = () => {
         </div>
       </div>
     </section>
+    <InfoStripe />
+    </>
   );
 };
 

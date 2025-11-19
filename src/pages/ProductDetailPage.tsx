@@ -11,7 +11,7 @@ import Accordion from "../components/accordion";
 import RecommendedTogether from "../components/recommended-together";
 import Faq from "../components/faq";
 import RelatedProducts from "../components/related-products";
-import useAutoCarousel from "../hooks/useAutoCarousel";
+import InfoStripe from "../components/info/InfoStripe";
 
 // Tipado del JSON local para evitar 'any' en el fallback
 type ProductJson = {
@@ -58,14 +58,6 @@ const ProductDetailPage: React.FC = () => {
 
   useLanguageUpdater();
 
-  const {
-    currentIndex,
-    containerRef,
-    handleMouseEnter,
-    handleMouseLeave,
-    handleTouchStart,
-    handleTouchEnd,
-  } = useAutoCarousel({ itemCount: 3, visibleItems: 1, autoScrollInterval: 3500, pauseOnHover: false });
 
   useEffect(() => {
     if (!product) return;
@@ -747,72 +739,7 @@ const ProductDetailPage: React.FC = () => {
             </>
           ) : null}
         </div>
-        <div className="w-full bg-gradient-to-r from-yellow-600 to-yellow-500">
-          <div className="max-w-full mx-auto px-2 sm:px-4 md:px-8 py-2">
-            <div className="block min-[1900px]:hidden overflow-hidden">
-              <div
-                ref={containerRef}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-                onTouchStart={handleTouchStart}
-                onTouchEnd={handleTouchEnd}
-                className="w-full overflow-hidden"
-              >
-                <div
-                  className="flex w-full"
-                  style={{ transform: `translateX(-${currentIndex * 100}%)`, transition: 'transform 500ms ease' }}
-                >
-                  <div className="w-full flex items-center justify-center gap-2 px-2 shrink-0">
-                    <span className="text-xs sm:text-sm font-semibold text-black whitespace-nowrap">{t('shipping.tipsa')}</span>
-                    <img src="/tipsa.png" alt="TIPSA" className="h-5 sm:h-6 w-auto" />
-                  </div>
-                  <div className="w-full flex items-center justify-center gap-2 px-2 shrink-0">
-                    <span className="hidden sm:inline text-sm font-semibold text-black whitespace-nowrap">{t('payments.methods')}</span>
-                    <div className="flex items-center gap-2">
-                      <svg aria-hidden="true" className="h-5 w-auto" viewBox="0 0 64 24"><rect x="0" y="0" width="64" height="24" rx="4" fill="#1A1F71" /><text x="10" y="16" fill="#ffffff" fontSize="12" fontWeight="700">VISA</text></svg>
-                      <svg aria-hidden="true" className="h-5 w-auto" viewBox="0 0 64 24"><rect x="0" y="0" width="64" height="24" rx="4" fill="#000000" /><circle cx="28" cy="12" r="8" fill="#EB001B" /><circle cx="36" cy="12" r="8" fill="#F79E1B" /></svg>
-                      <svg aria-hidden="true" className="h-5 w-auto" viewBox="0 0 64 24"><rect x="0" y="0" width="64" height="24" rx="4" fill="#2E77BC" /><text x="6" y="16" fill="#ffffff" fontSize="10" fontWeight="700">AMEX</text></svg>
-                      <svg aria-hidden="true" className="h-5 w-auto" viewBox="0 0 64 24"><rect x="0" y="0" width="64" height="24" rx="4" fill="#000000" /><circle cx="30" cy="12" r="8" fill="#EB001B" /><circle cx="38" cy="12" r="8" fill="#0099DF" /></svg>
-                    </div>
-                    <span className="hidden sm:inline text-xs text-black/80 whitespace-nowrap">{t('payments.processedByRedsys')}</span>
-                  </div>
-                  <div className="w-full flex items-center justify-center gap-2 px-2 shrink-0">
-                    <svg aria-hidden="true" className="h-5 w-5 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M21 12a9 9 0 10-3.35 6.94" />
-                      <path d="M21 12l-4 0" />
-                      <path d="M21 12l-2-2" />
-                    </svg>
-                    <span className="text-xs sm:text-sm font-semibold text-black whitespace-nowrap">{t('returns.fourteenDays')}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="hidden min-[1900px]:flex items-center justify-between gap-4 flex-nowrap whitespace-nowrap">
-              <div className="flex items-center pl-6 basis-1/3 min-w-0 justify-start">
-                <span className="text-base font-semibold text-black whitespace-nowrap">{t('shipping.tipsa')}</span>
-                <img src="/tipsa.png" alt="TIPSA" className="h-7 w-auto" />
-              </div>
-              <div className="flex items-center gap-3 basis-1/3 min-w-0 justify-center overflow-x-hidden">
-                <span className="text-base font-semibold text-black whitespace-nowrap">{t('payments.methods')}</span>
-                <div className="flex items-center gap-2">
-                  <svg aria-hidden="true" className="h-5 w-auto" viewBox="0 0 64 24"><rect x="0" y="0" width="64" height="24" rx="4" fill="#1A1F71" /><text x="10" y="16" fill="#ffffff" fontSize="12" fontWeight="700">VISA</text></svg>
-                  <svg aria-hidden="true" className="h-5 w-auto" viewBox="0 0 64 24"><rect x="0" y="0" width="64" height="24" rx="4" fill="#000000" /><circle cx="28" cy="12" r="8" fill="#EB001B" /><circle cx="36" cy="12" r="8" fill="#F79E1B" /></svg>
-                  <svg aria-hidden="true" className="h-5 w-auto" viewBox="0 0 64 24"><rect x="0" y="0" width="64" height="24" rx="4" fill="#2E77BC" /><text x="6" y="16" fill="#ffffff" fontSize="10" fontWeight="700">AMEX</text></svg>
-                  <svg aria-hidden="true" className="h-5 w-auto" viewBox="0 0 64 24"><rect x="0" y="0" width="64" height="24" rx="4" fill="#000000" /><circle cx="30" cy="12" r="8" fill="#EB001B" /><circle cx="38" cy="12" r="8" fill="#0099DF" /></svg>
-                </div>
-                <span className="text-sm md:text-base text-black/80 whitespace-nowrap">{t('payments.processedByRedsys')}</span>
-              </div>
-              <div className="flex items-center gap-2 pr-6 lg:pr-12 basis-1/3 min-w-0 justify-end">
-                <svg aria-hidden="true" className="h-6 w-6 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 12a9 9 0 10-3.35 6.94" />
-                  <path d="M21 12l-4 0" />
-                  <path d="M21 12l-2-2" />
-                </svg>
-                <span className="text-base font-semibold text-black whitespace-nowrap">{t('returns.fourteenDays')}</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <InfoStripe />
         {product && (
           <>
             <div className="w-full border-t border-gray-800">
