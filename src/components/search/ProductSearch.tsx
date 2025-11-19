@@ -29,7 +29,8 @@ type ProductJson = {
 const ProductSearch: React.FC<{ className?: string; fullScreen?: boolean; onClose?: () => void; autoFocus?: boolean }> = ({ className, fullScreen, onClose, autoFocus }) => {
   const { i18n, t } = useTranslation();
   const navigate = useNavigate();
-  const lang = (i18n.language as "es" | "en") || "es";
+  const baseLang = i18n.resolvedLanguage?.split('-')[0] || i18n.language?.split('-')[0] || 'es';
+  const lang: 'es' | 'en' | 'ca' = baseLang === 'en' ? 'en' : baseLang === 'ca' ? 'ca' : 'es';
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -112,9 +113,9 @@ const ProductSearch: React.FC<{ className?: string; fullScreen?: boolean; onClos
     }
     const tokens = q.split(/\s+/).filter(Boolean);
     const scored = all.map((p) => {
-      const name = p.name?.[lang]?.toLowerCase() || "";
-      const desc = p.description?.[lang]?.toLowerCase() || "";
-      const cat = String(typeof p.category === "string" ? p.category : (p.category?.[lang] || "")).toLowerCase();
+      const name = (p.name?.[lang] || p.name?.es || '').toLowerCase();
+      const desc = (p.description?.[lang] || p.description?.es || '').toLowerCase();
+      const cat = String(typeof p.category === "string" ? p.category : (p.category?.[lang] || p.category?.es || "")).toLowerCase();
       let s = 0;
       for (const tkn of tokens) {
         if (name.includes(tkn)) s += 5;
@@ -125,7 +126,7 @@ const ProductSearch: React.FC<{ className?: string; fullScreen?: boolean; onClos
       return { ...p, score: s } as Suggestion;
     })
       .filter((p) => p.score > 0)
-      .sort((a, b) => b.score - a.score || a.name[lang].localeCompare(b.name[lang]));
+      .sort((a, b) => b.score - a.score || (a.name[lang] || a.name.es).localeCompare(b.name[lang] || b.name.es));
     return scored.slice(0, 8);
   }, [query, all, lang]);
 
@@ -133,7 +134,7 @@ const ProductSearch: React.FC<{ className?: string; fullScreen?: boolean; onClos
     setOpen(false);
     setQuery("");
     const toSlug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').replace(/-{2,}/g, '-');
-    const slug = toSlug(p.name[lang]);
+    const slug = toSlug(p.name[lang] || p.name.es);
     if (p.sportId) navigate(`/products/${p.sportId}/${slug}`);
     else navigate(`/product/${slug}`);
   };
@@ -168,32 +169,32 @@ const ProductSearch: React.FC<{ className?: string; fullScreen?: boolean; onClos
               if (e.key === "Escape") onClose?.();
               onKeyDown(e);
             }}
-            placeholder={lang === "es" ? "Buscar productos" : "Search products"}
+            placeholder={t('search.placeholder')}
             className="bg-gray-800/60 border border-gray-700 rounded-full px-4 py-2 text-sm w-full placeholder:text-gray-400 outline-none"
             autoFocus={autoFocus}
           />
           <button
             type="button"
             onClick={() => onClose?.()}
-            aria-label={lang === "es" ? "Cerrar" : "Close"}
+            aria-label={t('cart.modal.close')}
             className="ml-2 text-gray-300 hover:text-white"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/></svg>
           </button>
         </div>
         <div className="flex-1 overflow-auto scrollbar-thin">
-          {loading && <div className="px-4 py-3 text-sm text-gray-300">{lang === "es" ? "Cargando…" : "Loading…"}</div>}
+          {loading && <div className="px-4 py-3 text-sm text-gray-300">{t('search.loading')}</div>}
           {error && !loading && <div className="px-4 py-3 text-sm text-red-400">{error}</div>}
           {!loading && !error && (
             <div>
-              <div className="px-4 py-2 text-xs text-gray-400 uppercase tracking-wide">{lang === "es" ? "Sugerencias" : "Suggestions"}</div>
+              <div className="px-4 py-2 text-xs text-gray-400 uppercase tracking-wide">{t('search.suggestions')}</div>
               {suggestions.length === 0 ? (
-                <div className="px-4 py-3 text-sm text-gray-300">{lang === "es" ? "Sin resultados" : "No results"}</div>
+                <div className="px-4 py-3 text-sm text-gray-300">{t('search.noResults')}</div>
               ) : (
                 <ul role="listbox">
                   {suggestions.map((p, i) => {
-                    const name = p.name[lang];
-                    const cat = typeof p.category === "string" ? p.category : (p.category?.[lang] || "");
+                    const name = p.name[lang] || p.name.es;
+                    const cat = typeof p.category === "string" ? p.category : (p.category?.[lang] || p.category?.es || "");
                     const active = i === highlight;
                     return (
                       <li
@@ -224,11 +225,11 @@ const ProductSearch: React.FC<{ className?: string; fullScreen?: boolean; onClos
                   })}
                 </ul>
               )}
-              <div className="px-4 py-2 text-xs text-gray-400 uppercase tracking-wide border-t border-gray-800">{lang === "es" ? "Todos los productos" : "All products"}</div>
+              <div className="px-4 py-2 text-xs text-gray-400 uppercase tracking-wide border-t border-gray-800">{t('allProducts.title')}</div>
               <ul role="listbox">
                 {all.map((p, i) => {
-                  const name = p.name[lang];
-                  const cat = typeof p.category === "string" ? p.category : (p.category?.[lang] || "");
+                  const name = p.name[lang] || p.name.es;
+                  const cat = typeof p.category === "string" ? p.category : (p.category?.[lang] || p.category?.es || "");
                   return (
                     <li
                       key={`all-${p.id}-${i}`}
@@ -271,17 +272,17 @@ const ProductSearch: React.FC<{ className?: string; fullScreen?: boolean; onClos
           onChange={(e) => { setQuery(e.target.value); setOpen(true); setHighlight(-1); }}
           onFocus={() => setOpen(true)}
           onKeyDown={onKeyDown}
-          placeholder={lang === "es" ? "Buscar productos" : "Search products"}
+          placeholder={t('search.placeholder')}
           className="bg-transparent outline-none text-sm w-full placeholder:text-gray-400"
         />
       </div>
       {open && (
         <div className="absolute left-0 mt-2 w-[22rem] md:w-[26rem] bg-black/90 backdrop-blur-sm border border-gray-700 rounded-xl shadow-xl z-50">
-          <div className="px-3 py-2 text-xs text-gray-400 uppercase tracking-wide">{lang === "es" ? "Sugerencias" : "Suggestions"}</div>
-          {loading && <div className="px-4 py-3 text-sm text-gray-300">{lang === "es" ? "Cargando…" : "Loading…"}</div>}
+          <div className="px-3 py-2 text-xs text-gray-400 uppercase tracking-wide">{t('search.suggestions')}</div>
+          {loading && <div className="px-4 py-3 text-sm text-gray-300">{t('search.loading')}</div>}
           {error && !loading && <div className="px-4 py-3 text-sm text-red-400">{error}</div>}
           {!loading && !error && suggestions.length === 0 && (
-            <div className="px-4 py-3 text-sm text-gray-300">{lang === "es" ? "Sin resultados" : "No results"}</div>
+            <div className="px-4 py-3 text-sm text-gray-300">{t('search.noResults')}</div>
           )}
           {!loading && !error && suggestions.length > 0 && (
             <ul role="listbox" className="max-h-80 overflow-auto scrollbar-thin">
@@ -320,7 +321,7 @@ const ProductSearch: React.FC<{ className?: string; fullScreen?: boolean; onClos
           )}
           {!loading && !error && (
             <>
-              <div className="px-3 py-2 text-xs text-gray-400 uppercase tracking-wide border-t border-gray-800">{lang === "es" ? "Todos los productos" : "All products"}</div>
+              <div className="px-3 py-2 text-xs text-gray-400 uppercase tracking-wide border-t border-gray-800">{t('allProducts.title')}</div>
               <ul role="listbox" className="max-h-80 overflow-auto scrollbar-thin">
                 {all.map((p, i) => {
                   const name = p.name[lang];

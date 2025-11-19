@@ -4,7 +4,7 @@ import { type Product } from '../../services/productsService';
 
 type Props = {
   product: Product;
-  language: 'es' | 'en';
+  language: 'es' | 'en' | 'ca';
   onOpen?: (product: Product) => void;
   onAddToCart?: (product: Product) => void;
   onBuyNow?: (product: Product) => void;
@@ -39,8 +39,8 @@ const ProductCard: React.FC<Props> = ({
     onBuyNow?.(product);
   };
 
-  const name = product.name[language];
-  const category = typeof product.category === 'string' ? product.category : product.category?.[language] || '';
+  const name = product.name[language] || product.name.es;
+  const category = typeof product.category === 'string' ? product.category : product.category?.[language] || product.category?.es || '';
   const priceLabel = product.price_formatted || (product.price ? `${product.price} €` : undefined);
 
   if (variant === 'compact') {
@@ -131,7 +131,7 @@ const ProductCard: React.FC<Props> = ({
           </div>
 
           <h3 className="text-xl font-bold text-white mb-3">{name}</h3>
-          <p className="text-gray-300 text-sm mb-4 line-clamp-3">{product.description[language]}</p>
+          <p className="text-gray-300 text-sm mb-4 line-clamp-3">{product.description[language] || product.description.es}</p>
         </div>
 
         <div className="flex flex-col gap-2 mt-auto">

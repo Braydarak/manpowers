@@ -22,7 +22,8 @@ const ProductsPage: React.FC = () => {
 
   useEffect(() => {
     if (!sportId) return;
-    const currentLanguage = (i18n.language as "es" | "en") || "es";
+    const baseLang = i18n.resolvedLanguage?.split('-')[0] || i18n.language?.split('-')[0] || 'es';
+    const currentLanguage: 'es' | 'en' | 'ca' = baseLang === 'en' ? 'en' : (baseLang === 'ca' ? 'ca' : 'es');
     const sport = sportName || sportId;
     const title = `Productos de ${sport} | MANPOWERS`;
     const description = `Catálogo de ${sport} en MANPOWERS. ${products
@@ -138,7 +139,8 @@ const ProductsPage: React.FC = () => {
     navigate("/sports");
   };
 
-  const currentLanguage = i18n.language as "es" | "en";
+  const baseLang = i18n.resolvedLanguage?.split('-')[0] || i18n.language?.split('-')[0] || 'es';
+  const currentLanguage: 'es' | 'en' | 'ca' = baseLang === 'en' ? 'en' : (baseLang === 'ca' ? 'ca' : 'es');
 
   // Añadir al carrito: despacha evento que consume CartWidget
   const handleAddToCart = (product: Product) => {
@@ -168,7 +170,7 @@ const ProductsPage: React.FC = () => {
   const toSlug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').replace(/-{2,}/g, '-');
   const openProductDetail = (product: Product) => {
     if (!sportId) return;
-    const slug = toSlug(product.name[currentLanguage]);
+    const slug = toSlug(product.name[currentLanguage] || product.name.es);
     navigate(`/products/${sportId}/${slug}`);
   };
 

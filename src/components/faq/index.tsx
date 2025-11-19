@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 type FaqItem = { id: string; question: string; answer: React.ReactNode };
 
 type Props = {
-  language: 'es' | 'en';
+  language: 'es' | 'en' | 'ca';
   items?: FaqItem[];
 };
 
@@ -14,6 +14,13 @@ const Faq: React.FC<Props> = ({ language, items }) => {
         { id: 'q2', question: '¿Puedo combinarlo con otros suplementos?', answer: 'Sí, suele ser compatible. Ajusta dosis y evita superar la ingesta diaria recomendada.' },
         { id: 'q3', question: '¿Es apto para veganos?', answer: 'Revisa la etiqueta y los ingredientes del producto específico.' },
         { id: 'q4', question: '¿Cuánto tiempo tarda en hacer efecto?', answer: 'Depende del producto y la constancia. Normalmente se nota tras varios días o semanas de uso.' },
+      ]
+    : language === 'ca'
+    ? [
+        { id: 'q1', question: 'Com he de prendre aquest producte?', answer: 'Segueix les indicacions de l’envàs. En cas de dubte, consulta amb un professional de la salut.' },
+        { id: 'q2', question: 'Puc combinar‑lo amb altres suplements?', answer: 'Sí, sol ser compatible. Ajusta la dosi i evita superar la ingesta diària recomanada.' },
+        { id: 'q3', question: 'És apte per a vegans?', answer: 'Revisa l’etiqueta i els ingredients del producte específic.' },
+        { id: 'q4', question: 'Quant triga a fer efecte?', answer: 'Depèn del producte i la constància. Normalment es nota després de dies o setmanes d’ús.' },
       ]
     : [
         { id: 'q1', question: 'How should I take this product?', answer: 'Follow the label instructions. If unsure, consult a health professional.' },

@@ -5,7 +5,7 @@ import productsService, { type Product } from '../../services/productsService';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 type Props = {
-  language: 'es' | 'en';
+  language: 'es' | 'en' | 'ca';
   title?: string;
 };
 
@@ -195,14 +195,14 @@ const AllProducts: React.FC<Props> = ({ language, title }) => {
   const toSlug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').replace(/-{2,}/g, '-');
   const openDetail = (p: Product) => {
     if (!p?.sportId) return;
-    const slug = toSlug(p.name[language]);
+    const slug = toSlug(p.name[language] || p.name.es);
     navigate(`/products/${p.sportId}/${slug}`);
   };
 
   const addToCart = (p: Product) => {
     const detail = {
       id: String(p.id),
-      name: p.name[language],
+      name: p.name[language] || p.name.es,
       price: p.price,
       image: p.image,
       quantity: 1,
@@ -275,12 +275,12 @@ const AllProducts: React.FC<Props> = ({ language, title }) => {
                   className="rp-card min-w-[88vw] md:min-w-[256px] bg-gray-900/60 border border-gray-800 rounded-xl p-3 hover:bg-gray-900 transition-colors cursor-pointer snap-center md:snap-start flex flex-col"
                 >
                   <div className="aspect-[4/3] bg-black rounded-lg overflow-hidden">
-                    <img src={p.image} alt={p.name[language]} className="w-full h-full object-cover" />
+                    <img src={p.image} alt={(p.name[language] || p.name.es)} className="w-full h-full object-cover" />
                   </div>
                   <div className="mt-3 flex-1">
-                    <div className="text-sm font-semibold text-white line-clamp-2">{p.name[language]}</div>
+                    <div className="text-sm font-semibold text-white line-clamp-2">{p.name[language] || p.name.es}</div>
                     <div className="text-xs text-gray-400 mt-1">
-                      {typeof p.category === 'string' ? p.category : p.category[language]}
+                      {typeof p.category === 'string' ? p.category : (p.category[language] || p.category.es)}
                     </div>
                     <div className="mt-2 text-base font-bold bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent">
                       {p.price_formatted ? p.price_formatted : `€ ${Number(p.price).toFixed(2)}`}

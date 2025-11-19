@@ -13,8 +13,9 @@ const HomePage: React.FC = () => {
   const [enter, setEnter] = useState(false);
   // Hook para actualizar idioma y título dinámicamente
   useLanguageUpdater();
-  const { i18n } = useTranslation();
-  const currentLanguage = (i18n.language as "es" | "en") || "es";
+  const { i18n, t } = useTranslation();
+  const baseLang = i18n.resolvedLanguage?.split('-')[0] || i18n.language?.split('-')[0] || 'es';
+  const currentLanguage: 'es' | 'en' | 'ca' = baseLang === 'en' ? 'en' : (baseLang === 'ca' ? 'ca' : 'es');
 
   useEffect(() => {
     updateSEOTags(seoConfigs.home);
@@ -49,7 +50,7 @@ const HomePage: React.FC = () => {
           <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-8">
             <AllProducts
               language={currentLanguage}
-              title={currentLanguage === 'es' ? 'Todos los productos' : 'All products'}
+              title={t('allProducts.title')}
             />
           </div>
         </div>

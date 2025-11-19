@@ -44,7 +44,8 @@ const ProductDetailPage: React.FC = () => {
   }>();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
-  const currentLanguage = (i18n.language as "es" | "en") || "es";
+  const baseLang = i18n.resolvedLanguage?.split('-')[0] || i18n.language?.split('-')[0] || 'es';
+  const currentLanguage: 'es' | 'en' | 'ca' = baseLang === 'en' ? 'en' : (baseLang === 'ca' ? 'ca' : 'es');
 
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -61,12 +62,12 @@ const ProductDetailPage: React.FC = () => {
 
   useEffect(() => {
     if (!product) return;
-    const title = `${product.name[currentLanguage]} | MANPOWERS`;
-    const description = product.description[currentLanguage];
-    const keywords = `${product.name[currentLanguage]}, ${
+    const title = `${(product.name[currentLanguage] || product.name.es)} | MANPOWERS`;
+    const description = product.description[currentLanguage] || product.description.es;
+    const keywords = `${(product.name[currentLanguage] || product.name.es)}, ${
       typeof product.category === "string"
         ? product.category
-        : product.category[currentLanguage]
+        : (product.category[currentLanguage] || product.category.es)
     }, MANPOWERS`;
     const ogImage = product.image || "/MAN-LOGO-BLANCO.png";
     const canonicalPath = typeof window !== 'undefined' ? window.location.pathname : (slug ? `/product/${slug}` : `/product/${id}`);
@@ -138,7 +139,7 @@ const ProductDetailPage: React.FC = () => {
 
         if (slug) {
           const base = sportParam ? normalized.filter((p) => p.sportId === sportParam || p.sportId === 'multisport') : normalized;
-          const found = base.find((p) => toSlug(p.name.es) === slug || toSlug(p.name.en) === slug);
+          const found = base.find((p) => toSlug(p.name.es) === slug || toSlug(p.name.en) === slug || toSlug(p.name.ca || '') === slug);
           if (found) {
             setProduct(found);
             return;
@@ -167,7 +168,7 @@ const ProductDetailPage: React.FC = () => {
         );
         const langItems = Array.isArray(p?.faqs?.[currentLanguage])
           ? p.faqs[currentLanguage]
-          : [];
+          : (Array.isArray(p?.faqs?.es) ? p.faqs.es : []);
         const items = (langItems as { question: string; answer: string }[])
           .slice(0, 4)
           .map((it, idx) => ({
@@ -345,13 +346,13 @@ const ProductDetailPage: React.FC = () => {
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <img
                       src={product.image}
-                      alt={product.name[currentLanguage]}
+                      alt={(product.name[currentLanguage] || product.name.es)}
                       className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105 group-hover:rotate-[0.5deg]"
                       onError={(e) => {
                         const target = e.currentTarget;
                         target.style.display = "none";
                         if (target.parentElement) {
-                          target.parentElement.innerHTML = `<span class='block p-6 text-gray-400'>Imagen no disponible</span>`;
+                          target.parentElement.innerHTML = `<span class='block p-6 text-gray-400'>${t('sports.imageNotAvailable')}</span>`;
                         }
                       }}
                     />
@@ -370,7 +371,7 @@ const ProductDetailPage: React.FC = () => {
                       {product.category
                         ? typeof product.category === "string"
                           ? product.category
-                          : product.category[currentLanguage]
+                          : (product.category[currentLanguage] || product.category.es)
                         : ""}
                     </span>
                     {product.sku && (
@@ -386,7 +387,7 @@ const ProductDetailPage: React.FC = () => {
                   </div>
 
                   <h1 className="text-4xl md:text-5xl font-extrabold">
-                    {product.name[currentLanguage]}
+                    {product.name[currentLanguage] || product.name.es}
                   </h1>
 
                   {typeof product.rating === "number" && product.rating > 0 && (
@@ -452,16 +453,22 @@ const ProductDetailPage: React.FC = () => {
                   <div className="text-xs text-gray-400">
                     {currentLanguage === "es"
                       ? "IVA incl. + gastos de envío"
+                      : currentLanguage === "ca"
+                      ? "IVA incl. + despeses d'enviament"
                       : "VAT incl. + shipping"}{" "}
                     ·{" "}
                     {currentLanguage === "es"
                       ? "Plazo de entrega 3–5 días laborables"
+                      : currentLanguage === "ca"
+                      ? "Termini de lliurament 3–5 dies laborables"
                       : "Delivery time 3–5 business days"}
                   </div>
 
                   <div className="text-sm text-gray-300">
                     {currentLanguage === "es"
                       ? "Tamaño del contenido:"
+                      : currentLanguage === "ca"
+                      ? "Mida del contingut:"
                       : "Content size:"}{" "}
                     {product.size}
                   </div>
@@ -539,29 +546,31 @@ const ProductDetailPage: React.FC = () => {
                 }`}
               >
                 <Accordion
-                  description={product.description[currentLanguage]}
+                  description={product.description[currentLanguage] || product.description.es}
                   objectives={
-                    product.objectives ? (
-                      <ul className="list-disc ml-5 space-y-1">
-                        {product.objectives[currentLanguage].map((o, i) => (
-                          <li key={i}>{o}</li>
-                        ))}
-                      </ul>
-                    ) : undefined
+                    product.objectives && ((product.objectives[currentLanguage] || product.objectives.es)?.length)
+                      ? (
+                          <ul className="list-disc ml-5 space-y-1">
+                            {(product.objectives[currentLanguage] || product.objectives.es)?.map((o, i) => (
+                              <li key={i}>{o}</li>
+                            ))}
+                          </ul>
+                        )
+                      : undefined
                   }
                   nutritionalValues={
                     product.nutritionalValues
-                      ? product.nutritionalValues[currentLanguage]
+                      ? (product.nutritionalValues[currentLanguage] || product.nutritionalValues.es)
                       : undefined
                   }
                   application={
                     product.application
-                      ? product.application[currentLanguage]
+                      ? (product.application[currentLanguage] || product.application.es)
                       : undefined
                   }
                   recommendations={
                     product.recommendations
-                      ? product.recommendations[currentLanguage]
+                      ? (product.recommendations[currentLanguage] || product.recommendations.es)
                       : undefined
                   }
                   defaultOpenId="descripcion"
@@ -768,11 +777,7 @@ const ProductDetailPage: React.FC = () => {
                   sportId={product.sportId}
                   currentId={product.id}
                   language={currentLanguage}
-                  title={
-                    currentLanguage === "es"
-                      ? "Productos relacionados"
-                      : "Related products"
-                  }
+                  title={t('relatedProducts.title')}
                 />
               </div>
             </div>

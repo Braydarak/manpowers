@@ -5,7 +5,7 @@ import { type Product } from '../../services/productsService';
 type Props = {
   currentId: number;
   sportId: string;
-  language: 'es' | 'en';
+  language: 'es' | 'en' | 'ca';
 };
 
 const RecommendedTogether: React.FC<Props> = ({ currentId, sportId, language }) => {
@@ -60,7 +60,7 @@ const RecommendedTogether: React.FC<Props> = ({ currentId, sportId, language }) 
       if (!selected.has(p.id)) return;
       const detail = {
         id: String(p.id),
-        name: typeof p.name === 'string' ? p.name : p.name[language],
+        name: typeof p.name === 'string' ? p.name : (p.name[language] || p.name.es),
         price: p.price,
         image: p.image,
         quantity: 1,
@@ -80,10 +80,10 @@ const RecommendedTogether: React.FC<Props> = ({ currentId, sportId, language }) 
           <div key={p.id} className="bg-gray-900/60 border border-gray-800 rounded-lg p-4 flex items-center gap-5 w-full md:w-2/3 lg:w-1/2 mx-auto justify-center">
             <input type="checkbox" checked={selected.has(p.id)} onChange={() => toggle(p.id)} className="accent-yellow-500 w-6 h-6 md:w-7 md:h-7" />
             <div className="w-20 h-20 bg-black rounded overflow-hidden">
-              <img src={p.image} alt={typeof p.name === 'string' ? p.name : p.name[language]} className="w-full h-full object-cover" />
+              <img src={p.image} alt={typeof p.name === 'string' ? p.name : (p.name[language] || p.name.es)} className="w-full h-full object-cover" />
             </div>
             <div className="flex-1 text-center">
-              <div className="text-base md:text-lg font-semibold line-clamp-2">{typeof p.name === 'string' ? p.name : p.name[language]}</div>
+              <div className="text-base md:text-lg font-semibold line-clamp-2">{typeof p.name === 'string' ? p.name : (p.name[language] || p.name.es)}</div>
               <div className="text-xs md:text-sm text-gray-400">{p.size}</div>
             </div>
             <div className="text-base md:text-lg font-bold">{p.price ? `€ ${Number(p.price).toFixed(2)}` : ''}</div>

@@ -4,33 +4,37 @@
       "id": 1,
       "name": {
         "es": "MAN POWERS Maca Forte 10:1 - 5000",
-        "en": "MAN POWERS Maca Forte 10:1 - 5000"
+        "en": "MAN POWERS Maca Forte 10:1 - 5000",
+        "ca": "MAN POWERS Maca Forte 10:1 - 5000"
       },
       "description": {
         "es": "Suplemento premium elaborado a partir de raíz de Maca Andina concentrada, que ofrece una potencia de 5000mg por cápsula. Su fórmula está diseñada para brindarte energía explosiva, resistencia física y un mayor enfoque mental.",
-        "en": "Premium supplement made from concentrated Andean Maca root, offering a potency of 5000mg per capsule. Its formula is designed to provide explosive energy, physical endurance and enhanced mental focus."
+        "en": "Premium supplement made from concentrated Andean Maca root, offering a potency of 5000mg per capsule. Its formula is designed to provide explosive energy, physical endurance and enhanced mental focus.",
+        "ca": "Complement premium elaborat a partir d'arrel de maca andina concentrada, que ofereix una potència de 5000 mg per càpsula. La seva fórmula està dissenyada per proporcionar energia explosiva, resistència física i un major enfocament mental."
       },
       "nutritionalValues": {
         "es": "Por cápsula: Extracto de Maca Andina 10:1 equivalente a 5000 mg.",
-        "en": "Per capsule: Andean Maca extract 10:1 equivalent to 5000 mg."
+        "en": "Per capsule: Andean Maca extract 10:1 equivalent to 5000 mg.",
+        "ca": "Per càpsula: Extracte de maca andina 10:1 equivalent a 5000 mg."
       },
       "application": {
         "es": "Tomar 1–2 cápsulas al día con agua, preferiblemente con comidas.",
-        "en": "Take 1–2 capsules daily with water, preferably with meals."
+        "en": "Take 1–2 capsules daily with water, preferably with meals.",
+        "ca": "Prendre 1–2 càpsules al dia amb aigua, preferiblement amb els àpats."
       },
       "recommendations": {
         "es": "No superar la dosis diaria. No recomendado para menores. Consulte con su médico si está embarazada, en lactancia o en tratamiento.",
-        "en": "Do not exceed the daily dose. Not recommended for minors. Consult your physician if pregnant, breastfeeding, or under treatment."
+        "en": "Do not exceed the daily dose. Not recommended for minors. Consult your physician if pregnant, breastfeeding, or under treatment.",
+        "ca": "No superar la dosi diària. No recomanat per a menors. Consulta el teu metge si estàs embarassada, en lactància o en tractament."
       },
       "price": "36,30",
       "size": "150 cap",
       "image": "/products/MACA-500.jpg",
-      "category": { "es": "suplementos", "en": "supplements" },
+      "category": { "es": "suplementos", "en": "supplements", "ca": "suplements" },
       "sportId": "multisport",
       "available": true,
       "rating": 4.7,
-      "votes": 128
-    ,
+      "votes": 128,
       "faqs": {
         "es": [
           { "question": "¿Para qué sirve la Maca Forte?", "answer": "Apoya energía, resistencia y enfoque mental." },
@@ -43,6 +47,12 @@
           { "question": "What is the recommended daily dose?", "answer": "Take 1–2 capsules daily with water." },
           { "question": "When should I take it?", "answer": "Preferably with meals, morning or afternoon." },
           { "question": "Any contraindications?", "answer": "Do not exceed the dose. Consult if pregnant or under treatment." }
+        ],
+        "ca": [
+          { "question": "Per a què serveix la Maca Forte?", "answer": "Dóna suport a l'energia, la resistència i l'enfocament mental." },
+          { "question": "Quina és la dosi diària recomanada?", "answer": "Prendre 1–2 càpsules al dia amb aigua." },
+          { "question": "Quan és millor prendre-la?", "answer": "Preferiblement amb els àpats, al matí o a la tarda." },
+          { "question": "Té contraindicacions?", "answer": "No superar la dosi. Consultar si estàs embarassada o en tractament." }
         ]
       }
     },
@@ -50,33 +60,37 @@
       "id": 2,
       "name": {
         "es": "Omega 3 - Puro aceite de pescado",
-        "en": "Omega 3 - Pure fish oil"
+        "en": "Omega 3 - Pure fish oil",
+        "ca": "Omega 3 - Oli de peix pur"
       },
       "description": {
         "es": "Omega 3 puro aceite de pescado, enriquecido con Vitamina E. Esencial para la salud cardiovascular, función cerebral y bienestar general.",
-        "en": "Pure fish oil Omega 3, enriched with Vitamin E. Essential for cardiovascular health, brain function and overall wellness."
+        "en": "Pure fish oil Omega 3, enriched with Vitamin E. Essential for cardiovascular health, brain function and overall wellness.",
+        "ca": "Omega 3 d'oli de peix pur, enriquit amb vitamina E. Essencial per a la salut cardiovascular, la funció cerebral i el benestar general."
       },
       "nutritionalValues": {
         "es": "Por ración: Aceite de pescado purificado rico en EPA/DHA, con Vitamina E.",
-        "en": "Per serving: Purified fish oil rich in EPA/DHA, with Vitamin E."
+        "en": "Per serving: Purified fish oil rich in EPA/DHA, with Vitamin E.",
+        "ca": "Per ració: Oli de peix purificat ric en EPA/DHA, amb vitamina E."
       },
       "application": {
         "es": "Tomar 2 cápsulas al día con agua.",
-        "en": "Take 2 capsules daily with water."
+        "en": "Take 2 capsules daily with water.",
+        "ca": "Prendre 2 càpsules al dia amb aigua."
       },
       "recommendations": {
         "es": "Personas con trastornos de coagulación o en tratamiento anticoagulante deben consultar con su médico.",
-        "en": "People with bleeding disorders or on anticoagulants should consult a physician."
+        "en": "People with bleeding disorders or on anticoagulants should consult a physician.",
+        "ca": "Les persones amb trastorns de coagulació o en tractament anticoagulant han de consultar el metge."
       },
       "price": "30,25",
       "size": "220 cap",
       "image": "/products/OMEGA-3.jpg",
-      "category": { "es": "suplementos", "en": "supplements" },
+      "category": { "es": "suplementos", "en": "supplements", "ca": "suplements" },
       "sportId": "multisport",
       "available": true,
       "rating": 4.6,
-      "votes": 96
-    ,
+      "votes": 96,
       "faqs": {
         "es": [
           { "question": "¿Cuánto EPA/DHA aporta por dosis?", "answer": "Aporta EPA y DHA purificados, revisar etiqueta del producto." },
@@ -89,6 +103,12 @@
           { "question": "Can I take it with meals?", "answer": "Yes, taking with meals is recommended." },
           { "question": "Interactions with anticoagulants?", "answer": "Consult your physician if you are on anticoagulant therapy." },
           { "question": "Is it suitable during pregnancy?", "answer": "Consult a health professional before use." }
+        ],
+        "ca": [
+          { "question": "Quant EPA/DHA per dosi?", "answer": "Aporta EPA i DHA purificats; revisa l'etiqueta del producte." },
+          { "question": "El puc prendre amb els àpats?", "answer": "Sí, es recomana prendre'l amb els àpats." },
+          { "question": "Interaccions amb anticoagulants?", "answer": "Consulta el metge si estàs en tractament anticoagulant." },
+          { "question": "És apte durant l'embaràs?", "answer": "Consulta un professional de la salut abans d'usar." }
         ]
       }
     },
@@ -96,24 +116,28 @@
       "id": 3,
       "name": {
         "es": "MAN Protector Solar Facial y Corporal SPF 50+",
-        "en": "MAN Facial and Body Sunscreen SPF 50+"
+        "en": "MAN Facial and Body Sunscreen SPF 50+",
+        "ca": "MAN Protector solar facial i corporal SPF 50+"
       },
       "description": {
         "es": "Tu aliado perfecto para el verano. Este innovador protector solar SPF 50+ te ofrece una protección total frente a los rayos UVA/UVB, combinada con un acelerador del bronceado. Su fórmula avanzada está enriquecida con Ácido Hialurónico.",
-        "en": "Your perfect summer ally. This innovative SPF 50+ sunscreen offers total protection against UVA/UVB rays, combined with a tanning accelerator. Its advanced formula is enriched with Hyaluronic Acid."
+        "en": "Your perfect summer ally. This innovative SPF 50+ sunscreen offers total protection against UVA/UVB rays, combined with a tanning accelerator. Its advanced formula is enriched with Hyaluronic Acid.",
+        "ca": "El teu aliat perfecte per a l'estiu. Aquest innovador protector solar SPF 50+ ofereix una protecció total davant dels raigs UVA/UVB, combinada amb un accelerador del bronzejat. La seva fórmula avançada està enriquida amb àcid hialurònic."
       },
       "application": {
         "es": "Aplicar generosamente sobre piel limpia, 15 minutos antes de la exposición. Reaplicar cada 2 horas o tras sudor intenso.",
-        "en": "Apply generously to clean skin 15 minutes before sun exposure. Reapply every 2 hours or after heavy sweating."
+        "en": "Apply generously to clean skin 15 minutes before sun exposure. Reapply every 2 hours or after heavy sweating.",
+        "ca": "Aplicar generosament sobre pell neta, 15 minuts abans de l'exposició. Reaplicar cada 2 hores o després de suor intens."
       },
       "recommendations": {
         "es": "Evitar contacto con ojos. No usar sobre piel irritada. Mantener fuera del alcance de niños.",
-        "en": "Avoid contact with eyes. Do not use on irritated skin. Keep out of reach of children."
+        "en": "Avoid contact with eyes. Do not use on irritated skin. Keep out of reach of children.",
+        "ca": "Evitar el contacte amb els ulls. No utilitzar sobre pell irritada. Mantenir fora de l'abast dels nens."
       },
       "price": "24,20",
       "size": "100 ml",
       "image": "/products/MAN-PROTECTOR-SOLAR.jpg",
-      "category": { "es": "cuidado", "en": "care" },
+      "category": { "es": "cuidado", "en": "care", "ca": "cura" },
       "sportId": "multisport",
       "available": true,
       "rating": 4.5,
@@ -134,6 +158,12 @@
           { "question": "Is it suitable for face and body?", "answer": "Yes, suitable for facial and body use." },
           { "question": "Is it sweat‑resistant?", "answer": "Yes, the formula is designed for physical activity." },
           { "question": "Is it suitable for sensitive skin?", "answer": "Yes, but patch test if you have sensitive skin." }
+        ],
+        "ca": [
+          { "question": "Cada quant he de reaplicar?", "answer": "Reaplica cada 2 hores o després de suor intens." },
+          { "question": "Serveix per a rostre i cos?", "answer": "Sí, apte per a ús facial i corporal." },
+          { "question": "Resisteix la suor?", "answer": "Sí, la fórmula està pensada per a l'activitat física." },
+          { "question": "És apte per a pell sensible?", "answer": "Sí, però fes una prova en una zona petita si tens la pell sensible." }
         ]
       }
     },
@@ -141,33 +171,37 @@
       "id": 4,
       "name": {
         "es": "Creatina Monohidrato Premium",
-        "en": "Premium Creatine Monohydrate"
+        "en": "Premium Creatine Monohydrate",
+        "ca": "Creatina monohidrat premium"
       },
       "description": {
         "es": "Creatina monohidrato de máxima pureza para aumentar la fuerza, potencia y masa muscular. Ideal para entrenamientos de alta intensidad y deportes de fuerza.",
-        "en": "Maximum purity creatine monohydrate to increase strength, power and muscle mass. Ideal for high-intensity training and strength sports."
+        "en": "Maximum purity creatine monohydrate to increase strength, power and muscle mass. Ideal for high-intensity training and strength sports.",
+        "ca": "Creatina monohidrat de màxima puresa per augmentar la força, la potència i la massa muscular. Ideal per a entrenaments d'alta intensitat i esports de força."
       },
       "nutritionalValues": {
         "es": "Por ración: Creatina monohidrato 5 g.",
-        "en": "Per serving: Creatine monohydrate 5 g."
+        "en": "Per serving: Creatine monohydrate 5 g.",
+        "ca": "Per ració: Creatina monohidrat 5 g."
       },
       "application": {
         "es": "Mezclar 1 cuchara (5 g) al día en agua o bebida favorita.",
-        "en": "Mix 1 scoop (5 g) daily in water or your favorite drink."
+        "en": "Mix 1 scoop (5 g) daily in water or your favorite drink.",
+        "ca": "Barreja 1 cullerada (5 g) al dia en aigua o beguda preferida."
       },
       "recommendations": {
         "es": "Fase de carga opcional. Mantener hidratación adecuada. No recomendado para menores.",
-        "en": "Optional loading phase. Maintain adequate hydration. Not recommended for minors."
+        "en": "Optional loading phase. Maintain adequate hydration. Not recommended for minors.",
+        "ca": "Fase de càrrega opcional. Mantén una hidratació adequada. No recomanat per a menors."
       },
       "price": "26,62",
       "size": "300 g",
       "image": "/products/CREATINA.jpg",
-      "category": { "es": "suplementos", "en": "supplements" },
+      "category": { "es": "suplementos", "en": "supplements", "ca": "suplements" },
       "sportId": "multisport",
       "available": true,
       "rating": 4.8,
-      "votes": 210
-    ,
+      "votes": 210,
       "faqs": {
         "es": [
           { "question": "¿Cuál es la dosis diaria recomendada?", "answer": "Entre 3–5 g al día." },
@@ -180,6 +214,12 @@
           { "question": "Do I need a loading phase?", "answer": "Optional depending on goals." },
           { "question": "When should I take it?", "answer": "Before or after training." },
           { "question": "Can I combine it with protein or caffeine?", "answer": "Yes, commonly combined with other supplements." }
+        ],
+        "ca": [
+          { "question": "Quina és la dosi diària recomanada?", "answer": "Entre 3–5 g al dia." },
+          { "question": "Necessito fase de càrrega?", "answer": "És opcional segons els objectius." },
+          { "question": "Quan l'haig de prendre?", "answer": "Abans o després de l'entrenament." },
+          { "question": "La puc combinar amb proteïna o cafeïna?", "answer": "Sí, es pot combinar amb altres suplements habituals." }
         ]
       }
     },
@@ -187,29 +227,32 @@
       "id": 5,
       "name": {
         "es": "Crema Anti-Rozaduras",
-        "en": "Anti-Chafing Cream"
+        "en": "Anti-Chafing Cream",
+        "ca": "Crema anti-rascades"
       },
       "description": {
         "es": "Antes de enfundarte la chaqueta y el plastrón, prepara la piel para los asaltos. Esta crema anti‑rozaduras crea una barrera invisible que reduce la fricción en axilas, ingles y cintura, incluso bajo el calor de la máscara. Se mantiene firme con el sudor y permite moverte con libertad en cada finta y desplazamiento.",
-        "en": "Before you zip up the jacket and plastron, prep your skin for the bout. This anti‑chafing cream builds an invisible shield that reduces friction on underarms, groin and waist, even under the mask’s heat. Sweat‑resistant and movement‑friendly for every feint and footwork."
+        "en": "Before you zip up the jacket and plastron, prep your skin for the bout. This anti‑chafing cream builds an invisible shield that reduces friction on underarms, groin and waist, even under the mask’s heat. Sweat‑resistant and movement‑friendly for every feint and footwork.",
+        "ca": "Abans d'enfundar-te la jaqueta i el plastró, prepara la pell per als assalts. Aquesta crema anti‑rascades crea una barrera invisible que redueix la fricció a aixelles, engonals i cintura, fins i tot sota la calor de la màscara. Es manté ferma amb la suor i permet moure't amb llibertat en cada finta i desplaçament."
       },
       "application": {
         "es": "Aplicar una capa fina en zonas de fricción antes de la actividad.",
-        "en": "Apply a thin layer to friction areas before activity."
+        "en": "Apply a thin layer to friction areas before activity.",
+        "ca": "Aplicar una capa fina a les zones de fricció abans de l'activitat."
       },
       "recommendations": {
         "es": "No aplicar sobre heridas. Probar en una zona pequeña si tienes piel sensible.",
-        "en": "Do not apply on open wounds. Patch test if you have sensitive skin."
+        "en": "Do not apply on open wounds. Patch test if you have sensitive skin.",
+        "ca": "No aplicar sobre ferides. Provar en una zona petita si tens la pell sensible."
       },
       "price": "25,41",
       "size": "100 ml",
       "image": "/products/CREMA-ANTI-ROZADURAS.jpg",
-      "category": { "es": "cuidado", "en": "care" },
+      "category": { "es": "cuidado", "en": "care", "ca": "cura" },
       "sportId": "fencing",
       "available": true,
       "rating": 4.4,
-      "votes": 52
-    ,
+      "votes": 52,
       "faqs": {
         "es": [
           { "question": "¿Dónde aplicar?", "answer": "En zonas de fricción como axilas, ingles y cintura." },
@@ -222,6 +265,12 @@
           { "question": "How long does it last?", "answer": "Depends on activity; reapply as needed." },
           { "question": "Can I use it daily?", "answer": "Yes, suitable for frequent use." },
           { "question": "Is it compatible with sensitive skin?", "answer": "Yes, perform a patch test if sensitive." }
+        ],
+        "ca": [
+          { "question": "On aplicar?", "answer": "A zones de fricció com aixelles, engonals i cintura." },
+          { "question": "Quant dura l'efecte?", "answer": "Depèn de l'activitat; reaplicar si cal." },
+          { "question": "Es pot usar diàriament?", "answer": "Sí, apte per a ús freqüent." },
+          { "question": "Compatible amb pell sensible?", "answer": "Sí, fer prova en una zona petita si tens la pell sensible." }
         ]
       }
     },
@@ -229,29 +278,32 @@
       "id": 6,
       "name": {
         "es": "Gel de Aloe Vera Puro",
-        "en": "Pure Aloe Vera Gel"
+        "en": "Pure Aloe Vera Gel",
+        "ca": "Gel d'àloe vera pur"
       },
       "description": {
         "es": "Gel de aloe vera 100% puro para hidratar, calmar y regenerar la piel. Ideal para quemaduras solares, irritaciones y cuidado diario de la piel.",
-        "en": "100% pure aloe vera gel to hydrate, soothe and regenerate skin. Ideal for sunburns, irritations and daily skin care."
+        "en": "100% pure aloe vera gel to hydrate, soothe and regenerate skin. Ideal for sunburns, irritations and daily skin care.",
+        "ca": "Gel d'àloe vera 100% pur per hidratar, calmar i regenerar la pell. Ideal per a cremades solars, irritacions i cura diària de la pell."
       },
       "application": {
         "es": "Aplicar una cantidad suficiente y masajear hasta su absorción.",
-        "en": "Apply a sufficient amount and massage until absorbed."
+        "en": "Apply a sufficient amount and massage until absorbed.",
+        "ca": "Aplicar una quantitat suficient i fer massatge fins a l'absorció."
       },
       "recommendations": {
         "es": "Uso externo. Evitar contacto con ojos.",
-        "en": "External use. Avoid contact with eyes."
+        "en": "External use. Avoid contact with eyes.",
+        "ca": "Ús extern. Evitar el contacte amb els ulls."
       },
       "price": "7,26",
       "size": "100 ml",
       "image": "/products/GEL-DE-ALOE-VERA.jpg",
-      "category": { "es": "cuidado", "en": "care" },
+      "category": { "es": "cuidado", "en": "care", "ca": "cura" },
       "sportId": "multisport",
       "available": true,
       "rating": 4.5,
-      "votes": 88
-    ,
+      "votes": 88,
       "faqs": {
         "es": [
           { "question": "¿Para qué se recomienda el gel de aloe?", "answer": "Hidratar, calmar y ayudar a regenerar la piel irritada o expuesta al sol." },
@@ -264,6 +316,12 @@
           { "question": "How and when to apply?", "answer": "Apply a sufficient amount and massage until absorbed; use after sun or irritation." },
           { "question": "Is it suitable for all skin types?", "answer": "Yes, suitable for general use. Avoid contact with eyes." },
           { "question": "How often can I use it?", "answer": "As needed, even daily." }
+        ],
+        "ca": [
+          { "question": "Per a què es recomana el gel d'àloe?", "answer": "Hidratar, calmar i ajudar a regenerar la pell irritada o exposada al sol." },
+          { "question": "Com i quan aplicar-lo?", "answer": "Aplicar quantitat suficient i fer massatge fins a l'absorció; usar després de sol o irritació." },
+          { "question": "És apte per a tot tipus de pell?", "answer": "Sí, apte per a ús general. Evitar el contacte amb els ulls." },
+          { "question": "Amb quina freqüència puc usar-lo?", "answer": "Segons necessitat, fins i tot diàriament." }
         ]
       }
     },
@@ -271,11 +329,13 @@
       "id": 7,
       "name": {
         "es": "Champú Anti-Caída Fortalecedor",
-        "en": "Anti-Hair Loss Strengthening Shampoo"
+        "en": "Anti-Hair Loss Strengthening Shampoo",
+        "ca": "Xampú anticaiguda reforçant"
       },
       "description": {
         "es": "El Champú Anticaída Manpowers - Anti Hair Loss, con la fórmula \"Hair Denseer\", es un tratamiento capilar de uso diario diseñado para combatir las principales causas de la caída del cabello masculino. Su mezcla de ingredientes activos estimula la raíz y fortalece la estructura capilar. No solo limpia, sino que trata el cuero cabelludo, ofreciendo un cabello más fuerte, denso y con mayor vitalidad.",
-        "en": "Manpowers Anti-Hair Loss Shampoo, with the \"Hair Denseer\" formula, is a daily hair treatment designed to combat the main causes of male hair loss. Its blend of active ingredients stimulates the root and strengthens the hair structure. It not only cleans but also treats the scalp, offering stronger, denser, and more vibrant hair."
+        "en": "Manpowers Anti-Hair Loss Shampoo, with the \"Hair Denseer\" formula, is a daily hair treatment designed to combat the main causes of male hair loss. Its blend of active ingredients stimulates the root and strengthens the hair structure. It not only cleans but also treats the scalp, offering stronger, denser, and more vibrant hair.",
+        "ca": "El xampú anticaiguda Manpowers, amb la fórmula \"Hair Denseer\", és un tractament capil·lar d'ús diari dissenyat per combatre les principals causes de la caiguda del cabell masculí. La seva barreja d'ingredients actius estimula l'arrel i enforteix l'estructura capil·lar. No només neteja, sinó que tracta el cuir cabellut, oferint un cabell més fort, dens i amb més vitalitat."
       },
       "objectives": {
         "es": [
@@ -289,20 +349,28 @@
           "Growth Activation: Stimulate the follicle to promote new hair growth.",
           "Hair Strengthening: Increase the resistance of the hair fiber against breakage.",
           "Density Increase: Provide a thicker and more voluminous appearance."
+        ],
+        "ca": [
+          "Reducció de la caiguda: Disminuir activament la pèrdua de cabell.",
+          "Activació del creixement: Estimular el fol·licle per promoure el creixement de cabell nou.",
+          "Enfortiment del cabell: Augmentar la resistència de la fibra capil·lar contra la ruptura.",
+          "Augment de la densitat: Proporcionar un aspecte més gruixut i amb més volum."
         ]
       },
       "application": {
         "es": "Aplicar sobre cabello húmedo, masajear y aclarar.",
-        "en": "Apply to wet hair, massage, and rinse."
+        "en": "Apply to wet hair, massage, and rinse.",
+        "ca": "Aplicar sobre cabell humit, fer massatge i esbandir."
       },
       "recommendations": {
         "es": "Uso frecuente. Evitar contacto con ojos.",
-        "en": "Frequent use. Avoid contact with eyes."
+        "en": "Frequent use. Avoid contact with eyes.",
+        "ca": "Ús freqüent. Evitar el contacte amb els ulls."
       },
       "price": "12,10",
       "size": "100 ml",
       "image": "/products/CHAMPU-ANTI-CAIDA-TIRADORES.jpg",
-      "category": { "es": "cuidado", "en": "care" },
+      "category": { "es": "cuidado", "en": "care", "ca": "cura" },
       "sportId": "archery",
       "available": true,
       "rating": 4.3,
@@ -320,6 +388,12 @@
           { "question": "How often should I use it?", "answer": "Suitable for frequent use." },
           { "question": "Is it good for sensitive scalps?", "answer": "Yes, avoid eye contact and discontinue if irritation occurs." },
           { "question": "Does it leave residue?", "answer": "No, cleans and rinses without heavy residue." }
+        ],
+        "ca": [
+          { "question": "Enforteix el cabell?", "answer": "Sí, ajuda a reforçar des de l'arrel i neteja suaument suor i residus." },
+          { "question": "Freqüència d'ús?", "answer": "Apte per a ús freqüent." },
+          { "question": "Serveix per a cuir cabellut sensible?", "answer": "Sí, però evita el contacte amb els ulls i suspèn si hi ha irritació." },
+          { "question": "Deixa residus?", "answer": "No, neteja i esbandix sense deixar residu pesat." }
         ]
       }
     },
@@ -327,24 +401,28 @@
       "id": 8,
       "name": {
         "es": "Crema para Masajes Relajante",
-        "en": "Relaxing Massage Cream"
+        "en": "Relaxing Massage Cream",
+        "ca": "Crema de massatge relaxant"
       },
       "description": {
         "es": "Termina la regata y notas hombros y zona lumbar cargados. Esta crema de masaje se desliza con facilidad y ayuda a descomprimir la tensión tras las maniobras y las horas de mar. Textura cómoda, aroma discreto y una sensación de descanso que te prepara para la siguiente salida.",
-        "en": "After the regatta, your shoulders and lower back feel tight. This massage cream glides smoothly and helps ease tension after maneuvers and hours at sea. Comfortable texture, subtle scent, and a rested feel that readies you for the next outing."
+        "en": "After the regatta, your shoulders and lower back feel tight. This massage cream glides smoothly and helps ease tension after maneuvers and hours at sea. Comfortable texture, subtle scent, and a rested feel that readies you for the next outing.",
+        "ca": "Acabada la regata, notes les espatlles i la zona lumbar carregades. Aquesta crema de massatge llisca amb facilitat i ajuda a descomprimir la tensió després de les maniobres i les hores de mar. Textura còmoda, aroma discret i una sensació de descans que et prepara per a la següent sortida."
       },
       "application": {
         "es": "Aplicar con masaje en la zona deseada hasta su absorción.",
-        "en": "Apply with massage to the desired area until absorbed."
+        "en": "Apply with massage to the desired area until absorbed.",
+        "ca": "Aplicar amb massatge a la zona desitjada fins a l'absorció."
       },
       "recommendations": {
         "es": "Uso externo. No aplicar sobre piel irritada.",
-        "en": "External use. Do not apply on irritated skin."
+        "en": "External use. Do not apply on irritated skin.",
+        "ca": "Ús extern. No aplicar sobre pell irritada."
       },
       "price": "10,00",
       "size": "100 ml",
       "image": "/products/CREMA-MASAJE.jpg",
-      "category": { "es": "cuidado", "en": "care" },
+      "category": { "es": "cuidado", "en": "care", "ca": "cura" },
       "sportId": "sailing",
       "available": true,
       "rating": 4.4,
@@ -362,6 +440,12 @@
           { "question": "How to apply?", "answer": "Massage into the tense area until absorbed." },
           { "question": "Is daily use okay?", "answer": "Yes, as needed." },
           { "question": "Does it feel sticky?", "answer": "No, comfortable texture and quick absorption." }
+        ],
+        "ca": [
+          { "question": "Quan es recomana?", "answer": "Després de maniobres o regates per alleujar tensió a espatlles i zona lumbar." },
+          { "question": "Com aplicar-la?", "answer": "Aplicar amb massatge fins a l'absorció a la zona carregada." },
+          { "question": "Serveix diàriament?", "answer": "Sí, segons necessitat." },
+          { "question": "Deixa sensació enganxosa?", "answer": "No, textura còmoda i d'absorció ràpida." }
         ]
       }
     },
@@ -369,24 +453,28 @@
       "id": 9,
       "name": {
         "es": "Crema para Pies con Aceite de Espliego",
-        "en": "Lavender Oil Foot Cream"
+        "en": "Lavender Oil Foot Cream",
+        "ca": "Crema de peus amb oli d'espígol"
       },
       "price": "12,10",
       "size": "100 ml",
       "description": {
         "es": "Tras jornadas en cubierta —con zapato náutico o descalzo—, los pies piden alivio. Esta crema con aceite de espliego hidrata, calma y ayuda a neutralizar el olor, dejando una sensación fresca para el próximo bordo. Ideal para talones y plantas que aguantan largas guardias.",
-        "en": "After long hours on deck —in boat shoes or barefoot— your feet need relief. This lavender oil cream hydrates, soothes, and helps neutralize odor, leaving a fresh feel for the next tack. Ideal for heels and soles that endure long watches."
+        "en": "After long hours on deck —in boat shoes or barefoot— your feet need relief. This lavender oil cream hydrates, soothes, and helps neutralize odor, leaving a fresh feel for the next tack. Ideal for heels and soles that endure long watches.",
+        "ca": "Després de llargues hores a coberta —amb sabata nàutica o descalç—, els peus demanen alleujament. Aquesta crema amb oli d'espígol hidrata, calma i ajuda a neutralitzar l'olor, deixant una sensació fresca per al pròxim bord. Ideal per a talons i plantes que aguanten llargues guàrdies."
       },
       "application": {
         "es": "Aplicar en pies limpios y secos, especialmente en talones y plantas.",
-        "en": "Apply to clean, dry feet, focusing on heels and soles."
+        "en": "Apply to clean, dry feet, focusing on heels and soles.",
+        "ca": "Aplicar en peus nets i secs, especialment en talons i plantes."
       },
       "recommendations": {
         "es": "Uso diario según necesidad.",
-        "en": "Use daily as needed."
+        "en": "Use daily as needed.",
+        "ca": "Ús diari segons necessitat."
       },
       "image": "/products/CREMA-PIES.jpg",
-      "category": { "es": "cuidado", "en": "care" },
+      "category": { "es": "cuidado", "en": "care", "ca": "cura" },
       "sportId": "sailing",
       "available": true,
       "rating": 4.2,
@@ -404,6 +492,12 @@
           { "question": "How to apply?", "answer": "Apply to clean, dry feet and massage." },
           { "question": "Daily use?", "answer": "Yes, as needed." },
           { "question": "Scent and feel?", "answer": "Subtle scent, leaves a fresh feel." }
+        ],
+        "ca": [
+          { "question": "Quines zones del peu?", "answer": "Talons i plantes; hidrata, calma i ajuda a neutralitzar l'olor." },
+          { "question": "Com aplicar-la?", "answer": "Aplicar en peus nets i secs, amb massatge." },
+          { "question": "Ús diari?", "answer": "Sí, segons necessitat." },
+          { "question": "Aroma i sensació?", "answer": "Aroma discret, deixa una sensació fresca." }
         ]
       }
     },
@@ -411,24 +505,28 @@
       "id": 10,
       "name": {
         "es": "Crema Anti-Rozaduras Deportivo",
-        "en": "Sports Anti-Chafing Cream"
+        "en": "Sports Anti-Chafing Cream",
+        "ca": "Crema anti-rascades esportiva"
       },
       "description": {
         "es": "Antes de salir, protege los puntos de contacto con el sillín. Nuestro stick anti‑rozaduras forma una película resistente al sudor y al agua que reduce la fricción en rutas largas, manteniendo la piel cómoda bajo el culotte. Ligero y de fácil aplicación para entrenos y marchas.",
-        "en": "Pre‑ride protection for saddle contact points. Our anti‑chafing stick forms a sweat‑ and water‑resistant film that reduces friction on long routes, keeping skin comfortable under your bibs. Lightweight and easy to apply for training and gran fondos."
+        "en": "Pre‑ride protection for saddle contact points. Our anti‑chafing stick forms a sweat‑ and water‑resistant film that reduces friction on long routes, keeping skin comfortable under your bibs. Lightweight and easy to apply for training and gran fondos.",
+        "ca": "Abans de sortir, protegeix els punts de contacte amb el seient. El nostre stick anti‑rascades forma una pel·lícula resistent a la suor i a l'aigua que redueix la fricció en rutes llargues, mantenint la pell còmoda sota el culot. Lleuger i de fàcil aplicació per a entrenaments i marxes."
       },
       "application": {
         "es": "Aplicar sobre zonas de contacto antes de la actividad.",
-        "en": "Apply to contact areas before activity."
+        "en": "Apply to contact areas before activity.",
+        "ca": "Aplicar sobre les zones de contacte abans de l'activitat."
       },
       "recommendations": {
         "es": "No aplicar sobre cortes o irritaciones.",
-        "en": "Do not apply on cuts or irritations."
+        "en": "Do not apply on cuts or irritations.",
+        "ca": "No aplicar sobre talls o irritacions."
       },
       "price": "25,41",
       "size": "100 ml",
       "image": "/products/ANTI-ROZADURAS-CICLISMO.jpg",
-      "category": { "es": "cuidado", "en": "care" },
+      "category": { "es": "cuidado", "en": "care", "ca": "cura" },
       "sportId": "cycling",
       "available": true,
       "rating": 4.3,
@@ -446,6 +544,12 @@
           { "question": "Is it sweat/water resistant?", "answer": "Yes, forms a resistant film for long routes." },
           { "question": "Skin irritation?", "answer": "Do not apply on cuts or irritations." },
           { "question": "Affects grip?", "answer": "No, lightweight and easy to apply." }
+        ],
+        "ca": [
+          { "question": "On aplicar abans de la ruta?", "answer": "Zones de contacte amb el seient per reduir la fricció." },
+          { "question": "Resisteix la suor i l'aigua?", "answer": "Sí, forma una pel·lícula resistent per a rutes llargues." },
+          { "question": "Irrita la pell?", "answer": "No aplicar sobre talls o irritacions." },
+          { "question": "Afecta l'adherència?", "answer": "No, és lleugera i de fàcil aplicació." }
         ]
       }
     },
@@ -453,24 +557,28 @@
       "id": 11,
       "name": {
         "es": "Agarre Táctico Profesional",
-        "en": "Professional Tactical Grip"
+        "en": "Professional Tactical Grip",
+        "ca": "Agarre tàctic professional"
       },
       "description": {
         "es": "A mitad de serie, las manos sudan y la sujeción del arco debe seguir siendo constante. Este gel de agarre técnico ofrece una firmeza seca y controlada para que tu mano soporte el tiro sin deslizamientos, cuidando la piel durante la sesión. Integra el agarre en tu rutina previa al disparo.",
-        "en": "Mid‑series, palms sweat and bow hold must stay consistent. This technical grip gel delivers dry, steady firmness so your bow hand resists slip while caring for the skin through the session. Fold the grip into your pre‑shot routine."
+        "en": "Mid‑series, palms sweat and bow hold must stay consistent. This technical grip gel delivers dry, steady firmness so your bow hand resists slip while caring for the skin through the session. Fold the grip into your pre‑shot routine.",
+        "ca": "A mitja sèrie, les mans suen i la subjecció de l'arc ha de continuar sent constant. Aquest gel d'agarre tècnic ofereix una fermesa seca i controlada perquè la mà aguanti el tir sense lliscaments, cuidant la pell durant la sessió. Integra l'agarre en la teva rutina prèvia al dispar."
       },
       "application": {
         "es": "Aplicar una pequeña cantidad en palma y dedos antes de tirar.",
-        "en": "Apply a small amount to palms and fingers before shooting."
+        "en": "Apply a small amount to palms and fingers before shooting.",
+        "ca": "Aplicar una petita quantitat a palma i dits abans de tirar."
       },
       "recommendations": {
         "es": "Probar en una zona pequeña. No usar en piel irritada.",
-        "en": "Patch test first. Do not use on irritated skin."
+        "en": "Patch test first. Do not use on irritated skin.",
+        "ca": "Fer una prova prèvia en una zona petita. No usar en pell irritada."
       },
       "price": "16,94",
       "size": "100 ml",
       "image": "/products/agarre-tactico.avif",
-      "category": { "es": "deportes", "en": "sports" },
+      "category": { "es": "deportes", "en": "sports", "ca": "esports" },
       "sportId": "archery",
       "available": true,
       "rating": 4.6,
@@ -488,6 +596,12 @@
           { "question": "How to apply?", "answer": "Small amount on palms and fingers before shooting." },
           { "question": "Residue?", "answer": "No sticky residue; skin‑friendly." },
           { "question": "Suitable for long sessions?", "answer": "Yes, designed to keep hold consistent." }
+        ],
+        "ca": [
+          { "question": "Millora l'agarre de l'arc?", "answer": "Sí, ofereix fermesa seca i controlada per evitar lliscaments." },
+          { "question": "Com aplicar-lo?", "answer": "Petita quantitat a palma i dits abans de tirar." },
+          { "question": "Deixa residus?", "answer": "No deixa residu enganxós i cuida la pell." },
+          { "question": "Apte per a sessions llargues?", "answer": "Sí, pensat per mantenir la subjecció constant." }
         ]
       }
     },
@@ -495,24 +609,28 @@
       "id": 12,
       "name": {
         "es": "Crema Efecto Frío",
-        "en": "Cooling Cream"
+        "en": "Cooling Cream",
+        "ca": "Crema efecte fred"
       },
       "description": {
         "es": "Entre tandas, un respiro para antebrazos y hombros. Nuestra crema efecto frío ofrece una sensación refrescante que ayuda a aliviar la carga tras las repeticiones de tiro, dejándote preparado para el siguiente end. Se absorbe rápido y no deja residuos, ideal para uso en campo.",
-        "en": "Between ends, give forearms and shoulders a breather. Our cooling cream delivers a refreshing feel that helps ease the load after repeated shots, leaving you ready for the next end. Fast‑absorbing and residue‑free — ideal on the range."
+        "en": "Between ends, give forearms and shoulders a breather. Our cooling cream delivers a refreshing feel that helps ease the load after repeated shots, leaving you ready for the next end. Fast‑absorbing and residue‑free — ideal on the range.",
+        "ca": "Entre sèries, un respir per als avantbraços i les espatlles. La nostra crema efecte fred ofereix una sensació refrescant que ajuda a alleujar la càrrega després de repeticions de tir, deixant-te preparat per a la següent sèrie. S'absorbeix ràpid i no deixa residus, ideal per a ús al camp."
       },
       "application": {
         "es": "Aplicar sobre la zona deseada tras la práctica.",
-        "en": "Apply to target area after practice."
+        "en": "Apply to target area after practice.",
+        "ca": "Aplicar sobre la zona desitjada després de la pràctica."
       },
       "recommendations": {
         "es": "Evitar contacto con ojos. Lavar manos tras uso.",
-        "en": "Avoid eye contact. Wash hands after use."
+        "en": "Avoid eye contact. Wash hands after use.",
+        "ca": "Evitar el contacte amb els ulls. Rentar les mans després de l'ús."
       },
       "price": "10,00",
       "size": "100 ml",
       "image": "/products/CREMA-EFECTO-FRIO-TIRADORES.jpg",
-      "category": { "es": "deportes", "en": "sports" },
+      "category": { "es": "deportes", "en": "sports", "ca": "esports" },
       "sportId": "archery",
       "available": true,
       "rating": 4.4,
@@ -530,6 +648,12 @@
           { "question": "Fast absorbing?", "answer": "Yes, quick absorption without residue." },
           { "question": "Range‑friendly?", "answer": "Yes, ideal for use on the range." },
           { "question": "Precautions?", "answer": "Avoid eye contact; wash hands after use." }
+        ],
+        "ca": [
+          { "question": "Quan usar la crema efecte fred?", "answer": "Entre sèries o després de la pràctica per alleujar càrrega en avantbraços i espatlles." },
+          { "question": "S'absorbeix ràpid?", "answer": "Sí, d'absorció ràpida i sense residus." },
+          { "question": "És apta al camp?", "answer": "Sí, ideal per a ús al camp de tir." },
+          { "question": "Precaucions?", "answer": "Evitar el contacte amb els ulls; rentar mans després d'usar." }
         ]
       }
     },
@@ -537,24 +661,28 @@
       "id": 13,
       "name": {
         "es": "Cremigel Masaje Muscular",
-        "en": "Muscle Massage Cream-Gel"
+        "en": "Muscle Massage Cream-Gel",
+        "ca": "Cremigel de massatge muscular"
       },
       "description": {
         "es": "Después de la práctica, trabaja la zona escapular y el manguito rotador con un masaje cómodo. Este cremigel ayuda a suavizar la tensión acumulada por el gesto del disparo, con deslizamiento justo y rápida absorción para recuperar sensaciones.",
-        "en": "Post‑practice, treat the scapular area and rotator cuff with a comfortable massage. This cream‑gel helps ease tension built up by the shooting motion, with just‑right glide and quick absorption to restore feel."
+        "en": "Post‑practice, treat the scapular area and rotator cuff with a comfortable massage. This cream‑gel helps ease tension built up by the shooting motion, with just‑right glide and quick absorption to restore feel.",
+        "ca": "Després de la pràctica, treballa la zona escapular i el manegot rotador amb un massatge còmode. Aquest cremigel ajuda a suavitzar la tensió acumulada pel gest del dispar, amb lliscament just i absorció ràpida per recuperar sensacions."
       },
       "application": {
         "es": "Aplicar con masaje en músculos trabajados hasta su absorción.",
-        "en": "Massage into worked muscles until absorbed."
+        "en": "Massage into worked muscles until absorbed.",
+        "ca": "Aplicar amb massatge en músculs treballats fins a l'absorció."
       },
       "recommendations": {
         "es": "Uso externo. No aplicar en heridas.",
-        "en": "External use. Do not apply on wounds."
+        "en": "External use. Do not apply on wounds.",
+        "ca": "Ús extern. No aplicar en ferides."
       },
       "price": "12,00",
       "size": "100 ml",
       "image": "/products/CREMIGEL-MASAJE-MUSCULAR-TIRADORES.jpg",
-      "category": { "es": "deportes", "en": "sports" },
+      "category": { "es": "deportes", "en": "sports", "ca": "esports" },
       "sportId": "archery",
       "available": true,
       "rating": 4.3,
@@ -572,6 +700,12 @@
           { "question": "How to apply?", "answer": "Massage into worked muscles until absorbed." },
           { "question": "Fast absorption?", "answer": "Yes, quick absorption with just‑right glide." },
           { "question": "Regular use?", "answer": "Yes, fit into recovery routine." }
+        ],
+        "ca": [
+          { "question": "Quina zona es recomana?", "answer": "Escapular i manegot rotador després de la pràctica, per suavitzar la tensió." },
+          { "question": "Com aplicar-lo?", "answer": "Amb massatge fins a l'absorció en músculs treballats." },
+          { "question": "S'absorbeix ràpid?", "answer": "Sí, absorció ràpida i lliscament just." },
+          { "question": "Ús regular?", "answer": "Sí, integrar-lo en la rutina de recuperació." }
         ]
       }
     },
@@ -579,24 +713,28 @@
       "id": 14,
       "name": {
         "es": "Gel efecto calor",
-        "en": "Heat Effect Gel"
+        "en": "Heat Effect Gel",
+        "ca": "Gel efecte calor"
       },
       "description": {
         "es": "Calienta antes de la primera serie. Nuestro gel efecto calor proporciona una sensación térmica progresiva en hombros, espalda y muñecas para activar antes de entrar a tirar. Integra el calentamiento en tu ritual, con textura que no molesta al agarre.",
-        "en": "Warm up before the first series. Our heat effect gel provides a gradual thermal feel to shoulders, back, and wrists to activate before you shoot. Make warm‑up part of your ritual with a texture that won’t interfere with grip."
+        "en": "Warm up before the first series. Our heat effect gel provides a gradual thermal feel to shoulders, back, and wrists to activate before you shoot. Make warm‑up part of your ritual with a texture that won’t interfere with grip.",
+        "ca": "Escalfa abans de la primera sèrie. El nostre gel efecte calor proporciona una sensació tèrmica progressiva a espatlles, esquena i canells per activar abans d'entrar a tirar. Integra l'escalfament en el teu ritual, amb textura que no molesta l'agarre."
       },
       "application": {
         "es": "Aplicar una pequeña cantidad y masajear hasta notar calor.",
-        "en": "Apply a small amount and massage until warmth is felt."
+        "en": "Apply a small amount and massage until warmth is felt.",
+        "ca": "Aplicar una petita quantitat i fer massatge fins notar calor."
       },
       "recommendations": {
         "es": "No usar en piel irritada. Lavar manos tras uso.",
-        "en": "Do not use on irritated skin. Wash hands after use."
+        "en": "Do not use on irritated skin. Wash hands after use.",
+        "ca": "No usar en pell irritada. Rentar les mans després de l'ús."
       },
       "price": "10,00",
       "size": "100 ml",
       "image": "/products/CREMA-EFECTO-CALOR.jpg",
-      "category": { "es": "deportes", "en": "sports" },
+      "category": { "es": "deportes", "en": "sports", "ca": "esports" },
       "sportId": "archery",
       "available": true,
       "rating": 4.2,
@@ -614,6 +752,12 @@
           { "question": "Thermal feel?", "answer": "Gradual, without interfering with grip." },
           { "question": "Precautions?", "answer": "Do not use on irritated skin; wash hands after use." },
           { "question": "Grip interference?", "answer": "No, texture designed not to interfere." }
+        ],
+        "ca": [
+          { "question": "Quan usar el gel calor?", "answer": "Durant l'escalfament per activar espatlles, esquena i canells." },
+          { "question": "Sensació tèrmica?", "answer": "Progressiva, sense molestar l'agarre." },
+          { "question": "Precaucions?", "answer": "No usar en pell irritada; rentar les mans després de l'ús." },
+          { "question": "Interfereix amb l'agarre?", "answer": "No, textura pensada per no interferir." }
         ]
       }
     },
@@ -621,23 +765,27 @@
       "id": 15,
       "name": {
         "es": "Gel efecto calor",
-        "en": "Heat Effect Gel"
+        "en": "Heat Effect Gel",
+        "ca": "Gel efecte calor"
       },
       "description": {
         "es": "En la sala, antes del asalto, activa piernas y brazos. El gel efecto calor despierta gemelos, cuádriceps y antebrazos con una sensación térmica suave que acompaña tu calentamiento sin saturar la piel. Ideal para reaccionar rápido desde el primer toque.",
-        "en": "In the salle, before the bout, activate legs and arms. The heat effect gel wakes calves, quads, and forearms with a gentle thermal feel that supports warm‑up without overloading the skin. Ideal for moving fast from the first touch."
+        "en": "In the salle, before the bout, activate legs and arms. The heat effect gel wakes calves, quads, and forearms with a gentle thermal feel that supports warm‑up without overloading the skin. Ideal for moving fast from the first touch.",
+        "ca": "A la sala, abans de l'assalt, activa cames i braços. El gel efecte calor desperta bessons, quàdriceps i avantbraços amb una sensació tèrmica suau que acompanya l'escalfament sense saturar la pell. Ideal per reaccionar ràpid des del primer toc."
       },
       "application": {
         "es": "Aplicar en músculos a activar antes del ejercicio.",
-        "en": "Apply to muscles to activate before exercise."
+        "en": "Apply to muscles to activate before exercise.",
+        "ca": "Aplicar als músculs a activar abans de l'exercici."
       },
       "recommendations": {
         "es": "Evitar contacto con ojos y mucosas.",
-        "en": "Avoid contact with eyes and mucous membranes."
+        "en": "Avoid contact with eyes and mucous membranes.",
+        "ca": "Evitar el contacte amb ulls i mucoses."
       },
       "price": "10,00",
       "size": "100 ml",
-      "category": { "es": "deportes", "en": "sports" },
+      "category": { "es": "deportes", "en": "sports", "ca": "esports" },
       "image": "/products/CREMA-EFECTO-CALOR.jpg",
       "sportId": "fencing",
       "available": true,
@@ -656,6 +804,12 @@
           { "question": "Thermal feel?", "answer": "Gentle, supports warm‑up." },
           { "question": "Precautions?", "answer": "Avoid eyes and mucous membranes." },
           { "question": "Frequency?", "answer": "As per warm‑up routine." }
+        ],
+        "ca": [
+          { "question": "Ús recomanat?", "answer": "Abans de l'assalt per activar músculs de cames i braços." },
+          { "question": "Sensació tèrmica?", "answer": "Suau, acompanya l'escalfament." },
+          { "question": "Precaucions?", "answer": "Evitar contacte amb ulls i mucoses." },
+          { "question": "Freqüència?", "answer": "Segons la rutina d'escalfament." }
         ]
       }
     },
@@ -663,15 +817,17 @@
       "id": 16,
       "name": {
         "es": "Cremigel",
-        "en": "Cremigel Massage Gel"
+        "en": "Cremigel Massage Gel",
+        "ca": "Cremigel"
       },
       "description": {
         "es": "Tras paradas y ripostas, los antebrazos quedan tensos. Este cremigel de masaje ayuda a soltar la carga y recuperar movilidad en muñecas y codos, con una textura cómoda que se integra en tu rutina de vuelta a la calma.",
-        "en": "After parries and ripostes, forearms feel tight. This massage cream‑gel helps release load and restore mobility in wrists and elbows, with a comfortable texture that fits your cool‑down routine."
+        "en": "After parries and ripostes, forearms feel tight. This massage cream‑gel helps release load and restore mobility in wrists and elbows, with a comfortable texture that fits your cool‑down routine.",
+        "ca": "Després de parades i ripostes, els avantbraços queden tensos. Aquest cremigel de massatge ajuda a alliberar la càrrega i recuperar mobilitat a canells i colzes, amb una textura còmoda que s'integra en la rutina de tornada a la calma."
       },
       "price": "12,00",
       "size": "100 ml",
-      "category": { "es": "cuidado", "en": "care" },
+      "category": { "es": "cuidado", "en": "care", "ca": "cura" },
       "image": "/products/CREMIGEL-MASAJE-MUSCULAR.jpg",
       "sportId": "fencing",
       "available": true,
@@ -690,6 +846,12 @@
           { "question": "How to apply?", "answer": "Massage into worked areas until absorbed." },
           { "question": "Texture?", "answer": "Comfortable cream‑gel, fits cool‑down." },
           { "question": "Frequent use?", "answer": "Yes, as needed." }
+        ],
+        "ca": [
+          { "question": "Per a què serveix?", "answer": "Alliberar càrrega en avantbraços, canells i colzes després de la pràctica." },
+          { "question": "Com aplicar-lo?", "answer": "Fer massatge en zones treballades fins a l'absorció." },
+          { "question": "Textura?", "answer": "Cremigel còmode, s'integra en la tornada a la calma." },
+          { "question": "Ús freqüent?", "answer": "Sí, segons necessitat." }
         ]
       }
     },
@@ -697,13 +859,15 @@
       "id": 17,
       "name": {
         "es": "Calcio + Magnesio Vitamina K",
-        "en": "Calcium + Magnesium Vitamin K"
+        "en": "Calcium + Magnesium Vitamin K",
+        "ca": "Calci + Magnesi Vitamina K"
       },
       "description": {
         "es": "Calcio + Magnesio Vitamina K es una combinación de nutrientes esenciales para el bienestar del cuerpo. El calcio ayuda a fortalecer los músculos y las articulaciones, mientras que el magnesio mejora la función muscular y la sensación de cuerpo. La vitamina K es crucial para el funcionamiento del sistema nervioso y muscular, y ayuda a prevenir lesiones y enfermedades. Esta combinación nutricional es esencial para mejorar el rendimiento deportivo y prevenir lesiones en atletas profesionales.",
-        "en": "Calcium + Magnesium Vitamin K is a combination of essential nutrients for body wellness. Calcium helps strengthen muscles and joints, while magnesium improves muscular function and body sensation. Vitamin K is crucial for the functioning of the nervous system and muscles, and helps prevent injuries and diseases. This nutritional combination is essential for improving sports performance and preventing injuries in professional athletes."
+        "en": "Calcium + Magnesium Vitamin K is a combination of essential nutrients for body wellness. Calcium helps strengthen muscles and joints, while magnesium improves muscular function and body sensation. Vitamin K is crucial for the functioning of the nervous system and muscles, and helps prevent injuries and diseases. This nutritional combination is essential for improving sports performance and preventing injuries in professional athletes.",
+        "ca": "Calci + Magnesi Vitamina K és una combinació de nutrients essencials per al benestar del cos. El calci ajuda a enfortir els músculs i les articulacions, mentre que el magnesi millora la funció muscular i la sensació corporal. La vitamina K és clau per al funcionament del sistema nerviós i muscular, i ajuda a prevenir lesions i malalties. Aquesta combinació nutricional és essencial per millorar el rendiment esportiu i prevenir lesions en atletes professionals."
       },
-      "category": { "es": "suplementos", "en": "supplements" },
+      "category": { "es": "suplementos", "en": "supplements", "ca": "suplements" },
       "image": "/products/CALCIO-MAGNESIO-VITAMINA-K-MAN-POWERS.jpg",
       "price": "24,20",
       "size": "150 cap",
@@ -724,6 +888,12 @@
           { "question": "How to take it?", "answer": "Follow label directions; preferably with meals." },
           { "question": "Compatibility with other supplements?", "answer": "Generally compatible; avoid exceeding recommended intake." },
           { "question": "Precautions?", "answer": "Consult professionals if under treatment or with medical conditions." }
+        ],
+        "ca": [
+          { "question": "Per a què serveix la combinació?", "answer": "Dóna suport a la funció muscular, salut òssia i benestar general." },
+          { "question": "Com prendre-ho?", "answer": "Seguir indicacions de l'envàs; preferiblement amb els àpats." },
+          { "question": "Compatibilitat amb altres suplements?", "answer": "Generalment compatible; evitar excedir la ingesta diària recomanada." },
+          { "question": "Precaucions?", "answer": "Consultar professionals si estàs en tractament o tens condicions mèdiques." }
         ]
       }
     },
@@ -731,24 +901,28 @@
       "id": 18,
       "name": {
         "es": "Crema Efecto Frío",
-        "en": "Cooling Cream"
+        "en": "Cooling Cream",
+        "ca": "Crema efecte fred"
       },
       "description": {
         "es": "Termina el asalto y dedica un minuto a bajar pulsaciones. Nuestra crema efecto frío aporta una sensación refrescante que ayuda a aliviar la fatiga en antebrazos, hombros y piernas después de tirar. Se absorbe rápido y acompaña la recuperación entre combates.",
-        "en": "After a bout, take a minute to come down. Our cooling cream brings a refreshing feel that helps ease fatigue in forearms, shoulders, and legs after fencing. Quick‑absorbing to support recovery between matches."
+        "en": "After a bout, take a minute to come down. Our cooling cream brings a refreshing feel that helps ease fatigue in forearms, shoulders, and legs after fencing. Quick‑absorbing to support recovery between matches.",
+        "ca": "Acabat l'assalt, dedica un minut a baixar pulsacions. La nostra crema efecte fred aporta una sensació refrescant que ajuda a alleujar la fatiga en avantbraços, espatlles i cames després de tirar. S'absorbeix ràpid i acompanya la recuperació entre combats."
       },
       "application": {
         "es": "Aplicar tras la práctica en las zonas cargadas.",
-        "en": "Apply after practice to fatigued areas."
+        "en": "Apply after practice to fatigued areas.",
+        "ca": "Aplicar després de la pràctica a les zones carregades."
       },
       "recommendations": {
         "es": "Evitar contacto con ojos. No usar en piel irritada.",
-        "en": "Avoid eye contact. Do not use on irritated skin."
+        "en": "Avoid eye contact. Do not use on irritated skin.",
+        "ca": "Evitar el contacte amb els ulls. No usar en pell irritada."
       },
       "price": "10,00",
       "size": "100 ml",
       "image": "/products/CREMA-EFECTO-FRIO.jpg",
-      "category": { "es": "deportes", "en": "sports" },
+      "category": { "es": "deportes", "en": "sports", "ca": "esports" },
       "sportId": "fencing",
       "available": true,
       "rating": 4.3,
@@ -766,6 +940,12 @@
           { "question": "Fast absorption?", "answer": "Yes; ideal for recovery between matches." },
           { "question": "Precautions?", "answer": "Avoid eye contact; do not use on irritated skin." },
           { "question": "Residue?", "answer": "No residue." }
+        ],
+        "ca": [
+          { "question": "Quan usar-la?", "answer": "Després de l'assalt per alleujar fatiga en avantbraços, espatlles i cames." },
+          { "question": "S'absorbeix ràpid?", "answer": "Sí, absorció ràpida; ideal per a recuperació entre combats." },
+          { "question": "Precaucions?", "answer": "Evitar contacte amb ulls; no usar en pell irritada." },
+          { "question": "Deixa residus?", "answer": "No, no deixa residu." }
         ]
       }
     },
@@ -773,16 +953,18 @@
       "id": 19,
       "name": {
         "es": "Agarre técnico Profesional",
-        "en": "Professional Technical Grip"
+        "en": "Professional Technical Grip",
+        "ca": "Agarre tècnic professional"
       },
       "description": {
         "es": "Gel de agarre técnico para golf, diseñado para mejorar la sujeción del palo en condiciones de humedad, sudor o tensión competitiva. Su fórmula crea una película antideslizante que mantiene las manos firmes y secas, incrementando el control del swing y la precisión en el impacto. Ideal para entrenamientos y torneos; se aplica en palma y dedos sin dejar residuos pegajosos ni marcar el grip. Ingredientes respetuosos con la piel que ayudan a prevenir rozaduras y fatiga de manos durante la vuelta.",
-        "en": "Professional grip gel for golf, engineered to enhance club hold in humidity, sweat, or pressure situations. The formula forms a thin anti-slip film that keeps hands dry and steady, improving swing control and strike precision. Perfect for practice and competition; apply to palms and fingers without sticky residue or marking the grip. Skin-friendly ingredients help prevent chafing and hand fatigue throughout the round."
+        "en": "Professional grip gel for golf, engineered to enhance club hold in humidity, sweat, or pressure situations. The formula forms a thin anti-slip film that keeps hands dry and steady, improving swing control and strike precision. Perfect for practice and competition; apply to palms and fingers without sticky residue or marking the grip. Skin-friendly ingredients help prevent chafing and hand fatigue throughout the round.",
+        "ca": "Gel d'agarre tècnic per al golf, dissenyat per millorar la subjecció del pal en condicions d'humitat, suor o tensió competitiva. La seva fórmula crea una pel·lícula antilliscant que manté les mans fermes i seques, incrementant el control del swing i la precisió a l'impacte. Ideal per a entrenaments i tornejos; s'aplica a palma i dits sense deixar residus enganxosos ni marcar el grip. Ingredients respectuosos amb la pell que ajuden a prevenir rascades i fatiga de mans durant la volta."
       },
       "price": "18,15",
       "size": "100 ml",
       "image": "/products/GEL-AGARRE-TECNICO.jpg",
-      "category": { "es": "deportes", "en": "sports" },
+      "category": { "es": "deportes", "en": "sports", "ca": "esports" },
       "sportId": "golf",
       "available": true,
       "rating": 4.6,
@@ -800,6 +982,12 @@
           { "question": "Grip marks?", "answer": "No, it doesn’t mark the grip or leave sticky residue." },
           { "question": "How to apply?", "answer": "Apply to palms and fingers before play." },
           { "question": "Competition‑ready?", "answer": "Yes, ideal for practice and tournaments." }
+        ],
+        "ca": [
+          { "question": "Millora l'agarre del pal?", "answer": "Sí, pel·lícula antilliscant per a mans fermes i seques." },
+          { "question": "Deixa marques al grip?", "answer": "No marca el grip ni deixa residu enganxós." },
+          { "question": "Com aplicar-lo?", "answer": "Aplicar a palma i dits abans de jugar." },
+          { "question": "Apte per a competició?", "answer": "Sí, ideal per a entrenaments i tornejos." }
         ]
       }
     },
@@ -807,24 +995,28 @@
       "id": 20,
       "name": {
         "es": "Crema Efecto Frío",
-        "en": "Cooling Cream"
+        "en": "Cooling Cream",
+        "ca": "Crema efecte fred"
       },
       "description": {
         "es": "Tras el campo de prácticas o los últimos nueve hoyos, refresca antebrazos y hombros. Esta crema efecto frío ayuda a aliviar la fatiga del swing repetido, dejando la piel cómoda y lista para seguir. Textura ligera, se absorbe rápido y no deja residuo en el grip.",
-        "en": "After the range or the closing nine, cool down forearms and shoulders. This cooling cream helps ease swing‑induced fatigue, leaving skin comfortable and ready to carry on. Lightweight, fast‑absorbing, and won’t leave residue on the grip."
+        "en": "After the range or the closing nine, cool down forearms and shoulders. This cooling cream helps ease swing‑induced fatigue, leaving skin comfortable and ready to carry on. Lightweight, fast‑absorbing, and won’t leave residue on the grip.",
+        "ca": "Després del camp de pràctiques o els últims nou forats, refresca avantbraços i espatlles. Aquesta crema efecte fred ajuda a alleujar la fatiga del swing repetit, deixant la pell còmoda i llesta per seguir. Textura lleugera, s'absorbeix ràpid i no deixa residu al grip."
       },
       "application": {
         "es": "Aplicar tras la vuelta en las zonas trabajadas.",
-        "en": "Apply after the round to worked areas."
+        "en": "Apply after the round to worked areas.",
+        "ca": "Aplicar després de la volta a les zones treballades."
       },
       "recommendations": {
         "es": "Evitar contacto con ojos. Lavar manos tras uso.",
-        "en": "Avoid eye contact. Wash hands after use."
+        "en": "Avoid eye contact. Wash hands after use.",
+        "ca": "Evitar el contacte amb els ulls. Rentar mans després de l'ús."
       },
       "price": "10,00",
       "size": "100 ml",
       "image": "/products/CREMA-EFECTO-FRIO-GOLF.jpg",
-      "category": { "es": "deportes", "en": "sports" },
+      "category": { "es": "deportes", "en": "sports", "ca": "esports" },
       "sportId": "golf",
       "available": true,
       "rating": 4.3,
@@ -842,6 +1034,12 @@
           { "question": "Residue on grip?", "answer": "No, lightweight and fast‑absorbing." },
           { "question": "How to apply?", "answer": "Apply to worked areas after play." },
           { "question": "Precautions?", "answer": "Avoid eye contact; wash hands after use." }
+        ],
+        "ca": [
+          { "question": "Quan usar la crema efecte fred?", "answer": "Després de la volta o pràctiques per alleujar la fatiga del swing repetit." },
+          { "question": "Deixa residu al grip?", "answer": "No, lleugera i d'absorció ràpida." },
+          { "question": "Com aplicar-la?", "answer": "Aplicar a les zones treballades després de jugar." },
+          { "question": "Precaucions?", "answer": "Evitar contacte amb ulls; rentar mans després de l'ús." }
         ]
       }
     },
@@ -849,15 +1047,17 @@
       "id": 21,
       "name": {
         "es": "Cremigel",
-        "en": "Cremigel Massage Gel"
+        "en": "Cremigel Massage Gel",
+        "ca": "Cremigel"
       },
       "description": {
         "es": "Al terminar la vuelta, mima zona lumbar, hombros y antebrazos. Este cremigel de masaje ofrece el deslizamiento justo para trabajar la tensión del swing, con absorción rápida para una recuperación cómoda antes de la siguiente ronda.",
-        "en": "Post‑round, treat lower back, shoulders, and forearms. This massage cream‑gel offers just‑right glide to work swing tension, with quick absorption for a comfortable recovery before the next round."
+        "en": "Post‑round, treat lower back, shoulders, and forearms. This massage cream‑gel offers just‑right glide to work swing tension, with quick absorption for a comfortable recovery before the next round.",
+        "ca": "En acabar la volta, mima la zona lumbar, les espatlles i els avantbraços. Aquest cremigel de massatge ofereix el lliscament just per treballar la tensió del swing, amb absorció ràpida per a una recuperació còmoda abans de la següent ronda."
       },
       "price": "12,00",
       "size": "100 ml",
-      "category": { "es": "cuidado", "en": "care" },
+      "category": { "es": "cuidado", "en": "care", "ca": "cura" },
       "image": "/products/CREMIGEL-MASAJE-MUSCULAR-GOLF.jpg",
       "sportId": "golf",
       "available": true,
@@ -876,6 +1076,12 @@
           { "question": "How to apply?", "answer": "Massage into tense areas until absorbed." },
           { "question": "Feel?", "answer": "Just‑right glide and quick absorption." },
           { "question": "Regular use?", "answer": "Yes, for post‑round recovery." }
+        ],
+        "ca": [
+          { "question": "Per a quines zones?", "answer": "Zona lumbar, espatlles i avantbraços després de la volta." },
+          { "question": "Com aplicar-lo?", "answer": "Fer massatge fins a l'absorció en zones tenses." },
+          { "question": "Sensació?", "answer": "Lliscament just i absorció ràpida." },
+          { "question": "Ús regular?", "answer": "Sí, en recuperació post‑ronda." }
         ]
       }
     },
@@ -883,24 +1089,28 @@
       "id": 22,
       "name": {
         "es": "Gel efecto calor",
-        "en": "Heat Effect Gel"
+        "en": "Heat Effect Gel",
+        "ca": "Gel efecte calor"
       },
       "description": {
         "es": "Antes de salir al tee 1, activa la movilidad. El gel efecto calor aporta una sensación térmica gradual en hombros, muñecas y espalda para preparar el cuerpo, sin dejar sensación pegajosa ni molestar el agarre.",
-        "en": "On the first tee, get mobility going. The heat effect gel gives a gradual thermal feel to shoulders, wrists, and back to prep the body, without stickiness or affecting grip."
+        "en": "On the first tee, get mobility going. The heat effect gel gives a gradual thermal feel to shoulders, wrists, and back to prep the body, without stickiness or affecting grip.",
+        "ca": "Abans de sortir al tee 1, activa la mobilitat. El gel efecte calor aporta una sensació tèrmica gradual a espatlles, canells i esquena per preparar el cos, sense deixar sensació enganxosa ni molestar l'agarre."
       },
       "application": {
         "es": "Aplicar antes de jugar en hombros, muñecas y espalda.",
-        "en": "Apply before play to shoulders, wrists and back."
+        "en": "Apply before play to shoulders, wrists and back.",
+        "ca": "Aplicar abans de jugar a espatlles, canells i esquena."
       },
       "recommendations": {
         "es": "Evitar contacto con ojos y mucosas.",
-        "en": "Avoid contact with eyes and mucous membranes."
+        "en": "Avoid contact with eyes and mucous membranes.",
+        "ca": "Evitar el contacte amb ulls i mucoses."
       },
       "price": "12,00",
       "size": "100 ml",
       "image": "/products/GEL-EFECTO-CALOR-GOLF.jpg",
-      "category": { "es": "deportes", "en": "sports" },
+      "category": { "es": "deportes", "en": "sports", "ca": "esports" },
       "sportId": "golf",
       "available": true,
       "rating": 4.4,
@@ -918,6 +1128,12 @@
           { "question": "Grip interference?", "answer": "No stickiness and doesn’t affect the grip." },
           { "question": "Precautions?", "answer": "Avoid eyes and mucous membranes." },
           { "question": "Frequency?", "answer": "Use in warm‑up before each start." }
+        ],
+        "ca": [
+          { "question": "Quan aplicar-lo?", "answer": "Abans de jugar per activar espatlles, canells i esquena." },
+          { "question": "Interfereix amb l'agarre?", "answer": "No, no deixa sensació enganxosa ni afecta el grip." },
+          { "question": "Precaucions?", "answer": "Evitar contacte amb ulls i mucoses." },
+          { "question": "Freqüència?", "answer": "En l'escalfament abans de cada sortida." }
         ]
       }
     },
@@ -925,16 +1141,18 @@
       "id": 23,
       "name": {
         "es": "Champú Anti-Caída Fortalecedor",
-        "en": "Anti-Hair Loss Strengthening Shampoo"
+        "en": "Anti-Hair Loss Strengthening Shampoo",
+        "ca": "Xampú anticaiguda reforçant"
       },
       "price": "12,10",
       "size": "100 ml",
       "description": {
         "es": "Sol, viento y horas en el campo pueden castigar el cabello. Este champú fortalecedor limpia sudor y residuos con suavidad, dejando el cuero cabelludo fresco tras la ronda. Con activos que ayudan a reforzar desde la raíz, acompaña tu juego día tras día.",
-        "en": "Sun, wind, and hours on the course can stress hair. This strengthening shampoo gently clears sweat and residue, leaving your scalp fresh after the round. With root‑supporting actives, it pairs with your game day after day."
+        "en": "Sun, wind, and hours on the course can stress hair. This strengthening shampoo gently clears sweat and residue, leaving your scalp fresh after the round. With root‑supporting actives, it pairs with your game day after day.",
+        "ca": "Sol, vent i hores al camp poden castigar el cabell. Aquest xampú reforçant neteja suaument la suor i els residus, deixant el cuir cabellut fresc després de la ronda. Amb actius que ajuden a reforçar des de l'arrel, acompanya el teu joc dia rere dia."
       },
       "image": "/products/CHAMPÚ-ANTICAIDA-GOLF.jpg",
-      "category": { "es": "cuidado", "en": "care" },
+      "category": { "es": "cuidado", "en": "care", "ca": "cura" },
       "sportId": "golf",
       "available": true,
       "rating": 4.1,
@@ -952,15 +1170,23 @@
           "Growth Activation: Stimulate the follicle to promote new hair growth.",
           "Hair Strengthening: Increase the resistance of the hair fiber against breakage.",
           "Density Increase: Provide a thicker and more voluminous appearance."
+        ],
+        "ca": [
+          "Reducció de la caiguda: Disminuir activament la pèrdua de cabell.",
+          "Activació del creixement: Estimular el fol·licle per promoure cabell nou.",
+          "Enfortiment del cabell: Augmentar la resistència de la fibra capil·lar contra la ruptura.",
+          "Augment de la densitat: Proporcionar un aspecte més gruixut i amb més volum."
         ]
       },
       "application": {
         "es": "Aplicar sobre cabello húmedo, masajear y aclarar.",
-        "en": "Apply to wet hair, massage, and rinse."
+        "en": "Apply to wet hair, massage, and rinse.",
+        "ca": "Aplicar sobre cabell humit, fer massatge i esbandir."
       },
       "recommendations": {
         "es": "Uso frecuente. Evitar contacto con ojos.",
-        "en": "Frequent use. Avoid contact with eyes."
+        "en": "Frequent use. Avoid contact with eyes.",
+        "ca": "Ús freqüent. Evitar el contacte amb els ulls."
       },
       "faqs": {
         "es": [
@@ -974,8 +1200,14 @@
           { "question": "How often should I use it?", "answer": "Suitable for frequent use." },
           { "question": "Is it good for sensitive scalps?", "answer": "Yes, avoid eye contact and discontinue if irritation occurs." },
           { "question": "Does it leave residue?", "answer": "No, cleans and rinses without heavy residue." }
+        ],
+        "ca": [
+          { "question": "Enforteix el cabell?", "answer": "Sí, ajuda a reforçar des de l'arrel i neteja suaument la suor i els residus." },
+          { "question": "Freqüència d'ús?", "answer": "Apte per a ús freqüent." },
+          { "question": "Serveix per a cuir cabellut sensible?", "answer": "Sí, però evita el contacte amb els ulls i suspèn si hi ha irritació." },
+          { "question": "Deixa residus?", "answer": "No, neteja i esbandeix sense deixar residu pesat." }
         ]
       }
-      }
+    }
   ]
 }

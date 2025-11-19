@@ -3,26 +3,32 @@ interface Product {
   name: {
     es: string;
     en: string;
+    ca?: string;
   };
   description: {
     es: string;
     en: string;
+    ca?: string;
   };
   objectives?: {
     es: string[];
     en: string[];
+    ca?: string[];
   };
   nutritionalValues?: {
     es: string;
     en: string;
+    ca?: string;
   };
   application?: {
     es: string;
     en: string;
+    ca?: string;
   };
   recommendations?: {
     es: string;
     en: string;
+    ca?: string;
   };
   price: number;
   price_formatted: string;
@@ -31,6 +37,7 @@ interface Product {
   category: {
     es: string;
     en: string;
+    ca?: string;
   };
   sportId: string;
   available: boolean;
@@ -66,6 +73,8 @@ interface ProductsFilters {
   available?: boolean;
   id?: number;
 }
+
+import caTranslations from '../data/productTranslationsCa';
 
 class ProductsService {
   private baseUrl: string;
@@ -111,11 +120,33 @@ class ProductsService {
         throw new Error('API returned error response');
       }
 
-      return data.products;
+      const merged = this.applyCaTranslations(data.products);
+      return merged;
     } catch (error) {
       console.error('Error fetching products:', error);
       // En caso de error, devolvemos array vacío
       return [];
+    }
+  }
+
+  private applyCaTranslations(products: Product[]): Product[] {
+    try {
+      const map = caTranslations || {};
+      return products.map((p) => {
+        const t = map[p.id] || {};
+        return {
+          ...p,
+          name: { ...p.name, ...(t.name || {}) },
+          description: { ...p.description, ...(t.description || {}) },
+          category: { ...p.category, ...(t.category || {}) },
+          nutritionalValues: p.nutritionalValues ? { ...p.nutritionalValues, ...(t.nutritionalValues || {}) } : undefined,
+          application: p.application ? { ...p.application, ...(t.application || {}) } : undefined,
+          recommendations: p.recommendations ? { ...p.recommendations, ...(t.recommendations || {}) } : undefined,
+          objectives: p.objectives ? { ...p.objectives, ...(t.objectives || {}) } : undefined,
+        } as Product;
+      });
+    } catch {
+      return products;
     }
   }
 

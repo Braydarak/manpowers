@@ -178,7 +178,7 @@ const Header: React.FC = () => {
                 <circle cx="12" cy="12" r="9" />
                 <path d="M2 12h20M12 2v20M4 8h16M4 16h16" />
               </svg>
-              <span className="select-none">{language === "es" ? "🇪🇸 Español" : "🇬🇧 English"}</span>
+              <span className="select-none">{language === "es" ? "🇪🇸 Español" : language === "ca" ? "🇦🇩 Català" : "🇬🇧 English"}</span>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5 text-white/70 absolute right-2">
                 <path d="M5.23 7.21a.75.75 0 011.06.02L10 10.939l3.71-3.71a.75.75 0 111.06 1.061l-4.24 4.24a.75.75 0 01-1.06 0l-4.24-4.24a.75.75 0 01.02-1.06z" />
               </svg>
@@ -201,6 +201,15 @@ const Header: React.FC = () => {
                     className="w-full text-left px-4 py-2 text-white hover:bg-gray-800"
                   >
                     🇬🇧 English
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => { handleLanguageChange("ca"); setLangOpen(false); }}
+                    className="w-full text-left px-4 py-2 text-white hover:bg-gray-800"
+                  >
+                    🇦🇩 Català
                   </button>
                 </li>
               </ul>
@@ -357,7 +366,7 @@ const Header: React.FC = () => {
                 <circle cx="12" cy="12" r="9" />
                 <path d="M2 12h20M12 2v20M4 8h16M4 16h16" />
               </svg>
-              <span className="select-none">{language === "es" ? "🇪🇸 Español" : "🇬🇧 English"}</span>
+              <span className="select-none">{language === "es" ? "🇪🇸 Español" : language === "ca" ? "🇦🇩 Català" : "🇬🇧 English"}</span>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5 text-white/70 absolute right-3">
                 <path d="M5.23 7.21a.75.75 0 011.06.02L10 10.939l3.71-3.71a.75.75 0 111.06 1.061l-4.24 4.24a.75.75 0 01-1.06 0l-4.24-4.24a.75.75 0 01.02-1.06z" />
               </svg>
@@ -380,6 +389,15 @@ const Header: React.FC = () => {
                     className="w-full text-left px-5 py-3 text-white hover:bg-gray-800"
                   >
                     🇬🇧 English
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => { handleLanguageChange("ca"); setLangOpenMobile(false); setMenuOpen(false); }}
+                    className="w-full text-left px-5 py-3 text-white hover:bg-gray-800"
+                  >
+                    🇦🇩 Català
                   </button>
                 </li>
               </ul>

@@ -7,7 +7,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 type Props = {
   sportId: string;
   currentId?: number;
-  language: 'es' | 'en';
+  language: 'es' | 'en' | 'ca';
   title?: string;
 };
 
@@ -155,14 +155,14 @@ const RelatedProducts: React.FC<Props> = ({ sportId, currentId, language, title 
   const toSlug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').replace(/-{2,}/g, '-');
   const openDetail = (p: Product) => {
     if (!sportId) return;
-    const slug = toSlug(p.name[language]);
+    const slug = toSlug(p.name[language] || p.name.es);
     navigate(`/products/${sportId}/${slug}`);
   };
 
   const addToCart = (p: Product) => {
     const detail = {
       id: String(p.id),
-      name: p.name[language],
+      name: p.name[language] || p.name.es,
       price: p.price,
       image: p.image,
       quantity: 1,
