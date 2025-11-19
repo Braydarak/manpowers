@@ -61,6 +61,10 @@ const ProductDetailPage: React.FC = () => {
 
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [id, slug]);
+
+  useEffect(() => {
     if (!product) return;
     const title = `${(product.name[currentLanguage] || product.name.es)} | MΛN POWERS`;
     const description = product.description[currentLanguage] || product.description.es;
