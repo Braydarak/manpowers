@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import CartWidget from "../cart/CartWidget";
+import ProductSearch from "../search/ProductSearch";
 
 const Header: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -11,6 +12,7 @@ const Header: React.FC = () => {
   );
   const [menuOpen, setMenuOpen] = useState<boolean>(false); // Estado para controlar el menú hamburguesa
   const [isMobile, setIsMobile] = useState<boolean>(false); // Estado para detectar si es dispositivo móvil
+  const [searchOpenMobile, setSearchOpenMobile] = useState<boolean>(false);
 
   // Función para manejar el cambio de idioma
   const handleLanguageChange = (lang: string) => {
@@ -65,9 +67,9 @@ const Header: React.FC = () => {
     };
   }, []);
 
-  // Evitar scroll cuando el menú está abierto en móvil
+  // Evitar scroll cuando el menú o la búsqueda están abiertos en móvil
   useEffect(() => {
-    if (menuOpen && isMobile) {
+    if ((menuOpen || searchOpenMobile) && isMobile) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
@@ -76,7 +78,7 @@ const Header: React.FC = () => {
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [menuOpen, isMobile]);
+  }, [menuOpen, searchOpenMobile, isMobile]);
 
   return (
     <header className="bg-gradient-to-b from-gray-900 to-black text-white py-4 px-6 w-full border-b border-gray-700 shadow-lg fixed top-0 z-50">
@@ -94,6 +96,16 @@ const Header: React.FC = () => {
           <div className="md:hidden">
             <CartWidget />
           </div>
+
+          <button
+            className="md:hidden p-2 text-white/90 hover:text-white focus:outline-none"
+            onClick={() => setSearchOpenMobile(true)}
+            aria-label="Buscar"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M10 18a8 8 0 100-16 8 8 0 000 16z" />
+            </svg>
+          </button>
 
           {/* Botón de menú hamburguesa (solo visible en móvil) */}
           <button
@@ -121,7 +133,10 @@ const Header: React.FC = () => {
 
         {/* Menú de navegación (visible en desktop) */}
         <div className="hidden md:flex flex-row items-center space-x-4">
-          <CartWidget />
+
+          <ProductSearch className="ml-2" />
+                    <CartWidget />
+
 
           {/* Selector de idioma */}
           <div className="flex items-center space-x-2 ml-0 md:ml-6">
@@ -321,6 +336,10 @@ const Header: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {searchOpenMobile && (
+        <ProductSearch fullScreen onClose={() => setSearchOpenMobile(false)} autoFocus />
+      )}
     </header>
   );
 };

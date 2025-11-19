@@ -33,3 +33,20 @@
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: #4b5563 #0b0f19;
+}
+.scrollbar-thin::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: #0b0f19;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: #4b5563;
+  border-radius: 9999px;
+  border: 2px solid #0b0f19;
+}
