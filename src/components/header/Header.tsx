@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import CartWidget from "../cart/CartWidget";
@@ -13,6 +13,10 @@ const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false); // Estado para controlar el menú hamburguesa
   const [isMobile, setIsMobile] = useState<boolean>(false); // Estado para detectar si es dispositivo móvil
   const [searchOpenMobile, setSearchOpenMobile] = useState<boolean>(false);
+  const [langOpen, setLangOpen] = useState<boolean>(false);
+  const [langOpenMobile, setLangOpenMobile] = useState<boolean>(false);
+  const langRef = useRef<HTMLDivElement | null>(null);
+  const langRefMobile = useRef<HTMLDivElement | null>(null);
 
   // Función para manejar el cambio de idioma
   const handleLanguageChange = (lang: string) => {
@@ -80,6 +84,30 @@ const Header: React.FC = () => {
     };
   }, [menuOpen, searchOpenMobile, isMobile]);
 
+  useEffect(() => {
+    const onDocClick = (e: MouseEvent) => {
+      const t = e.target as Node | null;
+      if (langRef.current && !langRef.current.contains(t)) {
+        setLangOpen(false);
+      }
+      if (langRefMobile.current && !langRefMobile.current.contains(t)) {
+        setLangOpenMobile(false);
+      }
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setLangOpen(false);
+        setLangOpenMobile(false);
+      }
+    };
+    document.addEventListener("mousedown", onDocClick);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDocClick);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, []);
+
   return (
     <header className="bg-gradient-to-b from-gray-900 to-black text-white py-4 px-6 w-full border-b border-gray-700 shadow-lg fixed top-0 z-50">
       <div className="max-w-[80%] mx-auto flex justify-between items-center h-full">
@@ -138,28 +166,45 @@ const Header: React.FC = () => {
                     <CartWidget />
 
 
-          {/* Selector de idioma */}
-          <div className="flex items-center space-x-2 ml-0 md:ml-6">
+          <div ref={langRef} className="ml-0 md:ml-6 relative">
             <button
-              onClick={() => handleLanguageChange("es")}
-              className={`px-2 py-1 rounded transition-all duration-300 cursor-pointer ${
-                language === "es"
-                  ? "bg-white text-black shadow-[0_0_10px_rgba(255,255,255,0.5)]"
-                  : "bg-gray-800 hover:bg-gray-700"
-              }`}
+              type="button"
+              aria-label="Idioma"
+              aria-expanded={langOpen}
+              onClick={() => setLangOpen((v) => !v)}
+              className="bg-gradient-to-r from-gray-900 to-black border border-white/20 text-white pl-10 pr-10 py-2 rounded-full shadow-md hover:from-gray-800 hover:to-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-500/40 focus:border-yellow-500/40 transition-all flex items-center gap-2"
             >
-              ES
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4 text-white/70 absolute left-3">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M2 12h20M12 2v20M4 8h16M4 16h16" />
+              </svg>
+              <span className="select-none">{language === "es" ? "🇪🇸 Español" : "🇬🇧 English"}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5 text-white/70 absolute right-2">
+                <path d="M5.23 7.21a.75.75 0 011.06.02L10 10.939l3.71-3.71a.75.75 0 111.06 1.061l-4.24 4.24a.75.75 0 01-1.06 0l-4.24-4.24a.75.75 0 01.02-1.06z" />
+              </svg>
             </button>
-            <button
-              onClick={() => handleLanguageChange("en")}
-              className={`px-2 py-1 rounded transition-all duration-300 cursor-pointer ${
-                language === "en"
-                  ? "bg-white text-black shadow-[0_0_10px_rgba(255,255,255,0.5)]"
-                  : "bg-gray-800 hover:bg-gray-700"
-              }`}
-            >
-              EN
-            </button>
+            {langOpen && (
+              <ul className="absolute right-0 mt-2 w-44 bg-gradient-to-r from-gray-900 to-black border border-white/20 rounded-xl shadow-xl overflow-hidden z-50">
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => { handleLanguageChange("es"); setLangOpen(false); }}
+                    className="w-full text-left px-4 py-2 text-white hover:bg-gray-800"
+                  >
+                    🇪🇸 Español
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => { handleLanguageChange("en"); setLangOpen(false); }}
+                    className="w-full text-left px-4 py-2 text-white hover:bg-gray-800"
+                  >
+                    🇬🇧 English
+                  </button>
+                </li>
+              </ul>
+            )}
           </div>
 
           {/* Botón TAMD Cosmetics */}
@@ -300,34 +345,45 @@ const Header: React.FC = () => {
             {t('headerCollaborators')}
           </button>
 
-          {/* Selector de idioma */}
-          <div className="flex items-center space-x-4 mt-6">
+          <div ref={langRefMobile} className="w-full mt-6 relative">
             <button
-              onClick={() => {
-                handleLanguageChange("es");
-                setMenuOpen(false);
-              }}
-              className={`px-4 py-2 rounded-lg text-lg transition-all duration-300 ${
-                language === "es"
-                  ? "bg-white text-black shadow-[0_0_10px_rgba(255,255,255,0.5)]"
-                  : "bg-gray-800 hover:bg-gray-700"
-              }`}
+              type="button"
+              aria-label="Idioma"
+              aria-expanded={langOpenMobile}
+              onClick={() => setLangOpenMobile((v) => !v)}
+              className="w-full bg-gradient-to-r from-gray-900 to-black border border-white/20 text-white pl-12 pr-12 py-3 rounded-full text-lg shadow-lg hover:from-gray-800 hover:to-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-500/40 focus:border-yellow-500/40 transition-all flex items-center justify-center"
             >
-              ES
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-5 w-5 text-white/70 absolute left-4">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M2 12h20M12 2v20M4 8h16M4 16h16" />
+              </svg>
+              <span className="select-none">{language === "es" ? "🇪🇸 Español" : "🇬🇧 English"}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5 text-white/70 absolute right-3">
+                <path d="M5.23 7.21a.75.75 0 011.06.02L10 10.939l3.71-3.71a.75.75 0 111.06 1.061l-4.24 4.24a.75.75 0 01-1.06 0l-4.24-4.24a.75.75 0 01.02-1.06z" />
+              </svg>
             </button>
-            <button
-              onClick={() => {
-                handleLanguageChange("en");
-                setMenuOpen(false);
-              }}
-              className={`px-4 py-2 rounded-lg text-lg transition-all duration-300 ${
-                language === "en"
-                  ? "bg-white text-black shadow-[0_0_10px_rgba(255,255,255,0.5)]"
-                  : "bg-gray-800 hover:bg-gray-700"
-              }`}
-            >
-              EN
-            </button>
+            {langOpenMobile && (
+              <ul className="absolute left-0 right-0 mt-2 bg-gradient-to-r from-gray-900 to-black border border-white/20 rounded-xl shadow-xl overflow-hidden z-50">
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => { handleLanguageChange("es"); setLangOpenMobile(false); setMenuOpen(false); }}
+                    className="w-full text-left px-5 py-3 text-white hover:bg-gray-800"
+                  >
+                    🇪🇸 Español
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => { handleLanguageChange("en"); setLangOpenMobile(false); setMenuOpen(false); }}
+                    className="w-full text-left px-5 py-3 text-white hover:bg-gray-800"
+                  >
+                    🇬🇧 English
+                  </button>
+                </li>
+              </ul>
+            )}
           </div>
 
           {/* Carrito dentro del menú móvil */}
