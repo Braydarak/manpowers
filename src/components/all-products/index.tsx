@@ -42,6 +42,9 @@ const AllProducts: React.FC<Props> = ({ language, title }) => {
   const [perPage, setPerPage] = useState<number>(4);
   const touchStartXRef = useRef<number | null>(null);
   const touchDeltaXRef = useRef<number>(0);
+  const [autoScrollPaused, setAutoScrollPaused] = useState<boolean>(false);
+  const autoIntervalRef = useRef<number | null>(null);
+  const pauseTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
     const load = async () => {
@@ -124,6 +127,43 @@ const AllProducts: React.FC<Props> = ({ language, title }) => {
     };
   }, [items]);
 
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    if (autoScrollPaused || items.length === 0) return;
+    const tick = () => {
+      const firstCard = el.querySelector<HTMLElement>('.rp-card');
+      const cardWidth = firstCard?.offsetWidth || 256;
+      const GAP = 16;
+      const pageDelta = cardWidth * perPage + GAP * (perPage - 1);
+      const maxScroll = el.scrollWidth - el.clientWidth;
+      const next = el.scrollLeft + pageDelta;
+      const target = next >= maxScroll - 2 ? 0 : Math.min(maxScroll, next);
+      el.scrollTo({ left: target, behavior: 'smooth' });
+      setTimeout(updateArrows, 350);
+    };
+    autoIntervalRef.current = window.setInterval(tick, 3500);
+    return () => {
+      if (autoIntervalRef.current !== null) {
+        window.clearInterval(autoIntervalRef.current);
+        autoIntervalRef.current = null;
+      }
+    };
+  }, [autoScrollPaused, perPage, items]);
+
+  useEffect(() => {
+    return () => {
+      if (pauseTimeoutRef.current !== null) {
+        window.clearTimeout(pauseTimeoutRef.current);
+        pauseTimeoutRef.current = null;
+      }
+      if (autoIntervalRef.current !== null) {
+        window.clearInterval(autoIntervalRef.current);
+        autoIntervalRef.current = null;
+      }
+    };
+  }, []);
+
   const scrollByAmount = (dir: 'left' | 'right') => {
     const el = containerRef.current;
     if (!el) return;
@@ -135,6 +175,21 @@ const AllProducts: React.FC<Props> = ({ language, title }) => {
     const target = Math.max(0, Math.min(maxScroll, el.scrollLeft + (dir === 'left' ? -pageDelta : pageDelta)));
     el.scrollTo({ left: target, behavior: 'smooth' });
     setTimeout(updateArrows, 350);
+  };
+
+  const pauseAutoScroll = (ms: number) => {
+    setAutoScrollPaused(true);
+    if (pauseTimeoutRef.current !== null) {
+      window.clearTimeout(pauseTimeoutRef.current);
+    }
+    pauseTimeoutRef.current = window.setTimeout(() => {
+      setAutoScrollPaused(false);
+    }, ms);
+  };
+
+  const onArrowClick = (dir: 'left' | 'right') => {
+    scrollByAmount(dir);
+    pauseAutoScroll(15000);
   };
 
   const toSlug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').replace(/-{2,}/g, '-');
@@ -167,7 +222,7 @@ const AllProducts: React.FC<Props> = ({ language, title }) => {
           <button
             type="button"
             aria-label="Anterior"
-            onClick={() => scrollByAmount('left')}
+            onClick={() => onArrowClick('left')}
             className="hidden md:inline-flex shrink-0 bg-gray-900/80 border border-gray-800 rounded-full p-2 text-white hover:bg-gray-800"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -196,6 +251,7 @@ const AllProducts: React.FC<Props> = ({ language, title }) => {
             if (Math.abs(dx) > TH) {
               scrollByAmount(dx > 0 ? 'left' : 'right');
             }
+            pauseAutoScroll(10000);
           }}
         >
           <div className="flex gap-4">
@@ -283,7 +339,7 @@ const AllProducts: React.FC<Props> = ({ language, title }) => {
           <button
             type="button"
             aria-label="Siguiente"
-            onClick={() => scrollByAmount('right')}
+            onClick={() => onArrowClick('right')}
             className="hidden md:inline-flex shrink-0 bg-gray-900/80 border border-gray-800 rounded-full p-2 text-white hover:bg-gray-800"
           >
             <ChevronRight className="w-5 h-5" />
