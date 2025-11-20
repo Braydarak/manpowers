@@ -2,7 +2,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import useScrollAnimation from "../../hooks/useScrollAnimation";
-import VideoSlider from "../../components/slider/VideoSlider";
 import sportsData from "../../../public/sports.json";
 import { Target, Sword, LandPlot, Bike, Anchor } from "lucide-react";
 import InfoStripe from "../../components/info/InfoStripe";
@@ -33,13 +32,20 @@ const Hero: React.FC = () => {
   return (
     <>
     <section className="relative min-h-screen w-full overflow-hidden">
-      {/* Video de fondo (slider) */}
-      <VideoSlider />
+      {/* Imagen de flyer-maca en lugar del slider de video */}
+      <div className="absolute inset-0 z-10">
+        <picture>
+          <source media="(min-width: 640px)" srcSet="/flyer-maca.jpg" />
+          <img
+            src="/flyer-maca-mobile.jpg"
+            alt="Flyer Maca"
+            className="w-full h-full object-cover"
+          />
+        </picture>
+      </div>
 
-      {/* Overlay oscuro para mejorar la legibilidad del texto */}
-      <div className="absolute inset-0 bg-black/40 sm:bg-black/45 lg:bg-black/50 z-20" />
       {/* Contenido del Hero */}
-      <div className="relative z-30 flex flex-col items-center justify-center min-h-screen text-white px-4 sm:px-6 lg:px-8 xl:px-12 pt-16 sm:pt-20 max-w-7xl mx-auto">
+      <div className="relative z-30 flex flex-col items-center justify-center min-h-screen text-white px-4 sm:px-6 lg:px-8 xl:px-12 pt-16 sm:pt-20 w-full lg:w-[60%] lg:ml-auto">
         {/* Logo */}
         <div className="mb-4 sm:mb-6 lg:mb-8 xl:mb-10">
           <img

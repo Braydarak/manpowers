@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import chatService from "../../services/chatService";
 
 const ChatWidget: React.FC = () => {
   const { i18n } = useTranslation();
@@ -12,6 +13,7 @@ const ChatWidget: React.FC = () => {
   const [messages, setMessages] = useState<{ id: string; text: string; from: "user" | "agent"; at: number; kind?: "welcome"; lang?: "es" | "en" | "ca" }[]>([]);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const listRef = useRef<HTMLDivElement | null>(null);
+  const [sending, setSending] = useState(false);
 
   const labels = useMemo(() => {
     return {
@@ -105,17 +107,28 @@ const ChatWidget: React.FC = () => {
       setMessages((m) => [...m, msg]);
     }
   };
-  const handleSend = () => {
+  const handleSend = async () => {
     const text = input.trim();
-    if (!text) return;
-    const msg = { id: String(Date.now()), text, from: "user" as const, at: Date.now() };
-    setMessages((m) => [...m, msg]);
+    if (!text || sending) return;
+    const userMsg = { id: String(Date.now()), text, from: "user" as const, at: Date.now() };
+    setMessages((m) => [...m, userMsg]);
     setInput("");
-    window.dispatchEvent(new CustomEvent("chat:message", { detail: msg }));
+    window.dispatchEvent(new CustomEvent("chat:message", { detail: userMsg }));
+    setSending(true);
+    try {
+      const res = await chatService.ask(text, lang);
+      const agentMsg = { id: String(Date.now() + 1), text: res.answer, from: "agent" as const, at: Date.now() };
+      setMessages((m) => [...m, agentMsg]);
+    } catch {
+      const agentMsg = { id: String(Date.now() + 1), text: "Error procesando la consulta.", from: "agent" as const, at: Date.now() };
+      setMessages((m) => [...m, agentMsg]);
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-[9]">
+    <div className="fixed bottom-4 right-4 z-[99]">
       {!open && !animatingOut && (
         <button
           type="button"
@@ -184,7 +197,8 @@ const ChatWidget: React.FC = () => {
                   <button
                     type="button"
                     onClick={handleSend}
-                    className="bg-yellow-500 text-black font-bold px-4 py-2 rounded-lg hover:bg-yellow-400 active:scale-95 transition-transform"
+                    className="bg-yellow-500 text-black font-bold px-4 py-2 rounded-lg hover:bg-yellow-400 active:scale-95 transition-transform disabled:opacity-60 disabled:cursor-not-allowed"
+                    disabled={sending}
                   >
                     {labels.send}
                   </button>
