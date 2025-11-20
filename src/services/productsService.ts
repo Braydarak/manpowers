@@ -77,54 +77,47 @@ interface ProductsFilters {
 import caTranslations from '../data/productTranslationsCa';
 
 class ProductsService {
-  private baseUrl: string;
-
-  constructor() {
-    // Usamos manpowers.es para todas las llamadas al backend
-    this.baseUrl = 'https://manpowers.es/backend/api';
-  }
+  constructor() {}
 
   async getProducts(filters?: ProductsFilters): Promise<Product[]> {
     try {
-      const params = new URLSearchParams();
-      
-      if (filters?.sport) {
-        params.append('sport', filters.sport);
+      const response = await fetch('/products.json');
+      const data = await response.json();
+      const arr = ((data.products || []) as Product[]).map((p) => ({
+        id: p.id,
+        name: p.name,
+        description: p.description,
+        objectives: p.objectives,
+        price: typeof p.price === 'string' ? parseFloat((p.price as string).replace(',', '.')) : p.price,
+        price_formatted: p.price_formatted ?? '',
+        size: p.size,
+        image: p.image,
+        category: typeof p.category === 'string' ? { es: p.category, en: p.category } : p.category,
+        sportId: p.sportId,
+        available: p.available,
+        sku: p.sku ?? '',
+        amazonLinks: p.amazonLinks,
+        nutritionalValues: p.nutritionalValues,
+        application: p.application,
+        recommendations: p.recommendations,
+        rating: p.rating,
+        votes: p.votes,
+      })) as Product[];
+      let products = this.applyCaTranslations(arr);
+      if (filters) {
+        products = products.filter((pr) => {
+          if (filters.id && String(pr.id) !== String(filters.id)) return false;
+          if (filters.sport && pr.sportId !== filters.sport) return false;
+          if (filters.category) {
+            const cat = typeof pr.category === 'string' ? pr.category : pr.category.es;
+            if (cat !== filters.category) return false;
+          }
+          if (typeof filters.available === 'boolean' && pr.available !== filters.available) return false;
+          return true;
+        });
       }
-      if (filters?.category) {
-        params.append('category', filters.category);
-      }
-      if (filters?.available !== undefined) {
-        params.append('available', filters.available.toString());
-      }
-      if (filters?.id) {
-        params.append('id', filters.id.toString());
-      }
-
-      const url = `${this.baseUrl}/products.php${params.toString() ? '?' + params.toString() : ''}`;
-      
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data: ProductsResponse = await response.json();
-      
-      if (!data.success) {
-        throw new Error('API returned error response');
-      }
-
-      const merged = this.applyCaTranslations(data.products);
-      return merged;
-    } catch (error) {
-      console.error('Error fetching products:', error);
-      // En caso de error, devolvemos array vacío
+      return products;
+    } catch {
       return [];
     }
   }

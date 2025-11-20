@@ -740,7 +740,7 @@ const resources = {
         acceptedCards: "Accepted cards",
       },
       shipping: {
-        tipsa: "Shipping handled by TIPSA",
+        tipsa: "Shipping handled by",
       },
       returns: {
         fourteenDays: "Returns within 14 calendar days",
