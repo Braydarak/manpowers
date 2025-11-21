@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ShoppingCart, X, Check } from "lucide-react";
+import { ShoppingCart, X } from "lucide-react";
 
 type CartItem = {
   id: string;
@@ -32,7 +32,6 @@ const CartWidget: React.FC<{ className?: string }> = () => {
   const [items, setItems] = useState<CartItem[]>([]);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [checkoutItems, setCheckoutItems] = useState<CartItem[] | null>(null);
-  const [toastMsg, setToastMsg] = useState<string | null>(null);
   const [paymentStep, setPaymentStep] = useState<"summary" | "processing">("summary");
 
 
@@ -117,15 +116,9 @@ const CartWidget: React.FC<{ className?: string }> = () => {
         });
       }
 
-      if (incoming.openCart) {
-        setOpen(true);
-      }
+      setOpen(true);
       if (incoming.openCheckout || incoming.buyNow) {
         setCheckoutOpen(true);
-      }
-
-      if (!incoming.buyNow) {
-        setToastMsg(t("cart.added"));
       }
     };
 
@@ -142,12 +135,6 @@ const CartWidget: React.FC<{ className?: string }> = () => {
     }
   }, [checkoutOpen]);
 
-  // Ocultar el toast automáticamente
-  useEffect(() => {
-    if (!toastMsg) return;
-    const timer = setTimeout(() => setToastMsg(null), 1800);
-    return () => clearTimeout(timer);
-  }, [toastMsg]);
 
 
 
@@ -679,14 +666,6 @@ const CartWidget: React.FC<{ className?: string }> = () => {
         </>
       )}
 
-      {/* Toast de confirmación (Snackbar) */}
-      {toastMsg && (
-        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[130]">
-          <div className="bg-green-600 text-white px-6 py-3 rounded-[15px] shadow-lg ring-1 ring-white/20 flex items-center gap-2">
-            {toastMsg} <Check />
-          </div>
-        </div>
-      )}
     </div>
   );
 };

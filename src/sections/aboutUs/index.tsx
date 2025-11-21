@@ -39,7 +39,7 @@ const AboutUs: React.FC = () => {
           {/* Historia */}
           <div 
             ref={originsRef as React.RefObject<HTMLDivElement>}
-            className={`space-y-6 transition-all duration-1000 delay-200 ${
+            className={`space-y-6 transition-all text-center duration-1000 delay-200 ${
               originsVisible 
                 ? 'opacity-100 translate-x-0' 
                 : 'opacity-0 -translate-x-8'

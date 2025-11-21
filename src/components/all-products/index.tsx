@@ -206,6 +206,7 @@ const AllProducts: React.FC<Props> = ({ language, title }) => {
       price: p.price,
       image: p.image,
       quantity: 1,
+      openCart: true,
     };
     window.dispatchEvent(new CustomEvent('cart:add', { detail }));
   };
