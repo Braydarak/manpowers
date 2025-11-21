@@ -312,30 +312,21 @@ const Header: React.FC = () => {
       <div
         className={`fixed inset-0 bg-gradient-to-b from-gray-900 to-black z-40 transition-transform duration-300 ease-in-out ${
           menuOpen ? "translate-x-0" : "-translate-x-full"
-        } md:hidden flex flex-col justify-start items-center pt-20 pb-10 overflow-y-auto h-screen`}
+        } md:hidden flex flex-col overflow-hidden h-screen`}
       >
-        {/* Botón X para cerrar el menú (esquina superior derecha) */}
-        <button
-          onClick={toggleMenu}
-          className="absolute top-6 right-6 p-2 hover:bg-gray-800 rounded-full transition-colors duration-300 focus:outline-none"
-          aria-label="Cerrar menú"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 text-white"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+        <div className="sticky top-0 w-full bg-gradient-to-r from-gray-900 to-black border-b border-white/20 px-4 py-4 flex items-center justify-end z-50">
+          <button
+            onClick={toggleMenu}
+            className="p-2 hover:bg-gray-800 rounded-md transition-colors duration-300 focus:outline-none"
+            aria-label="Cerrar menú"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
-        <div className="flex flex-col items-center w-full">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div className="flex-1 overflow-y-auto">
+          <div className="flex flex-col items-center w-full">
           <InfoStripe />
           <div className="w-full grid grid-cols-1 gap-0">
             <span className="text-white/70 text-xl text-center mb-4 border-t border-white/30 py-5 px-4">{t("menu.viewBySport")}</span>
@@ -617,6 +608,7 @@ const Header: React.FC = () => {
               </svg>
             </button>
           </div>
+        </div>
         </div>
       </div>
 
