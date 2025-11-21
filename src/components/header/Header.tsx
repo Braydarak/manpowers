@@ -528,10 +528,10 @@ const Header: React.FC = () => {
               </svg>
               <span className="select-none">
                 {language === "es"
-                  ? "🇪🇸 Español"
+                  ? "Español"
                   : language === "ca"
-                  ? "🇦🇩 Català"
-                  : "🇬🇧 English"}
+                  ? "Català"
+                  : "English"}
               </span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
