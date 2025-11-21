@@ -354,7 +354,7 @@ const CartWidget: React.FC<{ className?: string }> = () => {
           </button>
         </div>
 
-        <div className="px-5 py-4 overflow-y-auto flex-1 min-h-0">
+        <div className="px-5 py-4 overflow-y-hidden sm:overflow-y-auto flex-1 min-h-0">
           {items.length === 0 ? (
             <p className="text-gray-300">{t("cart.empty")}</p>
           ) : (

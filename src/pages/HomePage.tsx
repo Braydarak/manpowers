@@ -42,7 +42,7 @@ const HomePage: React.FC = () => {
   }, []);
 
   return (
-    <div className="">
+    <div>
       <Header />
       <main className={`flex-grow transition-all duration-500 bg-gradient-to-b from-blue-950/10 via-black/95 to-black ${enter ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
         <Hero />

@@ -179,7 +179,7 @@ const ProductsPage: React.FC = () => {
       <Header />
 
       <main
-        className={`pt-24 md:pt-28 transition-all duration-500 ${
+        className={`pt-16 md:pt-28 transition-all duration-500 ${
           enter ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
         }`}
       >

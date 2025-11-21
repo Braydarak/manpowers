@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import CartWidget from "../cart/CartWidget";
 import ProductSearch from "../search/ProductSearch";
+import InfoStripe from "../info/InfoStripe";
 
 const Header: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -17,6 +18,8 @@ const Header: React.FC = () => {
   const [langOpenMobile, setLangOpenMobile] = useState<boolean>(false);
   const langRef = useRef<HTMLDivElement | null>(null);
   const langRefMobile = useRef<HTMLDivElement | null>(null);
+  const [hideHeader, setHideHeader] = useState<boolean>(false);
+  const lastScrollY = useRef<number>(0);
 
   // Función para manejar el cambio de idioma
   const handleLanguageChange = (lang: string) => {
@@ -71,6 +74,28 @@ const Header: React.FC = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (!isMobile) {
+      setHideHeader(false);
+      return;
+    }
+    const onScroll = () => {
+      const y = window.scrollY || 0;
+      if (y <= 0) {
+        setHideHeader(false);
+        lastScrollY.current = 0;
+        return;
+      }
+      const goingDown = y > lastScrollY.current;
+      setHideHeader(goingDown && y > 20);
+      lastScrollY.current = y;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, [isMobile]);
+
   // Evitar scroll cuando el menú o la búsqueda están abiertos en móvil
   useEffect(() => {
     if ((menuOpen || searchOpenMobile) && isMobile) {
@@ -109,77 +134,116 @@ const Header: React.FC = () => {
   }, []);
 
   return (
-    <header className="bg-gradient-to-b from-gray-900 to-black text-white py-4 px-6 w-full border-b border-gray-700 shadow-lg fixed top-0 z-50">
-      <div className="max-w-[80%] mx-auto flex justify-between items-center h-full">
-        {/* Logo */}
-        <h1 className="cursor-pointer" onClick={handleLogoClick}>
-          <img
-            src="/MAN-LOGO-BLANCO.png"
-            alt="MΛN POWERS - Suplementos Premium"
-            className="h-16 md:h-26 drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-transform duration-300 hover:scale-105"
-          />
-        </h1>
-
-        <div className="flex items-center space-x-4">
-          <div className="md:hidden">
-            <CartWidget />
-          </div>
-
+    <header
+      className={`bg-gradient-to-b from-gray-900 to-black text-white py-4 px-6 w-full border-b border-gray-700 shadow-lg fixed top-0 z-50 transition-transform duration-300 ${
+        isMobile && hideHeader && !menuOpen && !searchOpenMobile
+          ? "-translate-y-full"
+          : "translate-y-0"
+      }`}
+    >
+      <div className="w-full mx-auto grid grid-cols-3 items-center md:flex md:justify-between md:items-center h-full relative">
+        {/* Controles izquierdos (móvil): menú + búsqueda */}
+        <div className="md:hidden flex items-center gap-3">
           <button
-            className="md:hidden p-2 text-white/90 hover:text-white focus:outline-none"
-            onClick={() => setSearchOpenMobile(true)}
-            aria-label="Buscar"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M10 18a8 8 0 100-16 8 8 0 000 16z" />
-            </svg>
-          </button>
-
-          {/* Botón de menú hamburguesa (solo visible en móvil) */}
-          <button
-            className="md:hidden flex flex-col justify-center items-center p-2 focus:outline-none"
+            className="flex flex-col justify-center items-center p-3 focus:outline-none"
             onClick={toggleMenu}
             aria-label="Menú"
           >
             <span
-              className={`block w-6 h-0.5 bg-white mb-1.5 transition-transform duration-300 ${
+              className={`block w-6 h-px bg-white mb-1.5 transition-transform duration-300 ${
                 menuOpen ? "rotate-45 translate-y-2" : ""
               }`}
             ></span>
             <span
-              className={`block w-6 h-0.5 bg-white mb-1.5 transition-opacity duration-300 ${
+              className={`block w-6 h-px bg-white mb-1.5 transition-opacity duration-300 ${
                 menuOpen ? "opacity-0" : "opacity-100"
               }`}
             ></span>
             <span
-              className={`block w-6 h-0.5 bg-white transition-transform duration-300 ${
+              className={`block w-6 h-px bg-white transition-transform duration-300 ${
                 menuOpen ? "-rotate-45 -translate-y-2" : ""
               }`}
             ></span>
           </button>
+          <button
+            className="p-2 text-white/90 hover:text-white focus:outline-none"
+            onClick={() => setSearchOpenMobile(true)}
+            aria-label="Buscar"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M21 21l-4.35-4.35M10 18a8 8 0 100-16 8 8 0 000 16z"
+              />
+            </svg>
+          </button>
+        </div>
+
+        {/* Logo centrado en móvil */}
+        <h1
+          className="cursor-pointer justify-self-center md:justify-self-start md:pl-50"
+          onClick={handleLogoClick}
+        >
+          <picture>
+            <source media="(min-width: 768px)" srcSet="/MAN-LOGO-BLANCO.png" />
+            <img
+              src="/MAN-BLANCO.png"
+              alt="MΛN POWERS - Suplementos Premium"
+              className="h-10 md:h-26 drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-transform duration-300 hover:scale-105"
+            />
+          </picture>
+        </h1>
+
+        {/* Carrito a la derecha (móvil) */}
+        <div className="md:hidden flex justify-end pr-2">
+          <CartWidget />
         </div>
 
         {/* Menú de navegación (visible en desktop) */}
         <div className="hidden md:flex flex-row items-center space-x-4">
-
           <ProductSearch className="ml-2" />
-                    <CartWidget />
-
+          <CartWidget />
 
           <div ref={langRef} className="ml-0 md:ml-6 relative">
             <button
               type="button"
               aria-label="Idioma"
               aria-expanded={langOpen}
-              onClick={() => setLangOpen((v) => !v)}
-              className="bg-gradient-to-r from-gray-900 to-black border border-white/20 text-white pl-10 pr-10 py-2 rounded-full shadow-md hover:from-gray-800 hover:to-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-500/40 focus:border-yellow-500/40 transition-all flex items-center gap-2"
+              onClick={(e) => { setLangOpen((v) => !v); (e.currentTarget as HTMLButtonElement).blur(); }}
+              className="bg-gradient-to-r from-gray-900 to-black border border-white/20 text-white pl-10 pr-10 py-2 rounded-md shadow-md hover:from-gray-800 hover:to-gray-900 focus:outline-none transition-all flex items-center gap-2"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4 text-white/70 absolute left-3">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="h-4 w-4 text-white/70 absolute left-3"
+              >
                 <circle cx="12" cy="12" r="9" />
                 <path d="M2 12h20M12 2v20M4 8h16M4 16h16" />
               </svg>
-              <span className="select-none">{language === "es" ? "Español" : language === "ca" ? "Català" : "English"}</span>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5 text-white/70 absolute right-2">
+              <span className="select-none">
+                {language === "es"
+                  ? "Español"
+                  : language === "ca"
+                  ? "Català"
+                  : "English"}
+              </span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                className="h-5 w-5 text-white/70 absolute right-2"
+              >
                 <path d="M5.23 7.21a.75.75 0 011.06.02L10 10.939l3.71-3.71a.75.75 0 111.06 1.061l-4.24 4.24a.75.75 0 01-1.06 0l-4.24-4.24a.75.75 0 01.02-1.06z" />
               </svg>
             </button>
@@ -188,7 +252,10 @@ const Header: React.FC = () => {
                 <li>
                   <button
                     type="button"
-                    onClick={() => { handleLanguageChange("es"); setLangOpen(false); }}
+                    onClick={() => {
+                      handleLanguageChange("es");
+                      setLangOpen(false);
+                    }}
                     className="w-full text-left px-4 py-2 text-white hover:bg-gray-800"
                   >
                     Español
@@ -197,7 +264,10 @@ const Header: React.FC = () => {
                 <li>
                   <button
                     type="button"
-                    onClick={() => { handleLanguageChange("en"); setLangOpen(false); }}
+                    onClick={() => {
+                      handleLanguageChange("en");
+                      setLangOpen(false);
+                    }}
                     className="w-full text-left px-4 py-2 text-white hover:bg-gray-800"
                   >
                     English
@@ -206,7 +276,10 @@ const Header: React.FC = () => {
                 <li>
                   <button
                     type="button"
-                    onClick={() => { handleLanguageChange("ca"); setLangOpen(false); }}
+                    onClick={() => {
+                      handleLanguageChange("ca");
+                      setLangOpen(false);
+                    }}
                     className="w-full text-left px-4 py-2 text-white hover:bg-gray-800"
                   >
                     Català
@@ -227,56 +300,19 @@ const Header: React.FC = () => {
           </a>
           {/* Botón Colaboradores */}
           <button
-            onClick={() => navigate('/colaboradores')}
+            onClick={() => navigate("/colaboradores")}
             className="border border-white/60 text-white px-4 py-2 rounded-lg font-semibold transition-all duration-300 hover:bg-white hover:text-black"
           >
-            {t('headerCollaborators')}
+            {t("headerCollaborators")}
           </button>
-                    <div className="flex flex-col">
-            <div className="flex items-center hover:text-gray-100 transition-colors duration-300">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 mr-2 text-gray-300"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                />
-              </svg>
-              <span>{t("phone")}</span>
-            </div>
-
-            <div className="flex items-center hover:text-gray-100 transition-colors duration-300">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 mr-2 text-gray-300"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                />
-              </svg>
-              <span>{t("email")}</span>
-            </div>
-          </div>
         </div>
       </div>
 
       {/* Menú móvil de pantalla completa */}
       <div
         className={`fixed inset-0 bg-gradient-to-b from-gray-900 to-black z-40 transition-transform duration-300 ease-in-out ${
-          menuOpen ? "translate-x-0" : "translate-x-full"
-        } md:hidden flex flex-col justify-center items-center pt-20 pb-10 px-6`}
+          menuOpen ? "translate-x-0" : "-translate-x-full"
+        } md:hidden flex flex-col justify-start items-center pt-20 pb-10 overflow-y-auto h-screen`}
       >
         {/* Botón X para cerrar el menú (esquina superior derecha) */}
         <button
@@ -299,42 +335,125 @@ const Header: React.FC = () => {
             />
           </svg>
         </button>
-        <div className="flex flex-col items-center space-y-8 w-full max-w-sm">
-          {/* Información de contacto */}
-          <div className="flex items-center hover:text-gray-100 transition-colors duration-300 text-lg">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 mr-3 text-gray-300"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+        <div className="flex flex-col items-center w-full">
+          <InfoStripe />
+          <div className="w-full grid grid-cols-1 gap-0">
+            <span className="text-white/70 text-xl text-center mb-4 border-t border-white/30 py-5 px-4">{t("menu.viewBySport")}</span>
+            <button
+              onClick={() => {
+                navigate("/products/archery");
+                setMenuOpen(false);
+              }}
+              className="w-full bg-gradient-to-r from-gray-900 to-black border-y border-white/30 text-white font-semibold py-5 px-4 transition-all duration-300 hover:bg-gray-800 flex items-center justify-between"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
+              <span>{t("sports.archery")}</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 text-white/70"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
                 strokeWidth={2}
-                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-              />
-            </svg>
-            <span>{t("phone")}</span>
-          </div>
-
-          <div className="flex items-center hover:text-gray-100 transition-colors duration-300 text-lg">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 mr-3 text-gray-300"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 12h14M13 7l5 5-5 5"
+                />
+              </svg>
+            </button>
+            <button
+              onClick={() => {
+                navigate("/products/fencing");
+                setMenuOpen(false);
+              }}
+              className="w-full bg-gradient-to-r from-gray-900 to-black border-y border-white/30 text-white font-semibold py-5 px-4 transition-all duration-300 hover:bg-gray-800 flex items-center justify-between"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
+              <span>{t("sports.fencing")}</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 text-white/70"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
                 strokeWidth={2}
-                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-              />
-            </svg>
-            <span>{t("email")}</span>
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 12h14M13 7l5 5-5 5"
+                />
+              </svg>
+            </button>
+            <button
+              onClick={() => {
+                navigate("/products/golf");
+                setMenuOpen(false);
+              }}
+              className="w-full bg-gradient-to-r from-gray-900 to-black border-y border-white/30 text-white font-semibold py-5 px-4 transition-all duration-300 hover:bg-gray-800 flex items-center justify-between"
+            >
+              <span>{t("sports.golf")}</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 text-white/70"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 12h14M13 7l5 5-5 5"
+                />
+              </svg>
+            </button>
+            <button
+              onClick={() => {
+                navigate("/products/cycling");
+                setMenuOpen(false);
+              }}
+              className="w-full bg-gradient-to-r from-gray-900 to-black border-y border-white/30 text-white font-semibold py-5 px-4 transition-all duration-300 hover:bg-gray-800 flex items-center justify-between"
+            >
+              <span>{t("sports.cycling")}</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 text-white/70"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 12h14M13 7l5 5-5 5"
+                />
+              </svg>
+            </button>
+            <button
+              onClick={() => {
+                navigate("/products/sailing");
+                setMenuOpen(false);
+              }}
+              className="w-full bg-gradient-to-r from-gray-900 to-black border-y border-white/30 text-white font-semibold py-5 px-4 transition-all duration-300 hover:bg-gray-800 flex items-center justify-between"
+            >
+              <span>{t("sports.sailing")}</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 text-white/70"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 12h14M13 7l5 5-5 5"
+                />
+              </svg>
+            </button>
           </div>
 
           {/* Botón TAMD Cosmetics */}
@@ -342,41 +461,98 @@ const Header: React.FC = () => {
             href="https://tamdcosmetics.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-[#DAB889] hover:bg-[#C5A678] text-black px-6 py-3 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl w-full text-center"
+            className="bg-[#DAB889] hover:bg-[#C5A678] mt-6 text-black px-6 py-3 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl w-[90%] text-center"
           >
             TAMD Cosmetics
           </a>
           {/* Botón Colaboradores (móvil) */}
           <button
-            onClick={() => { navigate('/colaboradores'); setMenuOpen(false); }}
-            className="border border-white/60 text-white px-6 py-3 rounded-lg font-semibold text-lg transition-all duration-300 hover:bg-white hover:text-black w-full text-center"
+            onClick={() => {
+              navigate("/colaboradores");
+              setMenuOpen(false);
+            }}
+            className="border border-white/60 text-white px-6 py-3 mt-6 rounded-lg font-semibold text-lg transition-all duration-300 hover:bg-white hover:text-black w-[90%] text-center"
           >
-            {t('headerCollaborators')}
+            {t("headerCollaborators")}
           </button>
 
-          <div ref={langRefMobile} className="w-full mt-6 relative">
+                    <button
+            onClick={() => {
+              navigate("/");
+              setMenuOpen(false);
+              setTimeout(() => {
+                try {
+                  document.getElementById("about-us")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                } catch {
+                  /* empty */
+                }
+              }, 300);
+            }}
+              className="w-full bg-gradient-to-r from-gray-900 to-black border-y border-white/30 mt-6 text-white font-semibold py-5 px-4 transition-all duration-300 hover:bg-gray-800 flex items-center justify-between"
+          >
+            {t("menu.aboutUs")}
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 text-white/70"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 12h14M13 7l5 5-5 5"
+                />
+              </svg>
+          </button>
+
+          <div ref={langRefMobile} className="w-[90%] mt-6 relative">
             <button
               type="button"
               aria-label="Idioma"
               aria-expanded={langOpenMobile}
-              onClick={() => setLangOpenMobile((v) => !v)}
-              className="w-full bg-gradient-to-r from-gray-900 to-black border border-white/20 text-white pl-12 pr-12 py-3 rounded-full text-lg shadow-lg hover:from-gray-800 hover:to-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-500/40 focus:border-yellow-500/40 transition-all flex items-center justify-center"
+              onClick={(e) => { setLangOpenMobile((v) => !v); (e.currentTarget as HTMLButtonElement).blur(); }}
+              className="w-full bg-gradient-to-r from-gray-900 to-black border border-white/20 text-white pl-12 pr-12 py-3 rounded-md text-lg shadow-lg hover:from-gray-800 hover:to-gray-900 focus:outline-none transition-all flex items-center justify-center"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-5 w-5 text-white/70 absolute left-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="h-5 w-5 text-white/70 absolute left-4"
+              >
                 <circle cx="12" cy="12" r="9" />
                 <path d="M2 12h20M12 2v20M4 8h16M4 16h16" />
               </svg>
-              <span className="select-none">{language === "es" ? "🇪🇸 Español" : language === "ca" ? "🇦🇩 Català" : "🇬🇧 English"}</span>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5 text-white/70 absolute right-3">
+              <span className="select-none">
+                {language === "es"
+                  ? "🇪🇸 Español"
+                  : language === "ca"
+                  ? "🇦🇩 Català"
+                  : "🇬🇧 English"}
+              </span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                className="h-5 w-5 text-white/70 absolute right-3"
+              >
                 <path d="M5.23 7.21a.75.75 0 011.06.02L10 10.939l3.71-3.71a.75.75 0 111.06 1.061l-4.24 4.24a.75.75 0 01-1.06 0l-4.24-4.24a.75.75 0 01.02-1.06z" />
               </svg>
             </button>
+            
             {langOpenMobile && (
               <ul className="absolute left-0 right-0 mt-2 bg-gradient-to-r from-gray-900 to-black border border-white/20 rounded-xl shadow-xl overflow-hidden z-50">
                 <li>
                   <button
                     type="button"
-                    onClick={() => { handleLanguageChange("es"); setLangOpenMobile(false); setMenuOpen(false); }}
+                    onClick={() => {
+                      handleLanguageChange("es");
+                      setLangOpenMobile(false);
+                      setMenuOpen(false);
+                    }}
                     className="w-full text-left px-5 py-3 text-white hover:bg-gray-800"
                   >
                     Español
@@ -385,7 +561,11 @@ const Header: React.FC = () => {
                 <li>
                   <button
                     type="button"
-                    onClick={() => { handleLanguageChange("en"); setLangOpenMobile(false); setMenuOpen(false); }}
+                    onClick={() => {
+                      handleLanguageChange("en");
+                      setLangOpenMobile(false);
+                      setMenuOpen(false);
+                    }}
                     className="w-full text-left px-5 py-3 text-white hover:bg-gray-800"
                   >
                     English
@@ -394,7 +574,11 @@ const Header: React.FC = () => {
                 <li>
                   <button
                     type="button"
-                    onClick={() => { handleLanguageChange("ca"); setLangOpenMobile(false); setMenuOpen(false); }}
+                    onClick={() => {
+                      handleLanguageChange("ca");
+                      setLangOpenMobile(false);
+                      setMenuOpen(false);
+                    }}
                     className="w-full text-left px-5 py-3 text-white hover:bg-gray-800"
                   >
                     Català
@@ -403,16 +587,15 @@ const Header: React.FC = () => {
               </ul>
             )}
           </div>
-
-          {/* Carrito dentro del menú móvil */}
-          <div className="mt-6">
-            <CartWidget />
-          </div>
         </div>
       </div>
 
       {searchOpenMobile && (
-        <ProductSearch fullScreen onClose={() => setSearchOpenMobile(false)} autoFocus />
+        <ProductSearch
+          fullScreen
+          onClose={() => setSearchOpenMobile(false)}
+          autoFocus
+        />
       )}
     </header>
   );

@@ -19,7 +19,7 @@ const Sports: React.FC = () => {
   };
 
   return (
-    <section id="sports" className="bg-gradient-to-b mt-20 from-black to-gray-950 text-white py-20 px-4 md:px-8 lg:px-12">
+    <section id="sports" className="bg-gradient-to-b mt-12 md:mt-20 from-black to-gray-950 text-white py-20 px-4 md:px-8 lg:px-12">
       <div className="max-w-full mx-auto">
         {/* Título principal */}
         <div 
@@ -30,7 +30,7 @@ const Sports: React.FC = () => {
               : 'opacity-0 translate-y-8'
           }`}
         >
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 uppercase drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]">
             {t('sportsTitle')}
           </h2>
           <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">

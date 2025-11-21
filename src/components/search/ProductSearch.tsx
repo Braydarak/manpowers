@@ -156,7 +156,7 @@ const ProductSearch: React.FC<{ className?: string; fullScreen?: boolean; onClos
 
   if (fullScreen) {
     return (
-      <div className="fixed inset-0 z-[200] bg-gradient-to-b from-gray-900 to-black">
+      <div className="fixed inset-0 z-[200] bg-black flex flex-col h-screen">
         <div className="p-4 flex items-center gap-3 border-b border-gray-800">
           <Search className="w-5 h-5 text-gray-300" />
           <input
@@ -182,7 +182,7 @@ const ProductSearch: React.FC<{ className?: string; fullScreen?: boolean; onClos
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/></svg>
           </button>
         </div>
-        <div className="flex-1 overflow-auto scrollbar-thin">
+        <div className="flex-1 overflow-y-auto scrollbar-thin min-h-0">
           {loading && <div className="px-4 py-3 text-sm text-gray-300">{t('search.loading')}</div>}
           {error && !loading && <div className="px-4 py-3 text-sm text-red-400">{error}</div>}
           {!loading && !error && (
