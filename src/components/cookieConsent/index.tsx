@@ -39,6 +39,17 @@ const CookieConsent: React.FC = () => {
     }
   }, []);
 
+  useEffect(() => {
+    const openPrefs = () => {
+      setShowBanner(true);
+      setShowSettings(true);
+    };
+    window.addEventListener("openCookiePreferences", openPrefs);
+    return () => {
+      window.removeEventListener("openCookiePreferences", openPrefs);
+    };
+  }, []);
+
   const saveAndClose = (next: ConsentPreferences) => {
     const toSave = { ...next, timestamp: Date.now(), necessary: true };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));

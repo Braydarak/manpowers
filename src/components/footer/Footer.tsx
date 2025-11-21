@@ -202,6 +202,15 @@ const Footer: React.FC = () => {
                 {t('footerCookies')}
               </a>
             </li>
+            <li>
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new Event('openCookiePreferences'))}
+                className="text-gray-400 hover:text-white transition-colors underline underline-offset-2"
+              >
+                {t('cookies.changePreferences')}
+              </button>
+            </li>
           </ul>
         </div>
       </div>

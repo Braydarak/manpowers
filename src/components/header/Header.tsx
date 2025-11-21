@@ -543,8 +543,8 @@ const Header: React.FC = () => {
               </svg>
             </button>
             
-            {langOpenMobile && (
-              <ul className="absolute left-0 right-0 mt-2 bg-gradient-to-r from-gray-900 to-black border border-white/20 rounded-xl shadow-xl overflow-hidden z-50">
+          {langOpenMobile && (
+            <ul className="absolute left-0 right-0 mt-2 bg-gradient-to-r from-gray-900 to-black border border-white/20 rounded-xl shadow-xl overflow-hidden z-50">
                 <li>
                   <button
                     type="button"
@@ -586,6 +586,36 @@ const Header: React.FC = () => {
                 </li>
               </ul>
             )}
+          </div>
+          <div className="w-full grid grid-cols-1 gap-0 mt-4">
+            <span className="text-white/70 text-xl text-center mb-4 border-t border-white/30 py-5 px-4">{t("menu.legal")}</span>
+            <button
+              onClick={() => { navigate("/privacidad"); setMenuOpen(false); }}
+              className="w-full bg-gradient-to-r from-gray-900 to-black border-y border-white/30 text-white font-semibold py-5 px-4 transition-all duration-300 hover:bg-gray-800 flex items-center justify-between"
+            >
+              <span>{t("footerPrivacy")}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white/70" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 7l5 5-5 5" />
+              </svg>
+            </button>
+            <button
+              onClick={() => { navigate("/cookies"); setMenuOpen(false); }}
+              className="w-full bg-gradient-to-r from-gray-900 to-black border-y border-white/30 text-white font-semibold py-5 px-4 transition-all duration-300 hover:bg-gray-800 flex items-center justify-between"
+            >
+              <span>{t("footerCookies")}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white/70" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 7l5 5-5 5" />
+              </svg>
+            </button>
+            <button
+              onClick={() => { window.dispatchEvent(new Event("openCookiePreferences")); setMenuOpen(false); }}
+              className="w-full bg-gradient-to-r from-gray-900 to-black border-y border-white/30 text-white font-semibold py-5 px-4 transition-all duration-300 hover:bg-gray-800 flex items-center justify-between"
+            >
+              <span>{t("cookies.changePreferences")}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white/70" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 7l5 5-5 5" />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
