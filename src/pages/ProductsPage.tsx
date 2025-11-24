@@ -21,6 +21,10 @@ const ProductsPage: React.FC = () => {
   useLanguageUpdater();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     if (!sportId) return;
     const baseLang = i18n.resolvedLanguage?.split('-')[0] || i18n.language?.split('-')[0] || 'es';
     const currentLanguage: 'es' | 'en' | 'ca' = baseLang === 'en' ? 'en' : (baseLang === 'ca' ? 'ca' : 'es');

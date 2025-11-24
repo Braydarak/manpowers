@@ -10,6 +10,10 @@ const PrivacyPolicyPage: React.FC = () => {
     const id = requestAnimationFrame(() => setEnter(true));
     return () => cancelAnimationFrame(id);
   }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-b from-gray-950 to-black text-white">
       <Header />
