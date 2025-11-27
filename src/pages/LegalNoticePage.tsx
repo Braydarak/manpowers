@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 
-const CookiesPolicyPage: React.FC = () => {
-  const { t } = useTranslation();
+const LegalNoticePage: React.FC = () => {
   const [enter, setEnter] = useState(false);
   const [html, setHtml] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
+
   type MammothOptions = { styleMap?: string[] };
   type Mammoth = {
     convertToHtml: (
@@ -16,6 +15,7 @@ const CookiesPolicyPage: React.FC = () => {
       options?: MammothOptions
     ) => Promise<{ value: string }>;
   };
+
   useEffect(() => {
     const id = requestAnimationFrame(() => setEnter(true));
     return () => cancelAnimationFrame(id);
@@ -48,7 +48,7 @@ const CookiesPolicyPage: React.FC = () => {
       setError("");
       try {
         const mammoth = await loadMammoth();
-        const url = encodeURI("/MDM_POLITICA DE COOKIES_(PLANTILLA).docx");
+        const url = encodeURI("/MDM_AVISO LEGAL.docx");
         const resp = await fetch(url);
         if (!resp.ok) throw new Error("docx-fetch-error");
         const buf = await resp.arrayBuffer();
@@ -64,7 +64,8 @@ const CookiesPolicyPage: React.FC = () => {
         );
         if (!cancelled) setHtml(result?.value || "");
       } catch {
-        if (!cancelled) setError("No se pudo cargar el documento de cookies.");
+        if (!cancelled)
+          setError("No se pudo cargar el documento de aviso legal.");
       } finally {
         if (!cancelled) setLoading(false);
       }
@@ -74,6 +75,7 @@ const CookiesPolicyPage: React.FC = () => {
       cancelled = true;
     };
   }, []);
+
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-b from-gray-950 to-black text-white">
       <Header />
@@ -84,7 +86,7 @@ const CookiesPolicyPage: React.FC = () => {
       >
         <div className="max-w-4xl mx-auto px-4 md:px-8 lg:px-12 py-10 md:py-16">
           <h1 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6">
-            {t("cookies.title")}
+            Aviso Legal
           </h1>
           <div className="bg-gray-900/60 rounded-xl border border-gray-800 shadow-xl p-4 md:p-6">
             {loading && (
@@ -128,4 +130,4 @@ const CookiesPolicyPage: React.FC = () => {
   );
 };
 
-export default CookiesPolicyPage;
+export default LegalNoticePage;

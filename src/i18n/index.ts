@@ -112,28 +112,33 @@ const resources = {
       footerCopyright: "© MΛN POWERS. Todos los derechos reservados.",
       footerPrivacy: "Política de Privacidad",
       footerCookies: "Política de Cookies",
+      footerLegal: "Aviso Legal",
       headerCollaborators: "Colaboradores",
       "collabLogin.title": "Acceso para colaboradores",
-      "collabLogin.subtitle": "Ingresa con tus credenciales para acceder al área de colaboradores.",
+      "collabLogin.subtitle":
+        "Ingresa con tus credenciales para acceder al área de colaboradores.",
       "collabLogin.username": "Nombre",
       "collabLogin.password": "Contraseña",
       "collabLogin.remember": "Recordarme",
       "collabLogin.signIn": "Iniciar sesión",
-      "collabLogin.helper": "Si no tienes acceso, contacta con el administrador.",
+      "collabLogin.helper":
+        "Si no tienes acceso, contacta con el administrador.",
       "collabLogin.error": "Revisa tu email y contraseña.",
       "collabLogin.errorInvalid": "Usuario o contraseña incorrectos.",
       "collabLogin.errorMissing": "Ingresa nombre y contraseña.",
       "collabLogin.errorPromo": "La promoción no existe o no está activa.",
       "collabLogin.success": "Inicio de sesión correcto.",
       "collabDashboard.hello": "Hola",
-      "collabDashboard.subtitle": "Aquí tienes un resumen de tus ventas con tu código.",
+      "collabDashboard.subtitle":
+        "Aquí tienes un resumen de tus ventas con tu código.",
       "collabDashboard.yourCode": "Tu código de descuento",
       "collabDashboard.noCode": "Sin código",
       "collabDashboard.copy": "Copiar",
       "collabDashboard.orders": "Pedidos",
       "collabDashboard.units": "Unidades",
       "collabDashboard.sales": "Ventas",
-      "collabDashboard.error": "No se pudieron cargar las estadísticas. Mostrando datos base.",
+      "collabDashboard.error":
+        "No se pudieron cargar las estadísticas. Mostrando datos base.",
 
       // Page Title
       pageTitle:
@@ -327,56 +332,81 @@ const resources = {
       exploreOtherSports: "Explorar Otros Deportes",
       // Privacy Policy
       "privacy.title": "Política de Privacidad",
-      "privacy.intro": "En MΛN POWERS tratamos tus datos con transparencia y responsabilidad, cumpliendo el RGPD (Reglamento (UE) 2016/679) y la LOPDGDD (Ley Orgánica 3/2018). Esta política explica qué datos recopilamos, para qué los usamos y qué derechos podés ejercer.",
+      "privacy.intro":
+        "En MΛN POWERS tratamos tus datos con transparencia y responsabilidad, cumpliendo el RGPD (Reglamento (UE) 2016/679) y la LOPDGDD (Ley Orgánica 3/2018). Esta política explica qué datos recopilamos, para qué los usamos y qué derechos podés ejercer.",
       "privacy.controllerTitle": "Responsable del tratamiento",
-      "privacy.controllerText": "MΛN POWERS es marca registrada (nº M4308707(8)) perteneciente a TAMD Cosmetics (CIF B22689434). Dirección: C. Severo Ochoa, 5, 28860 Paracuellos de Jarama, Madrid. Email: info@manpowers.es.",
+      "privacy.controllerText":
+        "MΛN POWERS es marca registrada (nº M4308707(8)) perteneciente a TAMD Cosmetics (CIF B22689434). Dirección: C. Severo Ochoa, 5, 28860 Paracuellos de Jarama, Madrid. Email: info@manpowers.es.",
       "privacy.purposesTitle": "Finalidades del tratamiento",
-      "privacy.purposesText": "Gestionamos pedidos y pagos, brindamos atención al cliente, enviamos comunicaciones relacionadas con productos y promociones cuando lo autorizás, mejoramos la experiencia del sitio y cumplimos con nuestras obligaciones legales.",
+      "privacy.purposesText":
+        "Gestionamos pedidos y pagos, brindamos atención al cliente, enviamos comunicaciones relacionadas con productos y promociones cuando lo autorizás, mejoramos la experiencia del sitio y cumplimos con nuestras obligaciones legales.",
       "privacy.legalBasisTitle": "Legitimación",
-      "privacy.legalBasisText": "Basamos el tratamiento en la ejecución de un contrato, el cumplimiento de obligaciones legales y nuestro interés legítimo. Para fines de marketing y analítica utilizamos tu consentimiento, que podés retirar en cualquier momento.",
+      "privacy.legalBasisText":
+        "Basamos el tratamiento en la ejecución de un contrato, el cumplimiento de obligaciones legales y nuestro interés legítimo. Para fines de marketing y analítica utilizamos tu consentimiento, que podés retirar en cualquier momento.",
       "privacy.recipientsTitle": "Destinatarios",
-      "privacy.recipientsText": "Compartimos datos con proveedores esenciales para la operativa (pasarela de pago, logística, alojamiento) y, cuando aceptás cookies no esenciales, con herramientas de analítica y marketing. Firmamos acuerdos para garantizar su correcta protección.",
+      "privacy.recipientsText":
+        "Compartimos datos con proveedores esenciales para la operativa (pasarela de pago, logística, alojamiento) y, cuando aceptás cookies no esenciales, con herramientas de analítica y marketing. Firmamos acuerdos para garantizar su correcta protección.",
       "privacy.rightsTitle": "Derechos",
-      "privacy.rightsText": "Podés ejercer tus derechos de acceso, rectificación, supresión, limitación, oposición y portabilidad escribiendo a info@manpowers.es. Respondemos tus solicitudes en los plazos previstos por la normativa.",
+      "privacy.rightsText":
+        "Podés ejercer tus derechos de acceso, rectificación, supresión, limitación, oposición y portabilidad escribiendo a info@manpowers.es. Respondemos tus solicitudes en los plazos previstos por la normativa.",
       "privacy.retentionTitle": "Conservación",
-      "privacy.retentionText": "Conservamos tus datos solo el tiempo necesario para cumplir con las finalidades del tratamiento y los plazos legales aplicables. Luego los eliminamos o los anonimizamos de forma segura.",
+      "privacy.retentionText":
+        "Conservamos tus datos solo el tiempo necesario para cumplir con las finalidades del tratamiento y los plazos legales aplicables. Luego los eliminamos o los anonimizamos de forma segura.",
       "privacy.cookiesTitle": "Cookies",
-      "privacy.cookiesText": "En nuestra Política de Cookies explicamos detalladamente el uso de tecnologías de seguimiento, tipos de cookies y cómo gestionar tus preferencias.",
+      "privacy.cookiesText":
+        "En nuestra Política de Cookies explicamos detalladamente el uso de tecnologías de seguimiento, tipos de cookies y cómo gestionar tus preferencias.",
       "privacy.dataCategoriesTitle": "Categorías de datos",
-      "privacy.dataCategoriesText": "Identificativos, contacto, transaccionales, preferencias, datos de navegación y, cuando proceda, información necesaria para la entrega y facturación.",
+      "privacy.dataCategoriesText":
+        "Identificativos, contacto, transaccionales, preferencias, datos de navegación y, cuando proceda, información necesaria para la entrega y facturación.",
       "privacy.securityTitle": "Seguridad",
-      "privacy.securityText": "Aplicamos medidas técnicas y organizativas apropiadas para proteger tus datos frente a accesos no autorizados, pérdida o alteración.",
+      "privacy.securityText":
+        "Aplicamos medidas técnicas y organizativas apropiadas para proteger tus datos frente a accesos no autorizados, pérdida o alteración.",
       "privacy.userResponsibilitiesTitle": "Responsabilidades del usuario",
-      "privacy.userResponsibilitiesText": "Debés proporcionar información veraz y mantenerla actualizada. Si compartís datos de terceros, garantizás contar con su consentimiento previo.",
+      "privacy.userResponsibilitiesText":
+        "Debés proporcionar información veraz y mantenerla actualizada. Si compartís datos de terceros, garantizás contar con su consentimiento previo.",
       "privacy.contactTitle": "Contacto",
-      "privacy.contactText": "Para consultas sobre privacidad o ejercicio de derechos, escríbenos a info@manpowers.es.",
+      "privacy.contactText":
+        "Para consultas sobre privacidad o ejercicio de derechos, escríbenos a info@manpowers.es.",
       "privacy.changesTitle": "Cambios en esta política",
-      "privacy.changesText": "Podemos actualizar esta política para reflejar cambios legales o de servicio. Publicaremos la versión vigente en este sitio.",
+      "privacy.changesText":
+        "Podemos actualizar esta política para reflejar cambios legales o de servicio. Publicaremos la versión vigente en este sitio.",
 
       // Cookies Policy
       "cookies.title": "Política de Cookies",
-      "cookies.intro": "Usamos cookies propias y de terceros para que el sitio funcione correctamente, medir su rendimiento y personalizar contenido. Las cookies no esenciales se activan solo con tu consentimiento. MΛN POWERS es marca registrada (nº M4308707(8)) perteneciente a TAMD Cosmetics (CIF B22689434).",
+      "cookies.intro":
+        "Usamos cookies propias y de terceros para que el sitio funcione correctamente, medir su rendimiento y personalizar contenido. Las cookies no esenciales se activan solo con tu consentimiento. MΛN POWERS es marca registrada (nº M4308707(8)) perteneciente a TAMD Cosmetics (CIF B22689434).",
       "cookies.whatTitle": "¿Qué son las cookies?",
-      "cookies.whatText": "Las cookies son pequeños archivos que tu navegador guarda en tu dispositivo. Permiten recordar preferencias, mejorar la experiencia de navegación y realizar mediciones de uso.",
+      "cookies.whatText":
+        "Las cookies son pequeños archivos que tu navegador guarda en tu dispositivo. Permiten recordar preferencias, mejorar la experiencia de navegación y realizar mediciones de uso.",
       "cookies.typesTitle": "Tipos de cookies que usamos",
-      "cookies.typesNecessary": "Necesarias: imprescindibles para que el sitio funcione (autenticación, seguridad, preferencias básicas).",
-      "cookies.typesAnalytics": "Analíticas: ayudan a entender el uso del sitio para mejorar rendimiento y usabilidad.",
-      "cookies.typesMarketing": "Marketing: personalizan contenido y publicidad según tus intereses.",
+      "cookies.typesNecessary":
+        "Necesarias: imprescindibles para que el sitio funcione (autenticación, seguridad, preferencias básicas).",
+      "cookies.typesAnalytics":
+        "Analíticas: ayudan a entender el uso del sitio para mejorar rendimiento y usabilidad.",
+      "cookies.typesMarketing":
+        "Marketing: personalizan contenido y publicidad según tus intereses.",
       "cookies.manageTitle": "Gestión de cookies",
-      "cookies.manageText": "Podés gestionar tus preferencias desde el banner de cookies o la configuración del navegador. Algunas funciones pueden verse afectadas si desactivás determinadas cookies.",
+      "cookies.manageText":
+        "Podés gestionar tus preferencias desde el banner de cookies o la configuración del navegador. Algunas funciones pueden verse afectadas si desactivás determinadas cookies.",
       "cookies.revokeTitle": "Revocar consentimiento",
-      "cookies.revokeText": "Podés borrar el almacenamiento del navegador para restablecer el banner de consentimiento o escribirnos a info@manpowers.es si necesitás ayuda.",
+      "cookies.revokeText":
+        "Podés borrar el almacenamiento del navegador para restablecer el banner de consentimiento o escribirnos a info@manpowers.es si necesitás ayuda.",
       "cookies.detailCookiesTitle": "Información detallada",
       "cookies.functionalTitle": "Cookies funcionales",
-      "cookies.functionalText": "Permiten recordar tus preferencias y opciones, ofreciendo una experiencia más personalizada.",
+      "cookies.functionalText":
+        "Permiten recordar tus preferencias y opciones, ofreciendo una experiencia más personalizada.",
       "cookies.performanceTitle": "Rendimiento y medición",
-      "cookies.performanceText": "Recopilan información agregada sobre el rendimiento del sitio para detectar incidencias y optimizarlo.",
+      "cookies.performanceText":
+        "Recopilan información agregada sobre el rendimiento del sitio para detectar incidencias y optimizarlo.",
       "cookies.thirdPartiesTitle": "Cookies de terceros",
-      "cookies.thirdPartiesText": "Algunas cookies son gestionadas por terceros (p. ej., analítica). Te recomendamos revisar sus políticas para conocer cómo tratan tus datos.",
+      "cookies.thirdPartiesText":
+        "Algunas cookies son gestionadas por terceros (p. ej., analítica). Te recomendamos revisar sus políticas para conocer cómo tratan tus datos.",
       "cookies.consentTitle": "Tu consentimiento",
-      "cookies.consentText": "Solo activamos cookies no esenciales cuando das tu consentimiento. Puedes cambiarlo en cualquier momento.",
+      "cookies.consentText":
+        "Solo activamos cookies no esenciales cuando das tu consentimiento. Puedes cambiarlo en cualquier momento.",
       "cookies.updateTitle": "Actualizaciones",
-      "cookies.updateText": "Podemos actualizar esta política para reflejar cambios legales, técnicos o de servicio. Te recomendamos revisarla periódicamente.",
+      "cookies.updateText":
+        "Podemos actualizar esta política para reflejar cambios legales, técnicos o de servicio. Te recomendamos revisarla periódicamente.",
       "cookies.changePreferences": "Cambiar preferencias de cookies",
       "search.placeholder": "Buscar productos",
       "search.suggestions": "Sugerencias",
@@ -482,9 +512,11 @@ const resources = {
       footerCopyright: "© MΛN POWERS. Tots els drets reservats.",
       footerPrivacy: "Política de Privacitat",
       footerCookies: "Política de Cookies",
+      footerLegal: "Avís Legal",
       headerCollaborators: "Col·laboradors",
       "collabLogin.title": "Accés per a col·laboradors",
-      "collabLogin.subtitle": "Entra amb les teves credencials per accedir a l'àrea de col·laboradors.",
+      "collabLogin.subtitle":
+        "Entra amb les teves credencials per accedir a l'àrea de col·laboradors.",
       "collabLogin.username": "Nom",
       "collabLogin.password": "Contrasenya",
       "collabLogin.remember": "Recorda'm",
@@ -496,14 +528,16 @@ const resources = {
       "collabLogin.errorPromo": "La promoció no existeix o no està activa.",
       "collabLogin.success": "Inici de sessió correcte.",
       "collabDashboard.hello": "Hola",
-      "collabDashboard.subtitle": "Aquí tens un resum de les teves vendes amb el teu codi.",
+      "collabDashboard.subtitle":
+        "Aquí tens un resum de les teves vendes amb el teu codi.",
       "collabDashboard.yourCode": "El teu codi de descompte",
       "collabDashboard.noCode": "Sense codi",
       "collabDashboard.copy": "Copia",
       "collabDashboard.orders": "Comandes",
       "collabDashboard.units": "Unitats",
       "collabDashboard.sales": "Vendes",
-      "collabDashboard.error": "No s'han pogut carregar les estadístiques. Mostrant dades base.",
+      "collabDashboard.error":
+        "No s'han pogut carregar les estadístiques. Mostrant dades base.",
       pageTitle:
         "MΛN POWERS - Suplements Premium i Productes de Benestar | Espanya",
       buyOn: "Comprar",
@@ -618,7 +652,8 @@ const resources = {
       "sports.imageNotAvailable": "Imatge no disponible",
       "sports.imageNot available": "Imatge no disponible",
       "sports.productsInDevelopment": "Productes en desenvolupament",
-      "sports.workingOnProducts": "Estem treballant en productes específics per a.",
+      "sports.workingOnProducts":
+        "Estem treballant en productes específics per a.",
       "sports.soonNews": "Aviat tindrem novetats!",
       "sports.exploreOtherSports": "Explora Altres Esports",
       "sports.sailing": "Nàutica",
@@ -650,9 +685,11 @@ const resources = {
       "resend.placeholder": "Escriu el teu email per reenviar",
       "resend.button": "Reenviar correu",
       "resend.loading": "Reenviant…",
-      "resend.success": "Correu reenviat. Revisa safata d'entrada i correu brossa.",
+      "resend.success":
+        "Correu reenviat. Revisa safata d'entrada i correu brossa.",
       "resend.invalidEmail": "Introdueix un email vàlid.",
-      "resend.fail": "No hem pogut reenviar el correu. Torna-ho a provar més tard.",
+      "resend.fail":
+        "No hem pogut reenviar el correu. Torna-ho a provar més tard.",
       "search.placeholder": "Cerca productes",
       "search.suggestions": "Suggeriments",
       "search.loading": "Carregant…",
@@ -773,15 +810,18 @@ const resources = {
       footerCopyright: "© MΛN POWERS. All rights reserved.",
       footerPrivacy: "Privacy Policy",
       footerCookies: "Cookies Policy",
+      footerLegal: "Legal Notice",
       headerCollaborators: "Collaborators",
       "collabLogin.title": "Collaborators Login",
-      "collabLogin.subtitle": "Sign in with your credentials to access the collaborators area.",
+      "collabLogin.subtitle":
+        "Sign in with your credentials to access the collaborators area.",
       "collabLogin.username": "Name",
       "collabLogin.password": "Password",
       "collabLogin.remember": "Remember me",
       "collabLogin.forgot": "Forgot your password?",
       "collabLogin.signIn": "Sign in",
-      "collabLogin.helper": "If you need access, please contact the administrator.",
+      "collabLogin.helper":
+        "If you need access, please contact the administrator.",
       "collabLogin.error": "Check your email and password.",
       "collabLogin.errorInvalid": "Invalid username or password.",
       "collabLogin.errorMissing": "Enter name and password.",
@@ -1000,56 +1040,81 @@ const resources = {
       exploreOtherSports: "Explore Other Sports",
       // Privacy Policy
       "privacy.title": "Privacy Policy",
-      "privacy.intro": "At MΛN POWERS, we respect your privacy and comply with GDPR and applicable Spanish laws.",
+      "privacy.intro":
+        "At MΛN POWERS, we respect your privacy and comply with GDPR and applicable Spanish laws.",
       "privacy.controllerTitle": "Data Controller",
-      "privacy.controllerText": "MΛN POWERS is a registered brand (trademark no. M4308707(8)) belonging to TAMD Cosmetics (CIF B22689434). Address: C. Severo Ochoa, 5, 28860 Paracuellos de Jarama, Madrid. Email: info@manpowers.es.",
+      "privacy.controllerText":
+        "MΛN POWERS is a registered brand (trademark no. M4308707(8)) belonging to TAMD Cosmetics (CIF B22689434). Address: C. Severo Ochoa, 5, 28860 Paracuellos de Jarama, Madrid. Email: info@manpowers.es.",
       "privacy.purposesTitle": "Processing Purposes",
-      "privacy.purposesText": "Manage orders and payments, customer support, product-related communications, service improvement, and legal compliance.",
+      "privacy.purposesText":
+        "Manage orders and payments, customer support, product-related communications, service improvement, and legal compliance.",
       "privacy.legalBasisTitle": "Legal Basis",
-      "privacy.legalBasisText": "Contract performance, legal obligations and legitimate interest. For marketing and analytics, we will request your consent.",
+      "privacy.legalBasisText":
+        "Contract performance, legal obligations and legitimate interest. For marketing and analytics, we will request your consent.",
       "privacy.recipientsTitle": "Recipients",
-      "privacy.recipientsText": "Service providers necessary for operations (e.g., payment gateway, logistics) and, where applicable, analytics/marketing when you accept non-essential cookies.",
+      "privacy.recipientsText":
+        "Service providers necessary for operations (e.g., payment gateway, logistics) and, where applicable, analytics/marketing when you accept non-essential cookies.",
       "privacy.rightsTitle": "Your Rights",
-      "privacy.rightsText": "You can exercise access, rectification, erasure, restriction, objection and portability by writing to info@manpowers.es.",
+      "privacy.rightsText":
+        "You can exercise access, rectification, erasure, restriction, objection and portability by writing to info@manpowers.es.",
       "privacy.retentionTitle": "Data Retention",
-      "privacy.retentionText": "Data is retained for the time necessary for the stated purposes and legal obligations.",
+      "privacy.retentionText":
+        "Data is retained for the time necessary for the stated purposes and legal obligations.",
       "privacy.cookiesTitle": "Cookies",
-      "privacy.cookiesText": "See the Cookies Policy for details about tracking technologies.",
+      "privacy.cookiesText":
+        "See the Cookies Policy for details about tracking technologies.",
       "privacy.dataCategoriesTitle": "Data Categories",
-      "privacy.dataCategoriesText": "Identification, contact, transactional, preferences, browsing data and, where necessary, delivery and invoicing information.",
+      "privacy.dataCategoriesText":
+        "Identification, contact, transactional, preferences, browsing data and, where necessary, delivery and invoicing information.",
       "privacy.securityTitle": "Security",
-      "privacy.securityText": "We apply appropriate technical and organizational measures to protect your data against unauthorized access, loss or alteration.",
+      "privacy.securityText":
+        "We apply appropriate technical and organizational measures to protect your data against unauthorized access, loss or alteration.",
       "privacy.userResponsibilitiesTitle": "User Responsibilities",
-      "privacy.userResponsibilitiesText": "You must provide truthful information and keep it updated. If you share third-party data, you confirm having their consent.",
+      "privacy.userResponsibilitiesText":
+        "You must provide truthful information and keep it updated. If you share third-party data, you confirm having their consent.",
       "privacy.contactTitle": "Contact",
-      "privacy.contactText": "For privacy inquiries or to exercise your rights, write to info@manpowers.es.",
+      "privacy.contactText":
+        "For privacy inquiries or to exercise your rights, write to info@manpowers.es.",
       "privacy.changesTitle": "Changes to this Policy",
-      "privacy.changesText": "We may update this policy to reflect legal or service changes. We will publish the current version on this site.",
+      "privacy.changesText":
+        "We may update this policy to reflect legal or service changes. We will publish the current version on this site.",
 
       // Cookies Policy
       "cookies.title": "Cookies Policy",
-      "cookies.intro": "We use our own and third-party cookies for necessary, analytics and marketing purposes, always with your consent when not strictly necessary. MΛN POWERS is a registered brand (trademark no. M4308707(8)) belonging to TAMD Cosmetics (CIF B22689434).",
+      "cookies.intro":
+        "We use our own and third-party cookies for necessary, analytics and marketing purposes, always with your consent when not strictly necessary. MΛN POWERS is a registered brand (trademark no. M4308707(8)) belonging to TAMD Cosmetics (CIF B22689434).",
       "cookies.whatTitle": "What are cookies?",
-      "cookies.whatText": "Files stored on your device to remember preferences, improve experience and perform usage measurement.",
+      "cookies.whatText":
+        "Files stored on your device to remember preferences, improve experience and perform usage measurement.",
       "cookies.typesTitle": "Types of cookies we use",
-      "cookies.typesNecessary": "Necessary: essential for the site to function (authentication, security, basic preferences).",
-      "cookies.typesAnalytics": "Analytics: help us understand site usage to improve performance and usability.",
-      "cookies.typesMarketing": "Marketing: personalize content and advertising based on your interests.",
+      "cookies.typesNecessary":
+        "Necessary: essential for the site to function (authentication, security, basic preferences).",
+      "cookies.typesAnalytics":
+        "Analytics: help us understand site usage to improve performance and usability.",
+      "cookies.typesMarketing":
+        "Marketing: personalize content and advertising based on your interests.",
       "cookies.manageTitle": "Managing cookies",
-      "cookies.manageText": "You can configure your preferences in the cookies banner or from your browser settings.",
+      "cookies.manageText":
+        "You can configure your preferences in the cookies banner or from your browser settings.",
       "cookies.revokeTitle": "Withdraw consent",
-      "cookies.revokeText": "You can clear your browser storage to reset the consent banner or contact us at info@manpowers.es.",
+      "cookies.revokeText":
+        "You can clear your browser storage to reset the consent banner or contact us at info@manpowers.es.",
       "cookies.detailCookiesTitle": "Detailed information",
       "cookies.functionalTitle": "Functional cookies",
-      "cookies.functionalText": "Allow remembering your preferences and options for a more personalized experience.",
+      "cookies.functionalText":
+        "Allow remembering your preferences and options for a more personalized experience.",
       "cookies.performanceTitle": "Performance and measurement",
-      "cookies.performanceText": "Collect anonymous information about site performance to optimize it.",
+      "cookies.performanceText":
+        "Collect anonymous information about site performance to optimize it.",
       "cookies.thirdPartiesTitle": "Third-party cookies",
-      "cookies.thirdPartiesText": "Some cookies are managed by third parties. Check their policies to know how they process data.",
+      "cookies.thirdPartiesText":
+        "Some cookies are managed by third parties. Check their policies to know how they process data.",
       "cookies.consentTitle": "Your consent",
-      "cookies.consentText": "We only activate non-essential cookies when you consent. You can change this at any time.",
+      "cookies.consentText":
+        "We only activate non-essential cookies when you consent. You can change this at any time.",
       "cookies.updateTitle": "Updates",
-      "cookies.updateText": "We may update this policy to reflect legal or technical changes. Please review it periodically.",
+      "cookies.updateText":
+        "We may update this policy to reflect legal or technical changes. Please review it periodically.",
     },
   },
 };

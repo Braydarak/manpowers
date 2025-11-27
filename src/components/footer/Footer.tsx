@@ -63,33 +63,96 @@ const Footer: React.FC = () => {
             {t("payments.methods")}
           </h3>
           <div className="space-y-3">
-            
             <div className="flex items-center justify-center">
-          
               <div className="flex items-center gap-2">
                 <span className="sr-only">{t("payments.acceptedCards")}</span>
-                <svg aria-hidden="true" className="h-5 w-auto" viewBox="0 0 64 24">
-                  <rect x="0" y="0" width="64" height="24" rx="4" fill="#1A1F71" />
-                  <text x="10" y="16" fill="#ffffff" fontSize="12" fontWeight="700">VISA</text>
+                <svg
+                  aria-hidden="true"
+                  className="h-5 w-auto"
+                  viewBox="0 0 64 24"
+                >
+                  <rect
+                    x="0"
+                    y="0"
+                    width="64"
+                    height="24"
+                    rx="4"
+                    fill="#1A1F71"
+                  />
+                  <text
+                    x="10"
+                    y="16"
+                    fill="#ffffff"
+                    fontSize="12"
+                    fontWeight="700"
+                  >
+                    VISA
+                  </text>
                 </svg>
-                <svg aria-hidden="true" className="h-5 w-auto" viewBox="0 0 64 24">
-                  <rect x="0" y="0" width="64" height="24" rx="4" fill="#000000" />
+                <svg
+                  aria-hidden="true"
+                  className="h-5 w-auto"
+                  viewBox="0 0 64 24"
+                >
+                  <rect
+                    x="0"
+                    y="0"
+                    width="64"
+                    height="24"
+                    rx="4"
+                    fill="#000000"
+                  />
                   <circle cx="28" cy="12" r="8" fill="#EB001B" />
                   <circle cx="36" cy="12" r="8" fill="#F79E1B" />
                 </svg>
-                <svg aria-hidden="true" className="h-5 w-auto" viewBox="0 0 64 24">
-                  <rect x="0" y="0" width="64" height="24" rx="4" fill="#2E77BC" />
-                  <text x="6" y="16" fill="#ffffff" fontSize="10" fontWeight="700">AMEX</text>
+                <svg
+                  aria-hidden="true"
+                  className="h-5 w-auto"
+                  viewBox="0 0 64 24"
+                >
+                  <rect
+                    x="0"
+                    y="0"
+                    width="64"
+                    height="24"
+                    rx="4"
+                    fill="#2E77BC"
+                  />
+                  <text
+                    x="6"
+                    y="16"
+                    fill="#ffffff"
+                    fontSize="10"
+                    fontWeight="700"
+                  >
+                    AMEX
+                  </text>
                 </svg>
-                <svg aria-hidden="true" className="h-5 w-auto" viewBox="0 0 64 24">
-                  <rect x="0" y="0" width="64" height="24" rx="4" fill="#000000" />
+                <svg
+                  aria-hidden="true"
+                  className="h-5 w-auto"
+                  viewBox="0 0 64 24"
+                >
+                  <rect
+                    x="0"
+                    y="0"
+                    width="64"
+                    height="24"
+                    rx="4"
+                    fill="#000000"
+                  />
                   <circle cx="30" cy="12" r="8" fill="#EB001B" />
                   <circle cx="38" cy="12" r="8" fill="#0099DF" />
                 </svg>
               </div>
             </div>
             <div className="flex items-start">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3 mt-0.5 text-gray-400" viewBox="0 0 24 24" fill="currentColor">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 mr-3 mt-0.5 text-gray-400"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
                 <path d="M3 7a2 2 0 012-2h11a2 2 0 012 2v6h1a2 2 0 110 4h-2a2 2 0 01-2-2H9a2 2 0 01-2 2H4a2 2 0 110-4h1V7zm2 0v6h10V7H5z" />
               </svg>
               <div className="flex items-center gap-2">
@@ -98,16 +161,28 @@ const Footer: React.FC = () => {
               </div>
             </div>
             <div className="flex items-start">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3 mt-0.5 text-gray-400" viewBox="0 0 24 24" fill="currentColor">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 mr-3 mt-0.5 text-gray-400"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
                 <path d="M12 5a7 7 0 100 14 7 7 0 000-14zm0 2a5 5 0 11-3.536 8.536l1.414-1.414A3 3 0 1015 12h-3V8h2a1 1 0 100-2h-2z" />
               </svg>
               <span className="text-gray-400">{t("returns.fourteenDays")}</span>
             </div>
             <div className="flex items-start">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3 mt-0.5 text-gray-400" viewBox="0 0 24 24" fill="currentColor">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 mr-3 mt-0.5 text-gray-400"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
                 <path d="M2 7a3 3 0 013-3h14a3 3 0 013 3v10a3 3 0 01-3 3H5a3 3 0 01-3-3V7zm3-1a1 1 0 00-1 1v2h16V7a1 1 0 00-1-1H5zm15 6H4v4a1 1 0 001 1h14a1 1 0 001-1v-4z" />
               </svg>
-              <span className="text-gray-400">{t("payments.processedByRedsys")}</span>
+              <span className="text-gray-400">
+                {t("payments.processedByRedsys")}
+              </span>
             </div>
           </div>
         </div>
@@ -191,7 +266,7 @@ const Footer: React.FC = () => {
                 href="/privacidad"
                 className="text-gray-400 hover:text-white transition-colors"
               >
-                {t('footerPrivacy')}
+                {t("footerPrivacy")}
               </a>
             </li>
             <li>
@@ -199,16 +274,26 @@ const Footer: React.FC = () => {
                 href="/cookies"
                 className="text-gray-400 hover:text-white transition-colors"
               >
-                {t('footerCookies')}
+                {t("footerCookies")}
+              </a>
+            </li>
+            <li>
+              <a
+                href="/aviso-legal"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                {t("footerLegal")}
               </a>
             </li>
             <li>
               <button
                 type="button"
-                onClick={() => window.dispatchEvent(new Event('openCookiePreferences'))}
+                onClick={() =>
+                  window.dispatchEvent(new Event("openCookiePreferences"))
+                }
                 className="text-gray-400 hover:text-white transition-colors underline underline-offset-2"
               >
-                {t('cookies.changePreferences')}
+                {t("cookies.changePreferences")}
               </button>
             </li>
           </ul>

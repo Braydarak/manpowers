@@ -745,6 +745,29 @@ const Header: React.FC = () => {
                 </button>
                 <button
                   onClick={() => {
+                    navigate("/aviso-legal");
+                    setMenuOpen(false);
+                  }}
+                  className="group w-full bg-gradient-to-r from-gray-900 to-black border-y border-white/30 text-white font-semibold py-5 px-4 transition-all duration-300 hover:bg-gray-800 flex items-center justify-between cursor-pointer"
+                >
+                  <span>{t("footerLegal")}</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 text-white/70 transition-transform duration-300 group-hover:translate-x-1"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M5 12h14M13 7l5 5-5 5"
+                    />
+                  </svg>
+                </button>
+                <button
+                  onClick={() => {
                     window.dispatchEvent(new Event("openCookiePreferences"));
                     setMenuOpen(false);
                   }}
