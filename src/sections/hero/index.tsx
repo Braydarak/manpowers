@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import useScrollAnimation from "../../hooks/useScrollAnimation";
@@ -18,19 +18,133 @@ const Hero: React.FC = () => {
     navigate("/sports");
   };
 
+  const desktopFlyers = useMemo(
+    () => ["/flyer-maca.jpg", "/flyer-tiro.jpg"],
+    []
+  );
+  const mobileFlyers = useMemo(
+    () => ["/flyer-maca-mobile.jpg", "/flyer-tiro-mobile.jpg"],
+    []
+  );
+  const [idx, setIdx] = useState(0);
+  const autoIntervalRef = useRef<number | null>(null);
+  const restartTimeoutRef = useRef<number | null>(null);
+  const AUTO_MS = 20000;
+  const FADE_MS = 700;
+
+  const [prevIdx, setPrevIdx] = useState(0);
+  const [showPrev, setShowPrev] = useState(false);
+  const lastIdxRef = useRef(0);
+  const fadeTimeoutRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    const nextDesktop = new Image();
+    nextDesktop.src = desktopFlyers[(idx + 1) % desktopFlyers.length];
+    const nextMobile = new Image();
+    nextMobile.src = mobileFlyers[(idx + 1) % mobileFlyers.length];
+  }, [idx, desktopFlyers, mobileFlyers]);
+
+  useEffect(() => {
+    if (lastIdxRef.current !== idx) {
+      setPrevIdx(lastIdxRef.current);
+      setShowPrev(true);
+      if (fadeTimeoutRef.current) window.clearTimeout(fadeTimeoutRef.current);
+      const id = requestAnimationFrame(() => {
+        setShowPrev(false);
+      });
+      fadeTimeoutRef.current = window.setTimeout(() => {
+        // garantía de limpieza si hubo múltiples clics rápidos
+        setShowPrev(false);
+        cancelAnimationFrame(id);
+      }, FADE_MS + 50);
+    }
+    lastIdxRef.current = idx;
+    return () => {
+      if (fadeTimeoutRef.current) window.clearTimeout(fadeTimeoutRef.current);
+    };
+  }, [idx]);
+
+  useEffect(() => {
+    const start = () => {
+      if (autoIntervalRef.current)
+        window.clearInterval(autoIntervalRef.current);
+      autoIntervalRef.current = window.setInterval(() => {
+        setIdx((i) => (i + 1) % desktopFlyers.length);
+      }, AUTO_MS);
+    };
+    start();
+    return () => {
+      if (autoIntervalRef.current)
+        window.clearInterval(autoIntervalRef.current);
+      if (restartTimeoutRef.current)
+        window.clearTimeout(restartTimeoutRef.current);
+    };
+  }, [desktopFlyers.length]);
+
+  const handleDotClick = (i: number) => {
+    setIdx(i % desktopFlyers.length);
+    if (autoIntervalRef.current) window.clearInterval(autoIntervalRef.current);
+    if (restartTimeoutRef.current)
+      window.clearTimeout(restartTimeoutRef.current);
+    restartTimeoutRef.current = window.setTimeout(() => {
+      autoIntervalRef.current = window.setInterval(() => {
+        setIdx((prev) => (prev + 1) % desktopFlyers.length);
+      }, AUTO_MS);
+    }, 5000);
+  };
+
   return (
     <>
       <section className="relative min-h-screen w-full overflow-hidden">
-        {/* Imagen de flyer-maca en lugar del slider de video */}
+        {/* Imagen de flyer rotativa con crossfade */}
         <div className="absolute inset-0 z-10">
-          <picture>
-            <source media="(min-width: 640px)" srcSet="/flyer-maca.jpg" />
+          <picture
+            className={`absolute inset-0 ${
+              showPrev ? "opacity-100" : "opacity-0"
+            } transition-opacity duration-700`}
+          >
+            <source
+              media="(min-width: 640px)"
+              srcSet={desktopFlyers[prevIdx]}
+            />
             <img
-              src="/flyer-maca-mobile.jpg"
-              alt="Flyer Maca"
+              src={mobileFlyers[prevIdx]}
+              alt="Flyer anterior"
               className="w-full h-full object-cover"
             />
           </picture>
+          <picture
+            className={`absolute inset-0 ${
+              showPrev ? "opacity-0" : "opacity-100"
+            } transition-opacity duration-700`}
+          >
+            <source media="(min-width: 640px)" srcSet={desktopFlyers[idx]} />
+            <img
+              src={mobileFlyers[idx]}
+              alt="Flyer"
+              className="w-full h-full object-cover"
+            />
+          </picture>
+        </div>
+
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-[120] hidden md:flex items-center gap-2">
+          {desktopFlyers.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => handleDotClick(i)}
+              aria-label={`Cambiar a slide ${i + 1}`}
+              aria-current={i === idx}
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") handleDotClick(i);
+              }}
+              className={
+                `h-3 w-3 rounded-full transition-all duration-300 cursor-pointer ` +
+                (i === idx ? "bg-white" : "bg-white/50 hover:bg-white/80")
+              }
+            />
+          ))}
         </div>
 
         {/* Contenido del Hero */}
@@ -80,24 +194,6 @@ const Hero: React.FC = () => {
               >
                 {t("heroSportsButton")}
               </button>
-            </div>
-
-            {/* Indicador de scroll */}
-            <div className="absolute bottom-4 sm:bottom-6 lg:bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 sm:h-8 sm:w-8 lg:h-10 lg:w-10 text-white opacity-70 hover:opacity-100 transition-opacity duration-300"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                />
-              </svg>
             </div>
           </div>
         </div>
