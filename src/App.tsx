@@ -1,5 +1,10 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import SportsPage from "./pages/SportsPage";
 import ProductsPage from "./pages/ProductsPage";
@@ -11,10 +16,15 @@ import CookiesPolicyPage from "./pages/CookiesPolicyPage";
 import LegalNoticePage from "./pages/LegalNoticePage";
 import CollaboratorsLoginPage from "./pages/CollaboratorsLoginPage";
 import CollaboratorsDashboardPage from "./pages/CollaboratorsDashboardPage";
+import ChatWidget from "./components/chatWidget";
+import ProductLandingPage from "./pages/ProductLandingPage";
 
-function App() {
+function AppInner() {
+  const location = useLocation();
+  const isLanding = location.pathname.startsWith("/landing");
   return (
-    <Router>
+    <>
+      {!isLanding && <ChatWidget />}
       <CookieConsent />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -27,6 +37,7 @@ function App() {
         <Route path="/product/:slug" element={<ProductDetailPage />} />
         <Route path="/products/:sportId/:id" element={<ProductDetailPage />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />
+        <Route path="/landing/:slug" element={<ProductLandingPage />} />
         <Route path="/payment-result" element={<PaymentResultPage />} />
         <Route path="/pago-ok" element={<PaymentResultPage />} />
         <Route path="/pago-ko" element={<PaymentResultPage />} />
@@ -39,6 +50,14 @@ function App() {
           element={<CollaboratorsDashboardPage />}
         />
       </Routes>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <AppInner />
     </Router>
   );
 }

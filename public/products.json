@@ -115,12 +115,12 @@
     {
       "id": 3,
       "name": {
-        "es": "MΛN POWERS Protector Solar Facial y Corporal SPF 50+",
-        "en": "MΛN POWERS Facial and Body Sunscreen SPF 50+",
-        "ca": "MΛN POWERS Protector solar facial i corporal SPF 50+"
+        "es": "Protector Solar Facial y Corporal SPF 50+",
+        "en": "Facial and Body Sunscreen SPF 50+",
+        "ca": "Protector solar facial i corporal SPF 50+"
       },
       "description": {
-        "es": "Tu aliado perfecto para el verano. Este innovador protector solar SPF 50+ te ofrece una protección total frente a los rayos UVA/UVB, combinada con un acelerador del bronceado. Su fórmula avanzada está enriquecida con Ácido Hialurónico.",
+        "es": "Tu aliado aliado para el verano. Este innovador protector solar SPF 50+ te ofrece una protección total frente a los rayos UVA/UVB, combinada con un acelerador del bronceado. Su fórmula avanzada está enriquecida con Ácido Hialurónico.",
         "en": "Your perfect summer ally. This innovative SPF 50+ sunscreen offers total protection against UVA/UVB rays, combined with a tanning accelerator. Its advanced formula is enriched with Hyaluronic Acid.",
         "ca": "El teu aliat perfecte per a l'estiu. Aquest innovador protector solar SPF 50+ ofereix una protecció total davant dels raigs UVA/UVB, combinada amb un accelerador del bronzejat. La seva fórmula avançada està enriquida amb àcid hialurònic."
       },
@@ -133,6 +133,10 @@
         "es": "Evitar contacto con ojos. No usar sobre piel irritada. Mantener fuera del alcance de niños.",
         "en": "Avoid contact with eyes. Do not use on irritated skin. Keep out of reach of children.",
         "ca": "Evitar el contacte amb els ulls. No utilitzar sobre pell irritada. Mantenir fora de l'abast dels nens."
+      },
+            "pricesBySize": {
+        "50ml": "14,52",
+        "100ml": "24,20"
       },
       "price": "24,20",
       "size": "100 ml",
