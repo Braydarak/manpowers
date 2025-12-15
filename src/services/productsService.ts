@@ -33,6 +33,7 @@ interface Product {
   price: number;
   price_formatted: string;
   size: string;
+  pricesBySize?: { [key: string]: string };
   image: string;
   category: {
     es: string;
@@ -74,28 +75,35 @@ interface ProductsFilters {
   id?: number;
 }
 
-import caTranslations from '../data/productTranslationsCa';
+import caTranslations from "../data/productTranslationsCa";
 
 class ProductsService {
   constructor() {}
 
   async getProducts(filters?: ProductsFilters): Promise<Product[]> {
     try {
-      const response = await fetch('/products.json');
+      const response = await fetch("/products.json");
       const data = await response.json();
       const arr = ((data.products || []) as Product[]).map((p) => ({
         id: p.id,
         name: p.name,
         description: p.description,
         objectives: p.objectives,
-        price: typeof p.price === 'string' ? parseFloat((p.price as string).replace(',', '.')) : p.price,
-        price_formatted: p.price_formatted ?? '',
+        price:
+          typeof p.price === "string"
+            ? parseFloat((p.price as string).replace(",", "."))
+            : p.price,
+        price_formatted: p.price_formatted ?? "",
         size: p.size,
+        pricesBySize: p.pricesBySize,
         image: p.image,
-        category: typeof p.category === 'string' ? { es: p.category, en: p.category } : p.category,
+        category:
+          typeof p.category === "string"
+            ? { es: p.category, en: p.category }
+            : p.category,
         sportId: p.sportId,
         available: p.available,
-        sku: p.sku ?? '',
+        sku: p.sku ?? "",
         amazonLinks: p.amazonLinks,
         nutritionalValues: p.nutritionalValues,
         application: p.application,
@@ -109,10 +117,15 @@ class ProductsService {
           if (filters.id && String(pr.id) !== String(filters.id)) return false;
           if (filters.sport && pr.sportId !== filters.sport) return false;
           if (filters.category) {
-            const cat = typeof pr.category === 'string' ? pr.category : pr.category.es;
+            const cat =
+              typeof pr.category === "string" ? pr.category : pr.category.es;
             if (cat !== filters.category) return false;
           }
-          if (typeof filters.available === 'boolean' && pr.available !== filters.available) return false;
+          if (
+            typeof filters.available === "boolean" &&
+            pr.available !== filters.available
+          )
+            return false;
           return true;
         });
       }
@@ -132,10 +145,18 @@ class ProductsService {
           name: { ...p.name, ...(t.name || {}) },
           description: { ...p.description, ...(t.description || {}) },
           category: { ...p.category, ...(t.category || {}) },
-          nutritionalValues: p.nutritionalValues ? { ...p.nutritionalValues, ...(t.nutritionalValues || {}) } : undefined,
-          application: p.application ? { ...p.application, ...(t.application || {}) } : undefined,
-          recommendations: p.recommendations ? { ...p.recommendations, ...(t.recommendations || {}) } : undefined,
-          objectives: p.objectives ? { ...p.objectives, ...(t.objectives || {}) } : undefined,
+          nutritionalValues: p.nutritionalValues
+            ? { ...p.nutritionalValues, ...(t.nutritionalValues || {}) }
+            : undefined,
+          application: p.application
+            ? { ...p.application, ...(t.application || {}) }
+            : undefined,
+          recommendations: p.recommendations
+            ? { ...p.recommendations, ...(t.recommendations || {}) }
+            : undefined,
+          objectives: p.objectives
+            ? { ...p.objectives, ...(t.objectives || {}) }
+            : undefined,
         } as Product;
       });
     } catch {

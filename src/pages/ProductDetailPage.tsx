@@ -33,19 +33,28 @@ type ProductJson = {
   recommendations?: { es: string; en: string };
   rating?: number;
   votes?: number;
+  pricesBySize?: { [key: string]: string };
 };
 
 const ProductDetailPage: React.FC = () => {
   const [enter, setEnter] = useState(false);
-  const { sportId: sportParam, id, slug } = useParams<{
+  const {
+    sportId: sportParam,
+    id,
+    slug,
+  } = useParams<{
     sportId?: string;
     id?: string;
     slug?: string;
   }>();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
-  const baseLang = i18n.resolvedLanguage?.split('-')[0] || i18n.language?.split('-')[0] || 'es';
-  const currentLanguage: 'es' | 'en' | 'ca' = baseLang === 'en' ? 'en' : (baseLang === 'ca' ? 'ca' : 'es');
+  const baseLang =
+    i18n.resolvedLanguage?.split("-")[0] ||
+    i18n.language?.split("-")[0] ||
+    "es";
+  const currentLanguage: "es" | "en" | "ca" =
+    baseLang === "en" ? "en" : baseLang === "ca" ? "ca" : "es";
 
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -59,6 +68,23 @@ const ProductDetailPage: React.FC = () => {
 
   useLanguageUpdater();
 
+  const getPriceForSize = (size?: string) => {
+    if (!product || !size || !product.pricesBySize) return undefined;
+    const directVal = product.pricesBySize[size];
+    const normalize = (s: string) => s.toLowerCase().replace(/\s+/g, "");
+    const normalizedTarget = normalize(size);
+    if (typeof directVal === "string") {
+      const num = parseFloat(directVal.replace(",", "."));
+      return Number.isFinite(num) ? num : undefined;
+    }
+    const matchedKey = Object.keys(product.pricesBySize).find(
+      (k) => normalize(k) === normalizedTarget
+    );
+    const val = matchedKey ? product.pricesBySize[matchedKey] : undefined;
+    if (!val) return undefined;
+    const num = parseFloat(val.replace(",", "."));
+    return Number.isFinite(num) ? num : undefined;
+  };
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -66,15 +92,23 @@ const ProductDetailPage: React.FC = () => {
 
   useEffect(() => {
     if (!product) return;
-    const title = `${(product.name[currentLanguage] || product.name.es)} | MΛN POWERS`;
-    const description = product.description[currentLanguage] || product.description.es;
-    const keywords = `${(product.name[currentLanguage] || product.name.es)}, ${
+    const title = `${
+      product.name[currentLanguage] || product.name.es
+    } | MΛN POWERS`;
+    const description =
+      product.description[currentLanguage] || product.description.es;
+    const keywords = `${product.name[currentLanguage] || product.name.es}, ${
       typeof product.category === "string"
         ? product.category
-        : (product.category[currentLanguage] || product.category.es)
+        : product.category[currentLanguage] || product.category.es
     }, MΛN POWERS`;
     const ogImage = product.image || "/MAN-LOGO-BLANCO.png";
-    const canonicalPath = typeof window !== 'undefined' ? window.location.pathname : (slug ? `/product/${slug}` : `/product/${id}`);
+    const canonicalPath =
+      typeof window !== "undefined"
+        ? window.location.pathname
+        : slug
+        ? `/product/${slug}`
+        : `/product/${id}`;
     updateSEOTags({
       title,
       description,
@@ -87,7 +121,14 @@ const ProductDetailPage: React.FC = () => {
   }, [product, currentLanguage, id, slug]);
 
   useEffect(() => {
-    const toSlug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').replace(/-{2,}/g, '-');
+    const toSlug = (s: string) =>
+      s
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "")
+        .replace(/-{2,}/g, "-");
     const loadProduct = async () => {
       if (!id && !slug) return;
       setLoading(true);
@@ -95,7 +136,9 @@ const ProductDetailPage: React.FC = () => {
 
       try {
         if (id) {
-          const productsById = await productsService.getProducts({ id: Number(id) });
+          const productsById = await productsService.getProducts({
+            id: Number(id),
+          });
           if (productsById && productsById.length > 0) {
             setProduct(productsById[0]);
             return;
@@ -125,6 +168,7 @@ const ProductDetailPage: React.FC = () => {
             available: p.available,
             sku: p.sku ?? "",
             amazonLinks: p.amazonLinks,
+            pricesBySize: p.pricesBySize,
             nutritionalValues: p.nutritionalValues,
             application: p.application,
             recommendations: p.recommendations,
@@ -134,7 +178,9 @@ const ProductDetailPage: React.FC = () => {
         );
 
         if (id) {
-          const byId = normalized.find((p: Product) => String(p.id) === String(id));
+          const byId = normalized.find(
+            (p: Product) => String(p.id) === String(id)
+          );
           if (byId) {
             setProduct(byId);
             return;
@@ -142,8 +188,17 @@ const ProductDetailPage: React.FC = () => {
         }
 
         if (slug) {
-          const base = sportParam ? normalized.filter((p) => p.sportId === sportParam || p.sportId === 'multisport') : normalized;
-          const found = base.find((p) => toSlug(p.name.es) === slug || toSlug(p.name.en) === slug || toSlug(p.name.ca || '') === slug);
+          const base = sportParam
+            ? normalized.filter(
+                (p) => p.sportId === sportParam || p.sportId === "multisport"
+              )
+            : normalized;
+          const found = base.find(
+            (p) =>
+              toSlug(p.name.es) === slug ||
+              toSlug(p.name.en) === slug ||
+              toSlug(p.name.ca || "") === slug
+          );
           if (found) {
             setProduct(found);
             return;
@@ -172,7 +227,9 @@ const ProductDetailPage: React.FC = () => {
         );
         const langItems = Array.isArray(p?.faqs?.[currentLanguage])
           ? p.faqs[currentLanguage]
-          : (Array.isArray(p?.faqs?.es) ? p.faqs.es : []);
+          : Array.isArray(p?.faqs?.es)
+          ? p.faqs.es
+          : [];
         const items = (langItems as { question: string; answer: string }[])
           .slice(0, 4)
           .map((it, idx) => ({
@@ -215,9 +272,18 @@ const ProductDetailPage: React.FC = () => {
   }, [loading]);
 
   useEffect(() => {
-    if (product && product.amazonLinks) {
-      const keys = Object.keys(product.amazonLinks);
-      if (keys.length > 0) setSelectedSize(keys[0]);
+    if (!product) {
+      setSelectedSize(null);
+      return;
+    }
+    const keys = product.amazonLinks
+      ? Object.keys(product.amazonLinks)
+      : product.pricesBySize
+      ? Object.keys(product.pricesBySize)
+      : [];
+    if (keys.length > 0) {
+      const preferred = keys.find((k) => k.toLowerCase() === "100ml");
+      setSelectedSize(preferred || keys[0]);
     } else {
       setSelectedSize(null);
     }
@@ -233,10 +299,13 @@ const ProductDetailPage: React.FC = () => {
 
   const handleAddToCart = () => {
     if (!product) return;
+    const priceBySize = getPriceForSize(selectedSize || undefined);
+    const computedPrice =
+      typeof priceBySize === "number" ? priceBySize : product.price;
     const detail = {
       id: String(product.id),
       name: product.name[currentLanguage],
-      price: product.price,
+      price: computedPrice,
       image: product.image,
       quantity: 1,
     };
@@ -245,10 +314,13 @@ const ProductDetailPage: React.FC = () => {
 
   const handleBuyNow = () => {
     if (!product) return;
+    const priceBySize = getPriceForSize(selectedSize || undefined);
+    const computedPrice =
+      typeof priceBySize === "number" ? priceBySize : product.price;
     const detail = {
       id: String(product.id),
       name: product.name[currentLanguage],
-      price: product.price,
+      price: computedPrice,
       image: product.image,
       quantity: 1,
       buyNow: true,
@@ -350,13 +422,15 @@ const ProductDetailPage: React.FC = () => {
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <img
                       src={product.image}
-                      alt={(product.name[currentLanguage] || product.name.es)}
+                      alt={product.name[currentLanguage] || product.name.es}
                       className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105 group-hover:rotate-[0.5deg]"
                       onError={(e) => {
                         const target = e.currentTarget;
                         target.style.display = "none";
                         if (target.parentElement) {
-                          target.parentElement.innerHTML = `<span class='block p-6 text-gray-400'>${t('sports.imageNotAvailable')}</span>`;
+                          target.parentElement.innerHTML = `<span class='block p-6 text-gray-400'>${t(
+                            "sports.imageNotAvailable"
+                          )}</span>`;
                         }
                       }}
                     />
@@ -375,7 +449,8 @@ const ProductDetailPage: React.FC = () => {
                       {product.category
                         ? typeof product.category === "string"
                           ? product.category
-                          : (product.category[currentLanguage] || product.category.es)
+                          : product.category[currentLanguage] ||
+                            product.category.es
                         : ""}
                     </span>
                     {product.sku && (
@@ -448,9 +523,17 @@ const ProductDetailPage: React.FC = () => {
 
                   <div className="flex items-center gap-4">
                     <span className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent">
-                      {product.price_formatted
-                        ? product.price_formatted
-                        : `€ ${Number(product.price).toFixed(2)}`}
+                      {(() => {
+                        const bySize = getPriceForSize(
+                          selectedSize || undefined
+                        );
+                        if (typeof bySize === "number") {
+                          return `€ ${bySize.toFixed(2)}`;
+                        }
+                        return product.price_formatted
+                          ? product.price_formatted
+                          : `€ ${Number(product.price).toFixed(2)}`;
+                      })()}
                     </span>
                   </div>
 
@@ -474,31 +557,45 @@ const ProductDetailPage: React.FC = () => {
                       : currentLanguage === "ca"
                       ? "Mida del contingut:"
                       : "Content size:"}{" "}
-                    {product.size}
+                    {selectedSize || product.size}
                   </div>
 
-                  {product.available && product.amazonLinks && (
-                    <div className="flex flex-col gap-3">
-                      <span className="text-sm text-gray-400">
-                        {t("product.selectSize")}
-                      </span>
-                      <div className="flex flex-wrap gap-2">
-                        {Object.keys(product.amazonLinks).map((size) => (
-                          <button
-                            key={size}
-                            onClick={() => setSelectedSize(size)}
-                            className={`${
-                              selectedSize === size
-                                ? "bg-yellow-500 text-black"
-                                : "bg-gray-800 text-gray-200"
-                            } font-semibold px-3 py-1 rounded-lg border border-gray-700`}
-                          >
-                            {size}
-                          </button>
-                        ))}
+                  {product.available &&
+                    (product.amazonLinks || product.pricesBySize) && (
+                      <div className="flex flex-col gap-3">
+                        <span className="text-sm text-gray-400">
+                          {t("product.selectSize")}
+                        </span>
+                        <div className="flex flex-wrap gap-2">
+                          {(product.amazonLinks
+                            ? Object.keys(product.amazonLinks)
+                            : Object.keys(product.pricesBySize || {})
+                          ).map((size) => {
+                            const num = getPriceForSize(size);
+                            const priceText =
+                              typeof num === "number"
+                                ? `€ ${num.toFixed(2)}`
+                                : product.price_formatted ||
+                                  `€ ${Number(product.price).toFixed(2)}`;
+                            return (
+                              <button
+                                key={size}
+                                onClick={() => setSelectedSize(size)}
+                                className={`${
+                                  selectedSize === size
+                                    ? "bg-yellow-500 text-black"
+                                    : "bg-gray-800 text-gray-200"
+                                } font-semibold px-3 py-1 rounded-lg border border-gray-700`}
+                              >
+                                {product.pricesBySize
+                                  ? `${size} - ${priceText}`
+                                  : size}
+                              </button>
+                            );
+                          })}
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
 
                   <div
                     className={`flex flex-col sm:flex-row gap-3 transition-all duration-500 ${
@@ -550,31 +647,42 @@ const ProductDetailPage: React.FC = () => {
                 }`}
               >
                 <Accordion
-                  description={product.description[currentLanguage] || product.description.es}
+                  description={
+                    product.description[currentLanguage] ||
+                    product.description.es
+                  }
                   objectives={
-                    product.objectives && ((product.objectives[currentLanguage] || product.objectives.es)?.length)
-                      ? (
-                          <ul className="list-disc ml-5 space-y-1">
-                            {(product.objectives[currentLanguage] || product.objectives.es)?.map((o, i) => (
-                              <li key={i}>{o}</li>
-                            ))}
-                          </ul>
-                        )
-                      : undefined
+                    product.objectives &&
+                    (
+                      product.objectives[currentLanguage] ||
+                      product.objectives.es
+                    )?.length ? (
+                      <ul className="list-disc ml-5 space-y-1">
+                        {(
+                          product.objectives[currentLanguage] ||
+                          product.objectives.es
+                        )?.map((o, i) => (
+                          <li key={i}>{o}</li>
+                        ))}
+                      </ul>
+                    ) : undefined
                   }
                   nutritionalValues={
                     product.nutritionalValues
-                      ? (product.nutritionalValues[currentLanguage] || product.nutritionalValues.es)
+                      ? product.nutritionalValues[currentLanguage] ||
+                        product.nutritionalValues.es
                       : undefined
                   }
                   application={
                     product.application
-                      ? (product.application[currentLanguage] || product.application.es)
+                      ? product.application[currentLanguage] ||
+                        product.application.es
                       : undefined
                   }
                   recommendations={
                     product.recommendations
-                      ? (product.recommendations[currentLanguage] || product.recommendations.es)
+                      ? product.recommendations[currentLanguage] ||
+                        product.recommendations.es
                       : undefined
                   }
                   defaultOpenId="descripcion"
@@ -717,9 +825,17 @@ const ProductDetailPage: React.FC = () => {
                 <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
                   <div className="bg-black/80 backdrop-blur border-t border-gray-800 px-4 py-3 flex items-center justify-between">
                     <div className="font-bold">
-                      {product.price_formatted
-                        ? product.price_formatted
-                        : `€ ${Number(product.price).toFixed(2)}`}
+                      {(() => {
+                        const bySize = getPriceForSize(
+                          selectedSize || undefined
+                        );
+                        if (typeof bySize === "number") {
+                          return `€ ${bySize.toFixed(2)}`;
+                        }
+                        return product.price_formatted
+                          ? product.price_formatted
+                          : `€ ${Number(product.price).toFixed(2)}`;
+                      })()}
                     </div>
                     <div className="flex gap-2">
                       {product.amazonLinks && selectedSize ? (
@@ -781,7 +897,7 @@ const ProductDetailPage: React.FC = () => {
                   sportId={product.sportId}
                   currentId={product.id}
                   language={currentLanguage}
-                  title={t('relatedProducts.title')}
+                  title={t("relatedProducts.title")}
                 />
               </div>
             </div>

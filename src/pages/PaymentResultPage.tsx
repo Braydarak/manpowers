@@ -52,14 +52,14 @@ function PaymentResultPage() {
   }, []);
 
   useEffect(() => {
-    if (paymentSuccess) {
+    if (location.pathname === "/pago-ok") {
       try {
         localStorage.removeItem("cart");
       } catch {
-        /* empty */
+        void 0;
       }
     }
-  }, [paymentSuccess]);
+  }, [location.pathname]);
 
   const handleManualResend = async () => {
     setResending(true);

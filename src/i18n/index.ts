@@ -417,6 +417,9 @@ const resources = {
       "menu.legal": "Legal",
       "allProducts.title": "Todos los productos",
       "relatedProducts.title": "Productos relacionados",
+      "chat.intro":
+        "Hola, soy el asistente de MΛN POWERS. Puedo ayudarte a encontrar el producto adecuado para mejorar tu rendimiento deportivo o mantenerte en tu máximo nivel. También puedo darte datos de contacto (teléfono y email), nuestra dirección, información legal (privacidad, cookies, aviso legal), cómo funciona el pago con tarjeta y por qué es seguro, y las condiciones de envíos y devoluciones. ¿En qué te ayudo?",
+      "chat.hint": "¿Necesitas ayuda?",
     },
   },
   ca: {
@@ -699,6 +702,9 @@ const resources = {
       "menu.legal": "Legal",
       "allProducts.title": "Tots els productes",
       "relatedProducts.title": "Productes relacionats",
+      "chat.intro":
+        "Hola! Soc l’assistent de MΛN POWERS. Et puc ajudar a trobar el producte adequat per millorar el teu rendiment esportiu o mantenir-te al màxim nivell. També puc facilitar dades de contacte, la nostra adreça, informació legal (privacitat, cookies, avís legal), com funciona el pagament amb targeta i per què és segur, i la política d’enviaments i devolucions. En què et puc ajudar?",
+      "chat.hint": "Necessites ajuda?",
       "cookies.changePreferences": "Canviar preferències de cookies",
     },
   },
@@ -861,6 +867,9 @@ const resources = {
       "allProducts.title": "All products",
       "relatedProducts.title": "Related products",
       "cookies.changePreferences": "Change cookie preferences",
+      "chat.intro":
+        "Hi! I’m the MΛN POWERS assistant. I can help you find the right product to boost your performance or keep you at your highest level. I can also provide contact details, our address, legal information (privacy, cookies, legal notice), how card payments work and why they’re secure, and our shipping and returns policy. How can I help?",
+      "chat.hint": "Need help?",
 
       // Products Mobile
       productsMobileAvailableSoon: "Coming Soon",
