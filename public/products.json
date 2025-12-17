@@ -144,6 +144,11 @@
       "category": { "es": "cuidado", "en": "care", "ca": "cura" },
       "sportId": "multisport",
       "available": true,
+      "landing_text": {
+        "es": "Protector solar SPF 50+ con fórmula avanzada y protección total frente a los rayos UVA/UVB.",
+        "en": "SPF 50+ sunscreen with advanced formula and total protection against UVA/UVB rays.",
+        "ca": "Protector solar SPF 50+ amb fórmula avançada i protecció total davant dels raigs UVA/UVB."
+      },
       "rating": 4.5,
       "votes": 73,
       "amazonLinks": {

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import productsService, { type Product } from "../services/productsService";
@@ -20,6 +20,8 @@ const ProductLandingPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const [showStickyButton, setShowStickyButton] = useState(false);
+  const mainButtonRef = useRef<HTMLButtonElement>(null);
 
   const toSlug = (s: string) =>
     s
@@ -79,6 +81,29 @@ const ProductLandingPage: React.FC = () => {
     }
   }, [product, currentLanguage]);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
+          setShowStickyButton(true);
+        } else {
+          setShowStickyButton(false);
+        }
+      },
+      {
+        threshold: 0,
+      }
+    );
+
+    if (mainButtonRef.current) {
+      observer.observe(mainButtonRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [product]);
+
   const handleBuy = () => {
     if (!product || !product.available) return;
     const computedPrice =
@@ -115,7 +140,7 @@ const ProductLandingPage: React.FC = () => {
   }, [product, selectedSize]);
 
   return (
-    <div className="relative min-h-screen bg-white overflow-hidden text-black">
+    <div className="relative min-h-screen bg-[#fafafa] overflow-hidden text-black">
       <div className="fixed top-0 left-0 right-0 z-50">
         <InfoStripe />
       </div>
@@ -149,7 +174,7 @@ const ProductLandingPage: React.FC = () => {
             <img
               src={product.image}
               alt={product.name[currentLanguage] || product.name.es}
-              className="w-full h-auto max-h-[60vh] object-contain mx-auto md:w-full md:h-full md:max-h-none md:mx-0 md:object-cover md:object-left min-[2000px]:object-contain min-[2000px]:w-[90%] min-[2000px]:max-h-[80vh] min-[2000px]:mx-auto md:max-[1900px]:scale-[0.88] md:max-[1800px]:scale-[0.82] md:max-[1700px]:scale-[0.75] md:max-[1600px]:scale-[0.68] md:max-[1500px]:scale-[0.62] md:max-[1700px]:-translate-x-[3%] md:max-[1500px]:-translate-x-[6%]"
+              className="w-full h-auto max-h-[60vh] mt-20 md:mt-0  object-contain mx-auto md:w-full md:h-full md:max-h-none md:mx-0 md:object-cover md:object-left min-[2000px]:object-contain min-[2000px]:w-[90%] min-[2000px]:max-h-[80vh] min-[2000px]:mx-auto md:max-[1900px]:scale-[0.88] md:max-[1800px]:scale-[0.82] md:max-[1700px]:scale-[0.75] md:max-[1600px]:scale-[0.68] md:max-[1500px]:scale-[0.62] md:max-[1700px]:-translate-x-[3%] md:max-[1500px]:-translate-x-[6%]"
               onError={(e) => {
                 const target = e.currentTarget;
                 target.style.display = "none";
@@ -157,10 +182,10 @@ const ProductLandingPage: React.FC = () => {
             />
             <div className="hidden md:block absolute inset-0 bg-[#fcfcfc] opacity-10" />
           </div>
-          <div className="relative bg-[#FCFCFC]">
+          <div className="relative bg-[#FCFCFC] overflow-y-auto h-full mb-20">
             <div className="hidden md:block absolute inset-0" />
-            <div className="relative flex items-center justify-center px-4 sm:px-6 md:px-8 py-10 md:py-0 md:h-full">
-              <div className="w-full max-w-2xl">
+            <div className="relative flex flex-col px-4 sm:px-6 md:px-8 py-10 md:mt-70 md:min-h-full">
+              <div className="w-full max-w-2xl mx-auto my-auto">
                 <h1 className="text-3xl md:text-5xl font-extrabold">
                   {product.name[currentLanguage] || product.name.es}
                 </h1>
@@ -203,6 +228,7 @@ const ProductLandingPage: React.FC = () => {
                 )}
                 <div className="mt-10 md:mt-16">
                   <button
+                    ref={mainButtonRef}
                     onClick={handleBuy}
                     disabled={!product.available}
                     className={`inline-block cursor-pointer md:w-auto w-full font-bold py-4 md:py-6 px-10 md:px-16 text-2xl md:text-4xl rounded-2xl transition-colors ${
@@ -215,6 +241,27 @@ const ProductLandingPage: React.FC = () => {
                       ? t("sports.buy")
                       : t("sports.comingSoon")}
                   </button>
+                  <div className="mt-10 md:mt-16">
+                    <span className="text-lg text-black">
+                      {product.description[currentLanguage] ||
+                        product.description.es}
+                    </span>
+                  </div>
+                  <div className="mt-10 md:mt-16">
+                    <h3 className="text-xl font-bold mb-4">
+                      Modo de aplicación
+                    </h3>
+                    <video
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="w-full h-64 md:h-80 object-cover object-center rounded-2xl"
+                      src="/test-video.mp4"
+                    >
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
                   <div className="mt-10 md:mt-16">
                     <Accordion
                       defaultOpenId="descripcion"
@@ -263,6 +310,22 @@ const ProductLandingPage: React.FC = () => {
               </div>
             </div>
           </div>
+          {product && product.available && (
+            <div
+              className={`fixed bottom-0 left-0 right-0 z-50 p-4 bg-white border-t border-gray-200 md:hidden shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] transition-transform duration-300 ease-in-out ${
+                showStickyButton ? "translate-y-0" : "translate-y-full"
+              }`}
+            >
+              <button
+                onClick={handleBuy}
+                className="w-full bg-gradient-to-r from-yellow-600 to-yellow-500 text-black font-bold py-4 rounded-xl text-xl shadow-lg flex items-center justify-center gap-2"
+              >
+                <span>{t("sports.buy")}</span>
+                <span>-</span>
+                <span>{priceText}</span>
+              </button>
+            </div>
+          )}
         </div>
       ) : null}
     </div>

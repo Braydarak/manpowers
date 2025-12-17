@@ -179,32 +179,36 @@ function PaymentResultPage() {
       }
     }
 
-    // Dirección del comprador desde sessionStorage
-    let buyerAddress = "";
-    let buyerPostalCode = "";
-    let buyerLocality = "";
-    let buyerProvince = "";
-    try {
-      buyerAddress = (sessionStorage.getItem("buyerAddress") || "").trim();
-      buyerPostalCode = (
-        sessionStorage.getItem("buyerPostalCode") || ""
-      ).trim();
-      buyerLocality = (sessionStorage.getItem("buyerLocality") || "").trim();
-      buyerProvince = (sessionStorage.getItem("buyerProvince") || "").trim();
-    } catch (err) {
-      console.warn(
-        "No se pudo leer dirección del comprador desde sessionStorage:",
-        err
-      );
-    }
-    const buyerAddressFull = [
-      buyerAddress,
-      buyerPostalCode,
-      buyerLocality,
-      buyerProvince,
-    ]
-      .filter(Boolean)
-      .join(", ");
+  // Dirección del comprador desde sessionStorage
+  let buyerAddress = "";
+  let buyerPostalCode = "";
+  let buyerLocality = "";
+  let buyerProvince = "";
+  let buyerPhone = "";
+  let marketingOptIn = "";
+  try {
+    buyerAddress = (sessionStorage.getItem("buyerAddress") || "").trim();
+    buyerPostalCode = (
+      sessionStorage.getItem("buyerPostalCode") || ""
+    ).trim();
+    buyerLocality = (sessionStorage.getItem("buyerLocality") || "").trim();
+    buyerProvince = (sessionStorage.getItem("buyerProvince") || "").trim();
+    buyerPhone = (sessionStorage.getItem("buyerPhone") || "").trim();
+    marketingOptIn = (sessionStorage.getItem("marketingOptIn") || "").trim();
+  } catch (err) {
+    console.warn(
+      "No se pudo leer dirección del comprador desde sessionStorage:",
+      err
+    );
+  }
+  const buyerAddressFull = [
+    buyerAddress,
+    buyerPostalCode,
+    buyerLocality,
+    buyerProvince,
+  ]
+    .filter(Boolean)
+    .join(", ");
 
     const payload = {
       message: t("email.receiptMessage"),
@@ -217,10 +221,12 @@ function PaymentResultPage() {
       year: new Date().getFullYear(),
       buyer_address: buyerAddress,
       buyer_postal_code: buyerPostalCode,
-      buyer_locality: buyerLocality,
-      buyer_province: buyerProvince,
-      buyer_address_full: buyerAddressFull,
-    };
+    buyer_locality: buyerLocality,
+    buyer_province: buyerProvince,
+    buyer_address_full: buyerAddressFull,
+    buyer_phone: buyerPhone,
+    marketing_opt_in: marketingOptIn === "true" ? "Sí" : marketingOptIn === "false" ? "No" : marketingOptIn,
+  };
 
     try {
       await emailjs.send(

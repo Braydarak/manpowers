@@ -105,11 +105,15 @@ const AutoEmailSender = () => {
     let buyerPostalCode = "";
     let buyerLocality = "";
     let buyerProvince = "";
+    let buyerPhone = "";
+    let marketingOptIn = "";
     try {
       buyerAddress = (sessionStorage.getItem("buyerAddress") || "").trim();
       buyerPostalCode = (sessionStorage.getItem("buyerPostalCode") || "").trim();
       buyerLocality = (sessionStorage.getItem("buyerLocality") || "").trim();
       buyerProvince = (sessionStorage.getItem("buyerProvince") || "").trim();
+      buyerPhone = (sessionStorage.getItem("buyerPhone") || "").trim();
+      marketingOptIn = (sessionStorage.getItem("marketingOptIn") || "").trim();
     } catch (err) {
       console.warn("No se pudo leer dirección del comprador desde sessionStorage:", err);
     }
@@ -132,6 +136,8 @@ const AutoEmailSender = () => {
       buyer_locality: buyerLocality,
       buyer_province: buyerProvince,
       buyer_address_full: buyerAddressFull,
+      buyer_phone: buyerPhone,
+      marketing_opt_in: marketingOptIn === "true" ? "Sí" : marketingOptIn === "false" ? "No" : marketingOptIn,
     };
 
     // Flag para evitar duplicar por pedido

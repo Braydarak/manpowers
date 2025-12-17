@@ -26,6 +26,8 @@ const parsePrice = (price: string | number | undefined): number => {
 
 // Helper function to validate email
 const isValidEmail = (email: string) => /\S+@\S+\.\S+/.test(email.trim());
+const isValidPhone = (phone: string) =>
+  /^(\+?\d[\d\s-]{6,})$/.test(phone.trim());
 
 const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
   hideSidebar,
@@ -155,6 +157,9 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
   const [promoError, setPromoError] = useState("");
   const [buyerEmail, setBuyerEmail] = useState("");
   const [buyerEmailError, setBuyerEmailError] = useState("");
+  const [buyerPhone, setBuyerPhone] = useState("");
+  const [buyerPhoneError, setBuyerPhoneError] = useState("");
+  const [marketingOptIn, setMarketingOptIn] = useState(false);
   // Campos de dirección requeridos
   const [address, setAddress] = useState("");
   const [postalCode, setPostalCode] = useState("");
@@ -230,6 +235,9 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
         setPaymentError(t("cart.invalidEmail"));
         return;
       }
+      if (buyerPhone.trim() && !isValidPhone(buyerPhone)) {
+        setBuyerPhoneError(t("cart.invalidPhone"));
+      }
       // Validación de campos requeridos
       let hasError = false;
       if (!address.trim()) {
@@ -255,10 +263,12 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
       // Guardar email y dirección del comprador
       try {
         sessionStorage.setItem("buyerEmail", buyerEmail.trim());
+        sessionStorage.setItem("buyerPhone", buyerPhone.trim());
         sessionStorage.setItem("buyerAddress", address.trim());
         sessionStorage.setItem("buyerPostalCode", postalCode.trim());
         sessionStorage.setItem("buyerLocality", locality.trim());
         sessionStorage.setItem("buyerProvince", province.trim());
+        sessionStorage.setItem("marketingOptIn", marketingOptIn ? "Sí" : "No");
         // Log del sessionStorage para depuración
         try {
           const dump: Record<string, string | null> = {};
@@ -553,6 +563,33 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                       )}
                       <div className="mt-3 space-y-2">
                         <label className="block text-sm text-gray-300">
+                          {t("cart.phoneLabel")}
+                        </label>
+                        <input
+                          type="tel"
+                          value={buyerPhone}
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            setBuyerPhone(val);
+                            if (!val.trim()) {
+                              setBuyerPhoneError("");
+                            } else if (!isValidPhone(val)) {
+                              setBuyerPhoneError(t("cart.invalidPhone"));
+                            } else {
+                              setBuyerPhoneError("");
+                            }
+                          }}
+                          placeholder={t("cart.phonePlaceholder")}
+                          className="w-full bg-gray-700 text-white rounded-md px-3 py-2 text-sm border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        />
+                        {buyerPhoneError && (
+                          <p className="text-red-400 text-xs mt-2">
+                            {buyerPhoneError}
+                          </p>
+                        )}
+                      </div>
+                      <div className="mt-3 space-y-2">
+                        <label className="block text-sm text-gray-300">
                           {t("cart.addressLabel")}
                         </label>
                         <input
@@ -626,6 +663,23 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                             {provinceError}
                           </p>
                         )}
+                        <div className="mt-3 flex items-center gap-3 p-2 rounded-lg border border-gray-700 bg-gray-800/50 hover:border-gray-600 transition-colors">
+                          <input
+                            id="marketingOptIn"
+                            type="checkbox"
+                            checked={marketingOptIn}
+                            onChange={(e) =>
+                              setMarketingOptIn(e.target.checked)
+                            }
+                            className="h-5 w-5 rounded border-gray-600 bg-gray-700 accent-yellow-500 focus:ring-2 focus:ring-yellow-500 cursor-pointer"
+                          />
+                          <label
+                            htmlFor="marketingOptIn"
+                            className="text-sm text-gray-300 cursor-pointer"
+                          >
+                            {t("cart.marketingOptInLabel")}
+                          </label>
+                        </div>
                       </div>
                     </div>
                     <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg p-3 border border-gray-700">
@@ -637,7 +691,8 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                           type="text"
                           value={promoCode}
                           onChange={(e) => setPromoCode(e.target.value)}
-                          placeholder="Introduce tu código"
+                          placeholder={t("cart.promoPlaceholder")}
+                          aria-label={t("cart.promoAriaLabel")}
                           className="flex-1 bg-gray-700 text-white rounded-md px-3 py-2 text-sm border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                         />
                         <button
