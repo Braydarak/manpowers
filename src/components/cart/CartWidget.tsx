@@ -481,7 +481,7 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
             }}
           />
           <div className="fixed inset-0 z-[120] flex items-stretch md:items-center justify-center p-0 md:p-4 md:h-[100vh]">
-            <div className="w-full h-screen md:h-auto sm:max-w-md md:max-w-3xl lg:max-w-4xl bg-gradient-to-b from-gray-900 to-black text-white rounded-none md:rounded-xl shadow-2xl border border-gray-700 flex flex-col">
+            <div className="w-full h-screen md:max-h-[700px] sm:max-w-md md:max-w-3xl lg:max-w-4xl bg-gradient-to-b from-gray-900 to-black text-white rounded-none md:rounded-xl shadow-2xl border border-gray-700 flex flex-col">
               <div className="flex items-center justify-between px-5 py-4 border-b border-gray-700">
                 <h3 className="text-white font-semibold mb-2 text-center">
                   {t("cart.finishPurchase")}
