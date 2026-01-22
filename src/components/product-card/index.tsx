@@ -100,7 +100,7 @@ const ProductCard: React.FC<Props> = ({
         if (e.key === 'Enter' || e.key === ' ') handleOpen();
       }}
     >
-      <div className="relative h-64 bg-gray-700 flex items-center justify-center overflow-hidden flex-shrink-0">
+      <div className="relative h-64 bg-white flex items-center justify-center overflow-hidden flex-shrink-0">
         {product.size && (
           <span className="absolute top-2 left-2 text-xs bg-black/70 text-white px-2 py-1 rounded-full">{product.size}</span>
         )}
@@ -110,7 +110,7 @@ const ProductCard: React.FC<Props> = ({
         <img
           src={product.image}
           alt={name}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain"
           onError={(e) => {
             const target = e.currentTarget;
             target.style.display = 'none';

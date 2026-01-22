@@ -30,29 +30,69 @@
       "price": "36,30",
       "size": "150 cap",
       "image": "/products/MACA-500.jpg",
-      "category": { "es": "suplementos", "en": "supplements", "ca": "suplements" },
+      "category": {
+        "es": "suplementos",
+        "en": "supplements",
+        "ca": "suplements"
+      },
       "sportId": "multisport",
       "available": true,
       "rating": 4.7,
       "votes": 128,
       "faqs": {
         "es": [
-          { "question": "¿Para qué sirve la Maca Forte?", "answer": "Apoya energía, resistencia y enfoque mental." },
-          { "question": "¿Cuál es la dosis diaria recomendada?", "answer": "Tomar 1–2 cápsulas al día con agua." },
-          { "question": "¿Cuándo es mejor tomarla?", "answer": "Preferiblemente con comidas, mañana o tarde." },
-          { "question": "¿Tiene contraindicaciones?", "answer": "No superar la dosis. Consultar si estás embarazada o en tratamiento." }
+          {
+            "question": "¿Para qué sirve la Maca Forte?",
+            "answer": "Apoya energía, resistencia y enfoque mental."
+          },
+          {
+            "question": "¿Cuál es la dosis diaria recomendada?",
+            "answer": "Tomar 1–2 cápsulas al día con agua."
+          },
+          {
+            "question": "¿Cuándo es mejor tomarla?",
+            "answer": "Preferiblemente con comidas, mañana o tarde."
+          },
+          {
+            "question": "¿Tiene contraindicaciones?",
+            "answer": "No superar la dosis. Consultar si estás embarazada o en tratamiento."
+          }
         ],
         "en": [
-          { "question": "What is Maca Forte good for?", "answer": "Supports energy, endurance and mental focus." },
-          { "question": "What is the recommended daily dose?", "answer": "Take 1–2 capsules daily with water." },
-          { "question": "When should I take it?", "answer": "Preferably with meals, morning or afternoon." },
-          { "question": "Any contraindications?", "answer": "Do not exceed the dose. Consult if pregnant or under treatment." }
+          {
+            "question": "What is Maca Forte good for?",
+            "answer": "Supports energy, endurance and mental focus."
+          },
+          {
+            "question": "What is the recommended daily dose?",
+            "answer": "Take 1–2 capsules daily with water."
+          },
+          {
+            "question": "When should I take it?",
+            "answer": "Preferably with meals, morning or afternoon."
+          },
+          {
+            "question": "Any contraindications?",
+            "answer": "Do not exceed the dose. Consult if pregnant or under treatment."
+          }
         ],
         "ca": [
-          { "question": "Per a què serveix la Maca Forte?", "answer": "Dóna suport a l'energia, la resistència i l'enfocament mental." },
-          { "question": "Quina és la dosi diària recomanada?", "answer": "Prendre 1–2 càpsules al dia amb aigua." },
-          { "question": "Quan és millor prendre-la?", "answer": "Preferiblement amb els àpats, al matí o a la tarda." },
-          { "question": "Té contraindicacions?", "answer": "No superar la dosi. Consultar si estàs embarassada o en tractament." }
+          {
+            "question": "Per a què serveix la Maca Forte?",
+            "answer": "Dóna suport a l'energia, la resistència i l'enfocament mental."
+          },
+          {
+            "question": "Quina és la dosi diària recomanada?",
+            "answer": "Prendre 1–2 càpsules al dia amb aigua."
+          },
+          {
+            "question": "Quan és millor prendre-la?",
+            "answer": "Preferiblement amb els àpats, al matí o a la tarda."
+          },
+          {
+            "question": "Té contraindicacions?",
+            "answer": "No superar la dosi. Consultar si estàs embarassada o en tractament."
+          }
         ]
       }
     },
@@ -86,29 +126,69 @@
       "price": "30,25",
       "size": "220 cap",
       "image": "/products/OMEGA-3.jpg",
-      "category": { "es": "suplementos", "en": "supplements", "ca": "suplements" },
+      "category": {
+        "es": "suplementos",
+        "en": "supplements",
+        "ca": "suplements"
+      },
       "sportId": "multisport",
       "available": true,
       "rating": 4.6,
       "votes": 96,
       "faqs": {
         "es": [
-          { "question": "¿Cuánto EPA/DHA aporta por dosis?", "answer": "Aporta EPA y DHA purificados, revisar etiqueta del producto." },
-          { "question": "¿Puedo tomarlo con comidas?", "answer": "Sí, se recomienda tomarlo con comidas." },
-          { "question": "¿Interacciones con anticoagulantes?", "answer": "Consultar al médico si estás bajo tratamiento anticoagulante." },
-          { "question": "¿Es apto durante el embarazo?", "answer": "Consultar con un profesional de salud antes de usar." }
+          {
+            "question": "¿Cuánto EPA/DHA aporta por dosis?",
+            "answer": "Aporta EPA y DHA purificados, revisar etiqueta del producto."
+          },
+          {
+            "question": "¿Puedo tomarlo con comidas?",
+            "answer": "Sí, se recomienda tomarlo con comidas."
+          },
+          {
+            "question": "¿Interacciones con anticoagulantes?",
+            "answer": "Consultar al médico si estás bajo tratamiento anticoagulante."
+          },
+          {
+            "question": "¿Es apto durante el embarazo?",
+            "answer": "Consultar con un profesional de salud antes de usar."
+          }
         ],
         "en": [
-          { "question": "How much EPA/DHA per serving?", "answer": "Provides purified EPA and DHA, check the product label." },
-          { "question": "Can I take it with meals?", "answer": "Yes, taking with meals is recommended." },
-          { "question": "Interactions with anticoagulants?", "answer": "Consult your physician if you are on anticoagulant therapy." },
-          { "question": "Is it suitable during pregnancy?", "answer": "Consult a health professional before use." }
+          {
+            "question": "How much EPA/DHA per serving?",
+            "answer": "Provides purified EPA and DHA, check the product label."
+          },
+          {
+            "question": "Can I take it with meals?",
+            "answer": "Yes, taking with meals is recommended."
+          },
+          {
+            "question": "Interactions with anticoagulants?",
+            "answer": "Consult your physician if you are on anticoagulant therapy."
+          },
+          {
+            "question": "Is it suitable during pregnancy?",
+            "answer": "Consult a health professional before use."
+          }
         ],
         "ca": [
-          { "question": "Quant EPA/DHA per dosi?", "answer": "Aporta EPA i DHA purificats; revisa l'etiqueta del producte." },
-          { "question": "El puc prendre amb els àpats?", "answer": "Sí, es recomana prendre'l amb els àpats." },
-          { "question": "Interaccions amb anticoagulants?", "answer": "Consulta el metge si estàs en tractament anticoagulant." },
-          { "question": "És apte durant l'embaràs?", "answer": "Consulta un professional de la salut abans d'usar." }
+          {
+            "question": "Quant EPA/DHA per dosi?",
+            "answer": "Aporta EPA i DHA purificats; revisa l'etiqueta del producte."
+          },
+          {
+            "question": "El puc prendre amb els àpats?",
+            "answer": "Sí, es recomana prendre'l amb els àpats."
+          },
+          {
+            "question": "Interaccions amb anticoagulants?",
+            "answer": "Consulta el metge si estàs en tractament anticoagulant."
+          },
+          {
+            "question": "És apte durant l'embaràs?",
+            "answer": "Consulta un professional de la salut abans d'usar."
+          }
         ]
       }
     },
@@ -134,7 +214,7 @@
         "en": "Avoid contact with eyes. Do not use on irritated skin. Keep out of reach of children.",
         "ca": "Evitar el contacte amb els ulls. No utilitzar sobre pell irritada. Mantenir fora de l'abast dels nens."
       },
-            "pricesBySize": {
+      "pricesBySize": {
         "50ml": "14,52",
         "100ml": "24,20"
       },
@@ -157,22 +237,58 @@
       },
       "faqs": {
         "es": [
-          { "question": "¿Cada cuánto debo reaplicar?", "answer": "Reaplicar cada 2 horas o tras sudor intenso." },
-          { "question": "¿Sirve para rostro y cuerpo?", "answer": "Sí, es apto para uso facial y corporal." },
-          { "question": "¿Resiste al sudor?", "answer": "Sí, la fórmula está pensada para actividad física." },
-          { "question": "¿Es apto para piel sensible?", "answer": "Sí, pero realiza prueba en zona pequeña si tienes piel sensible." }
+          {
+            "question": "¿Cada cuánto debo reaplicar?",
+            "answer": "Reaplicar cada 2 horas o tras sudor intenso."
+          },
+          {
+            "question": "¿Sirve para rostro y cuerpo?",
+            "answer": "Sí, es apto para uso facial y corporal."
+          },
+          {
+            "question": "¿Resiste al sudor?",
+            "answer": "Sí, la fórmula está pensada para actividad física."
+          },
+          {
+            "question": "¿Es apto para piel sensible?",
+            "answer": "Sí, pero realiza prueba en zona pequeña si tienes piel sensible."
+          }
         ],
         "en": [
-          { "question": "How often should I reapply?", "answer": "Reapply every 2 hours or after heavy sweating." },
-          { "question": "Is it suitable for face and body?", "answer": "Yes, suitable for facial and body use." },
-          { "question": "Is it sweat‑resistant?", "answer": "Yes, the formula is designed for physical activity." },
-          { "question": "Is it suitable for sensitive skin?", "answer": "Yes, but patch test if you have sensitive skin." }
+          {
+            "question": "How often should I reapply?",
+            "answer": "Reapply every 2 hours or after heavy sweating."
+          },
+          {
+            "question": "Is it suitable for face and body?",
+            "answer": "Yes, suitable for facial and body use."
+          },
+          {
+            "question": "Is it sweat‑resistant?",
+            "answer": "Yes, the formula is designed for physical activity."
+          },
+          {
+            "question": "Is it suitable for sensitive skin?",
+            "answer": "Yes, but patch test if you have sensitive skin."
+          }
         ],
         "ca": [
-          { "question": "Cada quant he de reaplicar?", "answer": "Reaplica cada 2 hores o després de suor intens." },
-          { "question": "Serveix per a rostre i cos?", "answer": "Sí, apte per a ús facial i corporal." },
-          { "question": "Resisteix la suor?", "answer": "Sí, la fórmula està pensada per a l'activitat física." },
-          { "question": "És apte per a pell sensible?", "answer": "Sí, però fes una prova en una zona petita si tens la pell sensible." }
+          {
+            "question": "Cada quant he de reaplicar?",
+            "answer": "Reaplica cada 2 hores o després de suor intens."
+          },
+          {
+            "question": "Serveix per a rostre i cos?",
+            "answer": "Sí, apte per a ús facial i corporal."
+          },
+          {
+            "question": "Resisteix la suor?",
+            "answer": "Sí, la fórmula està pensada per a l'activitat física."
+          },
+          {
+            "question": "És apte per a pell sensible?",
+            "answer": "Sí, però fes una prova en una zona petita si tens la pell sensible."
+          }
         ]
       }
     },
@@ -206,29 +322,69 @@
       "price": "26,62",
       "size": "300 g",
       "image": "/products/CREATINA.jpg",
-      "category": { "es": "suplementos", "en": "supplements", "ca": "suplements" },
+      "category": {
+        "es": "suplementos",
+        "en": "supplements",
+        "ca": "suplements"
+      },
       "sportId": "multisport",
       "available": true,
       "rating": 4.8,
       "votes": 210,
       "faqs": {
         "es": [
-          { "question": "¿Cuál es la dosis diaria recomendada?", "answer": "Entre 3–5 g al día." },
-          { "question": "¿Necesito fase de carga?", "answer": "Es opcional según objetivos." },
-          { "question": "¿Cuándo tomarla?", "answer": "Antes o después del entrenamiento." },
-          { "question": "¿Puedo combinarla con proteína o cafeína?", "answer": "Sí, puede combinarse con otros suplementos habituales." }
+          {
+            "question": "¿Cuál es la dosis diaria recomendada?",
+            "answer": "Entre 3–5 g al día."
+          },
+          {
+            "question": "¿Necesito fase de carga?",
+            "answer": "Es opcional según objetivos."
+          },
+          {
+            "question": "¿Cuándo tomarla?",
+            "answer": "Antes o después del entrenamiento."
+          },
+          {
+            "question": "¿Puedo combinarla con proteína o cafeína?",
+            "answer": "Sí, puede combinarse con otros suplementos habituales."
+          }
         ],
         "en": [
-          { "question": "What is the recommended daily dose?", "answer": "Between 3–5 g per day." },
-          { "question": "Do I need a loading phase?", "answer": "Optional depending on goals." },
-          { "question": "When should I take it?", "answer": "Before or after training." },
-          { "question": "Can I combine it with protein or caffeine?", "answer": "Yes, commonly combined with other supplements." }
+          {
+            "question": "What is the recommended daily dose?",
+            "answer": "Between 3–5 g per day."
+          },
+          {
+            "question": "Do I need a loading phase?",
+            "answer": "Optional depending on goals."
+          },
+          {
+            "question": "When should I take it?",
+            "answer": "Before or after training."
+          },
+          {
+            "question": "Can I combine it with protein or caffeine?",
+            "answer": "Yes, commonly combined with other supplements."
+          }
         ],
         "ca": [
-          { "question": "Quina és la dosi diària recomanada?", "answer": "Entre 3–5 g al dia." },
-          { "question": "Necessito fase de càrrega?", "answer": "És opcional segons els objectius." },
-          { "question": "Quan l'haig de prendre?", "answer": "Abans o després de l'entrenament." },
-          { "question": "La puc combinar amb proteïna o cafeïna?", "answer": "Sí, es pot combinar amb altres suplements habituals." }
+          {
+            "question": "Quina és la dosi diària recomanada?",
+            "answer": "Entre 3–5 g al dia."
+          },
+          {
+            "question": "Necessito fase de càrrega?",
+            "answer": "És opcional segons els objectius."
+          },
+          {
+            "question": "Quan l'haig de prendre?",
+            "answer": "Abans o després de l'entrenament."
+          },
+          {
+            "question": "La puc combinar amb proteïna o cafeïna?",
+            "answer": "Sí, es pot combinar amb altres suplements habituals."
+          }
         ]
       }
     },
@@ -264,22 +420,58 @@
       "votes": 52,
       "faqs": {
         "es": [
-          { "question": "¿Dónde aplicar?", "answer": "En zonas de fricción como axilas, ingles y cintura." },
-          { "question": "¿Cuánto dura el efecto?", "answer": "Depende de la actividad; reaplicar si es necesario." },
-          { "question": "¿Se puede usar a diario?", "answer": "Sí, apto para uso frecuente." },
-          { "question": "¿Es compatible con piel sensible?", "answer": "Sí, realizar prueba en zona pequeña si tienes piel sensible." }
+          {
+            "question": "¿Dónde aplicar?",
+            "answer": "En zonas de fricción como axilas, ingles y cintura."
+          },
+          {
+            "question": "¿Cuánto dura el efecto?",
+            "answer": "Depende de la actividad; reaplicar si es necesario."
+          },
+          {
+            "question": "¿Se puede usar a diario?",
+            "answer": "Sí, apto para uso frecuente."
+          },
+          {
+            "question": "¿Es compatible con piel sensible?",
+            "answer": "Sí, realizar prueba en zona pequeña si tienes piel sensible."
+          }
         ],
         "en": [
-          { "question": "Where should I apply it?", "answer": "On friction areas like underarms, groin and waist." },
-          { "question": "How long does it last?", "answer": "Depends on activity; reapply as needed." },
-          { "question": "Can I use it daily?", "answer": "Yes, suitable for frequent use." },
-          { "question": "Is it compatible with sensitive skin?", "answer": "Yes, perform a patch test if sensitive." }
+          {
+            "question": "Where should I apply it?",
+            "answer": "On friction areas like underarms, groin and waist."
+          },
+          {
+            "question": "How long does it last?",
+            "answer": "Depends on activity; reapply as needed."
+          },
+          {
+            "question": "Can I use it daily?",
+            "answer": "Yes, suitable for frequent use."
+          },
+          {
+            "question": "Is it compatible with sensitive skin?",
+            "answer": "Yes, perform a patch test if sensitive."
+          }
         ],
         "ca": [
-          { "question": "On aplicar?", "answer": "A zones de fricció com aixelles, engonals i cintura." },
-          { "question": "Quant dura l'efecte?", "answer": "Depèn de l'activitat; reaplicar si cal." },
-          { "question": "Es pot usar diàriament?", "answer": "Sí, apte per a ús freqüent." },
-          { "question": "Compatible amb pell sensible?", "answer": "Sí, fer prova en una zona petita si tens la pell sensible." }
+          {
+            "question": "On aplicar?",
+            "answer": "A zones de fricció com aixelles, engonals i cintura."
+          },
+          {
+            "question": "Quant dura l'efecte?",
+            "answer": "Depèn de l'activitat; reaplicar si cal."
+          },
+          {
+            "question": "Es pot usar diàriament?",
+            "answer": "Sí, apte per a ús freqüent."
+          },
+          {
+            "question": "Compatible amb pell sensible?",
+            "answer": "Sí, fer prova en una zona petita si tens la pell sensible."
+          }
         ]
       }
     },
@@ -315,22 +507,58 @@
       "votes": 88,
       "faqs": {
         "es": [
-          { "question": "¿Para qué se recomienda el gel de aloe?", "answer": "Hidratar, calmar y ayudar a regenerar la piel irritada o expuesta al sol." },
-          { "question": "¿Cómo y cuándo aplicarlo?", "answer": "Aplicar cantidad suficiente y masajear hasta absorción; usar tras sol o irritación." },
-          { "question": "¿Es apto para todo tipo de piel?", "answer": "Sí, apto para uso general. Evitar contacto con ojos." },
-          { "question": "¿Con qué frecuencia puedo usarlo?", "answer": "Según necesidad, incluso a diario." }
+          {
+            "question": "¿Para qué se recomienda el gel de aloe?",
+            "answer": "Hidratar, calmar y ayudar a regenerar la piel irritada o expuesta al sol."
+          },
+          {
+            "question": "¿Cómo y cuándo aplicarlo?",
+            "answer": "Aplicar cantidad suficiente y masajear hasta absorción; usar tras sol o irritación."
+          },
+          {
+            "question": "¿Es apto para todo tipo de piel?",
+            "answer": "Sí, apto para uso general. Evitar contacto con ojos."
+          },
+          {
+            "question": "¿Con qué frecuencia puedo usarlo?",
+            "answer": "Según necesidad, incluso a diario."
+          }
         ],
         "en": [
-          { "question": "What is aloe gel recommended for?", "answer": "Hydrating, soothing, and helping regenerate irritated or sun‑exposed skin." },
-          { "question": "How and when to apply?", "answer": "Apply a sufficient amount and massage until absorbed; use after sun or irritation." },
-          { "question": "Is it suitable for all skin types?", "answer": "Yes, suitable for general use. Avoid contact with eyes." },
-          { "question": "How often can I use it?", "answer": "As needed, even daily." }
+          {
+            "question": "What is aloe gel recommended for?",
+            "answer": "Hydrating, soothing, and helping regenerate irritated or sun‑exposed skin."
+          },
+          {
+            "question": "How and when to apply?",
+            "answer": "Apply a sufficient amount and massage until absorbed; use after sun or irritation."
+          },
+          {
+            "question": "Is it suitable for all skin types?",
+            "answer": "Yes, suitable for general use. Avoid contact with eyes."
+          },
+          {
+            "question": "How often can I use it?",
+            "answer": "As needed, even daily."
+          }
         ],
         "ca": [
-          { "question": "Per a què es recomana el gel d'àloe?", "answer": "Hidratar, calmar i ajudar a regenerar la pell irritada o exposada al sol." },
-          { "question": "Com i quan aplicar-lo?", "answer": "Aplicar quantitat suficient i fer massatge fins a l'absorció; usar després de sol o irritació." },
-          { "question": "És apte per a tot tipus de pell?", "answer": "Sí, apte per a ús general. Evitar el contacte amb els ulls." },
-          { "question": "Amb quina freqüència puc usar-lo?", "answer": "Segons necessitat, fins i tot diàriament." }
+          {
+            "question": "Per a què es recomana el gel d'àloe?",
+            "answer": "Hidratar, calmar i ajudar a regenerar la pell irritada o exposada al sol."
+          },
+          {
+            "question": "Com i quan aplicar-lo?",
+            "answer": "Aplicar quantitat suficient i fer massatge fins a l'absorció; usar després de sol o irritació."
+          },
+          {
+            "question": "És apte per a tot tipus de pell?",
+            "answer": "Sí, apte per a ús general. Evitar el contacte amb els ulls."
+          },
+          {
+            "question": "Amb quina freqüència puc usar-lo?",
+            "answer": "Segons necessitat, fins i tot diàriament."
+          }
         ]
       }
     },
@@ -383,26 +611,61 @@
       "sportId": "archery",
       "available": true,
       "rating": 4.3,
-      "votes": 64
-    ,
+      "votes": 64,
       "faqs": {
         "es": [
-          { "question": "¿Fortalece el cabello?", "answer": "Sí, ayuda a reforzar desde la raíz y limpiar suavemente sudor y residuos." },
-          { "question": "¿Frecuencia de uso?", "answer": "Apto para uso frecuente." },
-          { "question": "¿Sirve para cuero cabelludo sensible?", "answer": "Sí, pero evitar contacto con ojos y suspender si hay irritación." },
-          { "question": "¿Deja residuos?", "answer": "No, limpia y enjuaga sin dejar residuo pesado." }
+          {
+            "question": "¿Fortalece el cabello?",
+            "answer": "Sí, ayuda a reforzar desde la raíz y limpiar suavemente sudor y residuos."
+          },
+          {
+            "question": "¿Frecuencia de uso?",
+            "answer": "Apto para uso frecuente."
+          },
+          {
+            "question": "¿Sirve para cuero cabelludo sensible?",
+            "answer": "Sí, pero evitar contacto con ojos y suspender si hay irritación."
+          },
+          {
+            "question": "¿Deja residuos?",
+            "answer": "No, limpia y enjuaga sin dejar residuo pesado."
+          }
         ],
         "en": [
-          { "question": "Does it strengthen hair?", "answer": "Yes, supports root strength and gently clears sweat and residue." },
-          { "question": "How often should I use it?", "answer": "Suitable for frequent use." },
-          { "question": "Is it good for sensitive scalps?", "answer": "Yes, avoid eye contact and discontinue if irritation occurs." },
-          { "question": "Does it leave residue?", "answer": "No, cleans and rinses without heavy residue." }
+          {
+            "question": "Does it strengthen hair?",
+            "answer": "Yes, supports root strength and gently clears sweat and residue."
+          },
+          {
+            "question": "How often should I use it?",
+            "answer": "Suitable for frequent use."
+          },
+          {
+            "question": "Is it good for sensitive scalps?",
+            "answer": "Yes, avoid eye contact and discontinue if irritation occurs."
+          },
+          {
+            "question": "Does it leave residue?",
+            "answer": "No, cleans and rinses without heavy residue."
+          }
         ],
         "ca": [
-          { "question": "Enforteix el cabell?", "answer": "Sí, ajuda a reforçar des de l'arrel i neteja suaument suor i residus." },
-          { "question": "Freqüència d'ús?", "answer": "Apte per a ús freqüent." },
-          { "question": "Serveix per a cuir cabellut sensible?", "answer": "Sí, però evita el contacte amb els ulls i suspèn si hi ha irritació." },
-          { "question": "Deixa residus?", "answer": "No, neteja i esbandix sense deixar residu pesat." }
+          {
+            "question": "Enforteix el cabell?",
+            "answer": "Sí, ajuda a reforçar des de l'arrel i neteja suaument suor i residus."
+          },
+          {
+            "question": "Freqüència d'ús?",
+            "answer": "Apte per a ús freqüent."
+          },
+          {
+            "question": "Serveix per a cuir cabellut sensible?",
+            "answer": "Sí, però evita el contacte amb els ulls i suspèn si hi ha irritació."
+          },
+          {
+            "question": "Deixa residus?",
+            "answer": "No, neteja i esbandix sense deixar residu pesat."
+          }
         ]
       }
     },
@@ -435,26 +698,55 @@
       "sportId": "sailing",
       "available": true,
       "rating": 4.4,
-      "votes": 57
-    ,
+      "votes": 57,
       "faqs": {
         "es": [
-          { "question": "¿Para qué momentos se recomienda?", "answer": "Tras maniobras o regatas para aliviar tensión en hombros y zona lumbar." },
-          { "question": "¿Cómo aplicarla?", "answer": "Aplicar con masaje hasta absorción en la zona cargada." },
+          {
+            "question": "¿Para qué momentos se recomienda?",
+            "answer": "Tras maniobras o regatas para aliviar tensión en hombros y zona lumbar."
+          },
+          {
+            "question": "¿Cómo aplicarla?",
+            "answer": "Aplicar con masaje hasta absorción en la zona cargada."
+          },
           { "question": "¿Sirve a diario?", "answer": "Sí, según necesidad." },
-          { "question": "¿Deja sensación pegajosa?", "answer": "No, textura cómoda y de rápida absorción." }
+          {
+            "question": "¿Deja sensación pegajosa?",
+            "answer": "No, textura cómoda y de rápida absorción."
+          }
         ],
         "en": [
-          { "question": "When is it recommended?", "answer": "After maneuvers or regattas to ease shoulder and lower‑back tension." },
-          { "question": "How to apply?", "answer": "Massage into the tense area until absorbed." },
+          {
+            "question": "When is it recommended?",
+            "answer": "After maneuvers or regattas to ease shoulder and lower‑back tension."
+          },
+          {
+            "question": "How to apply?",
+            "answer": "Massage into the tense area until absorbed."
+          },
           { "question": "Is daily use okay?", "answer": "Yes, as needed." },
-          { "question": "Does it feel sticky?", "answer": "No, comfortable texture and quick absorption." }
+          {
+            "question": "Does it feel sticky?",
+            "answer": "No, comfortable texture and quick absorption."
+          }
         ],
         "ca": [
-          { "question": "Quan es recomana?", "answer": "Després de maniobres o regates per alleujar tensió a espatlles i zona lumbar." },
-          { "question": "Com aplicar-la?", "answer": "Aplicar amb massatge fins a l'absorció a la zona carregada." },
-          { "question": "Serveix diàriament?", "answer": "Sí, segons necessitat." },
-          { "question": "Deixa sensació enganxosa?", "answer": "No, textura còmoda i d'absorció ràpida." }
+          {
+            "question": "Quan es recomana?",
+            "answer": "Després de maniobres o regates per alleujar tensió a espatlles i zona lumbar."
+          },
+          {
+            "question": "Com aplicar-la?",
+            "answer": "Aplicar amb massatge fins a l'absorció a la zona carregada."
+          },
+          {
+            "question": "Serveix diàriament?",
+            "answer": "Sí, segons necessitat."
+          },
+          {
+            "question": "Deixa sensació enganxosa?",
+            "answer": "No, textura còmoda i d'absorció ràpida."
+          }
         ]
       }
     },
@@ -487,26 +779,52 @@
       "sportId": "sailing",
       "available": true,
       "rating": 4.2,
-      "votes": 49
-    ,
+      "votes": 49,
       "faqs": {
         "es": [
-          { "question": "¿Para qué zonas del pie?", "answer": "Talones y plantas; hidrata, calma y ayuda a neutralizar el olor." },
-          { "question": "¿Cómo aplicarla?", "answer": "Aplicar en pies limpios y secos, con masaje." },
+          {
+            "question": "¿Para qué zonas del pie?",
+            "answer": "Talones y plantas; hidrata, calma y ayuda a neutralizar el olor."
+          },
+          {
+            "question": "¿Cómo aplicarla?",
+            "answer": "Aplicar en pies limpios y secos, con masaje."
+          },
           { "question": "¿Uso diario?", "answer": "Sí, según necesidad." },
-          { "question": "¿Aroma y sensación?", "answer": "Aroma discreto, deja sensación fresca." }
+          {
+            "question": "¿Aroma y sensación?",
+            "answer": "Aroma discreto, deja sensación fresca."
+          }
         ],
         "en": [
-          { "question": "Which foot areas?", "answer": "Heels and soles; hydrates, soothes, and helps neutralize odor." },
-          { "question": "How to apply?", "answer": "Apply to clean, dry feet and massage." },
+          {
+            "question": "Which foot areas?",
+            "answer": "Heels and soles; hydrates, soothes, and helps neutralize odor."
+          },
+          {
+            "question": "How to apply?",
+            "answer": "Apply to clean, dry feet and massage."
+          },
           { "question": "Daily use?", "answer": "Yes, as needed." },
-          { "question": "Scent and feel?", "answer": "Subtle scent, leaves a fresh feel." }
+          {
+            "question": "Scent and feel?",
+            "answer": "Subtle scent, leaves a fresh feel."
+          }
         ],
         "ca": [
-          { "question": "Quines zones del peu?", "answer": "Talons i plantes; hidrata, calma i ajuda a neutralitzar l'olor." },
-          { "question": "Com aplicar-la?", "answer": "Aplicar en peus nets i secs, amb massatge." },
+          {
+            "question": "Quines zones del peu?",
+            "answer": "Talons i plantes; hidrata, calma i ajuda a neutralitzar l'olor."
+          },
+          {
+            "question": "Com aplicar-la?",
+            "answer": "Aplicar en peus nets i secs, amb massatge."
+          },
           { "question": "Ús diari?", "answer": "Sí, segons necessitat." },
-          { "question": "Aroma i sensació?", "answer": "Aroma discret, deixa una sensació fresca." }
+          {
+            "question": "Aroma i sensació?",
+            "answer": "Aroma discret, deixa una sensació fresca."
+          }
         ]
       }
     },
@@ -539,26 +857,61 @@
       "sportId": "cycling",
       "available": true,
       "rating": 4.3,
-      "votes": 61
-    ,
+      "votes": 61,
       "faqs": {
         "es": [
-          { "question": "¿Dónde aplicar antes de la ruta?", "answer": "Zonas de contacto con el sillín para reducir la fricción." },
-          { "question": "¿Resiste sudor y agua?", "answer": "Sí, forma película resistente para rutas largas." },
-          { "question": "¿Irrita la piel?", "answer": "No aplicar sobre cortes o irritaciones." },
-          { "question": "¿Afecta el agarre?", "answer": "No, ligera y de fácil aplicación." }
+          {
+            "question": "¿Dónde aplicar antes de la ruta?",
+            "answer": "Zonas de contacto con el sillín para reducir la fricción."
+          },
+          {
+            "question": "¿Resiste sudor y agua?",
+            "answer": "Sí, forma película resistente para rutas largas."
+          },
+          {
+            "question": "¿Irrita la piel?",
+            "answer": "No aplicar sobre cortes o irritaciones."
+          },
+          {
+            "question": "¿Afecta el agarre?",
+            "answer": "No, ligera y de fácil aplicación."
+          }
         ],
         "en": [
-          { "question": "Where to apply pre‑ride?", "answer": "Saddle contact areas to reduce friction." },
-          { "question": "Is it sweat/water resistant?", "answer": "Yes, forms a resistant film for long routes." },
-          { "question": "Skin irritation?", "answer": "Do not apply on cuts or irritations." },
-          { "question": "Affects grip?", "answer": "No, lightweight and easy to apply." }
+          {
+            "question": "Where to apply pre‑ride?",
+            "answer": "Saddle contact areas to reduce friction."
+          },
+          {
+            "question": "Is it sweat/water resistant?",
+            "answer": "Yes, forms a resistant film for long routes."
+          },
+          {
+            "question": "Skin irritation?",
+            "answer": "Do not apply on cuts or irritations."
+          },
+          {
+            "question": "Affects grip?",
+            "answer": "No, lightweight and easy to apply."
+          }
         ],
         "ca": [
-          { "question": "On aplicar abans de la ruta?", "answer": "Zones de contacte amb el seient per reduir la fricció." },
-          { "question": "Resisteix la suor i l'aigua?", "answer": "Sí, forma una pel·lícula resistent per a rutes llargues." },
-          { "question": "Irrita la pell?", "answer": "No aplicar sobre talls o irritacions." },
-          { "question": "Afecta l'adherència?", "answer": "No, és lleugera i de fàcil aplicació." }
+          {
+            "question": "On aplicar abans de la ruta?",
+            "answer": "Zones de contacte amb el seient per reduir la fricció."
+          },
+          {
+            "question": "Resisteix la suor i l'aigua?",
+            "answer": "Sí, forma una pel·lícula resistent per a rutes llargues."
+          },
+          {
+            "question": "Irrita la pell?",
+            "answer": "No aplicar sobre talls o irritacions."
+          },
+          {
+            "question": "Afecta l'adherència?",
+            "answer": "No, és lleugera i de fàcil aplicació."
+          }
         ]
       }
     },
@@ -591,26 +944,61 @@
       "sportId": "archery",
       "available": true,
       "rating": 4.6,
-      "votes": 132
-    ,
+      "votes": 132,
       "faqs": {
         "es": [
-          { "question": "¿Mejora el agarre del arco?", "answer": "Sí, ofrece firmeza seca y controlada para evitar deslizamientos." },
-          { "question": "¿Cómo aplicarlo?", "answer": "Pequeña cantidad en palma y dedos antes de tirar." },
-          { "question": "¿Deja residuos?", "answer": "No deja residuo pegajoso y cuida la piel." },
-          { "question": "¿Apto para sesiones largas?", "answer": "Sí, pensado para mantener sujeción constante." }
+          {
+            "question": "¿Mejora el agarre del arco?",
+            "answer": "Sí, ofrece firmeza seca y controlada para evitar deslizamientos."
+          },
+          {
+            "question": "¿Cómo aplicarlo?",
+            "answer": "Pequeña cantidad en palma y dedos antes de tirar."
+          },
+          {
+            "question": "¿Deja residuos?",
+            "answer": "No deja residuo pegajoso y cuida la piel."
+          },
+          {
+            "question": "¿Apto para sesiones largas?",
+            "answer": "Sí, pensado para mantener sujeción constante."
+          }
         ],
         "en": [
-          { "question": "Does it improve bow grip?", "answer": "Yes, dry steady firmness prevents slip." },
-          { "question": "How to apply?", "answer": "Small amount on palms and fingers before shooting." },
-          { "question": "Residue?", "answer": "No sticky residue; skin‑friendly." },
-          { "question": "Suitable for long sessions?", "answer": "Yes, designed to keep hold consistent." }
+          {
+            "question": "Does it improve bow grip?",
+            "answer": "Yes, dry steady firmness prevents slip."
+          },
+          {
+            "question": "How to apply?",
+            "answer": "Small amount on palms and fingers before shooting."
+          },
+          {
+            "question": "Residue?",
+            "answer": "No sticky residue; skin‑friendly."
+          },
+          {
+            "question": "Suitable for long sessions?",
+            "answer": "Yes, designed to keep hold consistent."
+          }
         ],
         "ca": [
-          { "question": "Millora l'agarre de l'arc?", "answer": "Sí, ofereix fermesa seca i controlada per evitar lliscaments." },
-          { "question": "Com aplicar-lo?", "answer": "Petita quantitat a palma i dits abans de tirar." },
-          { "question": "Deixa residus?", "answer": "No deixa residu enganxós i cuida la pell." },
-          { "question": "Apte per a sessions llargues?", "answer": "Sí, pensat per mantenir la subjecció constant." }
+          {
+            "question": "Millora l'agarre de l'arc?",
+            "answer": "Sí, ofereix fermesa seca i controlada per evitar lliscaments."
+          },
+          {
+            "question": "Com aplicar-lo?",
+            "answer": "Petita quantitat a palma i dits abans de tirar."
+          },
+          {
+            "question": "Deixa residus?",
+            "answer": "No deixa residu enganxós i cuida la pell."
+          },
+          {
+            "question": "Apte per a sessions llargues?",
+            "answer": "Sí, pensat per mantenir la subjecció constant."
+          }
         ]
       }
     },
@@ -643,26 +1031,61 @@
       "sportId": "archery",
       "available": true,
       "rating": 4.4,
-      "votes": 75
-    ,
+      "votes": 75,
       "faqs": {
         "es": [
-          { "question": "¿Cuándo usar la crema efecto frío?", "answer": "Entre tandas o tras la práctica para aliviar carga en antebrazos y hombros." },
-          { "question": "¿Se absorbe rápido?", "answer": "Sí, de rápida absorción y sin residuos." },
-          { "question": "¿Sirve en campo?", "answer": "Sí, ideal para uso en campo de tiro." },
-          { "question": "¿Precauciones?", "answer": "Evitar contacto con ojos; lavar manos tras usar." }
+          {
+            "question": "¿Cuándo usar la crema efecto frío?",
+            "answer": "Entre tandas o tras la práctica para aliviar carga en antebrazos y hombros."
+          },
+          {
+            "question": "¿Se absorbe rápido?",
+            "answer": "Sí, de rápida absorción y sin residuos."
+          },
+          {
+            "question": "¿Sirve en campo?",
+            "answer": "Sí, ideal para uso en campo de tiro."
+          },
+          {
+            "question": "¿Precauciones?",
+            "answer": "Evitar contacto con ojos; lavar manos tras usar."
+          }
         ],
         "en": [
-          { "question": "When to use the cooling cream?", "answer": "Between ends or after practice to ease forearm and shoulder load." },
-          { "question": "Fast absorbing?", "answer": "Yes, quick absorption without residue." },
-          { "question": "Range‑friendly?", "answer": "Yes, ideal for use on the range." },
-          { "question": "Precautions?", "answer": "Avoid eye contact; wash hands after use." }
+          {
+            "question": "When to use the cooling cream?",
+            "answer": "Between ends or after practice to ease forearm and shoulder load."
+          },
+          {
+            "question": "Fast absorbing?",
+            "answer": "Yes, quick absorption without residue."
+          },
+          {
+            "question": "Range‑friendly?",
+            "answer": "Yes, ideal for use on the range."
+          },
+          {
+            "question": "Precautions?",
+            "answer": "Avoid eye contact; wash hands after use."
+          }
         ],
         "ca": [
-          { "question": "Quan usar la crema efecte fred?", "answer": "Entre sèries o després de la pràctica per alleujar càrrega en avantbraços i espatlles." },
-          { "question": "S'absorbeix ràpid?", "answer": "Sí, d'absorció ràpida i sense residus." },
-          { "question": "És apta al camp?", "answer": "Sí, ideal per a ús al camp de tir." },
-          { "question": "Precaucions?", "answer": "Evitar el contacte amb els ulls; rentar mans després d'usar." }
+          {
+            "question": "Quan usar la crema efecte fred?",
+            "answer": "Entre sèries o després de la pràctica per alleujar càrrega en avantbraços i espatlles."
+          },
+          {
+            "question": "S'absorbeix ràpid?",
+            "answer": "Sí, d'absorció ràpida i sense residus."
+          },
+          {
+            "question": "És apta al camp?",
+            "answer": "Sí, ideal per a ús al camp de tir."
+          },
+          {
+            "question": "Precaucions?",
+            "answer": "Evitar el contacte amb els ulls; rentar mans després d'usar."
+          }
         ]
       }
     },
@@ -695,26 +1118,61 @@
       "sportId": "archery",
       "available": true,
       "rating": 4.3,
-      "votes": 68
-    ,
+      "votes": 68,
       "faqs": {
         "es": [
-          { "question": "¿Para qué zona se recomienda?", "answer": "Escapular y manguito rotador tras la práctica, para suavizar tensión." },
-          { "question": "¿Cómo aplicarlo?", "answer": "Con masaje hasta absorción en músculos trabajados." },
-          { "question": "¿Se absorbe rápido?", "answer": "Sí, absorción rápida y deslizamiento justo." },
-          { "question": "¿Uso regular?", "answer": "Sí, integrarlo en la rutina de recuperación." }
+          {
+            "question": "¿Para qué zona se recomienda?",
+            "answer": "Escapular y manguito rotador tras la práctica, para suavizar tensión."
+          },
+          {
+            "question": "¿Cómo aplicarlo?",
+            "answer": "Con masaje hasta absorción en músculos trabajados."
+          },
+          {
+            "question": "¿Se absorbe rápido?",
+            "answer": "Sí, absorción rápida y deslizamiento justo."
+          },
+          {
+            "question": "¿Uso regular?",
+            "answer": "Sí, integrarlo en la rutina de recuperación."
+          }
         ],
         "en": [
-          { "question": "Which areas are targeted?", "answer": "Scapular area and rotator cuff post‑practice to ease tension." },
-          { "question": "How to apply?", "answer": "Massage into worked muscles until absorbed." },
-          { "question": "Fast absorption?", "answer": "Yes, quick absorption with just‑right glide." },
-          { "question": "Regular use?", "answer": "Yes, fit into recovery routine." }
+          {
+            "question": "Which areas are targeted?",
+            "answer": "Scapular area and rotator cuff post‑practice to ease tension."
+          },
+          {
+            "question": "How to apply?",
+            "answer": "Massage into worked muscles until absorbed."
+          },
+          {
+            "question": "Fast absorption?",
+            "answer": "Yes, quick absorption with just‑right glide."
+          },
+          {
+            "question": "Regular use?",
+            "answer": "Yes, fit into recovery routine."
+          }
         ],
         "ca": [
-          { "question": "Quina zona es recomana?", "answer": "Escapular i manegot rotador després de la pràctica, per suavitzar la tensió." },
-          { "question": "Com aplicar-lo?", "answer": "Amb massatge fins a l'absorció en músculs treballats." },
-          { "question": "S'absorbeix ràpid?", "answer": "Sí, absorció ràpida i lliscament just." },
-          { "question": "Ús regular?", "answer": "Sí, integrar-lo en la rutina de recuperació." }
+          {
+            "question": "Quina zona es recomana?",
+            "answer": "Escapular i manegot rotador després de la pràctica, per suavitzar la tensió."
+          },
+          {
+            "question": "Com aplicar-lo?",
+            "answer": "Amb massatge fins a l'absorció en músculs treballats."
+          },
+          {
+            "question": "S'absorbeix ràpid?",
+            "answer": "Sí, absorció ràpida i lliscament just."
+          },
+          {
+            "question": "Ús regular?",
+            "answer": "Sí, integrar-lo en la rutina de recuperació."
+          }
         ]
       }
     },
@@ -747,26 +1205,61 @@
       "sportId": "archery",
       "available": true,
       "rating": 4.2,
-      "votes": 59
-    ,
+      "votes": 59,
       "faqs": {
         "es": [
-          { "question": "¿Cuándo usar el gel calor?", "answer": "En calentamiento para activar hombros, espalda y muñecas." },
-          { "question": "¿Sensación térmica?", "answer": "Progresiva, sin molestar el agarre." },
-          { "question": "¿Precauciones?", "answer": "No usar en piel irritada; lavar manos tras uso." },
-          { "question": "¿Interfiere con el agarre?", "answer": "No, textura pensada para no interferir." }
+          {
+            "question": "¿Cuándo usar el gel calor?",
+            "answer": "En calentamiento para activar hombros, espalda y muñecas."
+          },
+          {
+            "question": "¿Sensación térmica?",
+            "answer": "Progresiva, sin molestar el agarre."
+          },
+          {
+            "question": "¿Precauciones?",
+            "answer": "No usar en piel irritada; lavar manos tras uso."
+          },
+          {
+            "question": "¿Interfiere con el agarre?",
+            "answer": "No, textura pensada para no interferir."
+          }
         ],
         "en": [
-          { "question": "When to use heat gel?", "answer": "During warm‑up to activate shoulders, back, and wrists." },
-          { "question": "Thermal feel?", "answer": "Gradual, without interfering with grip." },
-          { "question": "Precautions?", "answer": "Do not use on irritated skin; wash hands after use." },
-          { "question": "Grip interference?", "answer": "No, texture designed not to interfere." }
+          {
+            "question": "When to use heat gel?",
+            "answer": "During warm‑up to activate shoulders, back, and wrists."
+          },
+          {
+            "question": "Thermal feel?",
+            "answer": "Gradual, without interfering with grip."
+          },
+          {
+            "question": "Precautions?",
+            "answer": "Do not use on irritated skin; wash hands after use."
+          },
+          {
+            "question": "Grip interference?",
+            "answer": "No, texture designed not to interfere."
+          }
         ],
         "ca": [
-          { "question": "Quan usar el gel calor?", "answer": "Durant l'escalfament per activar espatlles, esquena i canells." },
-          { "question": "Sensació tèrmica?", "answer": "Progressiva, sense molestar l'agarre." },
-          { "question": "Precaucions?", "answer": "No usar en pell irritada; rentar les mans després de l'ús." },
-          { "question": "Interfereix amb l'agarre?", "answer": "No, textura pensada per no interferir." }
+          {
+            "question": "Quan usar el gel calor?",
+            "answer": "Durant l'escalfament per activar espatlles, esquena i canells."
+          },
+          {
+            "question": "Sensació tèrmica?",
+            "answer": "Progressiva, sense molestar l'agarre."
+          },
+          {
+            "question": "Precaucions?",
+            "answer": "No usar en pell irritada; rentar les mans després de l'ús."
+          },
+          {
+            "question": "Interfereix amb l'agarre?",
+            "answer": "No, textura pensada per no interferir."
+          }
         ]
       }
     },
@@ -799,26 +1292,58 @@
       "sportId": "fencing",
       "available": true,
       "rating": 4.2,
-      "votes": 54
-    ,
+      "votes": 54,
       "faqs": {
         "es": [
-          { "question": "¿Uso recomendado?", "answer": "Antes del asalto para activar músculos de piernas y brazos." },
-          { "question": "¿Sensación térmica?", "answer": "Suave, acompaña el calentamiento." },
-          { "question": "¿Precauciones?", "answer": "Evitar contacto con ojos y mucosas." },
-          { "question": "¿Frecuencia?", "answer": "Según rutina de calentamiento." }
+          {
+            "question": "¿Uso recomendado?",
+            "answer": "Antes del asalto para activar músculos de piernas y brazos."
+          },
+          {
+            "question": "¿Sensación térmica?",
+            "answer": "Suave, acompaña el calentamiento."
+          },
+          {
+            "question": "¿Precauciones?",
+            "answer": "Evitar contacto con ojos y mucosas."
+          },
+          {
+            "question": "¿Frecuencia?",
+            "answer": "Según rutina de calentamiento."
+          }
         ],
         "en": [
-          { "question": "Recommended use?", "answer": "Pre‑bout to activate leg and arm muscles." },
-          { "question": "Thermal feel?", "answer": "Gentle, supports warm‑up." },
-          { "question": "Precautions?", "answer": "Avoid eyes and mucous membranes." },
+          {
+            "question": "Recommended use?",
+            "answer": "Pre‑bout to activate leg and arm muscles."
+          },
+          {
+            "question": "Thermal feel?",
+            "answer": "Gentle, supports warm‑up."
+          },
+          {
+            "question": "Precautions?",
+            "answer": "Avoid eyes and mucous membranes."
+          },
           { "question": "Frequency?", "answer": "As per warm‑up routine." }
         ],
         "ca": [
-          { "question": "Ús recomanat?", "answer": "Abans de l'assalt per activar músculs de cames i braços." },
-          { "question": "Sensació tèrmica?", "answer": "Suau, acompanya l'escalfament." },
-          { "question": "Precaucions?", "answer": "Evitar contacte amb ulls i mucoses." },
-          { "question": "Freqüència?", "answer": "Segons la rutina d'escalfament." }
+          {
+            "question": "Ús recomanat?",
+            "answer": "Abans de l'assalt per activar músculs de cames i braços."
+          },
+          {
+            "question": "Sensació tèrmica?",
+            "answer": "Suau, acompanya l'escalfament."
+          },
+          {
+            "question": "Precaucions?",
+            "answer": "Evitar contacte amb ulls i mucoses."
+          },
+          {
+            "question": "Freqüència?",
+            "answer": "Segons la rutina d'escalfament."
+          }
         ]
       }
     },
@@ -841,25 +1366,51 @@
       "sportId": "fencing",
       "available": true,
       "rating": 4.1,
-      "votes": 47
-    ,
+      "votes": 47,
       "faqs": {
         "es": [
-          { "question": "¿Para qué sirve?", "answer": "Soltar carga en antebrazos, muñecas y codos tras la práctica." },
-          { "question": "¿Cómo aplicarlo?", "answer": "Masajear en zonas trabajadas hasta absorber." },
-          { "question": "¿Textura?", "answer": "Cremigel cómodo, se integra en la vuelta a la calma." },
+          {
+            "question": "¿Para qué sirve?",
+            "answer": "Soltar carga en antebrazos, muñecas y codos tras la práctica."
+          },
+          {
+            "question": "¿Cómo aplicarlo?",
+            "answer": "Masajear en zonas trabajadas hasta absorber."
+          },
+          {
+            "question": "¿Textura?",
+            "answer": "Cremigel cómodo, se integra en la vuelta a la calma."
+          },
           { "question": "¿Uso frecuente?", "answer": "Sí, según necesidad." }
         ],
         "en": [
-          { "question": "What is it for?", "answer": "Releasing load in forearms, wrists and elbows post‑practice." },
-          { "question": "How to apply?", "answer": "Massage into worked areas until absorbed." },
-          { "question": "Texture?", "answer": "Comfortable cream‑gel, fits cool‑down." },
+          {
+            "question": "What is it for?",
+            "answer": "Releasing load in forearms, wrists and elbows post‑practice."
+          },
+          {
+            "question": "How to apply?",
+            "answer": "Massage into worked areas until absorbed."
+          },
+          {
+            "question": "Texture?",
+            "answer": "Comfortable cream‑gel, fits cool‑down."
+          },
           { "question": "Frequent use?", "answer": "Yes, as needed." }
         ],
         "ca": [
-          { "question": "Per a què serveix?", "answer": "Alliberar càrrega en avantbraços, canells i colzes després de la pràctica." },
-          { "question": "Com aplicar-lo?", "answer": "Fer massatge en zones treballades fins a l'absorció." },
-          { "question": "Textura?", "answer": "Cremigel còmode, s'integra en la tornada a la calma." },
+          {
+            "question": "Per a què serveix?",
+            "answer": "Alliberar càrrega en avantbraços, canells i colzes després de la pràctica."
+          },
+          {
+            "question": "Com aplicar-lo?",
+            "answer": "Fer massatge en zones treballades fins a l'absorció."
+          },
+          {
+            "question": "Textura?",
+            "answer": "Cremigel còmode, s'integra en la tornada a la calma."
+          },
           { "question": "Ús freqüent?", "answer": "Sí, segons necessitat." }
         ]
       }
@@ -876,33 +1427,72 @@
         "en": "Calcium + Magnesium Vitamin K is a combination of essential nutrients for body wellness. Calcium helps strengthen muscles and joints, while magnesium improves muscular function and body sensation. Vitamin K is crucial for the functioning of the nervous system and muscles, and helps prevent injuries and diseases. This nutritional combination is essential for improving sports performance and preventing injuries in professional athletes.",
         "ca": "Calci + Magnesi Vitamina K és una combinació de nutrients essencials per al benestar del cos. El calci ajuda a enfortir els músculs i les articulacions, mentre que el magnesi millora la funció muscular i la sensació corporal. La vitamina K és clau per al funcionament del sistema nerviós i muscular, i ajuda a prevenir lesions i malalties. Aquesta combinació nutricional és essencial per millorar el rendiment esportiu i prevenir lesions en atletes professionals."
       },
-      "category": { "es": "suplementos", "en": "supplements", "ca": "suplements" },
+      "category": {
+        "es": "suplementos",
+        "en": "supplements",
+        "ca": "suplements"
+      },
       "image": "/products/CALCIO-MAGNESIO-VITAMINA-K-MAN-POWERS.jpg",
       "price": "24,20",
       "size": "150 cap",
       "sportId": "multisport",
       "available": true,
       "rating": 4.5,
-      "votes": 101
-    ,
+      "votes": 101,
       "faqs": {
         "es": [
-          { "question": "¿Para qué sirve la combinación?", "answer": "Apoya función muscular, salud ósea y bienestar general." },
-          { "question": "¿Cómo tomarlo?", "answer": "Seguir indicaciones del envase; preferible con comidas." },
-          { "question": "¿Compatibilidad con otros suplementos?", "answer": "Generalmente compatible; evitar exceder ingesta diaria recomendada." },
-          { "question": "¿Precauciones?", "answer": "Consultar profesionales si estás en tratamiento o tienes condiciones médicas." }
+          {
+            "question": "¿Para qué sirve la combinación?",
+            "answer": "Apoya función muscular, salud ósea y bienestar general."
+          },
+          {
+            "question": "¿Cómo tomarlo?",
+            "answer": "Seguir indicaciones del envase; preferible con comidas."
+          },
+          {
+            "question": "¿Compatibilidad con otros suplementos?",
+            "answer": "Generalmente compatible; evitar exceder ingesta diaria recomendada."
+          },
+          {
+            "question": "¿Precauciones?",
+            "answer": "Consultar profesionales si estás en tratamiento o tienes condiciones médicas."
+          }
         ],
         "en": [
-          { "question": "What is this combo for?", "answer": "Supports muscular function, bone health, and overall wellness." },
-          { "question": "How to take it?", "answer": "Follow label directions; preferably with meals." },
-          { "question": "Compatibility with other supplements?", "answer": "Generally compatible; avoid exceeding recommended intake." },
-          { "question": "Precautions?", "answer": "Consult professionals if under treatment or with medical conditions." }
+          {
+            "question": "What is this combo for?",
+            "answer": "Supports muscular function, bone health, and overall wellness."
+          },
+          {
+            "question": "How to take it?",
+            "answer": "Follow label directions; preferably with meals."
+          },
+          {
+            "question": "Compatibility with other supplements?",
+            "answer": "Generally compatible; avoid exceeding recommended intake."
+          },
+          {
+            "question": "Precautions?",
+            "answer": "Consult professionals if under treatment or with medical conditions."
+          }
         ],
         "ca": [
-          { "question": "Per a què serveix la combinació?", "answer": "Dóna suport a la funció muscular, salut òssia i benestar general." },
-          { "question": "Com prendre-ho?", "answer": "Seguir indicacions de l'envàs; preferiblement amb els àpats." },
-          { "question": "Compatibilitat amb altres suplements?", "answer": "Generalment compatible; evitar excedir la ingesta diària recomanada." },
-          { "question": "Precaucions?", "answer": "Consultar professionals si estàs en tractament o tens condicions mèdiques." }
+          {
+            "question": "Per a què serveix la combinació?",
+            "answer": "Dóna suport a la funció muscular, salut òssia i benestar general."
+          },
+          {
+            "question": "Com prendre-ho?",
+            "answer": "Seguir indicacions de l'envàs; preferiblement amb els àpats."
+          },
+          {
+            "question": "Compatibilitat amb altres suplements?",
+            "answer": "Generalment compatible; evitar excedir la ingesta diària recomanada."
+          },
+          {
+            "question": "Precaucions?",
+            "answer": "Consultar professionals si estàs en tractament o tens condicions mèdiques."
+          }
         ]
       }
     },
@@ -935,25 +1525,51 @@
       "sportId": "fencing",
       "available": true,
       "rating": 4.3,
-      "votes": 63
-    ,
+      "votes": 63,
       "faqs": {
         "es": [
-          { "question": "¿Cuándo usarla?", "answer": "Tras el asalto para aliviar fatiga en antebrazos, hombros y piernas." },
-          { "question": "¿Se absorbe rápido?", "answer": "Sí, rápida absorción; ideal para recuperación entre combates." },
-          { "question": "¿Precauciones?", "answer": "Evitar contacto con ojos; no usar en piel irritada." },
+          {
+            "question": "¿Cuándo usarla?",
+            "answer": "Tras el asalto para aliviar fatiga en antebrazos, hombros y piernas."
+          },
+          {
+            "question": "¿Se absorbe rápido?",
+            "answer": "Sí, rápida absorción; ideal para recuperación entre combates."
+          },
+          {
+            "question": "¿Precauciones?",
+            "answer": "Evitar contacto con ojos; no usar en piel irritada."
+          },
           { "question": "¿Deja residuos?", "answer": "No, no deja residuo." }
         ],
         "en": [
-          { "question": "When to use it?", "answer": "Post‑bout to ease fatigue in forearms, shoulders, and legs." },
-          { "question": "Fast absorption?", "answer": "Yes; ideal for recovery between matches." },
-          { "question": "Precautions?", "answer": "Avoid eye contact; do not use on irritated skin." },
+          {
+            "question": "When to use it?",
+            "answer": "Post‑bout to ease fatigue in forearms, shoulders, and legs."
+          },
+          {
+            "question": "Fast absorption?",
+            "answer": "Yes; ideal for recovery between matches."
+          },
+          {
+            "question": "Precautions?",
+            "answer": "Avoid eye contact; do not use on irritated skin."
+          },
           { "question": "Residue?", "answer": "No residue." }
         ],
         "ca": [
-          { "question": "Quan usar-la?", "answer": "Després de l'assalt per alleujar fatiga en avantbraços, espatlles i cames." },
-          { "question": "S'absorbeix ràpid?", "answer": "Sí, absorció ràpida; ideal per a recuperació entre combats." },
-          { "question": "Precaucions?", "answer": "Evitar contacte amb ulls; no usar en pell irritada." },
+          {
+            "question": "Quan usar-la?",
+            "answer": "Després de l'assalt per alleujar fatiga en avantbraços, espatlles i cames."
+          },
+          {
+            "question": "S'absorbeix ràpid?",
+            "answer": "Sí, absorció ràpida; ideal per a recuperació entre combats."
+          },
+          {
+            "question": "Precaucions?",
+            "answer": "Evitar contacte amb ulls; no usar en pell irritada."
+          },
           { "question": "Deixa residus?", "answer": "No, no deixa residu." }
         ]
       }
@@ -977,26 +1593,61 @@
       "sportId": "golf",
       "available": true,
       "rating": 4.6,
-      "votes": 118
-    ,
+      "votes": 118,
       "faqs": {
         "es": [
-          { "question": "¿Mejora el agarre del palo?", "answer": "Sí, película antideslizante para manos firmes y secas." },
-          { "question": "¿Deja marcas en el grip?", "answer": "No marca el grip ni deja residuo pegajoso." },
-          { "question": "¿Cómo aplicarlo?", "answer": "Aplicar en palma y dedos antes de jugar." },
-          { "question": "¿Apto para competencia?", "answer": "Sí, ideal para entrenos y torneos." }
+          {
+            "question": "¿Mejora el agarre del palo?",
+            "answer": "Sí, película antideslizante para manos firmes y secas."
+          },
+          {
+            "question": "¿Deja marcas en el grip?",
+            "answer": "No marca el grip ni deja residuo pegajoso."
+          },
+          {
+            "question": "¿Cómo aplicarlo?",
+            "answer": "Aplicar en palma y dedos antes de jugar."
+          },
+          {
+            "question": "¿Apto para competencia?",
+            "answer": "Sí, ideal para entrenos y torneos."
+          }
         ],
         "en": [
-          { "question": "Does it improve club hold?", "answer": "Yes, anti‑slip film keeps hands dry and steady." },
-          { "question": "Grip marks?", "answer": "No, it doesn’t mark the grip or leave sticky residue." },
-          { "question": "How to apply?", "answer": "Apply to palms and fingers before play." },
-          { "question": "Competition‑ready?", "answer": "Yes, ideal for practice and tournaments." }
+          {
+            "question": "Does it improve club hold?",
+            "answer": "Yes, anti‑slip film keeps hands dry and steady."
+          },
+          {
+            "question": "Grip marks?",
+            "answer": "No, it doesn’t mark the grip or leave sticky residue."
+          },
+          {
+            "question": "How to apply?",
+            "answer": "Apply to palms and fingers before play."
+          },
+          {
+            "question": "Competition‑ready?",
+            "answer": "Yes, ideal for practice and tournaments."
+          }
         ],
         "ca": [
-          { "question": "Millora l'agarre del pal?", "answer": "Sí, pel·lícula antilliscant per a mans fermes i seques." },
-          { "question": "Deixa marques al grip?", "answer": "No marca el grip ni deixa residu enganxós." },
-          { "question": "Com aplicar-lo?", "answer": "Aplicar a palma i dits abans de jugar." },
-          { "question": "Apte per a competició?", "answer": "Sí, ideal per a entrenaments i tornejos." }
+          {
+            "question": "Millora l'agarre del pal?",
+            "answer": "Sí, pel·lícula antilliscant per a mans fermes i seques."
+          },
+          {
+            "question": "Deixa marques al grip?",
+            "answer": "No marca el grip ni deixa residu enganxós."
+          },
+          {
+            "question": "Com aplicar-lo?",
+            "answer": "Aplicar a palma i dits abans de jugar."
+          },
+          {
+            "question": "Apte per a competició?",
+            "answer": "Sí, ideal per a entrenaments i tornejos."
+          }
         ]
       }
     },
@@ -1029,26 +1680,61 @@
       "sportId": "golf",
       "available": true,
       "rating": 4.3,
-      "votes": 72
-    ,
+      "votes": 72,
       "faqs": {
         "es": [
-          { "question": "¿Cuándo usar la crema efecto frío?", "answer": "Tras la vuelta o prácticas para aliviar fatiga del swing repetido." },
-          { "question": "¿Deja residuo en el grip?", "answer": "No, ligera y de rápida absorción." },
-          { "question": "¿Cómo aplicarla?", "answer": "Aplicar en zonas trabajadas tras jugar." },
-          { "question": "¿Precauciones?", "answer": "Evitar contacto con ojos; lavar manos tras uso." }
+          {
+            "question": "¿Cuándo usar la crema efecto frío?",
+            "answer": "Tras la vuelta o prácticas para aliviar fatiga del swing repetido."
+          },
+          {
+            "question": "¿Deja residuo en el grip?",
+            "answer": "No, ligera y de rápida absorción."
+          },
+          {
+            "question": "¿Cómo aplicarla?",
+            "answer": "Aplicar en zonas trabajadas tras jugar."
+          },
+          {
+            "question": "¿Precauciones?",
+            "answer": "Evitar contacto con ojos; lavar manos tras uso."
+          }
         ],
         "en": [
-          { "question": "When to use the cooling cream?", "answer": "After practice or the round to ease swing‑induced fatigue." },
-          { "question": "Residue on grip?", "answer": "No, lightweight and fast‑absorbing." },
-          { "question": "How to apply?", "answer": "Apply to worked areas after play." },
-          { "question": "Precautions?", "answer": "Avoid eye contact; wash hands after use." }
+          {
+            "question": "When to use the cooling cream?",
+            "answer": "After practice or the round to ease swing‑induced fatigue."
+          },
+          {
+            "question": "Residue on grip?",
+            "answer": "No, lightweight and fast‑absorbing."
+          },
+          {
+            "question": "How to apply?",
+            "answer": "Apply to worked areas after play."
+          },
+          {
+            "question": "Precautions?",
+            "answer": "Avoid eye contact; wash hands after use."
+          }
         ],
         "ca": [
-          { "question": "Quan usar la crema efecte fred?", "answer": "Després de la volta o pràctiques per alleujar la fatiga del swing repetit." },
-          { "question": "Deixa residu al grip?", "answer": "No, lleugera i d'absorció ràpida." },
-          { "question": "Com aplicar-la?", "answer": "Aplicar a les zones treballades després de jugar." },
-          { "question": "Precaucions?", "answer": "Evitar contacte amb ulls; rentar mans després de l'ús." }
+          {
+            "question": "Quan usar la crema efecte fred?",
+            "answer": "Després de la volta o pràctiques per alleujar la fatiga del swing repetit."
+          },
+          {
+            "question": "Deixa residu al grip?",
+            "answer": "No, lleugera i d'absorció ràpida."
+          },
+          {
+            "question": "Com aplicar-la?",
+            "answer": "Aplicar a les zones treballades després de jugar."
+          },
+          {
+            "question": "Precaucions?",
+            "answer": "Evitar contacte amb ulls; rentar mans després de l'ús."
+          }
         ]
       }
     },
@@ -1071,26 +1757,61 @@
       "sportId": "golf",
       "available": true,
       "rating": 4.2,
-      "votes": 58
-    ,
+      "votes": 58,
       "faqs": {
         "es": [
-          { "question": "¿Para qué zonas?", "answer": "Zona lumbar, hombros y antebrazos tras la vuelta." },
-          { "question": "¿Cómo aplicarlo?", "answer": "Masajear hasta absorción en zonas tensas." },
-          { "question": "¿Sensación?", "answer": "Deslizamiento justo y absorción rápida." },
-          { "question": "¿Uso regular?", "answer": "Sí, en recuperación post‑ronda." }
+          {
+            "question": "¿Para qué zonas?",
+            "answer": "Zona lumbar, hombros y antebrazos tras la vuelta."
+          },
+          {
+            "question": "¿Cómo aplicarlo?",
+            "answer": "Masajear hasta absorción en zonas tensas."
+          },
+          {
+            "question": "¿Sensación?",
+            "answer": "Deslizamiento justo y absorción rápida."
+          },
+          {
+            "question": "¿Uso regular?",
+            "answer": "Sí, en recuperación post‑ronda."
+          }
         ],
         "en": [
-          { "question": "Which areas?", "answer": "Lower back, shoulders, and forearms post‑round." },
-          { "question": "How to apply?", "answer": "Massage into tense areas until absorbed." },
-          { "question": "Feel?", "answer": "Just‑right glide and quick absorption." },
-          { "question": "Regular use?", "answer": "Yes, for post‑round recovery." }
+          {
+            "question": "Which areas?",
+            "answer": "Lower back, shoulders, and forearms post‑round."
+          },
+          {
+            "question": "How to apply?",
+            "answer": "Massage into tense areas until absorbed."
+          },
+          {
+            "question": "Feel?",
+            "answer": "Just‑right glide and quick absorption."
+          },
+          {
+            "question": "Regular use?",
+            "answer": "Yes, for post‑round recovery."
+          }
         ],
         "ca": [
-          { "question": "Per a quines zones?", "answer": "Zona lumbar, espatlles i avantbraços després de la volta." },
-          { "question": "Com aplicar-lo?", "answer": "Fer massatge fins a l'absorció en zones tenses." },
-          { "question": "Sensació?", "answer": "Lliscament just i absorció ràpida." },
-          { "question": "Ús regular?", "answer": "Sí, en recuperació post‑ronda." }
+          {
+            "question": "Per a quines zones?",
+            "answer": "Zona lumbar, espatlles i avantbraços després de la volta."
+          },
+          {
+            "question": "Com aplicar-lo?",
+            "answer": "Fer massatge fins a l'absorció en zones tenses."
+          },
+          {
+            "question": "Sensació?",
+            "answer": "Lliscament just i absorció ràpida."
+          },
+          {
+            "question": "Ús regular?",
+            "answer": "Sí, en recuperació post‑ronda."
+          }
         ]
       }
     },
@@ -1123,26 +1844,61 @@
       "sportId": "golf",
       "available": true,
       "rating": 4.4,
-      "votes": 66
-    ,
+      "votes": 66,
       "faqs": {
         "es": [
-          { "question": "¿Cuándo aplicarlo?", "answer": "Antes de jugar para activar hombros, muñecas y espalda." },
-          { "question": "¿Interfiere con el agarre?", "answer": "No, no deja sensación pegajosa ni afecta el grip." },
-          { "question": "¿Precauciones?", "answer": "Evitar contacto con ojos y mucosas." },
-          { "question": "¿Frecuencia?", "answer": "En el calentamiento antes de cada salida." }
+          {
+            "question": "¿Cuándo aplicarlo?",
+            "answer": "Antes de jugar para activar hombros, muñecas y espalda."
+          },
+          {
+            "question": "¿Interfiere con el agarre?",
+            "answer": "No, no deja sensación pegajosa ni afecta el grip."
+          },
+          {
+            "question": "¿Precauciones?",
+            "answer": "Evitar contacto con ojos y mucosas."
+          },
+          {
+            "question": "¿Frecuencia?",
+            "answer": "En el calentamiento antes de cada salida."
+          }
         ],
         "en": [
-          { "question": "When to apply?", "answer": "Before play to activate shoulders, wrists and back." },
-          { "question": "Grip interference?", "answer": "No stickiness and doesn’t affect the grip." },
-          { "question": "Precautions?", "answer": "Avoid eyes and mucous membranes." },
-          { "question": "Frequency?", "answer": "Use in warm‑up before each start." }
+          {
+            "question": "When to apply?",
+            "answer": "Before play to activate shoulders, wrists and back."
+          },
+          {
+            "question": "Grip interference?",
+            "answer": "No stickiness and doesn’t affect the grip."
+          },
+          {
+            "question": "Precautions?",
+            "answer": "Avoid eyes and mucous membranes."
+          },
+          {
+            "question": "Frequency?",
+            "answer": "Use in warm‑up before each start."
+          }
         ],
         "ca": [
-          { "question": "Quan aplicar-lo?", "answer": "Abans de jugar per activar espatlles, canells i esquena." },
-          { "question": "Interfereix amb l'agarre?", "answer": "No, no deixa sensació enganxosa ni afecta el grip." },
-          { "question": "Precaucions?", "answer": "Evitar contacte amb ulls i mucoses." },
-          { "question": "Freqüència?", "answer": "En l'escalfament abans de cada sortida." }
+          {
+            "question": "Quan aplicar-lo?",
+            "answer": "Abans de jugar per activar espatlles, canells i esquena."
+          },
+          {
+            "question": "Interfereix amb l'agarre?",
+            "answer": "No, no deixa sensació enganxosa ni afecta el grip."
+          },
+          {
+            "question": "Precaucions?",
+            "answer": "Evitar contacte amb ulls i mucoses."
+          },
+          {
+            "question": "Freqüència?",
+            "answer": "En l'escalfament abans de cada sortida."
+          }
         ]
       }
     },
@@ -1165,9 +1921,8 @@
       "sportId": "golf",
       "available": true,
       "rating": 4.1,
-      "votes": 53
-    ,
-     "objectives": {
+      "votes": 53,
+      "objectives": {
         "es": [
           "Reducción de la Caída: Disminuir activamente la pérdida de cabello.",
           "Activación del Crecimiento: Estimular el folículo para promover el crecimiento de cabello nuevo.",
@@ -1199,23 +1954,602 @@
       },
       "faqs": {
         "es": [
-          { "question": "¿Fortalece el cabello?", "answer": "Sí, ayuda a reforzar desde la raíz y limpiar suavemente sudor y residuos." },
-          { "question": "¿Frecuencia de uso?", "answer": "Apto para uso frecuente." },
-          { "question": "¿Sirve para cuero cabelludo sensible?", "answer": "Sí, pero evitar contacto con ojos y suspender si hay irritación." },
-          { "question": "¿Deja residuos?", "answer": "No, limpia y enjuaga sin dejar residuo pesado." }
+          {
+            "question": "¿Fortalece el cabello?",
+            "answer": "Sí, ayuda a reforzar desde la raíz y limpiar suavemente sudor y residuos."
+          },
+          {
+            "question": "¿Frecuencia de uso?",
+            "answer": "Apto para uso frecuente."
+          },
+          {
+            "question": "¿Sirve para cuero cabelludo sensible?",
+            "answer": "Sí, pero evitar contacto con ojos y suspender si hay irritación."
+          },
+          {
+            "question": "¿Deja residuos?",
+            "answer": "No, limpia y enjuaga sin dejar residuo pesado."
+          }
         ],
         "en": [
-          { "question": "Does it strengthen hair?", "answer": "Yes, supports root strength and gently clears sweat and residue." },
-          { "question": "How often should I use it?", "answer": "Suitable for frequent use." },
-          { "question": "Is it good for sensitive scalps?", "answer": "Yes, avoid eye contact and discontinue if irritation occurs." },
-          { "question": "Does it leave residue?", "answer": "No, cleans and rinses without heavy residue." }
+          {
+            "question": "Does it strengthen hair?",
+            "answer": "Yes, supports root strength and gently clears sweat and residue."
+          },
+          {
+            "question": "How often should I use it?",
+            "answer": "Suitable for frequent use."
+          },
+          {
+            "question": "Is it good for sensitive scalps?",
+            "answer": "Yes, avoid eye contact and discontinue if irritation occurs."
+          },
+          {
+            "question": "Does it leave residue?",
+            "answer": "No, cleans and rinses without heavy residue."
+          }
         ],
         "ca": [
-          { "question": "Enforteix el cabell?", "answer": "Sí, ajuda a reforçar des de l'arrel i neteja suaument la suor i els residus." },
-          { "question": "Freqüència d'ús?", "answer": "Apte per a ús freqüent." },
-          { "question": "Serveix per a cuir cabellut sensible?", "answer": "Sí, però evita el contacte amb els ulls i suspèn si hi ha irritació." },
-          { "question": "Deixa residus?", "answer": "No, neteja i esbandeix sense deixar residu pesat." }
+          {
+            "question": "Enforteix el cabell?",
+            "answer": "Sí, ajuda a reforçar des de l'arrel i neteja suaument la suor i els residus."
+          },
+          {
+            "question": "Freqüència d'ús?",
+            "answer": "Apte per a ús freqüent."
+          },
+          {
+            "question": "Serveix per a cuir cabellut sensible?",
+            "answer": "Sí, però evita el contacte amb els ulls i suspèn si hi ha irritació."
+          },
+          {
+            "question": "Deixa residus?",
+            "answer": "No, neteja i esbandeix sense deixar residu pesat."
+          }
         ]
+      }
+    },
+    {
+      "id": 24,
+      "name": {
+        "es": "Mochila Táctica",
+        "en": "Tactical Backpack",
+        "ca": "Motxilla Tàctica"
+      },
+      "price": "35,00",
+      "description": {
+        "es": "Diseñada para la máxima resistencia y funcionalidad. Esta mochila táctica cuenta con múltiples compartimentos, materiales duraderos y un diseño ergonómico ideal para llevar todo tu equipamiento deportivo o para tus aventuras al aire libre.",
+        "en": "Designed for maximum durability and functionality. This tactical backpack features multiple compartments, rugged materials, and an ergonomic design ideal for carrying all your sports gear or for your outdoor adventures.",
+        "ca": "Dissenyada per a la màxima resistència i funcionalitat. Aquesta motxilla tàctica compta amb múltiples compartiments, materials duradors i un disseny ergonòmic ideal per portar tot el teu equipament esportiu o per a les teves aventures a l'aire lliure."
+      },
+      "image": "/products/Mochila-Táctica.jpg",
+      "category": {
+        "es": "indumentaria",
+        "en": "clothing",
+        "ca": "indumentaria"
+      },
+      "sportId": "archery",
+      "size": "50x40x20 cm",
+      "available": true,
+      "rating": 4.5,
+      "votes": 83,
+      "objectives": {
+        "es": [
+          "Gran Capacidad: Espacio optimizado para todo tu equipo.",
+          "Resistencia Extrema: Materiales de alta calidad a prueba de desgarros.",
+          "Organización: Múltiples bolsillos para mantener todo en orden.",
+          "Comodidad: Correas ajustables y acolchadas para largas jornadas."
+        ],
+        "en": [
+          "High Capacity: Optimized space for all your gear.",
+          "Extreme Durability: High-quality tear-proof materials.",
+          "Organization: Multiple pockets to keep everything sorted.",
+          "Comfort: Adjustable and padded straps for long days."
+        ],
+        "ca": [
+          "Gran Capacitat: Espai optimitzat per a tot el teu equip.",
+          "Resistència Extrema: Materials d'alta qualitat a prova d'esquinçaments.",
+          "Organització: Múltiples butxaques per mantenir-ho tot en ordre.",
+          "Comoditat: Corretges ajustables i encoixinades per a llargues jornades."
+        ]
+      },
+      "recommendations": {
+        "es": "No lavar a máquina. Dejar secar al aire si se moja.",
+        "en": "Do not machine wash. Air dry if wet.",
+        "ca": "No rentar a màquina. Deixar assecar a l'aire si es mulla."
+      }
+    },
+    {
+      "id": 25,
+      "name": {
+        "es": "Bolsa de Lona - Táctica",
+        "en": "Canvas Bag - Tactical",
+        "ca": "Bossa de Lona - Tàctica"
+      },
+      "price": "35,00",
+      "description": {
+        "es": "Diseñada para la máxima resistencia y funcionalidad. Esta bolsa de lona cuenta con múltiples compartimentos, materiales duraderos y un diseño ergonómico ideal para llevar todo tu equipamiento deportivo o para tus aventuras al aire libre.",
+        "en": "Designed for maximum durability and functionality. This canvas bag features multiple compartments, rugged materials, and an ergonomic design ideal for carrying all your sports gear or for your outdoor adventures.",
+        "ca": "Dissenyada per a la màxima resistència i funcionalitat. Aquesta bossa de lona compta amb múltiples compartiments, materials duradors i un disseny ergonòmic ideal per portar tot el teu equipament esportiu o per a les teves aventures a l'aire lliure."
+      },
+      "image": "/products/Bolsa-de-Lona.jpg",
+      "category": {
+        "es": "indumentaria",
+        "en": "clothing",
+        "ca": "indumentària"
+      },
+      "sportId": "archery",
+      "available": true,
+      "rating": 4.5,
+      "votes": 83,
+      "objectives": {
+        "es": [
+          "Gran Capacidad: Espacio optimizado para todo tu equipo.",
+          "Resistencia Extrema: Materiales de alta calidad a prueba de desgarros.",
+          "Organización: Múltiples bolsillos para mantener todo en orden.",
+          "Comodidad: Correas ajustables y acolchadas para largas jornadas."
+        ],
+        "en": [
+          "High Capacity: Optimized space for all your gear.",
+          "Extreme Durability: High-quality tear-proof materials.",
+          "Organization: Multiple pockets to keep everything sorted.",
+          "Comfort: Adjustable and padded straps for long days."
+        ],
+        "ca": [
+          "Gran Capacitat: Espai optimitzat per a tot el teu equip.",
+          "Resistència Extrema: Materials d'alta qualitat a prova d'esquinçaments.",
+          "Organització: Múltiples butxaques per mantenir-ho tot en ordre.",
+          "Comoditat: Corretges ajustables i encoixinades per a llargues jornades."
+        ]
+      },
+      "recommendations": {
+        "es": "No lavar a máquina. Dejar secar al aire si se moja.",
+        "en": "Do not machine wash. Air dry if wet.",
+        "ca": "No rentar a màquina. Deixar assecar a l'aire si es mulla."
+      }
+    },
+    {
+      "id": 26,
+      "name": {
+        "es": "Polo Táctico",
+        "en": "Tactical Polo",
+        "ca": "Polo Tàctic"
+      },
+      "price": "30,00",
+      "description": {
+        "es": "Polo táctico de alto rendimiento, fabricado con tejido transpirable y resistente. Ideal para actividades al aire libre y uso diario, combinando estilo y funcionalidad.",
+        "en": "High-performance tactical polo, made with breathable and durable fabric. Ideal for outdoor activities and daily use, combining style and functionality.",
+        "ca": "Polo tàctic d'alt rendiment, fabricat amb teixit transpirable i resistent. Ideal per a activitats a l'aire lliure i ús diari, combinant estil i funcionalitat."
+      },
+      "image": "/products/Polo-Tactico.jpg",
+      "category": {
+        "es": "indumentaria",
+        "en": "clothing",
+        "ca": "indumentària"
+      },
+      "sportId": "multisport",
+      "size": "L, XL",
+      "available": true,
+      "rating": 4.5,
+      "votes": 83,
+      "objectives": {
+        "es": [
+          "Transpirabilidad: Mantente fresco en cualquier situación.",
+          "Durabilidad: Tejido resistente al desgaste y lavados.",
+          "Confort: Diseño ergonómico para libertad de movimiento.",
+          "Estilo Táctico: Look profesional y funcional."
+        ],
+        "en": [
+          "Breathability: Stay cool in any situation.",
+          "Durability: Fabric resistant to wear and washing.",
+          "Comfort: Ergonomic design for freedom of movement.",
+          "Tactical Style: Professional and functional look."
+        ],
+        "ca": [
+          "Transpirabilitat: Mantén-te fresc en qualsevol situació.",
+          "Durabilitat: Teixit resistent al desgast i rentats.",
+          "Confort: Disseny ergonòmic per a llibertat de moviment.",
+          "Estil Tàctic: Look professional i funcional."
+        ]
+      },
+      "recommendations": {
+        "es": "Lavar en frío. No usar lejía. Planchar a baja temperatura si es necesario.",
+        "en": "Wash cold. Do not bleach. Iron at low temperature if needed.",
+        "ca": "Rentar en fred. No utilitzar lleixiu. Planxar a baixa temperatura si cal."
+      }
+    },
+    {
+      "id": 27,
+      "name": {
+        "es": "Chaqueta Nordica",
+        "en": "Nordic Coat",
+        "ca": "Jaqueta Nòrdica"
+      },
+      "price": "60,00",
+      "description": {
+        "es": "Chaqueta Softshell de diseño nórdico, ofrece protección superior contra el viento y el frío. Tejido técnico impermeable y transpirable para mantener el confort en climas adversos.",
+        "en": "Nordic design Softshell jacket, offering superior protection against wind and cold. Technical waterproof and breathable fabric to maintain comfort in adverse climates.",
+        "ca": "Jaqueta Softshell de disseny nòrdic, ofereix protecció superior contra el vent i el fred. Teixit tècnic impermeable i transpirable per mantenir el confort en climes adversos."
+      },
+      "image": "/products/Softshell-Nordic.jpg",
+      "category": {
+        "es": "indumentaria",
+        "en": "clothing",
+        "ca": "indumentària"
+      },
+      "sportId": "multisport",
+      "size": "L, XL",
+      "available": true,
+      "rating": 4.5,
+      "votes": 83,
+      "objectives": {
+        "es": [
+          "Aislamiento Térmico: Mantiene el calor corporal eficazmente.",
+          "Cortavientos: Bloquea el viento frío completamente.",
+          "Impermeabilidad: Protección contra lluvia ligera y nieve.",
+          "Movilidad: Tejido elástico para libertad de movimiento."
+        ],
+        "en": [
+          "Thermal Insulation: Retains body heat effectively.",
+          "Windproof: Blocks cold wind completely.",
+          "Waterproofing: Protection against light rain and snow.",
+          "Mobility: Stretchy fabric for freedom of movement."
+        ],
+        "ca": [
+          "Aïllament Tèrmic: Manté la calor corporal eficaçment.",
+          "Tallavents: Bloqueja el vent fred completament.",
+          "Impermeabilitat: Protecció contra pluja lleugera i neu.",
+          "Mobilitat: Teixit elàstic per a llibertat de moviment."
+        ]
+      },
+      "recommendations": {
+        "es": "Lavar con cremalleras cerradas. No usar suavizante. Secar al aire.",
+        "en": "Wash with zippers closed. Do not use fabric softener. Air dry.",
+        "ca": "Rentar amb cremalleres tancades. No utilitzar suavitzant. Assecar a l'aire."
+      }
+    },
+    {
+      "id": 28,
+      "name": {
+        "es": "Chubasquero",
+        "en": "Raincoat",
+        "ca": "Impermeable"
+      },
+      "price": "20,00",
+      "description": {
+        "es": "Chubasquero ligero y compacto, 100% impermeable. Diseñado para mantenerte seco en las condiciones más húmedas sin sacrificar la transpirabilidad.",
+        "en": "Lightweight and compact raincoat, 100% waterproof. Designed to keep you dry in the wettest conditions without sacrificing breathability.",
+        "ca": "Impermeable lleuger i compacte, 100% resistent a l'aigua. Dissenyat per mantenir-te sec en les condicions més humides sense sacrificar la transpirabilitat."
+      },
+      "image": "/products/Chubasquero.jpg",
+      "category": {
+        "es": "indumentaria",
+        "en": "clothing",
+        "ca": "indumentària"
+      },
+      "sportId": "multisport",
+      "size": "L, XL",
+      "available": true,
+      "rating": 4.5,
+      "votes": 83,
+      "objectives": {
+        "es": [
+          "Impermeabilidad Total: Tejido y costuras selladas.",
+          "Ligereza: Peso mínimo para facilitar el transporte.",
+          "Compactabilidad: Se pliega fácilmente para guardar.",
+          "Transpirabilidad: Evita el exceso de sudoración."
+        ],
+        "en": [
+          "Total Waterproofing: Fabric and sealed seams.",
+          "Lightweight: Minimal weight for easy transport.",
+          "Packability: Folds easily for storage.",
+          "Breathability: Prevents excessive sweating."
+        ],
+        "ca": [
+          "Impermeabilitat Total: Teixit i costures segellades.",
+          "Lleugeresa: Pes mínim per facilitar el transport.",
+          "Compactabilitat: Es plega fàcilment per guardar.",
+          "Transpirabilitat: Evita l'excés de sudoració."
+        ]
+      },
+      "recommendations": {
+        "es": "Lavar a mano o ciclo delicado. No secar en secadora. No planchar.",
+        "en": "Hand wash or delicate cycle. Do not tumble dry. Do not iron.",
+        "ca": "Rentar a mà o cicle delicat. No assecar a l'assecadora. No planxar."
+      }
+    },
+    {
+      "id": 29,
+      "name": {
+        "es": "Mochila Táctica de Caza",
+        "en": "Tactical Hunting Backpack",
+        "ca": "Motxilla Tàctica de Caça"
+      },
+      "price": "80,00",
+      "description": {
+        "es": "Mochila especializada para caza con diseño de camuflaje. Cuenta con compartimentos específicos para equipo, soporte para arma y materiales silenciosos.",
+        "en": "Specialized hunting backpack with camouflage design. Features specific compartments for gear, weapon holder, and silent materials.",
+        "ca": "Motxilla especialitzada per a caça amb disseny de camuflatge. Compta amb compartiments específics per a equip, suport per a arma i materials silenciosos."
+      },
+      "image": "/products/Mochila-Tactica-Caza.jpg",
+      "category": {
+        "es": "indumentaria",
+        "en": "clothing",
+        "ca": "indumentària"
+      },
+      "sportId": "archery",
+      "available": true,
+      "rating": 4.5,
+      "votes": 83,
+      "objectives": {
+        "es": [
+          "Camuflaje: Patrón diseñado para entornos boscosos.",
+          "Silencio: Tejidos que minimizan el ruido al moverse.",
+          "Organización: Bolsillos dedicados para munición y accesorios.",
+          "Soporte de Arma: Sistema seguro para transportar rifles o arcos."
+        ],
+        "en": [
+          "Camouflage: Pattern designed for woodland environments.",
+          "Silence: Fabrics that minimize noise when moving.",
+          "Organization: Dedicated pockets for ammo and accessories.",
+          "Weapon Holder: Secure system for transporting rifles or bows."
+        ],
+        "ca": [
+          "Camuflatge: Patró dissenyat per a entorns boscosos.",
+          "Silenci: Teixits que minimitzen el soroll en moure's.",
+          "Organització: Butxaques dedicades per a munició i accessoris.",
+          "Suport d'Arma: Sistema segur per transportar rifles o arcs."
+        ]
+      },
+      "recommendations": {
+        "es": "Limpiar con paño húmedo. No usar detergentes fuertes. Dejar secar al aire.",
+        "en": "Clean with a damp cloth. Do not use strong detergents. Air dry.",
+        "ca": "Netejar amb un drap humit. No utilitzar detergents forts. Deixar assecar a l'aire."
+      }
+    },
+    {
+      "id": 30,
+      "name": {
+        "es": "Bolso de Hombro Táctico",
+        "en": "Tactical Shoulder Bag",
+        "ca": "Bolso de Hombro Tàctic"
+      },
+      "price": "25,00",
+      "description": {
+        "es": "Bolso de hombro táctico versátil y resistente. Ideal para transportar equipo esencial de forma cómoda y accesible. Diseño compacto con sistema MOLLE.",
+        "en": "Versatile and rugged tactical shoulder bag. Ideal for carrying essential gear comfortably and accessibly. Compact design with MOLLE system.",
+        "ca": "Bolso d'espatlla tàctic versàtil i resistent. Ideal per transportar equip essencial de forma còmoda i accessible. Disseny compacte amb sistema MOLLE."
+      },
+      "image": "/products/Bolso-de-Hombro-Táctico.jpg",
+      "category": {
+        "es": "indumentaria",
+        "en": "clothing",
+        "ca": "indumentària"
+      },
+      "sportId": "archery",
+      "available": true,
+      "rating": 4.5,
+      "votes": 83,
+      "objectives": {
+        "es": [
+          "Accesibilidad: Diseño cruzado para acceso rápido.",
+          "Modularidad: Sistema MOLLE para accesorios extra.",
+          "Resistencia: Nylon de alta densidad.",
+          "Compacto: Espacio optimizado para lo esencial."
+        ],
+        "en": [
+          "Accessibility: Crossbody design for quick access.",
+          "Modularity: MOLLE system for extra accessories.",
+          "Durability: High-density nylon.",
+          "Compact: Optimized space for essentials."
+        ],
+        "ca": [
+          "Accessibilitat: Disseny creuat per a accés ràpid.",
+          "Modularitat: Sistema MOLLE per a accessoris extra.",
+          "Resistència: Nylon d'alta densitat.",
+          "Compacte: Espai optimitzat per a l'essencial."
+        ]
+      },
+      "recommendations": {
+        "es": "Limpiar con paño húmedo. No usar detergentes fuertes. Dejar secar al aire.",
+        "en": "Clean with a damp cloth. Do not use strong detergents. Air dry.",
+        "ca": "Netejar amb un drap humit. No utilitzar detergents forts. Deixar assecar a l'aire."
+      }
+    },
+    {
+      "id": 31,
+      "name": {
+        "es": "Bolsa de Lona",
+        "en": "Canvas Bag",
+        "ca": "Bossa de Lona"
+      },
+      "price": "35,00",
+      "description": {
+        "es": "Bolsa de lona resistente y espaciosa en varios colores. Perfecta para gimnasio, viajes o uso diario. Material duradero y diseño clásico.",
+        "en": "Durable and spacious canvas bag available in colors. Perfect for gym, travel, or daily use. Rugged material and classic design.",
+        "ca": "Bossa de lona resistent i espaiosa en diversos colors. Perfecta per gimnàs, viatges o ús diari. Material durador i disseny clàssic."
+      },
+      "image": "/products/Bolsa-de-Lona-color.jpg",
+      "category": {
+        "es": "indumentaria",
+        "en": "clothing",
+        "ca": "indumentària"
+      },
+      "sportId": "archery",
+      "available": true,
+      "rating": 4.5,
+      "votes": 83,
+      "objectives": {
+        "es": [
+          "Durabilidad: Lona de algodón resistente.",
+          "Espacio: Gran compartimento principal.",
+          "Estilo: Diseño clásico y funcional.",
+          "Versatilidad: Ideal para deporte o viaje."
+        ],
+        "en": [
+          "Durability: Tough cotton canvas.",
+          "Space: Large main compartment.",
+          "Style: Classic and functional design.",
+          "Versatility: Ideal for sports or travel."
+        ],
+        "ca": [
+          "Durabilitat: Lona de cotó resistent.",
+          "Espai: Gran compartiment principal.",
+          "Estil: Disseny clàssic i funcional.",
+          "Versatilitat: Ideal per a esport o viatge."
+        ]
+      },
+      "recommendations": {
+        "es": "Limpiar con paño húmedo. No usar detergentes fuertes. Dejar secar al aire.",
+        "en": "Clean with a damp cloth. Do not use strong detergents. Air dry.",
+        "ca": "Netejar amb un drap humit. No utilitzar detergents forts. Deixar assecar a l'aire."
+      }
+    },
+    {
+      "id": 32,
+      "name": {
+        "es": "Gorra transpirable",
+        "en": "Breathable Cap",
+        "ca": "Gorra Transpirable"
+      },
+      "price": "10,00",
+      "description": {
+        "es": "Gorra táctica transpirable diseñada para climas cálidos. Paneles de malla para ventilación superior y visera para protección solar.",
+        "en": "Breathable tactical cap designed for warm climates. Mesh panels for superior ventilation and visor for sun protection.",
+        "ca": "Gorra tàctica transpirable dissenyada per a climes càlids. Panells de malla per a ventilació superior i visera per a protecció solar."
+      },
+      "image": "/products/Gorra-Táctica-Transpirable.jpg",
+      "category": {
+        "es": "indumentaria",
+        "en": "clothing",
+        "ca": "indumentària"
+      },
+      "sportId": "multisport",
+      "available": true,
+      "rating": 4.5,
+      "votes": 83,
+      "objectives": {
+        "es": [
+          "Ventilación: Paneles de malla transpirable.",
+          "Protección Solar: Visera curva protectora.",
+          "Ajuste: Cierre ajustable trasero.",
+          "Confort: Banda interior absorbente."
+        ],
+        "en": [
+          "Ventilation: Breathable mesh panels.",
+          "Sun Protection: Protective curved visor.",
+          "Fit: Adjustable rear closure.",
+          "Comfort: Absorbent inner band."
+        ],
+        "ca": [
+          "Ventilació: Panells de malla transpirable.",
+          "Protecció Solar: Visera corba protectora.",
+          "Ajust: Tancament ajustable posterior.",
+          "Confort: Banda interior absorbent."
+        ]
+      },
+      "recommendations": {
+        "es": "No lavar a máquina. Dejar secar al aire si se moja.",
+        "en": "Do not machine wash. Air dry if wet.",
+        "ca": "No rentar a màquina. Deixar assecar a l'aire si es mulla."
+      }
+    },
+    {
+      "id": 33,
+      "name": {
+        "es": "Camiseta Tactica",
+        "en": "Tactical Shirt",
+        "ca": "Camiseta Tàctica"
+      },
+      "price": "15,00",
+      "description": {
+        "es": "Camiseta táctica de alto rendimiento. Tejido transpirable y de secado rápido. Diseño ergonómico para máxima movilidad.",
+        "en": "High performance tactical shirt. Breathable and quick-drying fabric. Ergonomic design for maximum mobility.",
+        "ca": "Camiseta tàctica d'alt rendiment. Teixit transpirable i d'assecat ràpid. Disseny ergonòmic per a màxima mobilitat."
+      },
+      "image": "/products/Camiseta-Tactica.jpg",
+      "category": {
+        "es": "indumentaria",
+        "en": "clothing",
+        "ca": "indumentària"
+      },
+      "sportId": "multisport",
+      "available": true,
+      "rating": 4.5,
+      "votes": 83,
+      "objectives": {
+        "es": [
+          "Material: 100% poliéster transpirable.",
+          "Ventilación: Tejido panel de abeja en la espalda.",
+          "Tecnología: Secado rápido y absorción de humedad.",
+          "Diseño: Corte ergonómico para confort."
+        ],
+        "en": [
+          "Material: 100% breathable polyester.",
+          "Ventilation: Honeycomb fabric on the back.",
+          "Technology: Quick-drying and moisture-wicking.",
+          "Design: Ergonomic cut for comfort."
+        ],
+        "ca": [
+          "Material: 100% polièster transpirable.",
+          "Ventilació: Teixit panell d'abella a l'esquena.",
+          "Tecnologia: Assecat ràpid i absorció d'humitat.",
+          "Disseny: Tall ergonòmic per a confort."
+        ]
+      },
+      "recommendations": {
+        "es": "Lavar a máquina en frío. No usar suavizante. No planchar.",
+        "en": "Machine wash cold. Do not use softener. Do not iron.",
+        "ca": "Rentar a màquina en fred. No utilitzar suavitzant. No planxar."
+      }
+    },
+    {
+      "id": 34,
+      "name": {
+        "es": "Parka Táctica",
+        "en": "Tactical Parka",
+        "ca": "Parka Tàctica"
+      },
+      "price": "75,00",
+      "description": {
+        "es": "Parka táctica impermeable y térmica. Diseñada para proteger contra el frío y la lluvia. Incluye capucha plegable y múltiples bolsillos.",
+        "en": "Waterproof and thermal tactical parka. Designed to protect against cold and rain. Includes foldable hood and multiple pockets.",
+        "ca": "Parka tàctica impermeable i tèrmica. Dissenyada per protegir contra el fred i la pluja. Inclou caputxa plegable i múltiples butxaques."
+      },
+      "image": "/products/Parka-Táctica.jpg",
+      "category": {
+        "es": "indumentaria",
+        "en": "clothing",
+        "ca": "indumentària"
+      },
+      "sportId": "multisport",
+      "available": true,
+      "rating": 4.5,
+      "votes": 83,
+      "objectives": {
+        "es": [
+          "Exterior: 100% poliéster impermeable.",
+          "Interior: 100% poliéster acolchado.",
+          "Almacenamiento: 2 bolsillos exteriores y 2 interiores.",
+          "Versatilidad: Capucha plegable en el cuello."
+        ],
+        "en": [
+          "Outer: 100% waterproof polyester.",
+          "Inner: 100% padded polyester.",
+          "Storage: 2 outer and 2 inner pockets.",
+          "Versatility: Foldable hood in the collar."
+        ],
+        "ca": [
+          "Exterior: 100% polièster impermeable.",
+          "Interior: 100% polièster encoixinat.",
+          "Emmagatzematge: 2 butxaques exteriors i 2 interiors.",
+          "Versatilitat: Caputxa plegable al coll."
+        ]
+      },
+      "recommendations": {
+        "es": "Lavar en seco o a mano. No usar secadora.",
+        "en": "Dry clean or hand wash. Do not tumble dry.",
+        "ca": "Rentar en sec o a mà. No utilitzar assecadora."
       }
     }
   ]

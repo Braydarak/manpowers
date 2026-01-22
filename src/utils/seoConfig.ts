@@ -1,3 +1,5 @@
+import type { Product } from "../services/productsService";
+
 export interface SEOConfig {
   title: string;
   description: string;
@@ -6,6 +8,56 @@ export interface SEOConfig {
   ogDescription?: string;
   ogImage?: string;
   canonicalUrl?: string;
+}
+
+export interface ProductSchema {
+  "@context": string;
+  "@type": string;
+  name: string;
+  image: string;
+  description: string;
+  sku: string;
+  brand: {
+    "@type": string;
+    name: string;
+  };
+  offers: {
+    "@type": string;
+    url: string;
+    priceCurrency: string;
+    price: number;
+    availability: string;
+    itemCondition: string;
+    shippingDetails?: {
+      "@type": string;
+      shippingRate: {
+        "@type": string;
+        value: string;
+        currency: string;
+      };
+      deliveryTime: {
+        "@type": string;
+        handlingTime: {
+          "@type": string;
+          minValue: number;
+          maxValue: number;
+          unitCode: string;
+        };
+        transitTime: {
+          "@type": string;
+          minValue: number;
+          maxValue: number;
+          unitCode: string;
+        };
+      };
+    };
+  };
+  aggregateRating?: {
+    "@type": string;
+    ratingValue: number;
+    reviewCount: number;
+  };
+  [key: string]: unknown;
 }
 
 export const seoConfigs = {
@@ -161,7 +213,8 @@ export const productSeoConfigs: Record<number, SEOConfig> = {
     title: "Agarre Táctico Profesional | MΛN POWERS",
     description:
       "A mitad de serie, las manos sudan y la sujeción del arco debe seguir siendo constante. Este gel de agarre técnico ofrece una firmeza seca y controlada para que tu mano soporte el tiro sin deslizamientos, cuidando la piel durante la sesión. Integra el agarre en tu rutina previa al disparo.",
-    keywords: "Agarre Táctico Profesional, deportes, MΛN POWERS, agarre tiro, agarre tiradores",
+    keywords:
+      "Agarre Táctico Profesional, deportes, MΛN POWERS, agarre tiro, agarre tiradores",
     ogTitle: "Agarre Táctico Profesional | MΛN POWERS",
     ogDescription:
       "A mitad de serie, las manos sudan y la sujeción del arco debe seguir siendo constante. Este gel de agarre técnico ofrece una firmeza seca y controlada para que tu mano soporte el tiro sin deslizamientos, cuidando la piel durante la sesión. Integra el agarre en tu rutina previa al disparo.",
@@ -241,7 +294,8 @@ export const productSeoConfigs: Record<number, SEOConfig> = {
     title: "Agarre técnico Profesional | MΛN POWERS",
     description:
       "Gel de agarre técnico para golf, diseñado para mejorar la sujeción del palo en condiciones de humedad, sudor o tensión competitiva. Su fórmula crea una película antideslizante que mantiene las manos firmes y secas, incrementando el control del swing y la precisión en el impacto. Ideal para entrenamientos y torneos; se aplica en palma y dedos sin dejar residuos pegajosos ni marcar el grip. Ingredientes respetuosos con la piel que ayudan a prevenir rozaduras y fatiga de manos durante la vuelta.",
-    keywords: "Agarre técnico Profesional, deportes, MΛN POWERS, agarre golf, agarre golfistas",
+    keywords:
+      "Agarre técnico Profesional, deportes, MΛN POWERS, agarre golf, agarre golfistas",
     ogTitle: "Agarre técnico Profesional | MΛN POWERS",
     ogDescription:
       "Gel de agarre técnico para golf, diseñado para mejorar la sujeción del palo en condiciones de humedad, sudor o tensión competitiva. Su fórmula crea una película antideslizante que mantiene las manos firmes y secas, incrementando el control del swing y la precisión en el impacto.",
@@ -312,7 +366,7 @@ export const updateSEOTags = (config: SEOConfig) => {
   }
 
   const ogDescription = document.querySelector(
-    'meta[property="og:description"]'
+    'meta[property="og:description"]',
   );
   if (ogDescription && config.ogDescription) {
     ogDescription.setAttribute("content", config.ogDescription);
@@ -323,4 +377,126 @@ export const updateSEOTags = (config: SEOConfig) => {
   if (canonical && config.canonicalUrl) {
     canonical.setAttribute("href", config.canonicalUrl);
   }
+};
+
+export const injectJSONLD = (schema: object) => {
+  let script = document.querySelector('script[type="application/ld+json"]');
+  if (!script) {
+    script = document.createElement("script");
+    script.setAttribute("type", "application/ld+json");
+    document.head.appendChild(script);
+  }
+  script.textContent = JSON.stringify(schema);
+};
+
+export const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "MΛN POWERS",
+  url: "https://manpowers.es",
+  logo: "https://manpowers.es/MAN-LOGO-BLANCO.png",
+  sameAs: [
+    "https://www.facebook.com/profile.php?id=61575027062016",
+    "https://www.instagram.com/manpowers__/",
+  ],
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      telephone: "+34-670-372-239",
+      contactType: "customer service",
+      email: "info@manpowers.es",
+      areaServed: "ES",
+      availableLanguage: ["es", "en", "ca"],
+    },
+  ],
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "C. Severo Ochoa, 5",
+    addressLocality: "Paracuellos de Jarama",
+    addressRegion: "Madrid",
+    postalCode: "28860",
+    addressCountry: "ES",
+  },
+  department: [
+    {
+      "@type": "Organization",
+      name: "MΛN POWERS Mallorca",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Carrer Ferrers, 6",
+        addressLocality: "Manacor",
+        addressRegion: "Illes Balears",
+        postalCode: "07500",
+        addressCountry: "ES",
+      },
+    },
+  ],
+};
+
+export const generateProductSchema = (
+  product: Product,
+  language: "es" | "en" | "ca" = "es",
+) => {
+  const url = `https://manpowers.es/product/${product.id}`;
+  const name = product.name[language] || product.name.es;
+  const description = product.description[language] || product.description.es;
+  const image = product.image.startsWith("http")
+    ? product.image
+    : `https://manpowers.es${product.image}`;
+
+  const schema: ProductSchema = {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    name: name,
+    image: image,
+    description: description,
+    sku: product.sku || String(product.id),
+    brand: {
+      "@type": "Brand",
+      name: "MΛN POWERS",
+    },
+    offers: {
+      "@type": "Offer",
+      url: url,
+      priceCurrency: "EUR",
+      price: product.price,
+      availability: product.available
+        ? "https://schema.org/InStock"
+        : "https://schema.org/OutOfStock",
+      itemCondition: "https://schema.org/NewCondition",
+      shippingDetails: {
+        "@type": "OfferShippingDetails",
+        shippingRate: {
+          "@type": "MonetaryAmount",
+          value: "0",
+          currency: "EUR",
+        },
+        deliveryTime: {
+          "@type": "ShippingDeliveryTime",
+          handlingTime: {
+            "@type": "QuantitativeValue",
+            minValue: 0,
+            maxValue: 1,
+            unitCode: "DAY",
+          },
+          transitTime: {
+            "@type": "QuantitativeValue",
+            minValue: 1,
+            maxValue: 3,
+            unitCode: "DAY",
+          },
+        },
+      },
+    },
+  };
+
+  if (product.rating) {
+    schema.aggregateRating = {
+      "@type": "AggregateRating",
+      ratingValue: product.rating,
+      reviewCount: product.votes || 1,
+    };
+  }
+
+  return schema;
 };
