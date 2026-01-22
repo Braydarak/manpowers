@@ -14,8 +14,12 @@ const HomePage: React.FC = () => {
   // Hook para actualizar idioma y título dinámicamente
   useLanguageUpdater();
   const { i18n, t } = useTranslation();
-  const baseLang = i18n.resolvedLanguage?.split('-')[0] || i18n.language?.split('-')[0] || 'es';
-  const currentLanguage: 'es' | 'en' | 'ca' = baseLang === 'en' ? 'en' : (baseLang === 'ca' ? 'ca' : 'es');
+  const baseLang =
+    i18n.resolvedLanguage?.split("-")[0] ||
+    i18n.language?.split("-")[0] ||
+    "es";
+  const currentLanguage: "es" | "en" | "ca" =
+    baseLang === "en" ? "en" : baseLang === "ca" ? "ca" : "es";
 
   useEffect(() => {
     updateSEOTags(seoConfigs.home);
@@ -30,7 +34,9 @@ const HomePage: React.FC = () => {
         const k = sessionStorage.key(i);
         if (k && k.startsWith("emailSent:")) dynamicKeys.push(k);
       }
-      [...keysToRemove, ...dynamicKeys].forEach((k) => sessionStorage.removeItem(k));
+      [...keysToRemove, ...dynamicKeys].forEach((k) =>
+        sessionStorage.removeItem(k),
+      );
     } catch (err) {
       console.warn("No se pudo limpiar sessionStorage al entrar en Home:", err);
     }
@@ -44,13 +50,15 @@ const HomePage: React.FC = () => {
   return (
     <div>
       <Header />
-      <main className={`flex-grow transition-all duration-500 bg-gradient-to-b from-blue-950/10 via-black/95 to-black ${enter ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+      <main
+        className={`flex-grow transition-all duration-500 bg-gradient-to-b from-blue-950/10 via-black/95 to-black ${enter ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+      >
         <Hero />
         <div className="w-full border-t border-gray-800">
           <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-8">
             <AllProducts
               language={currentLanguage}
-              title={t('allProducts.title')}
+              title={t("allProducts.title")}
             />
           </div>
         </div>

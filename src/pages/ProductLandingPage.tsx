@@ -65,8 +65,8 @@ const ProductLandingPage: React.FC = () => {
     const keys = product.amazonLinks
       ? Object.keys(product.amazonLinks)
       : product.pricesBySize
-      ? Object.keys(product.pricesBySize)
-      : [];
+        ? Object.keys(product.pricesBySize)
+        : [];
     if (keys.length > 0)
       setSelectedSize(keys.includes("100ml") ? "100ml" : keys[0]);
     else setSelectedSize(null);
@@ -92,7 +92,7 @@ const ProductLandingPage: React.FC = () => {
       },
       {
         threshold: 0,
-      }
+      },
     );
 
     if (mainButtonRef.current) {
@@ -130,8 +130,8 @@ const ProductLandingPage: React.FC = () => {
         typeof val === "number"
           ? val
           : typeof val === "string"
-          ? parseFloat(val.replace(",", "."))
-          : Number(product.price);
+            ? parseFloat(val.replace(",", "."))
+            : Number(product.price);
       return `€ ${num.toFixed(2)}`;
     }
     return product.price_formatted

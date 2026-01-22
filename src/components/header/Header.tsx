@@ -214,7 +214,7 @@ const Header: React.FC = () => {
               alt="MΛN POWERS - Suplementos Premium"
               className={`${
                 isBelow1000 ? "h-10 md:h-20" : "h-12 md:h-26"
-              } drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-transform duration-300 hover:scale-105`}
+              } drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]`}
             />
           </picture>
         </h1>

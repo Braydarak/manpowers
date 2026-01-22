@@ -78,7 +78,7 @@ const ProductDetailPage: React.FC = () => {
       return Number.isFinite(num) ? num : undefined;
     }
     const matchedKey = Object.keys(product.pricesBySize).find(
-      (k) => normalize(k) === normalizedTarget
+      (k) => normalize(k) === normalizedTarget,
     );
     const val = matchedKey ? product.pricesBySize[matchedKey] : undefined;
     if (!val) return undefined;
@@ -107,8 +107,8 @@ const ProductDetailPage: React.FC = () => {
       typeof window !== "undefined"
         ? window.location.pathname
         : slug
-        ? `/product/${slug}`
-        : `/product/${id}`;
+          ? `/product/${slug}`
+          : `/product/${id}`;
     updateSEOTags({
       title,
       description,
@@ -174,12 +174,12 @@ const ProductDetailPage: React.FC = () => {
             recommendations: p.recommendations,
             rating: p.rating,
             votes: p.votes,
-          })
+          }),
         );
 
         if (id) {
           const byId = normalized.find(
-            (p: Product) => String(p.id) === String(id)
+            (p: Product) => String(p.id) === String(id),
           );
           if (byId) {
             setProduct(byId);
@@ -190,14 +190,14 @@ const ProductDetailPage: React.FC = () => {
         if (slug) {
           const base = sportParam
             ? normalized.filter(
-                (p) => p.sportId === sportParam || p.sportId === "multisport"
+                (p) => p.sportId === sportParam || p.sportId === "multisport",
               )
             : normalized;
           const found = base.find(
             (p) =>
               toSlug(p.name.es) === slug ||
               toSlug(p.name.en) === slug ||
-              toSlug(p.name.ca || "") === slug
+              toSlug(p.name.ca || "") === slug,
           );
           if (found) {
             setProduct(found);
@@ -223,13 +223,13 @@ const ProductDetailPage: React.FC = () => {
         const response = await fetch("/products.json");
         const data = await response.json();
         const p = (data.products || []).find(
-          (x: ProductJson) => String(x.id) === String(id)
+          (x: ProductJson) => String(x.id) === String(id),
         );
         const langItems = Array.isArray(p?.faqs?.[currentLanguage])
           ? p.faqs[currentLanguage]
           : Array.isArray(p?.faqs?.es)
-          ? p.faqs.es
-          : [];
+            ? p.faqs.es
+            : [];
         const items = (langItems as { question: string; answer: string }[])
           .slice(0, 4)
           .map((it, idx) => ({
@@ -252,12 +252,12 @@ const ProductDetailPage: React.FC = () => {
     };
     window.addEventListener(
       "cart:checkoutOpen",
-      onCheckoutToggle as EventListener
+      onCheckoutToggle as EventListener,
     );
     return () => {
       window.removeEventListener(
         "cart:checkoutOpen",
-        onCheckoutToggle as EventListener
+        onCheckoutToggle as EventListener,
       );
     };
   }, []);
@@ -279,8 +279,8 @@ const ProductDetailPage: React.FC = () => {
     const keys = product.amazonLinks
       ? Object.keys(product.amazonLinks)
       : product.pricesBySize
-      ? Object.keys(product.pricesBySize)
-      : [];
+        ? Object.keys(product.pricesBySize)
+        : [];
     if (keys.length > 0) {
       const preferred = keys.find((k) => k.toLowerCase() === "100ml");
       setSelectedSize(preferred || keys[0]);
@@ -302,9 +302,25 @@ const ProductDetailPage: React.FC = () => {
     const priceBySize = getPriceForSize(selectedSize || undefined);
     const computedPrice =
       typeof priceBySize === "number" ? priceBySize : product.price;
+
+    let finalName = product.name[currentLanguage];
+    let finalId = String(product.id);
+
+    // Si es indumentaria y hay talla seleccionada, añadir al nombre y al ID
+    if (
+      (typeof product.category === "string"
+        ? product.category
+        : product.category.es
+      )?.toLowerCase() === "indumentaria" &&
+      selectedSize
+    ) {
+      finalName = `${finalName} (${selectedSize})`;
+      finalId = `${finalId}-${selectedSize}`;
+    }
+
     const detail = {
-      id: String(product.id),
-      name: product.name[currentLanguage],
+      id: finalId,
+      name: finalName,
       price: computedPrice,
       image: product.image,
       quantity: 1,
@@ -317,9 +333,25 @@ const ProductDetailPage: React.FC = () => {
     const priceBySize = getPriceForSize(selectedSize || undefined);
     const computedPrice =
       typeof priceBySize === "number" ? priceBySize : product.price;
+
+    let finalName = product.name[currentLanguage];
+    let finalId = String(product.id);
+
+    // Si es indumentaria y hay talla seleccionada, añadir al nombre y al ID
+    if (
+      (typeof product.category === "string"
+        ? product.category
+        : product.category.es
+      )?.toLowerCase() === "indumentaria" &&
+      selectedSize
+    ) {
+      finalName = `${finalName} (${selectedSize})`;
+      finalId = `${finalId}-${selectedSize}`;
+    }
+
     const detail = {
-      id: String(product.id),
-      name: product.name[currentLanguage],
+      id: finalId,
+      name: finalName,
       price: computedPrice,
       image: product.image,
       quantity: 1,
@@ -429,7 +461,7 @@ const ProductDetailPage: React.FC = () => {
                         target.style.display = "none";
                         if (target.parentElement) {
                           target.parentElement.innerHTML = `<span class='block p-6 text-gray-400'>${t(
-                            "sports.imageNotAvailable"
+                            "sports.imageNotAvailable",
                           )}</span>`;
                         }
                       }}
@@ -525,7 +557,7 @@ const ProductDetailPage: React.FC = () => {
                     <span className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent">
                       {(() => {
                         const bySize = getPriceForSize(
-                          selectedSize || undefined
+                          selectedSize || undefined,
                         );
                         if (typeof bySize === "number") {
                           return `€ ${bySize.toFixed(2)}`;
@@ -541,24 +573,26 @@ const ProductDetailPage: React.FC = () => {
                     {currentLanguage === "es"
                       ? "IVA incl. + gastos de envío"
                       : currentLanguage === "ca"
-                      ? "IVA incl. + despeses d'enviament"
-                      : "VAT incl. + shipping"}{" "}
+                        ? "IVA incl. + despeses d'enviament"
+                        : "VAT incl. + shipping"}{" "}
                     ·{" "}
                     {currentLanguage === "es"
                       ? "Plazo de entrega 3–5 días laborables"
                       : currentLanguage === "ca"
-                      ? "Termini de lliurament 3–5 dies laborables"
-                      : "Delivery time 3–5 business days"}
+                        ? "Termini de lliurament 3–5 dies laborables"
+                        : "Delivery time 3–5 business days"}
                   </div>
 
-                  <div className="text-sm text-gray-300">
-                    {currentLanguage === "es"
-                      ? "Tamaño del contenido:"
-                      : currentLanguage === "ca"
-                      ? "Mida del contingut:"
-                      : "Content size:"}{" "}
-                    {selectedSize || product.size}
-                  </div>
+                  {(selectedSize || product.size) && (
+                    <div className="text-sm text-gray-300">
+                      {currentLanguage === "es"
+                        ? "Tamaño del contenido:"
+                        : currentLanguage === "ca"
+                          ? "Mida del contingut:"
+                          : "Content size:"}{" "}
+                      {selectedSize || product.size}
+                    </div>
+                  )}
 
                   {product.available &&
                     (product.amazonLinks || product.pricesBySize) && (
@@ -593,6 +627,40 @@ const ProductDetailPage: React.FC = () => {
                               </button>
                             );
                           })}
+                        </div>
+                      </div>
+                    )}
+
+                  {product.available &&
+                    !product.amazonLinks &&
+                    !product.pricesBySize &&
+                    (typeof product.category === "string"
+                      ? product.category
+                      : product.category.es
+                    )?.toLowerCase() === "indumentaria" &&
+                    typeof product.size === "string" && (
+                      <div className="flex flex-col gap-3">
+                        <span className="text-sm text-gray-400">
+                          {t("product.selectSize")}
+                        </span>
+                        <div className="flex flex-wrap gap-2">
+                          {product.size
+                            .split(",")
+                            .map((s) => s.trim())
+                            .filter((s) => s)
+                            .map((size) => (
+                              <button
+                                key={size}
+                                onClick={() => setSelectedSize(size)}
+                                className={`${
+                                  selectedSize === size
+                                    ? "bg-yellow-500 text-black"
+                                    : "bg-gray-800 text-gray-200"
+                                } font-semibold px-3 py-1 rounded-lg border border-gray-700 hover:bg-gray-700 transition-colors`}
+                              >
+                                {size}
+                              </button>
+                            ))}
                         </div>
                       </div>
                     )}
@@ -827,7 +895,7 @@ const ProductDetailPage: React.FC = () => {
                     <div className="font-bold">
                       {(() => {
                         const bySize = getPriceForSize(
-                          selectedSize || undefined
+                          selectedSize || undefined,
                         );
                         if (typeof bySize === "number") {
                           return `€ ${bySize.toFixed(2)}`;
@@ -883,14 +951,21 @@ const ProductDetailPage: React.FC = () => {
                 />
               </div>
             </div>
-            <div className="w-full border-t border-gray-800">
-              <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-8">
-                <div className="text-2xl md:text-3xl font-extrabold mb-6 text-center bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent">
-                  {t("faq.title")}
+            {!(
+              (typeof product.category === "string"
+                ? product.category
+                : product.category.es
+              )?.toLowerCase() === "indumentaria"
+            ) && (
+              <div className="w-full border-t border-gray-800">
+                <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-8">
+                  <div className="text-2xl md:text-3xl font-extrabold mb-6 text-center bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent">
+                    {t("faq.title")}
+                  </div>
+                  <Faq language={currentLanguage} items={faqItems} />
                 </div>
-                <Faq language={currentLanguage} items={faqItems} />
               </div>
-            </div>
+            )}
             <div className="w-full border-t border-gray-800">
               <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-8 mb-20">
                 <RelatedProducts
