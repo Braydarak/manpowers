@@ -51,10 +51,10 @@ const HomePage: React.FC = () => {
     <div>
       <Header />
       <main
-        className={`flex-grow transition-all duration-500 bg-gradient-to-b from-blue-950/10 via-black/95 to-black ${enter ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+        className={`flex-grow transition-all duration-500 bg-black ${enter ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
       >
         <Hero />
-        <div className="w-full border-t border-gray-800">
+        <div className="w-full">
           <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-8">
             <AllProducts
               language={currentLanguage}

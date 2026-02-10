@@ -26,8 +26,12 @@ const ProductsPage: React.FC = () => {
 
   useEffect(() => {
     if (!sportId) return;
-    const baseLang = i18n.resolvedLanguage?.split('-')[0] || i18n.language?.split('-')[0] || 'es';
-    const currentLanguage: 'es' | 'en' | 'ca' = baseLang === 'en' ? 'en' : (baseLang === 'ca' ? 'ca' : 'es');
+    const baseLang =
+      i18n.resolvedLanguage?.split("-")[0] ||
+      i18n.language?.split("-")[0] ||
+      "es";
+    const currentLanguage: "es" | "en" | "ca" =
+      baseLang === "en" ? "en" : baseLang === "ca" ? "ca" : "es";
     const sport = sportName || sportId;
     const title = `Productos de ${sport} | MΛN POWERS`;
     const description = `Catálogo de ${sport} en MΛN POWERS. ${products
@@ -39,7 +43,7 @@ const ProductsPage: React.FC = () => {
       .map((p) =>
         typeof p.category === "string"
           ? p.category
-          : p.category[currentLanguage]
+          : p.category[currentLanguage],
       )
       .join(", ")}`;
     const ogImage = products[0]?.image
@@ -54,7 +58,7 @@ const ProductsPage: React.FC = () => {
       ogImage,
       canonicalUrl: `https://manpowers.es/products/${sportId}`,
     });
-  }, [sportId, sportName, products, i18n.language]);
+  }, [sportId, sportName, products, i18n.language, i18n.resolvedLanguage]);
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -71,7 +75,7 @@ const ProductsPage: React.FC = () => {
           } catch (backendError) {
             console.warn(
               "Backend no disponible, usando datos locales:",
-              backendError
+              backendError,
             );
           }
 
@@ -87,14 +91,14 @@ const ProductsPage: React.FC = () => {
                   typeof product.price === "string"
                     ? parseFloat(product.price.replace(",", "."))
                     : product.price,
-              })
+              }),
             );
           }
 
           // Filtrar productos por sportId específico y productos multisport
           const filteredProducts = allProducts.filter(
             (product: Product) =>
-              product.sportId === sportId || product.sportId === "multisport"
+              product.sportId === sportId || product.sportId === "multisport",
           );
 
           // Ordenar: primero los específicos del deporte, luego los multisport
@@ -104,7 +108,7 @@ const ProductsPage: React.FC = () => {
               const bIsSpecific = b.sportId === sportId;
               if (aIsSpecific === bIsSpecific) return 0;
               return aIsSpecific ? -1 : 1;
-            }
+            },
           );
 
           setProducts(sortedProducts);
@@ -143,8 +147,12 @@ const ProductsPage: React.FC = () => {
     navigate("/sports");
   };
 
-  const baseLang = i18n.resolvedLanguage?.split('-')[0] || i18n.language?.split('-')[0] || 'es';
-  const currentLanguage: 'es' | 'en' | 'ca' = baseLang === 'en' ? 'en' : (baseLang === 'ca' ? 'ca' : 'es');
+  const baseLang =
+    i18n.resolvedLanguage?.split("-")[0] ||
+    i18n.language?.split("-")[0] ||
+    "es";
+  const currentLanguage: "es" | "en" | "ca" =
+    baseLang === "en" ? "en" : baseLang === "ca" ? "ca" : "es";
 
   // Añadir al carrito: despacha evento que consume CartWidget
   const handleAddToCart = (product: Product) => {
@@ -171,15 +179,52 @@ const ProductsPage: React.FC = () => {
     window.dispatchEvent(new CustomEvent("cart:add", { detail }));
   };
 
-  const toSlug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').replace(/-{2,}/g, '-');
+  const toSlug = (s: string) =>
+    s
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .replace(/-{2,}/g, "-");
   const openProductDetail = (product: Product) => {
     if (!sportId) return;
     const slug = toSlug(product.name[currentLanguage] || product.name.es);
     navigate(`/products/${sportId}/${slug}`);
   };
 
+  // Separate products by category
+  const cosmetics = products.filter((p) => {
+    const cat = typeof p.category === "string" ? p.category : p.category.es;
+    const lowerCat = cat.toLowerCase();
+    // Include products that are explicitly 'cuidado' OR 'suplementos' OR multisport items that are not apparel
+    return (
+      lowerCat.includes("cuidado") ||
+      lowerCat.includes("suplementos") ||
+      (p.sportId === "multisport" && !lowerCat.includes("indumentaria"))
+    );
+  });
+
+  const apparel = products.filter((p) => {
+    const cat = typeof p.category === "string" ? p.category : p.category.es;
+    return cat.toLowerCase().includes("indumentaria");
+  });
+
+  const titles = {
+    cosmetics: {
+      es: "Cosmética",
+      en: "Cosmetics",
+      ca: "Cosmètica",
+    },
+    apparel: {
+      es: "Indumentaria",
+      en: "Apparel",
+      ca: "Indumentària",
+    },
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-950 to-black">
+    <div className="min-h-screen bg-black">
       <Header />
 
       <main
@@ -221,7 +266,7 @@ const ProductsPage: React.FC = () => {
 
         {/* Productos */}
         <section className="py-20 px-4 md:px-8 lg:px-12">
-          <div className="max-w-7xl mx-auto">
+          <div className="max-w-7xl mx-auto space-y-20">
             {loading ? (
               <div className="text-center py-20">
                 <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-yellow-400 mx-auto mb-4"></div>
@@ -242,20 +287,58 @@ const ProductsPage: React.FC = () => {
                 </button>
               </div>
             ) : products.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {products.map((product) => (
-                  <ProductCard
-                    key={product.id}
-                    product={product}
-                    language={currentLanguage}
-                    onOpen={openProductDetail}
-                    onAddToCart={handleAddToCart}
-                    onBuyNow={handleBuyNow}
-                    showAmazonLinks={true}
-                    variant="full"
-                  />
-                ))}
-              </div>
+              <>
+                {/* Cosmetics Section */}
+                {cosmetics.length > 0 && (
+                  <div>
+                    <h2 className="text-2xl md:text-3xl font-extrabold mb-8 uppercase text-white">
+                      {titles.cosmetics[currentLanguage] || titles.cosmetics.es}
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                      {cosmetics.map((product) => (
+                        <ProductCard
+                          key={product.id}
+                          product={product}
+                          language={currentLanguage}
+                          onOpen={openProductDetail}
+                          onAddToCart={handleAddToCart}
+                          onBuyNow={handleBuyNow}
+                          showAmazonLinks={true}
+                          variant="full"
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Separator */}
+                {cosmetics.length > 0 && apparel.length > 0 && (
+                  <div className="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent my-4 mt-10 mb-10" />
+                )}
+
+                {/* Apparel Section */}
+                {apparel.length > 0 && (
+                  <div>
+                    <h2 className="text-2xl md:text-3xl font-extrabold mb-8 uppercase text-white">
+                      {titles.apparel[currentLanguage] || titles.apparel.es}
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                      {apparel.map((product) => (
+                        <ProductCard
+                          key={product.id}
+                          product={product}
+                          language={currentLanguage}
+                          onOpen={openProductDetail}
+                          onAddToCart={handleAddToCart}
+                          onBuyNow={handleBuyNow}
+                          showAmazonLinks={true}
+                          variant="full"
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </>
             ) : (
               <div className="text-center py-20">
                 <div className="text-6xl mb-4">🏆</div>
