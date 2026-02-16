@@ -353,7 +353,7 @@ const ChatWidget: React.FC = () => {
   return (
     <div
       ref={panelRef}
-      className="fixed bottom-0 left-0 right-0 md:bottom-4 md:right-2 md:left-auto z-[300] w-screen md:w-[480px] md:max-w-lg h-full md:h-[40vh] bg-[var(--color-primary)] border border-black/10 rounded-t-xl md:rounded-xl shadow-2xl flex flex-col backdrop-blur"
+      className="fixed bottom-0 left-0 right-0 md:bottom-4 md:right-2 md:left-auto z-[300] w-screen md:w-[480px] md:max-w-lg h-full md:h-[60vh] bg-[var(--color-primary)] border border-black/10 rounded-t-xl md:rounded-xl shadow-2xl flex flex-col backdrop-blur"
     >
       <div className="flex items-center justify-between p-3 border-b border-black/10 rounded-t-xl bg-[var(--color-primary)] text-black">
         <div className="flex items-center gap-2">
