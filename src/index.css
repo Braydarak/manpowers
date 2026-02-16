@@ -5,9 +5,13 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  --color-primary: #ffffff;
+  --color-secondary: #ff2800;
+  --color-black: #111111;
+
+  color-scheme: light;
+  color: #111111;
+  background-color: var(--color-primary);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -42,42 +46,62 @@ body {
 
 .scrollbar-thin {
   scrollbar-width: thin;
-  scrollbar-color: #f59e0b #0b0f19;
+  scrollbar-color: var(--color-black) var(--color-primary);
 }
 .scrollbar-thin::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 .scrollbar-thin::-webkit-scrollbar-track {
-  background: #0b0f19;
+  background: var(--color-primary);
 }
 .scrollbar-thin::-webkit-scrollbar-thumb {
-  background-color: #f59e0b;
+  background-color: var(--color-black);
   border-radius: 9999px;
-  border: 2px solid #0b0f19;
+  border: 2px solid var(--color-black);
 }
 
 html {
   scrollbar-width: thin;
-  scrollbar-color: #f59e0b #0b0f19;
+  scrollbar-color: var(--color-black) var(--color-primary);
 }
 html::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 html::-webkit-scrollbar-track {
-  background: #0b0f19;
+  background: var(--color-primary);
 }
 html::-webkit-scrollbar-thumb {
-  background-color: #f59e0b;
+  background-color: var(--color-secondary);
   border-radius: 9999px;
-  border: 2px solid #0b0f19;
+  border: 2px solid var(--color-secondary);
 }
 
 @keyframes slide-up {
-  from { transform: translateY(100%); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 .animate-slide-up {
   animation: slide-up 0.3s ease-out forwards;
+}
+
+@keyframes cart-overlay-slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.cart-overlay-fade-in {
+  animation: cart-overlay-slide-in 0.3s ease-out forwards;
 }

@@ -9,7 +9,7 @@ const Header: React.FC = () => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [language, setLanguage] = useState<string>(
-    i18n.resolvedLanguage?.split("-")[0] || "es"
+    i18n.resolvedLanguage?.split("-")[0] || "es",
   );
   const [menuOpen, setMenuOpen] = useState<boolean>(false); // Estado para controlar el menú hamburguesa
   const [isMobile, setIsMobile] = useState<boolean>(false); // Estado para detectar si es dispositivo móvil
@@ -150,7 +150,7 @@ const Header: React.FC = () => {
 
   return (
     <header
-      className={`bg-gradient-to-b from-gray-900 to-black text-white py-2 px-6 w-full border-b border-gray-700 shadow-lg fixed top-0 z-50 transition-transform duration-300 ${
+      className={`bg-[var(--color-primary)] text-black py-1.5 md:py-2 px-4 md:px-6 w-full border-b border-black/10 shadow-lg fixed top-0 z-50 transition-transform duration-300 ${
         isMobile && hideHeader && !menuOpen && !searchOpenMobile
           ? "-translate-y-full"
           : "translate-y-0"
@@ -165,17 +165,17 @@ const Header: React.FC = () => {
             aria-label="Menú"
           >
             <span
-              className={`block w-6 h-px bg-white mb-1.5 transition-transform duration-300 ${
+              className={`block w-6 h-px bg-black mb-1.5 transition-transform duration-300 ${
                 menuOpen ? "rotate-45 translate-y-2" : ""
               }`}
             ></span>
             <span
-              className={`block w-6 h-px bg-white mb-1.5 transition-opacity duration-300 ${
+              className={`block w-6 h-px bg-black mb-1.5 transition-opacity duration-300 ${
                 menuOpen ? "opacity-0" : "opacity-100"
               }`}
             ></span>
             <span
-              className={`block w-6 h-px bg-white transition-transform duration-300 ${
+              className={`block w-6 h-px bg-black transition-transform duration-300 ${
                 menuOpen ? "-rotate-45 -translate-y-2" : ""
               }`}
             ></span>
@@ -208,13 +208,13 @@ const Header: React.FC = () => {
           onClick={handleLogoClick}
         >
           <picture>
-            <source media="(min-width: 768px)" srcSet="/MAN-LOGO-BLANCO.png" />
+            <source media="(min-width: 768px)" srcSet="/MAN-BLANCO.png" />
             <img
               src="/MAN-BLANCO.png"
               alt="MΛN POWERS - Suplementos Premium"
               className={`${
-                isBelow1000 ? "h-10 md:h-20" : "h-12 md:h-26"
-              } drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]`}
+                isBelow1000 ? "h-8 md:h-14" : "h-9 md:h-16"
+              } invert drop-shadow-[0_0_4px_rgba(0,0,0,0.25)]`}
             />
           </picture>
         </h1>
@@ -229,7 +229,7 @@ const Header: React.FC = () => {
           {!isBelow1000 && <ProductSearch className="ml-2" />}
           {isBelow1000 && (
             <button
-              className="p-2 text-white/90 hover:text-white focus:outline-none"
+              className="p-2 text-black/80 hover:text-black focus:outline-none"
               onClick={() => setSearchOpenMobile(true)}
               aria-label="Buscar"
             >
@@ -260,7 +260,7 @@ const Header: React.FC = () => {
                 setLangOpen((v) => !v);
                 (e.currentTarget as HTMLButtonElement).blur();
               }}
-              className="bg-gradient-to-r from-gray-900 to-black border border-white/20 text-white pl-10 pr-10 py-2 rounded-md shadow-md hover:from-gray-800 hover:to-gray-900 focus:outline-none transition-all flex items-center gap-2"
+              className="bg-[var(--color-primary)] border border-black/20 text-black pl-10 pr-10 py-2 rounded-md shadow-md hover:bg-black/5 focus:outline-none transition-all flex items-center gap-2"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -268,7 +268,7 @@ const Header: React.FC = () => {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
-                className="h-4 w-4 text-white/70 absolute left-3"
+                className="h-4 w-4 text-black/60 absolute left-3"
               >
                 <circle cx="12" cy="12" r="9" />
                 <path d="M2 12h20M12 2v20M4 8h16M4 16h16" />
@@ -277,20 +277,20 @@ const Header: React.FC = () => {
                 {language === "es"
                   ? "Español"
                   : language === "ca"
-                  ? "Català"
-                  : "English"}
+                    ? "Català"
+                    : "English"}
               </span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
                 fill="currentColor"
-                className="h-5 w-5 text-white/70 absolute right-2"
+                className="h-5 w-5 text-black/60 absolute right-2"
               >
                 <path d="M5.23 7.21a.75.75 0 011.06.02L10 10.939l3.71-3.71a.75.75 0 111.06 1.061l-4.24 4.24a.75.75 0 01-1.06 0l-4.24-4.24a.75.75 0 01.02-1.06z" />
               </svg>
             </button>
             {langOpen && (
-              <ul className="absolute right-0 mt-2 w-44 bg-gradient-to-r from-gray-900 to-black border border-white/20 rounded-xl shadow-xl overflow-hidden z-50">
+              <ul className="absolute right-0 mt-2 w-44 bg-[var(--color-primary)] border border-black/10 rounded-xl shadow-xl overflow-hidden z-50">
                 <li>
                   <button
                     type="button"
@@ -298,7 +298,7 @@ const Header: React.FC = () => {
                       handleLanguageChange("es");
                       setLangOpen(false);
                     }}
-                    className="w-full text-left px-4 py-2 text-white hover:bg-gray-800"
+                    className="w-full text-left px-4 py-2 text-black hover:bg-black/5"
                   >
                     Español
                   </button>
@@ -310,7 +310,7 @@ const Header: React.FC = () => {
                       handleLanguageChange("en");
                       setLangOpen(false);
                     }}
-                    className="w-full text-left px-4 py-2 text-white hover:bg-gray-800"
+                    className="w-full text-left px-4 py-2 text-black hover:bg-black/5"
                   >
                     English
                   </button>
@@ -322,7 +322,7 @@ const Header: React.FC = () => {
                       handleLanguageChange("ca");
                       setLangOpen(false);
                     }}
-                    className="w-full text-left px-4 py-2 text-white hover:bg-gray-800"
+                    className="w-full text-left px-4 py-2 text-black hover:bg-black/5"
                   >
                     Català
                   </button>
@@ -336,17 +336,17 @@ const Header: React.FC = () => {
             aria-label="Menú"
           >
             <span
-              className={`block w-6 h-px bg-white mb-1.5 transition-transform duration-300 ${
+              className={`block w-6 h-px bg-black mb-1.5 transition-transform duration-300 ${
                 menuOpen ? "rotate-45 translate-y-2" : ""
               }`}
             ></span>
             <span
-              className={`block w-6 h-px bg-white mb-1.5 transition-opacity duration-300 ${
+              className={`block w-6 h-px bg-black mb-1.5 transition-opacity duration-300 ${
                 menuOpen ? "opacity-0" : "opacity-100"
               }`}
             ></span>
             <span
-              className={`block w-6 h-px bg-white transition-transform duration-300 ${
+              className={`block w-6 h-px bg-black transition-transform duration-300 ${
                 menuOpen ? "-rotate-45 -translate-y-2" : ""
               }`}
             ></span>
@@ -367,21 +367,21 @@ const Header: React.FC = () => {
           }`}
         />
         <div
-          className={`absolute top-0 left-0 h-screen w-full md:left-auto md:right-0 md:w-[40%] bg-gradient-to-b from-gray-900 to-black transition-transform duration-300 ease-in-out z-[120] ${
+          className={`absolute top-0 left-0 h-screen w-full md:left-auto md:right-0 md:w-[40%] bg-[var(--color-primary)] text-black transition-transform duration-300 ease-in-out z-[120] ${
             menuOpen
               ? "translate-x-0 md:translate-x-0"
               : "-translate-x-full md:translate-x-full"
           } flex flex-col overflow-hidden`}
         >
-          <div className="sticky top-0 w-full bg-gradient-to-r from-gray-900 to-black border-b border-white/20 px-4 py-4 flex items-center justify-end z-50">
+          <div className="sticky top-0 w-full bg-[var(--color-primary)] border-b border-black/10 px-4 py-4 flex items-center justify-end z-50">
             <button
               onClick={toggleMenu}
-              className="p-2 hover:bg-gray-800 rounded-md transition-colors duration-300 focus:outline-none"
+              className="p-2 hover:bg-black/5 rounded-md transition-colors duration-300 focus:outline-none"
               aria-label="Cerrar menú"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 text-white"
+                className="h-6 w-6 text-black"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -400,7 +400,7 @@ const Header: React.FC = () => {
               <InfoStripe forceMobile />
               <div className="w-full grid grid-cols-1 gap-0">
                 <div>
-                  <span className="text-white/70 text-xl text-center mb-4 border-t border-white/30 py-5 px-4 flex justify-center items-center">
+                  <span className="text-black/70 text-xl text-center mb-4 border-t border-black/10 py-5 px-4 flex justify-center items-center">
                     {t("menu.viewBySport")}
                   </span>
                   <button
@@ -408,7 +408,7 @@ const Header: React.FC = () => {
                       navigate("/products/archery");
                       setMenuOpen(false);
                     }}
-                    className="group relative w-full bg-gradient-to-r from-gray-900 to-black border-y border-white/30 text-white font-semibold py-5 px-4 transition-all duration-300 hover:bg-gray-800 overflow-hidden cursor-pointer"
+                    className="group relative w-full bg-[var(--color-primary)] border-y border-black/10 text-black font-semibold py-5 px-4 transition-all duration-300 hover:bg-black/5 overflow-hidden cursor-pointer"
                   >
                     <img
                       src="/tiro.jpeg"
@@ -419,7 +419,7 @@ const Header: React.FC = () => {
                       <span>{t("sports.archery")}</span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5 text-white/70 transition-transform duration-300 group-hover:translate-x-1"
+                        className="h-5 w-5 text-black/60 transition-transform duration-300 group-hover:translate-x-1"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -438,7 +438,7 @@ const Header: React.FC = () => {
                       navigate("/products/fencing");
                       setMenuOpen(false);
                     }}
-                    className="group relative w-full bg-gradient-to-r from-gray-900 to-black border-y border-white/30 text-white font-semibold py-5 px-4 transition-all duration-300 hover:bg-gray-800 overflow-hidden cursor-pointer"
+                    className="group relative w-full bg-[var(--color-primary)] border-y border-black/10 text-black font-semibold py-5 px-4 transition-all duration-300 hover:bg-black/5 overflow-hidden cursor-pointer"
                   >
                     <img
                       src="/esgrima.jpg"
@@ -449,7 +449,7 @@ const Header: React.FC = () => {
                       <span>{t("sports.fencing")}</span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5 text-white/70 transition-transform duration-300 group-hover:translate-x-1"
+                        className="h-5 w-5 text-black/60 transition-transform duration-300 group-hover:translate-x-1"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -468,7 +468,7 @@ const Header: React.FC = () => {
                       navigate("/products/golf");
                       setMenuOpen(false);
                     }}
-                    className="group relative w-full bg-gradient-to-r from-gray-900 to-black border-y border-white/30 text-white font-semibold py-5 px-4 transition-all duration-300 hover:bg-gray-800 overflow-hidden cursor-pointer"
+                    className="group relative w-full bg-[var(--color-primary)] border-y border-black/10 text-black font-semibold py-5 px-4 transition-all duration-300 hover:bg-black/5 overflow-hidden cursor-pointer"
                   >
                     <img
                       src="/golf.jpg"
@@ -479,7 +479,7 @@ const Header: React.FC = () => {
                       <span>{t("sports.golf")}</span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5 text-white/70 transition-transform duration-300 group-hover:translate-x-1"
+                        className="h-5 w-5 text-black/60 transition-transform duration-300 group-hover:translate-x-1"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -498,7 +498,7 @@ const Header: React.FC = () => {
                       navigate("/products/cycling");
                       setMenuOpen(false);
                     }}
-                    className="group relative w-full bg-gradient-to-r from-gray-900 to-black border-y border-white/30 text-white font-semibold py-5 px-4 transition-all duration-300 hover:bg-gray-800 overflow-hidden cursor-pointer"
+                    className="group relative w-full bg-[var(--color-primary)] border-y border-black/10 text-black font-semibold py-5 px-4 transition-all duration-300 hover:bg-black/5 overflow-hidden cursor-pointer"
                   >
                     <img
                       src="/ciclismo.jpg"
@@ -509,7 +509,7 @@ const Header: React.FC = () => {
                       <span>{t("sports.cycling")}</span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5 text-white/70 transition-transform duration-300 group-hover:translate-x-1"
+                        className="h-5 w-5 text-black/60 transition-transform duration-300 group-hover:translate-x-1"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -528,7 +528,7 @@ const Header: React.FC = () => {
                       navigate("/products/sailing");
                       setMenuOpen(false);
                     }}
-                    className="group relative w-full bg-gradient-to-r from-gray-900 to-black border-y border-white/30 text-white font-semibold py-5 px-4 transition-all duration-300 hover:bg-gray-800 overflow-hidden cursor-pointer"
+                    className="group relative w-full bg-[var(--color-primary)] border-y border-black/10 text-black font-semibold py-5 px-4 transition-all duration-300 hover:bg-black/5 overflow-hidden cursor-pointer"
                   >
                     <img
                       src="/nautica.jpg"
@@ -539,7 +539,7 @@ const Header: React.FC = () => {
                       <span>{t("sports.sailing")}</span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5 text-white/70 transition-transform duration-300 group-hover:translate-x-1"
+                        className="h-5 w-5 text-black/60 transition-transform duration-300 group-hover:translate-x-1"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -571,7 +571,7 @@ const Header: React.FC = () => {
                   navigate("/colaboradores");
                   setMenuOpen(false);
                 }}
-                className="border border-white/60 text-white px-6 py-3 mt-6 rounded-lg font-semibold text-lg transition-all duration-300 hover:bg-white hover:text-black w-[90%] text-center cursor-pointer"
+                className="border border-black/40 text-black px-6 py-3 mt-6 rounded-lg font-semibold text-lg transition-all duration-300 hover:bg-black hover:text-white w-[90%] text-center cursor-pointer"
               >
                 {t("headerCollaborators")}
               </button>
@@ -591,7 +591,7 @@ const Header: React.FC = () => {
                     }
                   }, 300);
                 }}
-                className="group w-full bg-gradient-to-r from-gray-900 to-black border-y border-white/30 mt-6 text-white font-semibold py-5 px-4 transition-all duration-300 hover:bg-gray-800 flex items-center justify-between cursor-pointer"
+                className="group w-full bg-[var(--color-primary)] border-y border-black/10 mt-6 text-black font-semibold py-5 px-4 transition-all duration-300 hover:bg-black/5 flex items-center justify-between cursor-pointer"
               >
                 {t("menu.aboutUs")}
                 <svg
@@ -619,7 +619,7 @@ const Header: React.FC = () => {
                     setLangOpenMobile((v) => !v);
                     (e.currentTarget as HTMLButtonElement).blur();
                   }}
-                  className="w-full bg-gradient-to-r from-gray-900 to-black border border-white/20 text-white pl-12 pr-12 py-3 rounded-md text-lg shadow-lg hover:from-gray-800 hover:to-gray-900 focus:outline-none transition-all flex items-center justify-center cursor-pointer"
+                  className="w-full bg-[var(--color-primary)] border border-black/20 text-black pl-12 pr-12 py-3 rounded-md text-lg shadow-lg hover:bg-black/5 focus:outline-none transition-all flex items-center justify-center cursor-pointer"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -627,7 +627,7 @@ const Header: React.FC = () => {
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2"
-                    className="h-5 w-5 text-white/70 absolute left-4"
+                    className="h-5 w-5 text-black/60 absolute left-4"
                   >
                     <circle cx="12" cy="12" r="9" />
                     <path d="M2 12h20M12 2v20M4 8h16M4 16h16" />
@@ -636,21 +636,21 @@ const Header: React.FC = () => {
                     {language === "es"
                       ? "Español"
                       : language === "ca"
-                      ? "Català"
-                      : "English"}
+                        ? "Català"
+                        : "English"}
                   </span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    className="h-5 w-5 text-white/70 absolute right-3"
+                    className="h-5 w-5 text-black/60 absolute right-3"
                   >
                     <path d="M5.23 7.21a.75.75 0 011.06.02L10 10.939l3.71-3.71a.75.75 0 111.06 1.061l-4.24 4.24a.75.75 0 01-1.06 0l-4.24-4.24a.75.75 0 01.02-1.06z" />
                   </svg>
                 </button>
 
                 {langOpenMobile && (
-                  <ul className="absolute left-0 right-0 mt-2 bg-gradient-to-r from-gray-900 to-black border border-white/20 rounded-xl shadow-xl overflow-hidden z-50">
+                  <ul className="absolute left-0 right-0 mt-2 bg-[var(--color-primary)] border border-black/10 rounded-xl shadow-xl overflow-hidden z-50">
                     <li>
                       <button
                         type="button"
@@ -659,7 +659,7 @@ const Header: React.FC = () => {
                           setLangOpenMobile(false);
                           setMenuOpen(false);
                         }}
-                        className="w-full text-left px-5 py-3 text-white hover:bg-gray-800"
+                        className="w-full text-left px-5 py-3 text-black hover:bg-black/5"
                       >
                         Español
                       </button>
@@ -672,7 +672,7 @@ const Header: React.FC = () => {
                           setLangOpenMobile(false);
                           setMenuOpen(false);
                         }}
-                        className="w-full text-left px-5 py-3 text-white hover:bg-gray-800"
+                        className="w-full text-left px-5 py-3 text-black hover:bg-black/5"
                       >
                         English
                       </button>
@@ -685,7 +685,7 @@ const Header: React.FC = () => {
                           setLangOpenMobile(false);
                           setMenuOpen(false);
                         }}
-                        className="w-full text-left px-5 py-3 text-white hover:bg-gray-800"
+                        className="w-full text-left px-5 py-3 text-black hover:bg-black/5"
                       >
                         Català
                       </button>
@@ -694,7 +694,7 @@ const Header: React.FC = () => {
                 )}
               </div>
               <div className="w-full grid grid-cols-1 gap-0 mt-4">
-                <span className="text-white/70 text-xl text-center mb-4 border-t border-white/30 py-5 px-4">
+                <span className="text-black/70 text-xl text-center mb-4 border-t border-black/10 py-5 px-4">
                   {t("menu.legal")}
                 </span>
                 <button
@@ -702,12 +702,12 @@ const Header: React.FC = () => {
                     navigate("/privacidad");
                     setMenuOpen(false);
                   }}
-                  className="group w-full bg-gradient-to-r from-gray-900 to-black border-y border-white/30 text-white font-semibold py-5 px-4 transition-all duration-300 hover:bg-gray-800 flex items-center justify-between cursor-pointer"
+                  className="group w-full bg-[var(--color-primary)] border-y border-black/10 text-black font-semibold py-5 px-4 transition-all duration-300 hover:bg-black/5 flex items-center justify-between cursor-pointer"
                 >
                   <span>{t("footerPrivacy")}</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 text-white/70 transition-transform duration-300 group-hover:translate-x-1"
+                    className="h-5 w-5 text-black/60 transition-transform duration-300 group-hover:translate-x-1"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -725,12 +725,12 @@ const Header: React.FC = () => {
                     navigate("/cookies");
                     setMenuOpen(false);
                   }}
-                  className="group w-full bg-gradient-to-r from-gray-900 to-black border-y border-white/30 text-white font-semibold py-5 px-4 transition-all duration-300 hover:bg-gray-800 flex items-center justify-between cursor-pointer"
+                  className="group w-full bg-[var(--color-primary)] border-y border-black/10 text-black font-semibold py-5 px-4 transition-all duration-300 hover:bg-black/5 flex items-center justify-between cursor-pointer"
                 >
                   <span>{t("footerCookies")}</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 text-white/70 transition-transform duration-300 group-hover:translate-x-1"
+                    className="h-5 w-5 text-black/60 transition-transform duration-300 group-hover:translate-x-1"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -748,12 +748,12 @@ const Header: React.FC = () => {
                     navigate("/aviso-legal");
                     setMenuOpen(false);
                   }}
-                  className="group w-full bg-gradient-to-r from-gray-900 to-black border-y border-white/30 text-white font-semibold py-5 px-4 transition-all duration-300 hover:bg-gray-800 flex items-center justify-between cursor-pointer"
+                  className="group w-full bg-[var(--color-primary)] border-y border-black/10 text-black font-semibold py-5 px-4 transition-all duration-300 hover:bg-black/5 flex items-center justify-between cursor-pointer"
                 >
                   <span>{t("footerLegal")}</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 text-white/70 transition-transform duration-300 group-hover:translate-x-1"
+                    className="h-5 w-5 text-black/60 transition-transform duration-300 group-hover:translate-x-1"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -771,7 +771,7 @@ const Header: React.FC = () => {
                     window.dispatchEvent(new Event("openCookiePreferences"));
                     setMenuOpen(false);
                   }}
-                  className="group w-full bg-gradient-to-r from-gray-900 to-black border-y border-white/30 text-white font-semibold py-5 px-4 transition-all duration-300 hover:bg-gray-800 flex items-center justify-between cursor-pointer"
+                  className="group w-full bg-[var(--color-primary)] border-y border-black/10 text-black font-semibold py-5 px-4 transition-all duration-300 hover:bg-black/5 flex items-center justify-between cursor-pointer"
                 >
                   <span>{t("cookies.changePreferences")}</span>
                   <svg
