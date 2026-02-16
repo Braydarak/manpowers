@@ -507,6 +507,7 @@ const AllProducts: React.FC<Props> = ({ language }) => {
     return (
       lowerCat.includes("cuidado") ||
       lowerCat.includes("suplementos") ||
+      lowerCat.includes("deportes") ||
       (p.sportId === "multisport" && !lowerCat.includes("indumentaria"))
     );
   });

@@ -201,6 +201,7 @@ const ProductsPage: React.FC = () => {
     return (
       lowerCat.includes("cuidado") ||
       lowerCat.includes("suplementos") ||
+      lowerCat.includes("deportes") ||
       (p.sportId === "multisport" && !lowerCat.includes("indumentaria"))
     );
   });
