@@ -28,7 +28,7 @@ const InfoStripe: React.FC<Props> = ({ forceMobile }) => {
     : "hidden min-[1900px]:flex";
 
   return (
-    <div className="w-full bg-gradient-to-r from-yellow-600 to-yellow-500">
+    <div className="w-full bg-[var(--color-secondary)] border-y border-black/10 text-white">
       <div className="max-w-full mx-auto px-2 sm:px-4 md:px-8 py-2">
         <div className={`${mobileContainerClass} overflow-hidden`}>
           <div
@@ -47,13 +47,13 @@ const InfoStripe: React.FC<Props> = ({ forceMobile }) => {
               }}
             >
               <div className="w-full flex items-center justify-center gap-2 px-2 shrink-0">
-                <span className="text-xs sm:text-sm font-semibold text-black whitespace-nowrap">
+                <span className="text-xs sm:text-sm font-semibold text-white whitespace-nowrap">
                   {t("shipping.tipsa")}
                 </span>
                 <img
                   src="/tipsa.png"
                   alt="TIPSA"
-                  className="h-5 sm:h-6 w-auto"
+                  className="h-5 sm:h-6 w-auto invert brightness-0"
                 />
               </div>
               <div className="w-full flex items-center justify-center gap-2 px-2 shrink-0">
@@ -141,7 +141,7 @@ const InfoStripe: React.FC<Props> = ({ forceMobile }) => {
               <div className="w-full flex items-center justify-center gap-2 px-2 shrink-0">
                 <svg
                   aria-hidden="true"
-                  className="h-5 w-5 text-black"
+                  className="h-5 w-5 text-white"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -153,7 +153,7 @@ const InfoStripe: React.FC<Props> = ({ forceMobile }) => {
                   <path d="M21 12l-4 0" />
                   <path d="M21 12l-2-2" />
                 </svg>
-                <span className="text-xs sm:text-sm font-semibold text-black whitespace-nowrap">
+                <span className="text-xs sm:text-sm font-semibold text-white whitespace-nowrap">
                   {t("returns.fourteenDays")}
                 </span>
               </div>
@@ -164,13 +164,17 @@ const InfoStripe: React.FC<Props> = ({ forceMobile }) => {
           className={`${desktopContainerClass} items-center justify-between gap-4 flex-nowrap whitespace-nowrap`}
         >
           <div className="flex items-center pl-6 basis-1/3 min-w-0 justify-start">
-            <span className="text-base font-semibold text-black whitespace-nowrap">
+            <span className="text-base font-semibold text-white whitespace-nowrap">
               {t("shipping.tipsa")}
             </span>
-            <img src="/tipsa.png" alt="TIPSA" className="h-7 w-auto" />
+            <img
+              src="/tipsa.png"
+              alt="TIPSA"
+              className="h-7 w-auto invert brightness-0"
+            />
           </div>
           <div className="flex items-center gap-3 basis-1/3 min-w-0 justify-center overflow-x-hidden">
-            <span className="text-base font-semibold text-black whitespace-nowrap">
+            <span className="text-base font-semibold text-white whitespace-nowrap">
               {t("payments.methods")}
             </span>
             <div className="flex items-center gap-2">
@@ -253,14 +257,14 @@ const InfoStripe: React.FC<Props> = ({ forceMobile }) => {
                 <circle cx="38" cy="12" r="8" fill="#0099DF" />
               </svg>
             </div>
-            <span className="text-sm md:text-base text-black/80 whitespace-nowrap">
+            <span className="text-sm md:text-base text-white/80 whitespace-nowrap">
               {t("payments.processedByRedsys")}
             </span>
           </div>
           <div className="flex items-center gap-2 pr-6 lg:pr-12 basis-1/3 min-w-0 justify-end">
             <svg
               aria-hidden="true"
-              className="h-6 w-6 text-black"
+              className="h-6 w-6 text-white"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -272,7 +276,7 @@ const InfoStripe: React.FC<Props> = ({ forceMobile }) => {
               <path d="M21 12l-4 0" />
               <path d="M21 12l-2-2" />
             </svg>
-            <span className="text-base font-semibold text-black whitespace-nowrap">
+            <span className="text-base font-semibold text-white whitespace-nowrap">
               {t("returns.fourteenDays")}
             </span>
           </div>
