@@ -194,7 +194,7 @@ const ProductSlider: React.FC<{
     <div className="relative py-8">
       {(title || "") && (
         <div className="flex items-center justify-between mb-8 px-4 md:px-0">
-          <div className="text-2xl md:text-4xl font-extrabold uppercase text-white">
+          <div className="text-2xl md:text-4xl font-extrabold uppercase text-black">
             {title}
           </div>
 
@@ -206,8 +206,8 @@ const ProductSlider: React.FC<{
               onClick={() => onArrowClick("left")}
               className={`p-2 rounded-full border transition-all duration-300 ${
                 canLeft
-                  ? "bg-zinc-900 border-zinc-700 text-yellow-400 hover:bg-zinc-800 hover:border-yellow-400/50"
-                  : "bg-zinc-900/50 border-zinc-800 text-zinc-600 cursor-not-allowed"
+                  ? "bg-[var(--color-primary)] border-black/10 text-black hover:bg-black/5"
+                  : "bg-[var(--color-primary)] border-black/5 text-black/30 cursor-not-allowed"
               }`}
             >
               <ChevronLeft className="w-6 h-6" />
@@ -218,8 +218,8 @@ const ProductSlider: React.FC<{
               onClick={() => onArrowClick("right")}
               className={`p-2 rounded-full border transition-all duration-300 ${
                 canRight
-                  ? "bg-zinc-900 border-zinc-700 text-yellow-400 hover:bg-zinc-800 hover:border-yellow-400/50"
-                  : "bg-zinc-900/50 border-zinc-800 text-zinc-600 cursor-not-allowed"
+                  ? "bg-[var(--color-primary)] border-black/10 text-black hover:bg-black/5"
+                  : "bg-[var(--color-primary)] border-black/5 text-black/30 cursor-not-allowed"
               }`}
             >
               <ChevronRight className="w-6 h-6" />
@@ -232,7 +232,7 @@ const ProductSlider: React.FC<{
         {/* Mobile Arrows (Overlay) */}
         {canLeft && (
           <button
-            className="md:hidden absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-black/60 backdrop-blur-sm p-2 rounded-full text-white border border-white/10"
+            className="md:hidden absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-black/70 backdrop-blur-sm p-2 rounded-full text-white border border-black/40"
             onClick={(e) => {
               e.stopPropagation();
               onArrowClick("left");
@@ -243,7 +243,7 @@ const ProductSlider: React.FC<{
         )}
         {canRight && (
           <button
-            className="md:hidden absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-black/60 backdrop-blur-sm p-2 rounded-full text-white border border-white/10"
+            className="md:hidden absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-black/70 backdrop-blur-sm p-2 rounded-full text-white border border-black/40"
             onClick={(e) => {
               e.stopPropagation();
               onArrowClick("right");
@@ -284,25 +284,25 @@ const ProductSlider: React.FC<{
               Array.from({ length: 4 }).map((_, i) => (
                 <div
                   key={i}
-                  className="min-w-[85vw] md:min-w-[280px] bg-zinc-900/40 border border-zinc-800 rounded-2xl p-4 animate-pulse"
+                  className="min-w-[85vw] md:min-w-[280px] bg-[var(--color-primary)] border border-black/10 rounded-2xl p-4 animate-pulse"
                 >
-                  <div className="aspect-[4/3] bg-zinc-800 rounded-xl mb-4" />
-                  <div className="h-4 w-3/4 bg-zinc-800 rounded mb-2" />
-                  <div className="h-4 w-1/2 bg-zinc-800 rounded" />
+                  <div className="aspect-[4/3] bg-black/5 rounded-xl mb-4" />
+                  <div className="h-4 w-3/4 bg-black/5 rounded mb-2" />
+                  <div className="h-4 w-1/2 bg-black/5 rounded" />
                   <div className="mt-6 flex justify-between items-center">
-                    <div className="h-6 w-20 bg-zinc-800 rounded" />
-                    <div className="h-10 w-10 bg-zinc-800 rounded-lg" />
+                    <div className="h-6 w-20 bg-black/5 rounded" />
+                    <div className="h-10 w-10 bg-black/5 rounded-lg" />
                   </div>
                 </div>
               ))
             ) : error ? (
               <div className="w-full text-center py-12">
-                <div className="text-red-400 bg-red-400/10 px-4 py-2 rounded-lg inline-block border border-red-400/20">
+                <div className="text-red-600 bg-red-50 px-4 py-2 rounded-lg inline-block border border-red-200">
                   {error}
                 </div>
               </div>
             ) : items.length === 0 ? (
-              <div className="text-zinc-400 px-3 py-2">
+              <div className="text-black/50 px-3 py-2">
                 {t("email.noProducts")}
               </div>
             ) : (
@@ -310,9 +310,9 @@ const ProductSlider: React.FC<{
                 <div
                   key={p.id}
                   onClick={() => openDetail(p)}
-                  className="rp-card group relative min-w-[85vw] md:min-w-[280px] bg-zinc-900/60 backdrop-blur-md border border-white/5 rounded-2xl p-4 hover:bg-zinc-900 hover:border-yellow-500/30 transition-all duration-300 cursor-pointer snap-center md:snap-start flex flex-col shadow-lg shadow-black/20 hover:shadow-yellow-500/5 hover:-translate-y-1"
+                  className="rp-card group relative min-w-[85vw] md:min-w-[280px] bg-[var(--color-primary)] border border-black/10 rounded-2xl p-4 transition-all duration-300 cursor-pointer snap-center md:snap-start flex flex-col shadow-lg shadow-black/10 hover:shadow-black/20 hover:-translate-y-1"
                 >
-                  <div className="relative aspect-[4/3] bg-black/40 rounded-xl overflow-hidden mb-4 border border-white/5">
+                  <div className="relative aspect-[4/3] bg-black/5 rounded-xl overflow-hidden mb-4 border border-black/5">
                     <img
                       src={p.image}
                       alt={p.name[language] || p.name.es}
@@ -329,13 +329,13 @@ const ProductSlider: React.FC<{
                   </div>
 
                   <div className="flex-1 flex flex-col">
-                    <div className="text-xs font-medium text-yellow-500/90 mb-1.5 uppercase tracking-wider">
+                    <div className="text-xs font-medium text-[var(--color-secondary)] mb-1.5 uppercase tracking-wider">
                       {typeof p.category === "string"
                         ? p.category
                         : p.category[language] || p.category.es}
                     </div>
 
-                    <div className="text-lg font-bold text-white leading-tight mb-2 line-clamp-2 group-hover:text-yellow-400 transition-colors">
+                    <div className="text-lg font-bold text-black leading-tight mb-2 line-clamp-2">
                       {p.name[language] || p.name.es}
                     </div>
 
@@ -386,18 +386,18 @@ const ProductSlider: React.FC<{
                               </>
                             );
                           })()}
-                          <span className="text-xs text-zinc-500 ml-1">
+                          <span className="text-xs text-black/50 ml-1">
                             ({p.votes})
                           </span>
                         </div>
                       )}
 
-                    <div className="mt-auto pt-3 flex items-end justify-between gap-3 border-t border-white/5">
+                    <div className="mt-auto pt-3 flex items-end justify-between gap-3 border-t border-black/10">
                       <div className="flex flex-col">
-                        <span className="text-[10px] text-zinc-500 uppercase font-medium">
+                        <span className="text-[10px] text-black/60 uppercase font-medium">
                           Precio
                         </span>
-                        <span className="text-xl font-bold text-white tracking-tight">
+                        <span className="text-xl font-bold text-[var(--color-secondary)] tracking-tight">
                           {p.price_formatted
                             ? p.price_formatted
                             : `€ ${Number(p.price).toFixed(2)}`}
@@ -410,7 +410,7 @@ const ProductSlider: React.FC<{
                             e.stopPropagation();
                             addToCart(p);
                           }}
-                          className="bg-yellow-400 hover:bg-yellow-300 text-black p-2.5 rounded-xl transition-all shadow-lg shadow-yellow-400/10 hover:shadow-yellow-400/30 hover:scale-105 active:scale-95 flex items-center justify-center group/btn"
+                          className="bg-[var(--color-secondary)] hover:brightness-90 text-white p-2.5 rounded-xl transition-all shadow-lg shadow-black/10 hover:shadow-black/20 hover:scale-105 active:scale-95 flex items-center justify-center group/btn"
                           aria-label={t("sports.addToCart")}
                         >
                           <svg
@@ -542,7 +542,7 @@ const AllProducts: React.FC<Props> = ({ language }) => {
 
       {cosmetics.length > 0 && apparel.length > 0 && (
         <div className="w-full px-4 md:px-0">
-          <div className="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+          <div className="w-full h-px bg-gradient-to-r from-transparent via-black/10 to-transparent" />
         </div>
       )}
 

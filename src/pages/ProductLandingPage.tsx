@@ -140,7 +140,7 @@ const ProductLandingPage: React.FC = () => {
   }, [product, selectedSize]);
 
   return (
-    <div className="relative min-h-screen bg-[#fafafa] overflow-hidden text-black">
+    <div className="relative min-h-screen bg-[var(--color-primary)] overflow-hidden text-black">
       <div className="fixed top-0 left-0 right-0 z-50">
         <InfoStripe />
       </div>
@@ -213,9 +213,9 @@ const ProductLandingPage: React.FC = () => {
                             onClick={() => setSelectedSize(size)}
                             className={`${
                               selectedSize === size
-                                ? "bg-yellow-500 text-black"
-                                : "bg-gray-200 text-gray-800"
-                            } font-semibold px-3 py-1 md:w-auto w-full rounded-lg border border-gray-300`}
+                                ? "bg-[var(--color-secondary)] text-white border-[var(--color-secondary)]"
+                                : "bg-black/5 text-black border-black/10"
+                            } font-semibold px-3 py-1 md:w-auto w-full rounded-lg`}
                           >
                             {product.pricesBySize
                               ? `${size}${priceText ? ` - ${priceText}` : ""}`
@@ -233,7 +233,7 @@ const ProductLandingPage: React.FC = () => {
                     disabled={!product.available}
                     className={`inline-block cursor-pointer md:w-auto w-full font-bold py-4 md:py-6 px-10 md:px-16 text-2xl md:text-4xl rounded-2xl transition-colors ${
                       product.available
-                        ? "bg-gradient-to-r from-yellow-600 to-yellow-500 text-black hover:from-yellow-500 hover:to-yellow-400"
+                        ? "bg-[var(--color-secondary)] text-white hover:brightness-90"
                         : "bg-gray-300 text-gray-500 cursor-not-allowed"
                     }`}
                   >
@@ -312,13 +312,13 @@ const ProductLandingPage: React.FC = () => {
           </div>
           {product && product.available && (
             <div
-              className={`fixed bottom-0 left-0 right-0 z-50 p-4 bg-white border-t border-gray-200 md:hidden shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] transition-transform duration-300 ease-in-out ${
+              className={`fixed bottom-0 left-0 right-0 z-50 p-4 bg-[var(--color-primary)] border-t border-black/10 md:hidden shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] transition-transform duration-300 ease-in-out ${
                 showStickyButton ? "translate-y-0" : "translate-y-full"
               }`}
             >
               <button
                 onClick={handleBuy}
-                className="w-full bg-gradient-to-r from-yellow-600 to-yellow-500 text-black font-bold py-4 rounded-xl text-xl shadow-lg flex items-center justify-center gap-2"
+                className="w-full bg-[var(--color-secondary)] text-white font-bold py-4 rounded-xl text-xl shadow-lg flex items-center justify-center gap-2 hover:brightness-90"
               >
                 <span>{t("sports.buy")}</span>
                 <span>-</span>
