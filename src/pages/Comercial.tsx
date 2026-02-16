@@ -30,6 +30,9 @@ interface CustomerData {
 interface Order {
   date: string;
   agent: string;
+  subtotal?: number;
+  discount_percent?: number;
+  discount_amount?: number;
   total: number;
   customer: CustomerData;
   products: {
@@ -47,6 +50,7 @@ const Comercial: React.FC = () => {
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [discountPercent, setDiscountPercent] = useState("");
   const [error, setError] = useState("");
   const [products, setProducts] = useState<Product[]>([]);
   const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
@@ -180,6 +184,22 @@ const Comercial: React.FC = () => {
     }, 0);
   };
 
+  const getDiscountPercentNumber = () => {
+    const raw = discountPercent.replace(",", ".");
+    const value = parseFloat(raw);
+    if (Number.isNaN(value) || value < 0) return 0;
+    if (value > 100) return 100;
+    return value;
+  };
+
+  const calculateFinalTotal = () => {
+    const subtotal = calculateTotal();
+    const percent = getDiscountPercentNumber();
+    const discountAmount = (subtotal * percent) / 100;
+    const finalTotal = subtotal - discountAmount;
+    return finalTotal > 0 ? finalTotal : 0;
+  };
+
   const totalItems = Object.values(quantities).reduce((acc, q) => acc + q, 0);
 
   const getSelectedProducts = () => {
@@ -222,10 +242,18 @@ const Comercial: React.FC = () => {
       total: (p.comercial_price || p.price) * p.quantity,
     }));
 
+    const subtotal = calculateTotal();
+    const discountPercentNumber = getDiscountPercentNumber();
+    const discountAmount = (subtotal * discountPercentNumber) / 100;
+    const finalTotal = subtotal - discountAmount;
+
     const orderData = {
       customer: customerData,
       products: selectedProducts,
-      total: calculateTotal(),
+      subtotal,
+      discount_percent: discountPercentNumber,
+      discount_amount: discountAmount,
+      total: finalTotal,
       date: new Date().toISOString(),
       agent: username,
     };
@@ -269,7 +297,10 @@ const Comercial: React.FC = () => {
             call_preference: customerData.callPreference || "Indiferente",
             customer_notes: customerData.notes || "Sin notas",
             products_list: productsHtml,
-            total_order: calculateTotal().toFixed(2),
+            subtotal_order: subtotal.toFixed(2),
+            discount_percent: discountPercentNumber.toFixed(2),
+            discount_amount: discountAmount.toFixed(2),
+            total_order: finalTotal.toFixed(2),
           };
 
           await emailjs.send(
@@ -296,6 +327,7 @@ const Comercial: React.FC = () => {
           company: "",
           callPreference: "",
         });
+        setDiscountPercent("");
         setView("products");
       } else {
         const errorData = await response.json();
@@ -423,11 +455,23 @@ const Comercial: React.FC = () => {
                         </div>
                       </div>
                       <div className="flex items-center gap-4">
-                        <div className="text-right">
+                        <div className="text-right space-y-1">
                           <div className="text-2xl font-bold text-white">
                             {order.total.toFixed(2)}€
                           </div>
-                          <div className="text-xs text-green-500 font-medium bg-green-900/20 px-2 py-1 rounded-full inline-block mt-1">
+                          {typeof order.discount_percent === "number" &&
+                            order.discount_percent > 0 && (
+                              <div className="text-xs text-gray-400">
+                                Descuento: {order.discount_percent.toFixed(0)}%{" "}
+                                {typeof order.discount_amount === "number" &&
+                                  order.discount_amount > 0 && (
+                                    <span>
+                                      (-{order.discount_amount.toFixed(2)} €)
+                                    </span>
+                                  )}
+                              </div>
+                            )}
+                          <div className="text-xs text-green-500 font-medium bg-green-900/20 px-2 py-1 rounded-full inline-block">
                             Confirmado
                           </div>
                         </div>
@@ -545,10 +589,22 @@ const Comercial: React.FC = () => {
                           </div>
                         )}
                       </div>
-                      <div className="text-right">
+                      <div className="text-right space-y-1">
                         <div className="text-2xl font-bold text-yellow-400">
                           {order.total.toFixed(2)} €
                         </div>
+                        {typeof order.discount_percent === "number" &&
+                          order.discount_percent > 0 && (
+                            <div className="text-xs text-gray-400">
+                              Descuento: {order.discount_percent.toFixed(0)}%{" "}
+                              {typeof order.discount_amount === "number" &&
+                                order.discount_amount > 0 && (
+                                  <span>
+                                    (-{order.discount_amount.toFixed(2)} €)
+                                  </span>
+                                )}
+                            </div>
+                          )}
                         <div className="text-xs text-gray-500">
                           {order.products.length} productos
                         </div>
@@ -761,11 +817,31 @@ const Comercial: React.FC = () => {
                     ))}
                   </div>
 
-                  <div className="border-t border-gray-800 pt-4 space-y-2">
+                  <div className="border-t border-gray-800 pt-4 space-y-3">
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-gray-300">Subtotal</span>
+                      <span className="text-gray-200">
+                        {calculateTotal().toFixed(2)} €
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="text-gray-300 text-sm">
+                        Descuento (%)
+                      </span>
+                      <input
+                        type="number"
+                        min="0"
+                        max="100"
+                        step="1"
+                        className="w-28 bg-black/40 border border-gray-700 rounded-lg px-3 py-2 text-right text-white focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 text-sm appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                        value={discountPercent}
+                        onChange={(e) => setDiscountPercent(e.target.value)}
+                      />
+                    </div>
                     <div className="flex justify-between items-center text-xl font-bold">
                       <span className="text-white">Total a Pagar</span>
                       <span className="text-yellow-400">
-                        {calculateTotal().toFixed(2)} €
+                        {calculateFinalTotal().toFixed(2)} €
                       </span>
                     </div>
                   </div>

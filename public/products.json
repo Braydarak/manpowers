@@ -947,8 +947,8 @@
         "en": "Patch test first. Do not use on irritated skin.",
         "ca": "Fer una prova prèvia en una zona petita. No usar en pell irritada."
       },
-      "price": "21,00",
-      "comercial_price": "21,00",
+      "price": "19,00",
+      "comercial_price": "19,00",
       "size": "100 ml",
       "image": "/products/agarre-tactico.avif",
       "category": { "es": "deportes", "en": "sports", "ca": "esports" },
@@ -1604,8 +1604,8 @@
         "en": "Professional grip gel for golf, engineered to enhance club hold in humidity, sweat, or pressure situations. The formula forms a thin anti-slip film that keeps hands dry and steady, improving swing control and strike precision. Perfect for practice and competition; apply to palms and fingers without sticky residue or marking the grip. Skin-friendly ingredients help prevent chafing and hand fatigue throughout the round.",
         "ca": "Gel d'agarre tècnic per al golf, dissenyat per millorar la subjecció del pal en condicions d'humitat, suor o tensió competitiva. La seva fórmula crea una pel·lícula antilliscant que manté les mans fermes i seques, incrementant el control del swing i la precisió a l'impacte. Ideal per a entrenaments i tornejos; s'aplica a palma i dits sense deixar residus enganxosos ni marcar el grip. Ingredients respectuosos amb la pell que ajuden a prevenir rascades i fatiga de mans durant la volta."
       },
-      "price": "21,00",
-      "comercial_price": "21,00",
+      "price": "19,00",
+      "comercial_price": "19,00",
       "size": "100 ml",
       "image": "/products/GEL-AGARRE-TECNICO.jpg",
       "category": { "es": "deportes", "en": "sports", "ca": "esports" },
@@ -1692,8 +1692,8 @@
         "en": "Avoid eye contact. Wash hands after use.",
         "ca": "Evitar el contacte amb els ulls. Rentar mans després de l'ús."
       },
-      "price": "15,00",
-      "comercial_price": "15,00",
+      "price": "16,00",
+      "comercial_price": "16,00",
       "size": "100 ml",
       "image": "/products/CREMA-EFECTO-FRIO-GOLF.jpg",
       "category": { "es": "deportes", "en": "sports", "ca": "esports" },
@@ -1770,8 +1770,8 @@
         "en": "Post‑round, treat lower back, shoulders, and forearms. This massage cream‑gel offers just‑right glide to work swing tension, with quick absorption for a comfortable recovery before the next round.",
         "ca": "En acabar la volta, mima la zona lumbar, les espatlles i els avantbraços. Aquest cremigel de massatge ofereix el lliscament just per treballar la tensió del swing, amb absorció ràpida per a una recuperació còmoda abans de la següent ronda."
       },
-      "price": "15,50",
-      "comercial_price": "15,50",
+      "price": "18,00",
+      "comercial_price": "18,00",
       "size": "100 ml",
       "category": { "es": "cuidado", "en": "care", "ca": "cura" },
       "image": "/products/CREMIGEL-MASAJE-MUSCULAR-GOLF.jpg",
@@ -1858,8 +1858,8 @@
         "en": "Avoid contact with eyes and mucous membranes.",
         "ca": "Evitar el contacte amb ulls i mucoses."
       },
-      "price": "15,80",
-      "comercial_price": "15,80",
+      "price": "16,00",
+      "comercial_price": "16,00",
       "size": "100 ml",
       "image": "/products/GEL-EFECTO-CALOR-GOLF.jpg",
       "category": { "es": "deportes", "en": "sports", "ca": "esports" },
@@ -2444,6 +2444,7 @@
         "ca": "Gorra Transpirable"
       },
       "price": "19,00",
+      "comercial_price": "19,00",
       "description": {
         "es": "Gorra táctica transpirable diseñada para climas cálidos. Paneles de malla para ventilación superior y visera para protección solar.",
         "en": "Breathable tactical cap designed for warm climates. Mesh panels for superior ventilation and visor for sun protection.",
