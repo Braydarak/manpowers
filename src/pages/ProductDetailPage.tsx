@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
-import ShareModal from "../components/modals/ShareModal";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import useLanguageUpdater from "../hooks/useLanguageUpdater";
@@ -60,7 +59,6 @@ const ProductDetailPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
-  const [shareOpen, setShareOpen] = useState<boolean>(false);
   const [checkoutOpenGlobal, setCheckoutOpenGlobal] = useState<boolean>(false);
   const [faqItems, setFaqItems] = useState<
     { id: string; question: string; answer: string }[]
@@ -361,8 +359,43 @@ const ProductDetailPage: React.FC = () => {
     window.dispatchEvent(new CustomEvent("cart:add", { detail }));
   };
 
-  const handleShare = () => {
-    setShareOpen(true);
+  const handleShareWhatsApp = () => {
+    if (typeof window === "undefined" || !product) return;
+    const shareUrl = window.location.href;
+    const name = product.name[currentLanguage] || product.name.es;
+    const text = `${name} - ${shareUrl}`;
+    const encoded = encodeURIComponent(text);
+    const whatsappUrl = `https://wa.me/?text=${encoded}`;
+    window.open(whatsappUrl, "_blank");
+  };
+
+  const handleShareInstagram = () => {
+    if (typeof window === "undefined" || !product) return;
+    const shareUrl = window.location.href;
+    const name = product.name[currentLanguage] || product.name.es;
+    const text = `${name}`;
+    if (typeof navigator !== "undefined") {
+      const nav = navigator as Navigator & {
+        share?: (data: {
+          title?: string;
+          text?: string;
+          url?: string;
+        }) => Promise<void>;
+      };
+      if (nav.share) {
+        nav
+          .share({
+            title: name,
+            text,
+            url: shareUrl,
+          })
+          .catch(() => {});
+        return;
+      }
+    }
+    const encodedUrl = encodeURIComponent(shareUrl);
+    const instagramUrl = `https://www.instagram.com/?url=${encodedUrl}`;
+    window.open(instagramUrl, "_blank");
   };
 
   const sportLabelName = (() => {
@@ -413,7 +446,7 @@ const ProductDetailPage: React.FC = () => {
           ) : product ? (
             <>
               <section className="py-6 mt-24">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between gap-4">
                   <button
                     onClick={goToSport}
                     className="text-[var(--color-secondary)] flex items-center gap-2 transition-colors hover:brightness-90"
@@ -432,12 +465,6 @@ const ProductDetailPage: React.FC = () => {
                       />
                     </svg>
                     {t("sports.backToSpecific", { sport: sportLabelName })}
-                  </button>
-                  <button
-                    onClick={handleShare}
-                    className="text-sm bg-[var(--color-primary)] text-black px-3 py-1 rounded-lg border border-black/20 hover:shadow-md transition-all"
-                  >
-                    {t("product.share")}
                   </button>
                 </div>
               </section>
@@ -488,11 +515,6 @@ const ProductDetailPage: React.FC = () => {
                     {product.sku && (
                       <span className="text-xs bg-black text-white px-2 py-1 rounded-full">
                         SKU {product.sku}
-                      </span>
-                    )}
-                    {product.available && (
-                      <span className="text-xs bg-green-600 text-white px-2 py-1 rounded-full">
-                        {t("sports.available")}
                       </span>
                     )}
                   </div>
@@ -703,6 +725,65 @@ const ProductDetailPage: React.FC = () => {
                         {t("sports.addToCart")}
                       </button>
                     )}
+                  </div>
+                  <div className="flex items-center gap-3 mt-2">
+                    <span className="text-xs sm:text-sm text-black/70">
+                      Compartir en
+                    </span>
+                    <button
+                      onClick={handleShareInstagram}
+                      className="flex md:hidden items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[var(--color-primary)] text-black border border-black/20 hover:shadow-md transition-all cursor-pointer"
+                      aria-label="Compartir en Instagram"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        viewBox="0 0 24 24"
+                        className="w-4 h-4 sm:w-5 sm:h-5"
+                        fill="none"
+                      >
+                        <rect
+                          x="2"
+                          y="2"
+                          width="20"
+                          height="20"
+                          rx="6"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        />
+                        <circle
+                          cx="12"
+                          cy="12"
+                          r="5"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        />
+                        <circle cx="17" cy="7" r="1.2" fill="currentColor" />
+                      </svg>
+                    </button>
+                    <button
+                      onClick={handleShareWhatsApp}
+                      className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[var(--color-primary)] text-black border border-black/20 hover:shadow-md transition-all cursor-pointer"
+                      aria-label="Compartir en WhatsApp"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        viewBox="0 0 24 24"
+                        className="w-4 h-4 sm:w-5 sm:h-5"
+                        fill="none"
+                      >
+                        <path
+                          d="M12 3.2a8.3 8.3 0 00-7.2 12.5L4 21l5.5-1.7A8.3 8.3 0 1012 3.2z"
+                          stroke="currentColor"
+                          strokeWidth="1.6"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M9.8 9.5c.2-.4.3-.6.6-.6.2 0 .4 0 .6.1.2.2.5.7.6.9.1.2.1.3 0 .5s-.2.3-.3.4-.2.2-.1.3c.1.2.4.7.9 1.1.6.5 1.1.6 1.3.7.1 0 .3 0 .4-.2l.3-.3c.1-.1.2-.2.4-.1l1 .5c.2.1.5.2.5.4 0 .3-.2.9-.6 1.2-.4.3-.9.4-1.5.4-.4 0-.8 0-1.2-.1-.4-.1-1-.3-1.6-.7a7.2 7.2 0 01-2.2-2.1c-.2-.3-.6-.8-.8-1.4-.2-.6-.3-1-.3-1.4 0-.4.2-.8.4-1.1.2-.3.5-.4.7-.4.2 0 .5 0 .6.1z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -980,12 +1061,6 @@ const ProductDetailPage: React.FC = () => {
         )}
       </main>
       <Footer />
-      <ShareModal
-        open={shareOpen}
-        onClose={() => setShareOpen(false)}
-        url={typeof window !== "undefined" ? window.location.href : ""}
-        productName={product ? product.name[currentLanguage] : undefined}
-      />
     </div>
   );
 };
