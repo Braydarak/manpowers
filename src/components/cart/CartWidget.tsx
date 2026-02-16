@@ -44,7 +44,7 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [checkoutItems, setCheckoutItems] = useState<CartItem[] | null>(null);
   const [paymentStep, setPaymentStep] = useState<"summary" | "processing">(
-    "summary"
+    "summary",
   );
 
   const [paymentError, setPaymentError] = useState<string>("");
@@ -99,7 +99,7 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
           const existing = prev.find((i) => i.id === incoming.id);
           if (existing) {
             return prev.map((i) =>
-              i.id === incoming.id ? { ...i, quantity: i.quantity + qty } : i
+              i.id === incoming.id ? { ...i, quantity: i.quantity + qty } : i,
             );
           }
           return [
@@ -134,7 +134,7 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
   useEffect(() => {
     try {
       window.dispatchEvent(
-        new CustomEvent("cart:checkoutOpen", { detail: checkoutOpen })
+        new CustomEvent("cart:checkoutOpen", { detail: checkoutOpen }),
       );
     } catch {
       // ignore
@@ -143,12 +143,12 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
 
   const totalItems = useMemo(
     () => items.reduce((acc, i) => acc + i.quantity, 0),
-    [items]
+    [items],
   );
   const checkoutList = checkoutItems ?? items;
   const checkoutTotalItems = useMemo(
     () => checkoutList.reduce((acc, i) => acc + i.quantity, 0),
-    [checkoutList]
+    [checkoutList],
   );
   const [subtotal, setSubtotal] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -173,7 +173,7 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
   useEffect(() => {
     const newSubtotal = checkoutList.reduce(
       (acc, i) => acc + parsePrice(i.price) * i.quantity,
-      0
+      0,
     );
     setSubtotal(newSubtotal);
   }, [checkoutList]);
@@ -186,7 +186,7 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
   const applyPromoCode = async () => {
     try {
       const response = await fetch(
-        "https://manpowers.es/backend/api/promo.php"
+        "https://manpowers.es/backend/api/promo.php",
       );
       const promos = await response.json();
       if (promos[promoCode]) {
@@ -204,7 +204,7 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
 
   const increment = (id: string) => {
     setItems((prev) =>
-      prev.map((i) => (i.id === id ? { ...i, quantity: i.quantity + 1 } : i))
+      prev.map((i) => (i.id === id ? { ...i, quantity: i.quantity + 1 } : i)),
     );
   };
 
@@ -212,7 +212,7 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
     setItems((prev) =>
       prev
         .map((i) => (i.id === id ? { ...i, quantity: i.quantity - 1 } : i))
-        .filter((i) => i.quantity > 0)
+        .filter((i) => i.quantity > 0),
     );
   };
 
@@ -328,12 +328,12 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
         <>
           <button
             onClick={() => setOpen(true)}
-            className="relative bg-black hover:bg-gray-900 text-white py-2 rounded-lg transition-all duration-200 shadow-lg flex items-center justify-center"
+            className="relative bg-transparent hover:bg-transparent text-black py-2 rounded-lg transition-all duration-200 flex items-center justify-center"
             aria-label={t("cart.open")}
           >
-            <ShoppingCart className="h-6 w-6 text-white" />
+            <ShoppingCart className="h-6 w-6 text-black" />
             {totalItems > 0 && (
-              <span className="absolute -top-2 -right-2 bg-white text-black rounded-full text-xs px-1.5 py-0.5 min-w-5 text-center ring-1 ring-black">
+              <span className="absolute -top-2 -right-2 bg-black text-white rounded-full text-xs px-1.5 py-0.5 min-w-5 text-center ring-1 ring-black">
                 {totalItems}
               </span>
             )}
@@ -341,22 +341,22 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
 
           {open && (
             <div
-              className="fixed inset-0 bg-black/50 z-[90]"
+              className="fixed top-0 left-0 h-screen w-full sm:w-[calc(100%-420px)] bg-black/40 z-[90] cart-overlay-fade-in"
               onClick={() => setOpen(false)}
             />
           )}
 
           <aside
-            className={`fixed top-0 right-0 h-screen w-full sm:w-[420px] bg-gradient-to-b from-gray-900 to-black text-white z-[100] shadow-2xl transform transition-transform duration-300 ${
+            className={`fixed top-0 right-0 h-screen w-full sm:w-[420px] bg-[var(--color-primary)] text-black z-[100] shadow-2xl transform transition-transform duration-300 border-l border-black/10 ${
               open ? "translate-x-0" : "translate-x-full"
             } flex flex-col`}
             aria-label={t("cart.title")}
           >
-            <div className="flex items-center justify-between px-5 py-4 border-b border-gray-800">
+            <div className="flex items-center justify-between px-5 py-4 border-b border-black/10">
               <h2 className="text-xl font-bold">{t("cart.title")}</h2>
               <button
                 onClick={() => setOpen(false)}
-                className="text-gray-300 hover:text-white transition-colors"
+                className="text-black/60 hover:text-black transition-colors"
                 aria-label={t("cart.close")}
               >
                 <X className="w-5 h-5" />
@@ -365,13 +365,13 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
 
             <div className="px-5 py-4 overflow-y-hidden sm:overflow-y-auto flex-1 min-h-0">
               {items.length === 0 ? (
-                <p className="text-gray-300">{t("cart.empty")}</p>
+                <p className="text-black/70">{t("cart.empty")}</p>
               ) : (
                 <ul className="space-y-4">
                   {items.map((item) => (
                     <li
                       key={item.id}
-                      className="flex items-center gap-4 bg-gray-800/40 rounded-lg p-3"
+                      className="flex items-center gap-4 bg-black/5 rounded-lg p-3"
                     >
                       {item.image ? (
                         <img
@@ -380,7 +380,7 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                           className="w-16 h-16 object-cover rounded"
                         />
                       ) : (
-                        <div className="w-16 h-16 rounded bg-gray-700 flex items-center justify-center text-xs text-gray-300">
+                        <div className="w-16 h-16 rounded bg-black/5 flex items-center justify-center text-xs text-black/50">
                           {t("cart.noImage")}
                         </div>
                       )}
@@ -389,20 +389,20 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                         <div className="flex items-center justify-between">
                           <span className="font-semibold">{item.name}</span>
                           {item.price !== undefined ? (
-                            <span className="text-white font-semibold">
+                            <span className="text-black font-semibold">
                               €{parsePrice(item.price).toFixed(2)}
                             </span>
                           ) : (
-                            <span className="text-gray-400 text-sm">
+                            <span className="text-black/50 text-sm">
                               {t("cart.noPrice")}
                             </span>
                           )}
                         </div>
 
                         <div className="flex items-center gap-3 mt-2">
-                          <div className="flex items-center border border-gray-700 rounded">
+                          <div className="flex items-center border border-black/20 rounded">
                             <button
-                              className="px-2 py-1 hover:bg-gray-700"
+                              className="px-2 py-1 hover:bg-black/5"
                               onClick={() => decrement(item.id)}
                               aria-label={t("cart.decreaseQty")}
                             >
@@ -410,7 +410,7 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                             </button>
                             <span className="px-3">{item.quantity}</span>
                             <button
-                              className="px-2 py-1 hover:bg-gray-700"
+                              className="px-2 py-1 hover:bg-black/5"
                               onClick={() => increment(item.id)}
                               aria-label={t("cart.increaseQty")}
                             >
@@ -418,7 +418,7 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                             </button>
                           </div>
                           <button
-                            className="text-red-400 hover:text-red-300 text-sm"
+                            className="text-red-600 hover:text-red-500 text-sm"
                             onClick={() => removeItem(item.id)}
                           >
                             {t("cart.remove")}
@@ -431,9 +431,9 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
               )}
             </div>
 
-            <div className="px-5 py-4 border-t border-gray-800">
+            <div className="px-5 py-4 border-t border-black/10">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-gray-300">{t("cart.total")}</span>
+                <span className="text-black/70">{t("cart.total")}</span>
                 <span className="text-2xl font-bold">
                   €{totalPrice.toFixed(2)}
                 </span>
@@ -448,15 +448,15 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                     setOpen(false);
                     setCheckoutOpen(false);
                   }}
-                  className="flex-1 bg-gray-800 hover:bg-gray-700 text-white rounded-lg px-4 py-3 transition-colors"
+                  className="flex-1 border border-black/20 hover:bg-black/5 text-black rounded-lg px-4 py-3 transition-colors"
                 >
                   {totalItems > 0 ? t("cart.clear") : t("cart.close")}
                 </button>
                 <button
                   className={`flex-1 font-semibold rounded-lg px-4 py-3 transition-colors ${
                     totalItems > 0
-                      ? "bg-white hover:bg-gray-100 text-black"
-                      : "bg-gray-400 text-gray-600 cursor-not-allowed"
+                      ? "bg-black hover:bg-black/90 text-white"
+                      : "bg-black/10 text-black/40 cursor-not-allowed"
                   }`}
                   onClick={() => setCheckoutOpen(true)}
                   disabled={totalItems === 0}
@@ -481,9 +481,9 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
             }}
           />
           <div className="fixed inset-0 z-[120] flex items-stretch md:items-center justify-center p-0 md:p-4 md:h-[100vh]">
-            <div className="w-full h-screen md:max-h-[700px] sm:max-w-md md:max-w-3xl lg:max-w-4xl bg-gradient-to-b from-gray-900 to-black text-white rounded-none md:rounded-xl shadow-2xl border border-gray-700 flex flex-col">
-              <div className="flex items-center justify-between px-5 py-4 border-b border-gray-700">
-                <h3 className="text-white font-semibold mb-2 text-center">
+            <div className="w-full h-screen md:max-h-[700px] sm:max-w-md md:max-w-3xl lg:max-w-4xl bg-[var(--color-primary)] text-black rounded-none md:rounded-xl shadow-2xl border border-black/10 flex flex-col">
+              <div className="flex items-center justify-between px-5 py-4 border-b border-black/10">
+                <h3 className="text-black font-semibold mb-2 text-center">
                   {t("cart.finishPurchase")}
                 </h3>
                 <button
@@ -493,7 +493,7 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                     resetPaymentState();
                   }}
                   aria-label={t("cart.modal.close")}
-                  className="text-gray-300 hover:text-white transition-colors"
+                  className="text-black/60 hover:text-black transition-colors"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -502,8 +502,8 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
               <div className="px-5 py-4 space-y-4 flex-1 overflow-y-auto min-h-0">
                 {paymentStep === "summary" && (
                   <>
-                    <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg p-3 border border-gray-700">
-                      <h4 className="font-semibold mb-2 text-white">
+                    <div className="bg-black/5 rounded-lg p-3 border border-black/10">
+                      <h4 className="font-semibold mb-2 text-black">
                         {t("cart.orderSummary")}
                       </h4>
                       <div className="space-y-1 text-sm">
@@ -513,7 +513,7 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                           return (
                             <div
                               key={item.id}
-                              className="flex justify-between text-gray-300"
+                              className="flex justify-between text-black/80"
                             >
                               <span>
                                 {item.name} x{item.quantity}
@@ -522,26 +522,26 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                             </div>
                           );
                         })}
-                        <div className="border-t border-gray-600 pt-2 space-y-2">
+                        <div className="border-t border-black/10 pt-2 space-y-2">
                           <div className="flex justify-between text-sm">
                             <span>{t("cart.subtotal")}:</span>
                             <span>€{subtotal.toFixed(2)}</span>
                           </div>
                           {discount > 0 && (
-                            <div className="flex justify-between text-sm text-green-400">
+                            <div className="flex justify-between text-sm text-green-700">
                               <span>{t("cart.discount")}:</span>
                               <span>-{discount}%</span>
                             </div>
                           )}
-                          <div className="font-semibold flex justify-between text-white">
+                          <div className="font-semibold flex justify-between text-black">
                             <span>{t("cart.total")}:</span>
                             <span>€{totalPrice.toFixed(2)}</span>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg p-3 border border-gray-700">
-                      <h4 className="font-semibold mb-2 text-white">
+                    <div className="bg-black/5 rounded-lg p-3 border border-black/10">
+                      <h4 className="font-semibold mb-2 text-black">
                         {t("cart.emailLabel")}
                       </h4>
                       <input
@@ -554,15 +554,15 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                           if (paymentError) setPaymentError("");
                         }}
                         placeholder={t("cart.emailPlaceholder")}
-                        className="w-full bg-gray-700 text-white rounded-md px-3 py-2 text-sm border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        className="w-full bg-[var(--color-primary)] text-black rounded-md px-3 py-2 text-sm border border-black/20 focus:ring-2 focus:ring-black/20 focus:outline-none"
                       />
                       {buyerEmailError && (
-                        <p className="text-red-400 text-xs mt-2">
+                        <p className="text-red-600 text-xs mt-2">
                           {buyerEmailError}
                         </p>
                       )}
                       <div className="mt-3 space-y-2">
-                        <label className="block text-sm text-gray-300">
+                        <label className="block text-sm text-black/80">
                           {t("cart.phoneLabel")}
                         </label>
                         <input
@@ -580,16 +580,16 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                             }
                           }}
                           placeholder={t("cart.phonePlaceholder")}
-                          className="w-full bg-gray-700 text-white rounded-md px-3 py-2 text-sm border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                          className="w-full bg-[var(--color-primary)] text-black rounded-md px-3 py-2 text-sm border border-black/20 focus:ring-2 focus:ring-black/20 focus:outline-none"
                         />
                         {buyerPhoneError && (
-                          <p className="text-red-400 text-xs mt-2">
+                          <p className="text-red-600 text-xs mt-2">
                             {buyerPhoneError}
                           </p>
                         )}
                       </div>
                       <div className="mt-3 space-y-2">
-                        <label className="block text-sm text-gray-300">
+                        <label className="block text-sm text-black/80">
                           {t("cart.addressLabel")}
                         </label>
                         <input
@@ -601,12 +601,12 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                             if (addressError) setAddressError("");
                           }}
                           placeholder={t("cart.addressPlaceholder")}
-                          className="w-full bg-gray-700 text-white rounded-md px-3 py-2 text-sm border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                          className="w-full bg-[var(--color-primary)] text-black rounded-md px-3 py-2 text-sm border border-black/20 focus:ring-2 focus:ring-black/20 focus:outline-none"
                         />
                         {addressError && (
-                          <p className="text-red-400 text-xs">{addressError}</p>
+                          <p className="text-red-600 text-xs">{addressError}</p>
                         )}
-                        <label className="block text-sm text-gray-300">
+                        <label className="block text-sm text-black/80">
                           {t("cart.postalCodeLabel")}
                         </label>
                         <input
@@ -618,14 +618,14 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                             if (postalCodeError) setPostalCodeError("");
                           }}
                           placeholder={t("cart.postalCodePlaceholder")}
-                          className="w-full bg-gray-700 text-white rounded-md px-3 py-2 text-sm border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                          className="w-full bg-[var(--color-primary)] text-black rounded-md px-3 py-2 text-sm border border-black/20 focus:ring-2 focus:ring-black/20 focus:outline-none"
                         />
                         {postalCodeError && (
-                          <p className="text-red-400 text-xs">
+                          <p className="text-red-600 text-xs">
                             {postalCodeError}
                           </p>
                         )}
-                        <label className="block text-sm text-gray-300">
+                        <label className="block text-sm text-black/80">
                           {t("cart.localityLabel")}
                         </label>
                         <input
@@ -637,14 +637,14 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                             if (localityError) setLocalityError("");
                           }}
                           placeholder={t("cart.localityPlaceholder")}
-                          className="w-full bg-gray-700 text-white rounded-md px-3 py-2 text-sm border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                          className="w-full bg-[var(--color-primary)] text-black rounded-md px-3 py-2 text-sm border border-black/20 focus:ring-2 focus:ring-black/20 focus:outline-none"
                         />
                         {localityError && (
-                          <p className="text-red-400 text-xs">
+                          <p className="text-red-600 text-xs">
                             {localityError}
                           </p>
                         )}
-                        <label className="block text-sm text-gray-300">
+                        <label className="block text-sm text-black/80">
                           {t("cart.provinceLabel")}
                         </label>
                         <input
@@ -656,14 +656,14 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                             if (provinceError) setProvinceError("");
                           }}
                           placeholder={t("cart.provincePlaceholder")}
-                          className="w-full bg-gray-700 text-white rounded-md px-3 py-2 text-sm border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                          className="w-full bg-[var(--color-primary)] text-black rounded-md px-3 py-2 text-sm border border-black/20 focus:ring-2 focus:ring-black/20 focus:outline-none"
                         />
                         {provinceError && (
-                          <p className="text-red-400 text-xs">
+                          <p className="text-red-600 text-xs">
                             {provinceError}
                           </p>
                         )}
-                        <div className="mt-3 flex items-center gap-3 p-2 rounded-lg border border-gray-700 bg-gray-800/50 hover:border-gray-600 transition-colors">
+                        <div className="mt-3 flex items-center gap-3 p-2 rounded-lg border border-black/10 bg-black/5 hover:border-black/20 transition-colors">
                           <input
                             id="marketingOptIn"
                             type="checkbox"
@@ -671,19 +671,19 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                             onChange={(e) =>
                               setMarketingOptIn(e.target.checked)
                             }
-                            className="h-5 w-5 rounded border-gray-600 bg-gray-700 accent-yellow-500 focus:ring-2 focus:ring-yellow-500 cursor-pointer"
+                            className="h-5 w-5 rounded border-black/30 bg-[var(--color-primary)] accent-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-secondary)] cursor-pointer"
                           />
                           <label
                             htmlFor="marketingOptIn"
-                            className="text-sm text-gray-300 cursor-pointer"
+                            className="text-sm text-black/80 cursor-pointer"
                           >
                             {t("cart.marketingOptInLabel")}
                           </label>
                         </div>
                       </div>
                     </div>
-                    <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg p-3 border border-gray-700">
-                      <h4 className="font-semibold mb-2 text-white">
+                    <div className="bg-black/5 rounded-lg p-3 border border-black/10">
+                      <h4 className="font-semibold mb-2 text-black">
                         {t("cart.promoTitle")}
                       </h4>
                       <div className="flex gap-2">
@@ -693,7 +693,7 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                           onChange={(e) => setPromoCode(e.target.value)}
                           placeholder={t("cart.promoPlaceholder")}
                           aria-label={t("cart.promoAriaLabel")}
-                          className="flex-1 bg-gray-700 text-white rounded-md px-3 py-2 text-sm border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                          className="flex-1 bg-[var(--color-primary)] text-black rounded-md px-3 py-2 text-sm border border-black/20 focus:ring-2 focus:ring-black/20 focus:outline-none"
                         />
                         <button
                           onClick={applyPromoCode}
@@ -703,29 +703,29 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                         </button>
                       </div>
                       {promoError && (
-                        <p className="text-red-400 text-xs mt-2">
+                        <p className="text-red-600 text-xs mt-2">
                           {promoError}
                         </p>
                       )}
                     </div>
                     {paymentError && (
-                      <div className="bg-red-900/50 border border-red-700 rounded-lg p-3">
-                        <p className="text-red-300 text-sm">{paymentError}</p>
+                      <div className="bg-red-100 border border-red-400 rounded-lg p-3">
+                        <p className="text-red-700 text-sm">{paymentError}</p>
                       </div>
                     )}
                   </>
                 )}
 
                 {paymentStep === "processing" && (
-                  <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg p-6 border border-gray-700 text-center">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto mb-4"></div>
-                    <p className="text-white">Procesando pago...</p>
+                  <div className="bg-black/5 rounded-lg p-6 border border-black/10 text-center">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black mx-auto mb-4"></div>
+                    <p className="text-black">Procesando pago...</p>
                   </div>
                 )}
               </div>
 
               {paymentStep === "summary" && (
-                <div className="px-5 py-4 border-t border-gray-700 space-y-3">
+                <div className="px-5 py-4 border-t border-black/10 space-y-3">
                   <button
                     onClick={startRedirectPayment}
                     disabled={
@@ -743,8 +743,8 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                       postalCode.trim() &&
                       locality.trim() &&
                       province.trim()
-                        ? "bg-blue-600 hover:bg-blue-700 text-white"
-                        : "bg-gray-700 text-gray-500 cursor-not-allowed"
+                        ? "bg-black hover:bg-black/90 text-white"
+                        : "bg-black/10 text-black/40 cursor-not-allowed"
                     }`}
                   >
                     {t("cart.payWithCard")}
@@ -754,7 +754,7 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                       setCheckoutOpen(false);
                       resetPaymentState();
                     }}
-                    className="w-full bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white rounded-lg px-4 py-2 transition-all duration-200 border border-gray-600"
+                    className="w-full border border-black/20 hover:bg-black/5 text-black rounded-lg px-4 py-2 transition-all duration-200"
                   >
                     {t("cart.modal.close")}
                   </button>
