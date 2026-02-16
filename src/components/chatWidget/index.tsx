@@ -47,7 +47,7 @@ const ChatWidget: React.FC = () => {
       gsap.fromTo(
         panelRef.current,
         { y: 20, autoAlpha: 0 },
-        { y: 0, autoAlpha: 1, duration: 0.25, ease: "power2.out" }
+        { y: 0, autoAlpha: 1, duration: 0.25, ease: "power2.out" },
       );
     }
   }, [open]);
@@ -78,7 +78,7 @@ const ChatWidget: React.FC = () => {
         if (hideTimeoutRef.current) window.clearTimeout(hideTimeoutRef.current);
         hideTimeoutRef.current = window.setTimeout(
           () => setShowHint(false),
-          25000
+          25000,
         );
       }, 15000);
     } else {
@@ -97,7 +97,7 @@ const ChatWidget: React.FC = () => {
       gsap.fromTo(
         hintRef.current,
         { y: 10, autoAlpha: 0, scale: 0.95 },
-        { y: 0, autoAlpha: 1, scale: 1, duration: 0.25, ease: "power2.out" }
+        { y: 0, autoAlpha: 1, scale: 1, duration: 0.25, ease: "power2.out" },
       );
     }
   }, [showHint]);
@@ -286,10 +286,10 @@ const ChatWidget: React.FC = () => {
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-yellow-400 underline break-all"
+          className="text-[var(--color-secondary)] underline break-all"
         >
           {href}
-        </a>
+        </a>,
       );
       lastIndex = regex.lastIndex;
     }
@@ -335,7 +335,7 @@ const ChatWidget: React.FC = () => {
         {showHint && (
           <div
             ref={hintRef}
-            className="hidden md:block bg-black/90 border border-gray-800 text-white px-3 py-2 rounded-lg shadow-lg pointer-events-none"
+            className="hidden md:block bg-[var(--color-primary)] border border-black/10 text-black px-3 py-2 rounded-lg shadow-lg pointer-events-none"
           >
             {t("chat.hint", "¿Necesitas ayuda?")}
           </div>
@@ -343,9 +343,9 @@ const ChatWidget: React.FC = () => {
         <button
           onClick={toggle}
           aria-label="Abrir chat"
-          className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-black p-5 rounded-full shadow-xl transition-transform hover:scale-105 cursor-pointer hover:from-yellow-500 hover:to-yellow-400"
+          className="bg-[var(--color-secondary)] text-white p-5 rounded-full shadow-xl transition-transform hover:scale-105 cursor-pointer hover:brightness-90"
         >
-          <MessageCircle className="w-7 h-7 text-black" />
+          <MessageCircle className="w-7 h-7 text-white" />
         </button>
       </div>
     );
@@ -353,17 +353,17 @@ const ChatWidget: React.FC = () => {
   return (
     <div
       ref={panelRef}
-      className="fixed bottom-0 left-0 right-0 md:bottom-4 md:right-2 md:left-auto z-[300] w-screen md:w-[480px] md:max-w-lg h-full md:h-[40vh] bg-black/90 border border-gray-800 rounded-t-xl md:rounded-xl shadow-2xl flex flex-col backdrop-blur"
+      className="fixed bottom-0 left-0 right-0 md:bottom-4 md:right-2 md:left-auto z-[300] w-screen md:w-[480px] md:max-w-lg h-full md:h-[40vh] bg-[var(--color-primary)] border border-black/10 rounded-t-xl md:rounded-xl shadow-2xl flex flex-col backdrop-blur"
     >
-      <div className="flex items-center justify-between p-3 border-b border-gray-800 rounded-t-xl bg-black/90 text-white">
+      <div className="flex items-center justify-between p-3 border-b border-black/10 rounded-t-xl bg-[var(--color-primary)] text-black">
         <div className="flex items-center gap-2">
-          <MessageCircle className="w-5 h-5 text-yellow-400" />
+          <MessageCircle className="w-5 h-5 text-[var(--color-secondary)]" />
           <span className="font-semibold">Chat</span>
         </div>
         <button
           onClick={toggle}
           aria-label="Cerrar"
-          className="p-1 cursor-pointer text-gray-300 hover:text-white"
+          className="p-1 cursor-pointer text-black/60 hover:text-black"
         >
           <X className="w-5 h-5" />
         </button>
@@ -374,7 +374,7 @@ const ChatWidget: React.FC = () => {
         className="p-3 flex-1 min-h-0 overflow-y-auto overscroll-contain space-y-3 chat-scroll"
       >
         {messages.length === 0 && (
-          <div className="text-sm text-gray-600">
+          <div className="text-sm text-black/60">
             Escribe tu pregunta sobre la web o los productos.
           </div>
         )}
@@ -388,8 +388,8 @@ const ChatWidget: React.FC = () => {
             <div
               className={
                 m.role === "user"
-                  ? "bg-gradient-to-r from-yellow-600 to-yellow-500 text-black px-3 py-2 rounded-lg max-w-[85%] shadow-sm transition-transform"
-                  : "bg-gray-800 text-gray-100 px-3 py-2 rounded-lg max-w-[85%] shadow-sm transition-transform border border-gray-700"
+                  ? "bg-[var(--color-secondary)] text-white px-3 py-2 rounded-lg max-w-[85%] shadow-sm transition-transform"
+                  : "bg-[var(--color-primary)] text-black px-3 py-2 rounded-lg max-w-[85%] shadow-sm transition-transform border border-black/10"
               }
             >
               {m.role === "assistant"
@@ -402,7 +402,7 @@ const ChatWidget: React.FC = () => {
                       <a
                         key={k}
                         href={href}
-                        className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-gradient-to-r from-yellow-600 to-yellow-500 text-black hover:from-yellow-500 hover:to-yellow-400 text-sm"
+                        className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[var(--color-secondary)] text-white hover:brightness-90 text-sm"
                       >
                         {href.startsWith("/products/")
                           ? t("product.viewDetails", "Ver producto")
@@ -416,28 +416,28 @@ const ChatWidget: React.FC = () => {
         ))}
         {loading && (
           <div className="flex justify-start">
-            <div className="bg-gray-800 text-white px-3 py-2 rounded-lg max-w-[85%] shadow-sm border border-gray-700">
+            <div className="bg-[var(--color-primary)] text-black px-3 py-2 rounded-lg max-w-[85%] shadow-sm border border-black/10">
               <div className="flex items-center gap-1">
                 <span
-                  className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                  className="w-2 h-2 bg-black/40 rounded-full animate-bounce"
                   style={{ animationDelay: "0ms" }}
                 ></span>
                 <span
-                  className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                  className="w-2 h-2 bg-black/40 rounded-full animate-bounce"
                   style={{ animationDelay: "100ms" }}
                 ></span>
                 <span
-                  className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                  className="w-2 h-2 bg-black/40 rounded-full animate-bounce"
                   style={{ animationDelay: "200ms" }}
                 ></span>
               </div>
             </div>
           </div>
         )}
-        {error && <div className="text-red-400 text-xs">{error}</div>}
+        {error && <div className="text-red-500 text-xs">{error}</div>}
       </div>
 
-      <div className="p-3 border-t border-gray-800 flex items-center gap-2">
+      <div className="p-3 border-t border-black/10 flex items-center gap-2 bg-[var(--color-primary)]">
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -445,12 +445,12 @@ const ChatWidget: React.FC = () => {
             if (e.key === "Enter") onSend();
           }}
           placeholder="Escribe tu mensaje"
-          className="flex-1 bg-gray-800/60 border border-gray-700 rounded-full text-white px-4 py-2 focus:outline-none placeholder:text-gray-400"
+          className="flex-1 bg-[var(--color-primary)] border border-black/15 rounded-full text-black px-4 py-2 focus:outline-none placeholder:text-black/40"
         />
         <button
           onClick={onSend}
           disabled={loading}
-          className="px-3 py-2 rounded-full bg-gradient-to-r from-yellow-600 to-yellow-500 text-black hover:from-yellow-500 hover:to-yellow-400 disabled:opacity-50 active:scale-[0.98]"
+          className="px-3 py-2 rounded-full bg-[var(--color-secondary)] text-white hover:brightness-90 disabled:opacity-50 active:scale-[0.98]"
         >
           <Send className="w-4 h-4" />
         </button>

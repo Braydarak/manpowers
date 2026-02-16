@@ -55,15 +55,15 @@ const Accordion: React.FC<AccordionProps> = ({
   ];
 
   const visibleItems = items.filter(
-    (i) => i.content !== undefined && i.content !== null
+    (i) => i.content !== undefined && i.content !== null,
   );
 
   return (
     <div
       className={
         white
-          ? "divide-y divide-gray-300 rounded-xl border border-gray-300 bg-transparent overflow-hidden"
-          : "divide-y divide-gray-800 rounded-xl border border-gray-800 bg-gray-900/60 overflow-hidden"
+          ? "divide-y divide-black/10 rounded-xl border border-black/10 bg-transparent overflow-hidden"
+          : "divide-y divide-black/10 rounded-xl border border-black/10 bg-[var(--color-primary)] overflow-hidden"
       }
     >
       {visibleItems.map(({ id, title, content }) => {
@@ -76,22 +76,22 @@ const Accordion: React.FC<AccordionProps> = ({
               aria-expanded={isOpen}
               className={
                 white
-                  ? "w-full flex items-center justify-between px-4 md:px-6 py-4 bg-transparent hover:bg-gray-100 text-left"
-                  : "w-full flex items-center justify-between px-4 md:px-6 py-4 bg-gray-900/60 hover:bg-gray-900 text-left"
+                  ? "w-full flex items-center justify-between px-4 md:px-6 py-4 bg-transparent hover:bg-black/5 text-left transition-colors"
+                  : "w-full flex items-center justify-between px-4 md:px-6 py-4 bg-[var(--color-primary)] hover:bg-black/5 text-left transition-colors"
               }
             >
               <span
                 className={
                   white
                     ? "text-sm md:text-base font-semibold text-black"
-                    : "text-sm md:text-base font-semibold text-white"
+                    : "text-sm md:text-base font-semibold text-black"
                 }
               >
                 {title}
               </span>
               <svg
                 className={`w-5 h-5 ${
-                  white ? "text-black" : "text-gray-300"
+                  white ? "text-black" : "text-black/60"
                 } transition-transform ${isOpen ? "rotate-180" : "rotate-0"}`}
                 viewBox="0 0 20 20"
                 fill="currentColor"
@@ -108,8 +108,8 @@ const Accordion: React.FC<AccordionProps> = ({
               <div
                 className={
                   white
-                    ? "px-4 md:px-6 pb-5 pt-5 mt-2 border-t border-gray-300 text-black text-sm md:text-base leading-relaxed"
-                    : "px-4 md:px-6 pb-5 pt-5 text-gray-300 text-sm md:text-base leading-relaxed"
+                    ? "px-4 md:px-6 pb-5 pt-5 mt-2 border-t border-black/10 text-black text-sm md:text-base leading-relaxed"
+                    : "px-4 md:px-6 pb-5 pt-5 text-black/70 text-sm md:text-base leading-relaxed bg-[var(--color-primary)]"
                 }
               >
                 {content}

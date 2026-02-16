@@ -123,7 +123,7 @@ const CookieConsent: React.FC = () => {
       style={{ position: "fixed" }}
     >
       <div
-        className={`w-full bg-gradient-to-b from-gray-900 to-black text-white border-t border-gray-800 shadow-[0_8px_30px_rgba(0,0,0,0.6)] transform transition-all duration-500 ease-out ${
+        className={`w-full bg-[var(--color-primary)] text-black border-t border-black/10 shadow-[0_-8px_30px_rgba(0,0,0,0.12)] transform transition-all duration-500 ease-out ${
           animateIn ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
         }`}
         style={{ willChange: "transform, opacity" }}
@@ -132,7 +132,7 @@ const CookieConsent: React.FC = () => {
           <h3 className="text-lg font-semibold mb-1">
             Tu privacidad nos importa
           </h3>
-          <p className="text-sm text-gray-300 mb-4">
+          <p className="text-sm text-black/70 mb-4">
             Usamos cookies para mejorar tu experiencia. Algunas son necesarias
             para que el sitio funcione. Puedes aceptar todas, rechazar las no
             esenciales o configurar tus preferencias.
@@ -142,19 +142,19 @@ const CookieConsent: React.FC = () => {
             <div className="flex flex-col md:flex-row gap-2">
               <button
                 onClick={acceptAll}
-                className="px-4 py-2 rounded-lg bg-yellow-500 hover:bg-yellow-400 text-black font-semibold transition"
+                className="px-4 py-2 rounded-lg bg-[var(--color-secondary)] hover:brightness-90 text-white font-semibold transition"
               >
                 Aceptar todas
               </button>
               <button
                 onClick={rejectAll}
-                className="px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 border border-gray-700 transition"
+                className="px-4 py-2 rounded-lg bg-black text-white border border-black/10 hover:opacity-90 transition"
               >
                 Rechazar no esenciales
               </button>
               <button
                 onClick={() => setShowSettings(true)}
-                className="px-4 py-2 rounded-lg bg-gray-900 hover:bg-gray-800 border border-gray-700 transition"
+                className="px-4 py-2 rounded-lg bg-black/5 hover:bg-black/10 border border-black/10 text-black transition"
               >
                 Configurar
               </button>
@@ -162,19 +162,19 @@ const CookieConsent: React.FC = () => {
                 <>
                   <a
                     href="/cookies"
-                    className="px-4 py-2 rounded-lg bg-transparent text-blue-400 underline underline-offset-2"
+                    className="px-4 py-2 rounded-lg bg-transparent text-[var(--color-secondary)] underline underline-offset-2"
                   >
                     Política de Cookies
                   </a>
                   <a
                     href="/privacidad"
-                    className="px-4 py-2 rounded-lg bg-transparent text-blue-400 underline underline-offset-2"
+                    className="px-4 py-2 rounded-lg bg-transparent text-[var(--color-secondary)] underline underline-offset-2"
                   >
                     Política de Privacidad
                   </a>
                   <a
                     href="/aviso-legal"
-                    className="px-4 py-2 rounded-lg bg-transparent text-blue-400 underline underline-offset-2"
+                    className="px-4 py-2 rounded-lg bg-transparent text-[var(--color-secondary)] underline underline-offset-2"
                   >
                     Aviso Legal
                   </a>
@@ -184,15 +184,15 @@ const CookieConsent: React.FC = () => {
           )}
 
           {showSettings && (
-            <div className="mt-4 border-t border-gray-700 pt-4">
+            <div className="mt-4 border-t border-black/10 pt-4">
               <div className="flex items-center justify-between mb-3">
                 <div>
                   <p className="font-medium">Necesarias</p>
-                  <p className="text-xs text-gray-400">
+                  <p className="text-xs text-black/60">
                     Requeridas para el funcionamiento básico. Siempre activas.
                   </p>
                 </div>
-                <span className="text-xs bg-gray-700 px-2 py-1 rounded">
+                <span className="text-xs bg-black text-white px-2 py-1 rounded">
                   Activadas
                 </span>
               </div>
@@ -200,7 +200,7 @@ const CookieConsent: React.FC = () => {
               <div className="flex items-center justify-between mb-3">
                 <div>
                   <p className="font-medium">Analíticas</p>
-                  <p className="text-xs text-gray-400">
+                  <p className="text-xs text-black/60">
                     Nos ayudan a entender el uso del sitio (p. ej., Google
                     Analytics).
                   </p>
@@ -214,7 +214,7 @@ const CookieConsent: React.FC = () => {
                       setPrefs({ ...prefs, analytics: e.target.checked })
                     }
                   />
-                  <div className="w-10 h-5 bg-gray-700 peer-checked:bg-blue-600 rounded-full transition-all relative">
+                  <div className="w-10 h-5 bg-black/20 peer-checked:bg-[var(--color-secondary)] rounded-full transition-all relative">
                     <span className="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full peer-checked:left-5 transition-all" />
                   </div>
                 </label>
@@ -223,7 +223,7 @@ const CookieConsent: React.FC = () => {
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <p className="font-medium">Marketing</p>
-                  <p className="text-xs text-gray-400">
+                  <p className="text-xs text-black/60">
                     Para personalización y publicidad (píxeles de seguimiento,
                     etc.).
                   </p>
@@ -237,7 +237,7 @@ const CookieConsent: React.FC = () => {
                       setPrefs({ ...prefs, marketing: e.target.checked })
                     }
                   />
-                  <div className="w-10 h-5 bg-gray-700 peer-checked:bg-blue-600 rounded-full transition-all relative">
+                  <div className="w-10 h-5 bg-black/20 peer-checked:bg-[var(--color-secondary)] rounded-full transition-all relative">
                     <span className="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full peer-checked:left-5 transition-all" />
                   </div>
                 </label>
@@ -246,31 +246,31 @@ const CookieConsent: React.FC = () => {
               <div className="flex flex-col md:flex-row gap-2">
                 <button
                   onClick={() => saveAndClose(prefs)}
-                  className="px-4 py-2 rounded-lg bg-yellow-500 hover:bg-yellow-400 text-black font-semibold transition"
+                  className="px-4 py-2 rounded-lg bg-[var(--color-secondary)] hover:brightness-90 text-white font-semibold transition"
                 >
                   Guardar preferencias
                 </button>
                 <button
                   onClick={() => setShowSettings(false)}
-                  className="px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 border border-gray-700 transition"
+                  className="px-4 py-2 rounded-lg bg-black text-white border border-black/10 hover:opacity-90 transition"
                 >
                   Volver
                 </button>
                 <a
                   href="/cookies"
-                  className="px-4 py-2 rounded-lg bg-transparent text-blue-400 underline underline-offset-2"
+                  className="px-4 py-2 rounded-lg bg-transparent text-[var(--color-secondary)] underline underline-offset-2"
                 >
                   Política de Cookies
                 </a>
                 <a
                   href="/privacidad"
-                  className="px-4 py-2 rounded-lg bg-transparent text-blue-400 underline underline-offset-2"
+                  className="px-4 py-2 rounded-lg bg-transparent text-[var(--color-secondary)] underline underline-offset-2"
                 >
                   Política de Privacidad
                 </a>
                 <a
                   href="/aviso-legal"
-                  className="px-4 py-2 rounded-lg bg-transparent text-blue-400 underline underline-offset-2"
+                  className="px-4 py-2 rounded-lg bg-transparent text-[var(--color-secondary)] underline underline-offset-2"
                 >
                   Aviso Legal
                 </a>

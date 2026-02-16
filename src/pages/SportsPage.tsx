@@ -18,9 +18,11 @@ const SportsPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="">
+    <div className="min-h-screen bg-[var(--color-primary)] text-black">
       <Header />
-      <main className={`flex-grow transition-all duration-500 ${enter ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+      <main
+        className={`flex-grow transition-all duration-500 ${enter ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+      >
         <Sports />
       </main>
       <Footer />

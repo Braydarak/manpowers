@@ -349,46 +349,46 @@ const Comercial: React.FC = () => {
 
   if (!isLoggedIn) {
     return (
-      <div className="flex flex-col min-h-screen bg-black text-white font-sans">
+      <div className="flex flex-col min-h-screen bg-[var(--color-primary)] text-black font-sans">
         <Header />
         <main className="flex-grow pt-32 pb-10 px-4 flex items-center justify-center">
-          <div className="w-full max-w-md bg-gray-900 border border-gray-800 rounded-2xl p-8 shadow-2xl shadow-yellow-500/10">
+          <div className="w-full max-w-md bg-[var(--color-primary)] border border-black/10 rounded-2xl p-8 shadow-2xl shadow-[var(--color-secondary)]/10">
             <div className="text-center mb-8">
-              <h1 className="text-3xl font-bold mb-2 text-white">
+              <h1 className="text-3xl font-bold mb-2 text-black">
                 Acceso Comercial
               </h1>
-              <p className="text-gray-400 text-sm">
+              <p className="text-black/60 text-sm">
                 Introduce tus credenciales para gestionar pedidos
               </p>
             </div>
             <form onSubmit={handleLogin} className="space-y-6">
               <div>
-                <label className="block text-xs font-bold text-yellow-500 uppercase tracking-wider mb-2">
+                <label className="block text-xs font-bold text-[var(--color-secondary)] uppercase tracking-wider mb-2">
                   Usuario
                 </label>
                 <input
                   type="text"
-                  className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition-all"
+                  className="w-full bg-white border border-black/15 rounded-lg px-4 py-3 text-black placeholder-black/40 focus:outline-none focus:border-[var(--color-secondary)] focus:ring-1 focus:ring-[var(--color-secondary)] transition-all"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   placeholder="Usuario asignado"
                 />
               </div>
               <div>
-                <label className="block text-xs font-bold text-yellow-500 uppercase tracking-wider mb-2">
+                <label className="block text-xs font-bold text-[var(--color-secondary)] uppercase tracking-wider mb-2">
                   Contraseña
                 </label>
                 <div className="relative">
                   <input
                     type={showPassword ? "text" : "password"}
-                    className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 pr-11 text-white focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition-all"
+                    className="w-full bg-white border border-black/15 rounded-lg px-4 py-3 pr-11 text-black placeholder-black/40 focus:outline-none focus:border-[var(--color-secondary)] focus:ring-1 focus:ring-[var(--color-secondary)] transition-all"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
                   />
                   <button
                     type="button"
-                    className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-200"
+                    className="absolute inset-y-0 right-0 flex items-center pr-3 text-black/40 hover:text-black/70"
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -402,7 +402,7 @@ const Comercial: React.FC = () => {
               )}
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 text-black font-bold py-4 rounded-lg transition-all transform hover:scale-[1.02] shadow-lg shadow-yellow-500/20"
+                className="w-full bg-[var(--color-secondary)] hover:brightness-90 text-white font-bold py-4 rounded-lg transition-all transform hover:scale-[1.02] shadow-lg"
               >
                 ACCEDER AL PANEL
               </button>
@@ -417,7 +417,7 @@ const Comercial: React.FC = () => {
   // Admin View - Only show orders
   if (isAdmin) {
     return (
-      <div className="flex flex-col min-h-screen bg-black text-white font-sans">
+      <div className="flex flex-col min-h-screen bg-[var(--color-primary)] text-black font-sans">
         <ComercialHeader
           onLogout={() => setIsLoggedIn(false)}
           onOrdersClick={() => {}} // Already in orders view
@@ -533,7 +533,7 @@ const Comercial: React.FC = () => {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-black text-white font-sans selection:bg-yellow-500/30">
+    <div className="flex flex-col min-h-screen bg-[var(--color-primary)] text-black font-sans selection:bg-[var(--color-secondary)]/30">
       <ComercialHeader
         onLogout={() => setIsLoggedIn(false)}
         onOrdersClick={() => setView("orders")}
@@ -543,11 +543,12 @@ const Comercial: React.FC = () => {
           <div className="flex flex-col items-center py-10 min-h-[50vh] w-full">
             <div className="w-full max-w-4xl mb-8 flex justify-between items-center">
               <h2 className="text-3xl font-bold text-white flex items-center gap-3">
-                <History className="text-yellow-500" /> Historial de Pedidos
+                <History className="text-[var(--color-secondary)]" /> Historial
+                de Pedidos
               </h2>
               <button
                 onClick={() => setView("products")}
-                className="px-6 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-all flex items-center gap-2"
+                className="px-6 py-2 bg-[var(--color-secondary)] text-white rounded-lg hover:brightness-90 transition-all flex items-center gap-2"
               >
                 <ArrowLeft size={18} /> Volver
               </button>
@@ -556,7 +557,7 @@ const Comercial: React.FC = () => {
             {isLoadingOrders ? (
               <div className="flex flex-col items-center justify-center py-20">
                 <Loader2
-                  className="animate-spin text-yellow-500 mb-4"
+                  className="animate-spin text-[var(--color-secondary)] mb-4"
                   size={48}
                 />
                 <p className="text-gray-400">Cargando pedidos...</p>
@@ -574,7 +575,7 @@ const Comercial: React.FC = () => {
                 </p>
                 <button
                   onClick={() => setView("products")}
-                  className="px-8 py-3 bg-yellow-600 text-black font-bold rounded-xl hover:bg-yellow-500 transition-all shadow-lg shadow-yellow-500/20"
+                  className="px-8 py-3 bg-[var(--color-secondary)] text-white font-bold rounded-xl hover:brightness-90 transition-all shadow-lg"
                 >
                   REALIZAR PEDIDO
                 </button>
@@ -584,7 +585,7 @@ const Comercial: React.FC = () => {
                 {orders.map((order, index) => (
                   <div
                     key={index}
-                    className="bg-gray-900 border border-gray-800 rounded-xl p-6 hover:border-yellow-500/30 transition-all"
+                    className="bg-gray-900 border border-gray-800 rounded-xl p-6 hover:border-[var(--color-secondary)] transition-all"
                   >
                     <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 border-b border-gray-800 pb-4 mb-4">
                       <div>
@@ -596,13 +597,13 @@ const Comercial: React.FC = () => {
                           {order.customer.name}
                         </h3>
                         {order.customer.company && (
-                          <div className="text-sm text-yellow-500">
+                          <div className="text-sm text-[var(--color-secondary)]">
                             {order.customer.company}
                           </div>
                         )}
                       </div>
                       <div className="text-right space-y-1">
-                        <div className="text-2xl font-bold text-yellow-400">
+                        <div className="text-2xl font-bold text-[var(--color-secondary)]">
                           {order.total.toFixed(2)} €
                         </div>
                         {typeof order.discount_percent === "number" &&
@@ -683,7 +684,7 @@ const Comercial: React.FC = () => {
                       </label>
                       <input
                         type="text"
-                        className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-yellow-500 transition-colors"
+                        className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[var(--color-secondary)] transition-colors"
                         placeholder="Ej: Juan Pérez"
                         value={customerData.name}
                         onChange={(e) =>
@@ -700,7 +701,7 @@ const Comercial: React.FC = () => {
                       </label>
                       <input
                         type="text"
-                        className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-yellow-500 transition-colors"
+                        className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[var(--color-secondary)] transition-colors"
                         placeholder="Ej: Gimnasio Hércules"
                         value={customerData.company}
                         onChange={(e) =>
@@ -717,7 +718,7 @@ const Comercial: React.FC = () => {
                       </label>
                       <input
                         type="tel"
-                        className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-yellow-500 transition-colors"
+                        className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[var(--color-secondary)] transition-colors"
                         placeholder="Ej: 600 000 000"
                         value={customerData.phone}
                         onChange={(e) =>
@@ -734,7 +735,7 @@ const Comercial: React.FC = () => {
                       </label>
                       <input
                         type="text"
-                        className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-yellow-500 transition-colors"
+                        className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[var(--color-secondary)] transition-colors"
                         placeholder="Ej: Por la mañana, 10:00 - 14:00"
                         value={customerData.callPreference}
                         onChange={(e) =>
@@ -751,7 +752,7 @@ const Comercial: React.FC = () => {
                       </label>
                       <input
                         type="email"
-                        className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-yellow-500 transition-colors"
+                        className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[var(--color-secondary)] transition-colors"
                         placeholder="cliente@email.com"
                         value={customerData.email}
                         onChange={(e) =>
@@ -767,7 +768,7 @@ const Comercial: React.FC = () => {
                         Dirección de Envío
                       </label>
                       <textarea
-                        className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-yellow-500 transition-colors resize-none h-24"
+                        className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[var(--color-secondary)] transition-colors resize-none h-24"
                         placeholder="Calle, Número, Ciudad, CP..."
                         value={customerData.address}
                         onChange={(e) =>
@@ -783,7 +784,7 @@ const Comercial: React.FC = () => {
                         Notas Adicionales
                       </label>
                       <textarea
-                        className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-yellow-500 transition-colors resize-none h-20"
+                        className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[var(--color-secondary)] transition-colors resize-none h-20"
                         placeholder="Instrucciones especiales..."
                         value={customerData.notes}
                         onChange={(e) =>
@@ -802,7 +803,8 @@ const Comercial: React.FC = () => {
               <div className="space-y-6">
                 <div className="bg-gray-900 border border-gray-800 rounded-xl p-6 shadow-xl sticky top-32">
                   <h2 className="text-xl font-bold mb-6 text-white flex items-center gap-2">
-                    <span className="text-yellow-500">🛒</span> Resumen Final
+                    <span className="text-[var(--color-secondary)]">🛒</span>{" "}
+                    Resumen Final
                   </h2>
 
                   <div className="space-y-3 mb-6 max-h-[40vh] overflow-y-auto pr-2 custom-scrollbar">
@@ -987,7 +989,7 @@ const Comercial: React.FC = () => {
                               />
 
                               <button
-                                className="w-8 h-8 rounded-full bg-yellow-500 hover:bg-yellow-400 text-black flex items-center justify-center transition-colors shadow-lg shadow-yellow-500/20"
+                                className="w-8 h-8 rounded-full bg-[var(--color-secondary)] hover:brightness-95 text-white flex items-center justify-center transition-colors shadow-lg"
                                 onClick={() =>
                                   handleQuantityChange(
                                     product.id,
@@ -1010,8 +1012,8 @@ const Comercial: React.FC = () => {
               <div className="hidden lg:block lg:col-span-1">
                 <div className="bg-gray-900 border border-gray-800 rounded-xl p-6 sticky top-32 shadow-2xl">
                   <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
-                    <ShoppingCart className="text-yellow-500" /> Resumen del
-                    Pedido
+                    <ShoppingCart className="text-[var(--color-secondary)]" />{" "}
+                    Resumen del Pedido
                   </h2>
 
                   <div className="space-y-3 mb-6 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
@@ -1065,7 +1067,7 @@ const Comercial: React.FC = () => {
                       </span>
                     </div>
                     <button
-                      className="w-full bg-yellow-600 hover:bg-yellow-500 text-black font-bold py-4 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-yellow-500/20 transform active:scale-95"
+                      className="w-full bg-[var(--color-secondary)] hover:brightness-90 text-white font-bold py-4 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg transform active:scale-95"
                       disabled={calculateTotal() === 0}
                       onClick={() => setView("checkout")}
                     >

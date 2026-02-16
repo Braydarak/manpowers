@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import productsService, { type Product } from '../../services/productsService';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import productsService, { type Product } from "../../services/productsService";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 type Props = {
   sportId: string;
   currentId?: number;
-  language: 'es' | 'en' | 'ca';
+  language: "es" | "en" | "ca";
   title?: string;
 };
 
@@ -31,10 +31,15 @@ type ProductJson = {
   votes?: number;
 };
 
-const RelatedProducts: React.FC<Props> = ({ sportId, currentId, language, title }) => {
+const RelatedProducts: React.FC<Props> = ({
+  sportId,
+  currentId,
+  language,
+  title,
+}) => {
   const [items, setItems] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>('');
+  const [error, setError] = useState<string>("");
   const containerRef = useRef<HTMLDivElement | null>(null);
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -48,7 +53,7 @@ const RelatedProducts: React.FC<Props> = ({ sportId, currentId, language, title 
   useEffect(() => {
     const load = async () => {
       setLoading(true);
-      setError('');
+      setError("");
       try {
         let related: Product[] = [];
         try {
@@ -58,45 +63,63 @@ const RelatedProducts: React.FC<Props> = ({ sportId, currentId, language, title 
           related = [];
         }
         if (!related || related.length === 0) {
-          const response = await fetch('/products.json');
+          const response = await fetch("/products.json");
           const data = await response.json();
-          related = (data.products as ProductJson[] || []).map((p: ProductJson) => ({
-            id: p.id,
-            name: p.name,
-            description: p.description,
-            price: typeof p.price === 'string' ? parseFloat(p.price.replace(',', '.')) : p.price,
-            price_formatted: p.price_formatted ?? '',
-            size: p.size,
-            image: p.image,
-            category: typeof p.category === 'string' ? { es: p.category, en: p.category } : p.category,
-            sportId: p.sportId,
-            available: p.available,
-            sku: p.sku ?? '',
-            amazonLinks: p.amazonLinks,
-            nutritionalValues: p.nutritionalValues,
-            application: p.application,
-            recommendations: p.recommendations,
-            rating: p.rating,
-            votes: p.votes,
-          }));
+          related = ((data.products as ProductJson[]) || []).map(
+            (p: ProductJson) => ({
+              id: p.id,
+              name: p.name,
+              description: p.description,
+              price:
+                typeof p.price === "string"
+                  ? parseFloat(p.price.replace(",", "."))
+                  : p.price,
+              price_formatted: p.price_formatted ?? "",
+              size: p.size,
+              image: p.image,
+              category:
+                typeof p.category === "string"
+                  ? { es: p.category, en: p.category }
+                  : p.category,
+              sportId: p.sportId,
+              available: p.available,
+              sku: p.sku ?? "",
+              amazonLinks: p.amazonLinks,
+              nutritionalValues: p.nutritionalValues,
+              application: p.application,
+              recommendations: p.recommendations,
+              rating: p.rating,
+              votes: p.votes,
+            }),
+          );
         }
-        const baseSport = String(sportId || '').toLowerCase().trim();
+        const baseSport = String(sportId || "")
+          .toLowerCase()
+          .trim();
         const filtered = related
           .filter((p) => String(p.id) !== String(currentId))
           .filter((p) => {
-            const s = String(p.sportId || '').toLowerCase().trim();
-            return s === baseSport || s === 'multisport';
+            const s = String(p.sportId || "")
+              .toLowerCase()
+              .trim();
+            return s === baseSport || s === "multisport";
           });
         const sorted = filtered.sort((a, b) => {
-          const aSpec = String(a.sportId || '').toLowerCase().trim() === baseSport;
-          const bSpec = String(b.sportId || '').toLowerCase().trim() === baseSport;
+          const aSpec =
+            String(a.sportId || "")
+              .toLowerCase()
+              .trim() === baseSport;
+          const bSpec =
+            String(b.sportId || "")
+              .toLowerCase()
+              .trim() === baseSport;
           if (aSpec === bSpec) return 0;
           return aSpec ? -1 : 1;
         });
         setItems(sorted);
         requestAnimationFrame(() => updateArrows());
       } catch {
-        setError('Error al cargar relacionados');
+        setError("Error al cargar relacionados");
       } finally {
         setLoading(false);
       }
@@ -111,7 +134,7 @@ const RelatedProducts: React.FC<Props> = ({ sportId, currentId, language, title 
       setCanRight(false);
       return;
     }
-    const firstCard = el.querySelector<HTMLElement>('.rp-card');
+    const firstCard = el.querySelector<HTMLElement>(".rp-card");
     const cardWidth = firstCard?.offsetWidth || 256;
     const GAP = 16;
     const pp = window.innerWidth < 768 ? 1 : 4;
@@ -131,28 +154,41 @@ const RelatedProducts: React.FC<Props> = ({ sportId, currentId, language, title 
     updateArrows();
     const onScroll = () => updateArrows();
     const onResize = () => updateArrows();
-    el.addEventListener('scroll', onScroll);
-    window.addEventListener('resize', onResize);
+    el.addEventListener("scroll", onScroll);
+    window.addEventListener("resize", onResize);
     return () => {
-      el.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onResize);
+      el.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
     };
   }, [items]);
 
-  const scrollByAmount = (dir: 'left' | 'right') => {
+  const scrollByAmount = (dir: "left" | "right") => {
     const el = containerRef.current;
     if (!el) return;
-    const firstCard = el.querySelector<HTMLElement>('.rp-card');
+    const firstCard = el.querySelector<HTMLElement>(".rp-card");
     const cardWidth = firstCard?.offsetWidth || 256;
     const GAP = 16;
     const pageDelta = cardWidth * perPage + GAP * (perPage - 1);
     const maxScroll = el.scrollWidth - el.clientWidth;
-    const target = Math.max(0, Math.min(maxScroll, el.scrollLeft + (dir === 'left' ? -pageDelta : pageDelta)));
-    el.scrollTo({ left: target, behavior: 'smooth' });
+    const target = Math.max(
+      0,
+      Math.min(
+        maxScroll,
+        el.scrollLeft + (dir === "left" ? -pageDelta : pageDelta),
+      ),
+    );
+    el.scrollTo({ left: target, behavior: "smooth" });
     setTimeout(updateArrows, 350);
   };
 
-  const toSlug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').replace(/-{2,}/g, '-');
+  const toSlug = (s: string) =>
+    s
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .replace(/-{2,}/g, "-");
   const openDetail = (p: Product) => {
     if (!sportId) return;
     const slug = toSlug(p.name[language] || p.name.es);
@@ -168,13 +204,13 @@ const RelatedProducts: React.FC<Props> = ({ sportId, currentId, language, title 
       quantity: 1,
       openCart: true,
     };
-    window.dispatchEvent(new CustomEvent('cart:add', { detail }));
+    window.dispatchEvent(new CustomEvent("cart:add", { detail }));
   };
 
   return (
     <div className="relative">
-      {(title || '') && (
-        <div className="text-2xl md:text-3xl font-extrabold mb-4 bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent">
+      {(title || "") && (
+        <div className="text-2xl md:text-3xl font-extrabold mb-4 text-[var(--color-secondary)]">
           {title}
         </div>
       )}
@@ -183,8 +219,8 @@ const RelatedProducts: React.FC<Props> = ({ sportId, currentId, language, title 
           <button
             type="button"
             aria-label="Anterior"
-            onClick={() => scrollByAmount('left')}
-            className="hidden md:inline-flex shrink-0 bg-gray-900/80 border border-gray-800 rounded-full p-2 text-white hover:bg-gray-800"
+            onClick={() => scrollByAmount("left")}
+            className="hidden md:inline-flex shrink-0 bg-[var(--color-primary)] border border-black/15 rounded-full p-2 text-black hover:bg-black/5 transition-colors"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
@@ -210,83 +246,122 @@ const RelatedProducts: React.FC<Props> = ({ sportId, currentId, language, title 
             touchDeltaXRef.current = 0;
             const TH = 48; // umbral de gesto
             if (Math.abs(dx) > TH) {
-              scrollByAmount(dx > 0 ? 'left' : 'right');
+              scrollByAmount(dx > 0 ? "left" : "right");
             }
           }}
         >
           <div className="flex gap-4">
             {loading ? (
               Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} className="min-w-[220px] bg-gray-900/60 border border-gray-800 rounded-xl p-3 animate-pulse">
-                  <div className="h-28 bg-gray-800 rounded" />
-                  <div className="h-4 w-3/4 bg-gray-800 rounded mt-3" />
-                  <div className="h-4 w-1/2 bg-gray-800 rounded mt-2" />
+                <div
+                  key={i}
+                  className="min-w-[220px] bg-[var(--color-primary)] border border-black/10 rounded-xl p-3 animate-pulse shadow-[0_10px_30px_rgba(0,0,0,0.06)]"
+                >
+                  <div className="h-28 bg-black/10 rounded" />
+                  <div className="h-4 w-3/4 bg-black/10 rounded mt-3" />
+                  <div className="h-4 w-1/2 bg-black/10 rounded mt-2" />
                 </div>
               ))
             ) : error ? (
-              <div className="text-sm text-red-400 px-3 py-2">{error}</div>
+              <div className="text-sm text-red-500 px-3 py-2">{error}</div>
             ) : items.length === 0 ? (
-              <div className="text-sm text-gray-300 px-3 py-2">Sin productos relacionados</div>
+              <div className="text-sm text-black/60 px-3 py-2">
+                Sin productos relacionados
+              </div>
             ) : (
               items.map((p) => (
                 <div
                   key={p.id}
                   onClick={() => openDetail(p)}
-                  className="rp-card min-w-[88vw] md:min-w-[256px] bg-gray-900/60 border border-gray-800 rounded-xl p-3 hover:bg-gray-900 transition-colors cursor-pointer snap-center md:snap-start flex flex-col"
+                  className="rp-card min-w-[88vw] md:min-w-[256px] bg-[var(--color-primary)] border border-black/10 rounded-xl p-3 hover:bg-black/5 transition-colors cursor-pointer snap-center md:snap-start flex flex-col shadow-[0_10px_30px_rgba(0,0,0,0.08)]"
                 >
-                  <div className="aspect-[4/3] bg-black rounded-lg overflow-hidden">
-                    <img src={p.image} alt={p.name[language]} className="w-full h-full object-cover" />
+                  <div className="aspect-[4/3] bg-black/5 rounded-lg overflow-hidden">
+                    <img
+                      src={p.image}
+                      alt={p.name[language]}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <div className="mt-3 flex-1">
-                    <div className="text-sm font-semibold text-white line-clamp-2">{p.name[language]}</div>
-                    <div className="text-xs text-gray-400 mt-1">
-                      {typeof p.category === 'string' ? p.category : p.category[language]}
+                    <div className="text-sm font-semibold text-black line-clamp-2">
+                      {p.name[language]}
                     </div>
-                    <div className="mt-2 text-base font-bold bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent">
-                      {p.price_formatted ? p.price_formatted : `€ ${Number(p.price).toFixed(2)}`}
+                    <div className="text-xs text-black/60 mt-1">
+                      {typeof p.category === "string"
+                        ? p.category
+                        : p.category[language]}
                     </div>
-                    {typeof p.rating === 'number' && typeof p.votes === 'number' && p.rating > 0 && p.votes > 0 && (
-                      <div className="flex items-center gap-1 mt-2">
-                        {(() => {
-                          const r = Number(p.rating || 0);
-                          const full = Math.floor(r);
-                          const half = r - full >= 0.5;
-                          const empty = 5 - full - (half ? 1 : 0);
-                          const Star = (props: { key?: number; className?: string }) => (
-                            <svg {...props} viewBox="0 0 24 24" fill="currentColor">
-                              <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.163L12 18.897l-7.335 3.864 1.401-8.163L.132 9.211l8.2-1.193z"/>
-                            </svg>
-                          );
-                          return (
-                            <>
-                              {Array.from({ length: full }).map((_, i) => (
-                                <Star key={i} className="w-4 h-4 text-yellow-400" />
-                              ))}
-                              {half && (
-                                <span className="relative w-4 h-4 inline-block">
-                                  <Star className="w-4 h-4 text-gray-500" />
-                                  <span className="absolute inset-0 overflow-hidden" style={{ width: '50%' }}>
-                                    <Star className="w-4 h-4 text-yellow-400" />
+                    <div className="mt-2 text-base font-bold text-[var(--color-secondary)]">
+                      {p.price_formatted
+                        ? p.price_formatted
+                        : `€ ${Number(p.price).toFixed(2)}`}
+                    </div>
+                    {typeof p.rating === "number" &&
+                      typeof p.votes === "number" &&
+                      p.rating > 0 &&
+                      p.votes > 0 && (
+                        <div className="flex items-center gap-1 mt-2">
+                          {(() => {
+                            const r = Number(p.rating || 0);
+                            const full = Math.floor(r);
+                            const half = r - full >= 0.5;
+                            const empty = 5 - full - (half ? 1 : 0);
+                            const Star = (props: {
+                              key?: number;
+                              className?: string;
+                            }) => (
+                              <svg
+                                {...props}
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                              >
+                                <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.163L12 18.897l-7.335 3.864 1.401-8.163L.132 9.211l8.2-1.193z" />
+                              </svg>
+                            );
+                            return (
+                              <>
+                                {Array.from({ length: full }).map((_, i) => (
+                                  <Star
+                                    key={i}
+                                    className="w-4 h-4 text-yellow-400"
+                                  />
+                                ))}
+                                {half && (
+                                  <span className="relative w-4 h-4 inline-block">
+                                    <Star className="w-4 h-4 text-gray-500" />
+                                    <span
+                                      className="absolute inset-0 overflow-hidden"
+                                      style={{ width: "50%" }}
+                                    >
+                                      <Star className="w-4 h-4 text-yellow-400" />
+                                    </span>
                                   </span>
-                                </span>
-                              )}
-                              {Array.from({ length: empty }).map((_, i) => (
-                                <Star key={i} className="w-4 h-4 text-gray-500" />
-                              ))}
-                            </>
-                          );
-                        })()}
-                        <span className="text-xs text-gray-400">({p.votes})</span>
-                      </div>
-                    )}
+                                )}
+                                {Array.from({ length: empty }).map((_, i) => (
+                                  <Star
+                                    key={i}
+                                    className="w-4 h-4 text-gray-500"
+                                  />
+                                ))}
+                              </>
+                            );
+                          })()}
+                          <span className="text-xs text-black/60">
+                            ({p.votes})
+                          </span>
+                        </div>
+                      )}
                   </div>
                   {p.available && (
                     <div className="mt-3">
                       <button
-                        onClick={(e) => { e.stopPropagation(); addToCart(p); }}
-                        className="w-full bg-black hover:bg-gray-900 text-white font-bold py-2 px-3 rounded-lg border border-gray-800 transition-all duration-300"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          addToCart(p);
+                        }}
+                        className="w-full bg-[var(--color-secondary)] hover:brightness-90 text-white font-bold py-2 px-3 rounded-lg border border-transparent transition-all duration-300"
                       >
-                        {t('sports.addToCart')}
+                        {t("sports.addToCart")}
                       </button>
                     </div>
                   )}
@@ -299,8 +374,8 @@ const RelatedProducts: React.FC<Props> = ({ sportId, currentId, language, title 
           <button
             type="button"
             aria-label="Siguiente"
-            onClick={() => scrollByAmount('right')}
-            className="hidden md:inline-flex shrink-0 bg-gray-900/80 border border-gray-800 rounded-full p-2 text-white hover:bg-gray-800"
+            onClick={() => scrollByAmount("right")}
+            className="hidden md:inline-flex shrink-0 bg-[var(--color-primary)] border border-black/15 rounded-full p-2 text-black hover:bg-black/5 transition-colors"
           >
             <ChevronRight className="w-5 h-5" />
           </button>

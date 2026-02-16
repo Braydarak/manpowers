@@ -23,11 +23,11 @@ const ComercialHeader: React.FC<ComercialHeaderProps> = ({
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-gray-900 to-black border-b border-gray-700 h-20 shadow-lg">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[var(--color-primary)] text-black border-b border-black/10 h-16 shadow-md">
       <div className="container mx-auto px-4 h-full flex items-center justify-between relative">
         {/* Mobile Menu Button (Left) */}
         <button
-          className="md:hidden text-white p-2"
+          className="md:hidden text-black p-2"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Menu"
         >
@@ -40,11 +40,11 @@ const ComercialHeader: React.FC<ComercialHeaderProps> = ({
           onClick={handleLogoClick}
         >
           <picture>
-            <source media="(min-width: 768px)" srcSet="/MAN-LOGO-BLANCO.png" />
+            <source media="(min-width: 768px)" srcSet="/MAN-BLANCO.png" />
             <img
               src="/MAN-BLANCO.png"
               alt="MΛN POWERS - Comercial"
-              className="h-10 md:h-14 drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
+              className="h-8 md:h-11 invert"
             />
           </picture>
         </div>
@@ -53,7 +53,7 @@ const ComercialHeader: React.FC<ComercialHeaderProps> = ({
         <div className="hidden md:flex items-center gap-4">
           <button
             onClick={onOrdersClick}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-800 text-gray-200 hover:text-white hover:bg-gray-700 transition-all border border-gray-700 hover:border-gray-600"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--color-primary)] text-black hover:bg-black/5 transition-all border border-black/15"
           >
             <History size={18} />
             <span>Pedidos Anteriores</span>
@@ -61,7 +61,7 @@ const ComercialHeader: React.FC<ComercialHeaderProps> = ({
 
           <button
             onClick={onLogout}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-900/20 text-red-400 hover:bg-red-900/40 hover:text-red-300 transition-all border border-red-900/30 hover:border-red-800/50"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--color-secondary)] text-white hover:brightness-90 transition-all border border-transparent"
           >
             <LogOut size={18} />
             <span>Cerrar Sesión</span>
@@ -74,13 +74,13 @@ const ComercialHeader: React.FC<ComercialHeaderProps> = ({
 
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
-        <div className="md:hidden absolute top-20 left-0 right-0 bg-black/95 backdrop-blur-md border-b border-gray-700 p-4 flex flex-col gap-3 shadow-xl animate-in slide-in-from-top-5">
+        <div className="md:hidden absolute top-16 left-0 right-0 bg-[var(--color-primary)]/98 backdrop-blur-md border-b border-black/10 p-4 flex flex-col gap-3 shadow-xl animate-in slide-in-from-top-5">
           <button
             onClick={() => {
               onOrdersClick();
               setIsMenuOpen(false);
             }}
-            className="flex items-center gap-3 px-4 py-4 rounded-lg bg-gray-900 text-gray-200 active:bg-gray-800 border border-gray-800"
+            className="flex items-center gap-3 px-4 py-4 rounded-lg bg-[var(--color-primary)] text-black active:bg-black/5 border border-black/15"
           >
             <History size={20} />
             <span className="font-medium">Pedidos Anteriores</span>
@@ -91,7 +91,7 @@ const ComercialHeader: React.FC<ComercialHeaderProps> = ({
               onLogout();
               setIsMenuOpen(false);
             }}
-            className="flex items-center gap-3 px-4 py-4 rounded-lg bg-red-900/20 text-red-400 active:bg-red-900/30 border border-red-900/30"
+            className="flex items-center gap-3 px-4 py-4 rounded-lg bg-[var(--color-secondary)] text-white active:brightness-90 border border-transparent"
           >
             <LogOut size={20} />
             <span className="font-medium">Cerrar Sesión</span>

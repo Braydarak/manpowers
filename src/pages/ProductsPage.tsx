@@ -225,7 +225,7 @@ const ProductsPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-[var(--color-primary)] text-black">
       <Header />
 
       <main
@@ -234,11 +234,11 @@ const ProductsPage: React.FC = () => {
         }`}
       >
         {/* Breadcrumb y Header */}
-        <section className="bg-gradient-to-r from-gray-900 to-gray-800 py-12">
+        <section className="bg-[var(--color-primary)] border-b border-black/10 py-12">
           <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
             <button
               onClick={handleBackToSports}
-              className="text-yellow-400 hover:text-yellow-300 mb-4 flex items-center gap-2 transition-colors"
+              className="text-[var(--color-secondary)] hover:brightness-90 mb-4 flex items-center gap-2 transition-colors"
             >
               <svg
                 className="w-5 h-5"
@@ -256,10 +256,10 @@ const ProductsPage: React.FC = () => {
               {t("sports.backToSports")}
             </button>
 
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
+            <h1 className="text-4xl md:text-6xl font-bold text-black mb-4">
               {t("sports.productsFor")} {sportName}
             </h1>
-            <p className="text-xl text-gray-300">
+            <p className="text-xl text-black/70">
               {t("sports.discoverSelection")} {sportName}
             </p>
           </div>
@@ -270,19 +270,19 @@ const ProductsPage: React.FC = () => {
           <div className="max-w-7xl mx-auto space-y-20">
             {loading ? (
               <div className="text-center py-20">
-                <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-yellow-400 mx-auto mb-4"></div>
-                <p className="text-gray-400 text-lg">Cargando productos...</p>
+                <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[var(--color-secondary)] mx-auto mb-4"></div>
+                <p className="text-black/60 text-lg">Cargando productos...</p>
               </div>
             ) : error ? (
               <div className="text-center py-20">
                 <div className="text-6xl mb-4">⚠️</div>
-                <h2 className="text-3xl font-bold text-white mb-4">
+                <h2 className="text-3xl font-bold text-black mb-4">
                   Error al cargar productos
                 </h2>
-                <p className="text-gray-400 text-lg mb-8">{error}</p>
+                <p className="text-black/60 text-lg mb-8">{error}</p>
                 <button
                   onClick={() => window.location.reload()}
-                  className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-black font-bold py-3 px-8 rounded-lg hover:from-yellow-500 hover:to-yellow-400 transition-all duration-300"
+                  className="bg-[var(--color-secondary)] text-white font-bold py-3 px-8 rounded-lg hover:brightness-90 transition-all duration-300"
                 >
                   Reintentar
                 </button>
@@ -292,7 +292,7 @@ const ProductsPage: React.FC = () => {
                 {/* Cosmetics Section */}
                 {cosmetics.length > 0 && (
                   <div>
-                    <h2 className="text-2xl md:text-3xl font-extrabold mb-8 uppercase text-white">
+                    <h2 className="text-2xl md:text-3xl font-extrabold mb-8 uppercase text-black">
                       {titles.cosmetics[currentLanguage] || titles.cosmetics.es}
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -314,13 +314,13 @@ const ProductsPage: React.FC = () => {
 
                 {/* Separator */}
                 {cosmetics.length > 0 && apparel.length > 0 && (
-                  <div className="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent my-4 mt-10 mb-10" />
+                  <div className="w-full h-px bg-gradient-to-r from-transparent via-black/10 to-transparent my-4 mt-10 mb-10" />
                 )}
 
                 {/* Apparel Section */}
                 {apparel.length > 0 && (
                   <div>
-                    <h2 className="text-2xl md:text-3xl font-extrabold mb-8 uppercase text-white">
+                    <h2 className="text-2xl md:text-3xl font-extrabold mb-8 uppercase text-black">
                       {titles.apparel[currentLanguage] || titles.apparel.es}
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -343,10 +343,10 @@ const ProductsPage: React.FC = () => {
             ) : (
               <div className="text-center py-20">
                 <div className="text-6xl mb-4">🏆</div>
-                <h2 className="text-3xl font-bold text-white mb-4">
+                <h2 className="text-3xl font-bold text-black mb-4">
                   {t("sports.productsInDevelopment")}
                 </h2>
-                <p className="text-gray-400 text-lg mb-8">
+                <p className="text-black/60 text-lg mb-8">
                   {t("sports.workingOnProducts", {
                     sportName: sportName.toLowerCase(),
                   })}{" "}
@@ -354,7 +354,7 @@ const ProductsPage: React.FC = () => {
                 </p>
                 <button
                   onClick={handleBackToSports}
-                  className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-black font-bold py-3 px-8 rounded-lg hover:from-yellow-500 hover:to-yellow-400 transition-all duration-300"
+                  className="bg-[var(--color-secondary)] text-white font-bold py-3 px-8 rounded-lg hover:brightness-90 transition-all duration-300"
                 >
                   {t("sports.exploreOtherSports")}
                 </button>

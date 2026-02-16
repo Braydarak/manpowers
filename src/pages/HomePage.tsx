@@ -48,10 +48,10 @@ const HomePage: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <div className="min-h-screen bg-[var(--color-primary)] text-black">
       <Header />
       <main
-        className={`flex-grow transition-all duration-500 bg-black ${enter ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+        className={`flex-grow transition-all duration-500 ${enter ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
       >
         <Hero />
         <div className="w-full">

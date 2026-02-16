@@ -5,23 +5,23 @@ const Footer: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <footer className="bg-black text-white py-8 px-6 border-t border-gray-800">
+    <footer className="bg-[var(--color-primary)] text-black py-8 px-6 border-t border-black/10">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
         {/* Columna 1: Logo e información */}
         <div className="w-full md:w-auto mb-8 md:mb-0">
           <img
             src="/MAN-LOGO-BLANCO.png"
             alt="MΛN POWERS Logo"
-            className="h-10 mr-4"
+            className="h-10 mr-4 invert"
           />
-          <p className="text-gray-400 mb-4 max-w-xs">{t("footerCompany")}</p>
+          <p className="text-black/70 mb-4 max-w-xs">{t("footerCompany")}</p>
           <div className="flex space-x-4">
             {/* Iconos de redes sociales */}
             <a
               href="https://www.facebook.com/profile.php?id=61575027062016"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors"
+              className="text-black/60 hover:text-black transition-colors"
             >
               <svg
                 className="w-6 h-6"
@@ -40,7 +40,7 @@ const Footer: React.FC = () => {
               href="https://www.instagram.com/manpowers__/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors"
+              className="text-black/60 hover:text-black transition-colors"
             >
               <svg
                 className="w-6 h-6"
@@ -59,7 +59,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="w-full md:w-auto">
-          <h3 className="text-lg font-semibold mb-4 border-b border-gray-800 pb-2 md:border-0 md:pb-0">
+          <h3 className="text-lg font-semibold mb-4 border-b border-black/10 pb-2 md:border-0 md:pb-0">
             {t("payments.methods")}
           </h3>
           <div className="space-y-3">
@@ -149,38 +149,38 @@ const Footer: React.FC = () => {
             <div className="flex items-start">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 mr-3 mt-0.5 text-gray-400"
+                className="h-5 w-5 mr-3 mt-0.5 text-black/50"
                 viewBox="0 0 24 24"
                 fill="currentColor"
               >
                 <path d="M3 7a2 2 0 012-2h11a2 2 0 012 2v6h1a2 2 0 110 4h-2a2 2 0 01-2-2H9a2 2 0 01-2 2H4a2 2 0 110-4h1V7zm2 0v6h10V7H5z" />
               </svg>
               <div className="flex items-center gap-2">
-                <span className="text-gray-400">{t("shipping.tipsa")}</span>
+                <span className="text-black/70">{t("shipping.tipsa")}</span>
                 <img src="/tipsa.png" alt="TIPSA" className="h-5 w-auto" />
               </div>
             </div>
             <div className="flex items-start">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 mr-3 mt-0.5 text-gray-400"
+                className="h-5 w-5 mr-3 mt-0.5 text-black/50"
                 viewBox="0 0 24 24"
                 fill="currentColor"
               >
                 <path d="M12 5a7 7 0 100 14 7 7 0 000-14zm0 2a5 5 0 11-3.536 8.536l1.414-1.414A3 3 0 1015 12h-3V8h2a1 1 0 100-2h-2z" />
               </svg>
-              <span className="text-gray-400">{t("returns.fourteenDays")}</span>
+              <span className="text-black/70">{t("returns.fourteenDays")}</span>
             </div>
             <div className="flex items-start">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 mr-3 mt-0.5 text-gray-400"
+                className="h-5 w-5 mr-3 mt-0.5 text-black/50"
                 viewBox="0 0 24 24"
                 fill="currentColor"
               >
                 <path d="M2 7a3 3 0 013-3h14a3 3 0 013 3v10a3 3 0 01-3 3H5a3 3 0 01-3-3V7zm3-1a1 1 0 00-1 1v2h16V7a1 1 0 00-1-1H5zm15 6H4v4a1 1 0 001 1h14a1 1 0 001-1v-4z" />
               </svg>
-              <span className="text-gray-400">
+              <span className="text-black/70">
                 {t("payments.processedByRedsys")}
               </span>
             </div>
@@ -189,14 +189,14 @@ const Footer: React.FC = () => {
 
         {/* Columna 2: Información de contacto */}
         <div className="w-full md:w-auto">
-          <h3 className="text-lg font-semibold mb-4 border-b border-gray-800 pb-2 md:border-0 md:pb-0">
+          <h3 className="text-lg font-semibold mb-4 border-b border-black/10 pb-2 md:border-0 md:pb-0">
             {t("footerContact")}
           </h3>
           <div className="space-y-4 md:space-y-3">
             <div className="flex items-start">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 mr-3 mt-0.5 text-gray-400"
+                className="h-5 w-5 mr-3 mt-0.5 text-black/50"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -214,12 +214,12 @@ const Footer: React.FC = () => {
                   d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                 />
               </svg>
-              <span className="text-gray-400">{t("footerAddress")}</span>
+              <span className="text-black/70">{t("footerAddress")}</span>
             </div>
             <div className="flex items-start">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 mr-3 mt-0.5 text-gray-400"
+                className="h-5 w-5 mr-3 mt-0.5 text-black/50"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -231,12 +231,12 @@ const Footer: React.FC = () => {
                   d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                 />
               </svg>
-              <span className="text-gray-400">{t("phone")}</span>
+              <span className="text-black/70">{t("phone")}</span>
             </div>
             <div className="flex items-start">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 mr-3 mt-0.5 text-gray-400"
+                className="h-5 w-5 mr-3 mt-0.5 text-black/50"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -248,23 +248,23 @@ const Footer: React.FC = () => {
                   d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                 />
               </svg>
-              <span className="text-gray-400">{t("email")}</span>
+              <span className="text-black/70">{t("email")}</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* Línea divisoria */}
-      <div className="border-t border-gray-800 mt-8 pt-6 max-w-7xl mx-auto">
+      <div className="border-t border-black/10 mt-8 pt-6 max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm text-center md:text-left">
+          <p className="text-black/60 text-sm text-center md:text-left">
             {new Date().getFullYear()} {t("footerCopyright")}
           </p>
           <ul className="space-x-4 flex md:mt-0 mt-10">
             <li>
               <a
                 href="/privacidad"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-black/60 hover:text-black transition-colors"
               >
                 {t("footerPrivacy")}
               </a>
@@ -272,7 +272,7 @@ const Footer: React.FC = () => {
             <li>
               <a
                 href="/cookies"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-black/60 hover:text-black transition-colors"
               >
                 {t("footerCookies")}
               </a>
@@ -280,7 +280,7 @@ const Footer: React.FC = () => {
             <li>
               <a
                 href="/aviso-legal"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-black/60 hover:text-black transition-colors"
               >
                 {t("footerLegal")}
               </a>
@@ -291,7 +291,7 @@ const Footer: React.FC = () => {
                 onClick={() =>
                   window.dispatchEvent(new Event("openCookiePreferences"))
                 }
-                className="text-gray-400 hover:text-white transition-colors underline underline-offset-2"
+                className="text-black/60 hover:text-black transition-colors underline underline-offset-2"
               >
                 {t("cookies.changePreferences")}
               </button>

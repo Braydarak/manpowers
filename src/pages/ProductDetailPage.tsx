@@ -380,7 +380,7 @@ const ProductDetailPage: React.FC = () => {
   })();
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-b from-gray-950 to-black text-white">
+    <div className="flex flex-col min-h-screen bg-[var(--color-primary)] text-black">
       <Header />
       <main
         className={`flex-grow pt-10 md:pt-28 transition-all duration-500 ${
@@ -391,12 +391,12 @@ const ProductDetailPage: React.FC = () => {
           {loading ? (
             <div className="py-24">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div className="animate-pulse bg-gray-900/60 rounded-xl h-[360px]"></div>
+                <div className="animate-pulse bg-black/5 rounded-xl h-[360px]"></div>
                 <div className="space-y-4">
-                  <div className="animate-pulse h-8 w-2/3 bg-gray-800 rounded"></div>
-                  <div className="animate-pulse h-4 w-full bg-gray-800 rounded"></div>
-                  <div className="animate-pulse h-4 w-5/6 bg-gray-800 rounded"></div>
-                  <div className="animate-pulse h-10 w-1/2 bg-gray-800 rounded"></div>
+                  <div className="animate-pulse h-8 w-2/3 bg-black/10 rounded"></div>
+                  <div className="animate-pulse h-4 w-full bg-black/10 rounded"></div>
+                  <div className="animate-pulse h-4 w-5/6 bg-black/10 rounded"></div>
+                  <div className="animate-pulse h-10 w-1/2 bg-black/10 rounded"></div>
                 </div>
               </div>
             </div>
@@ -405,7 +405,7 @@ const ProductDetailPage: React.FC = () => {
               <h2 className="text-2xl font-bold mb-4">{error}</h2>
               <button
                 onClick={handleBack}
-                className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-black font-bold py-2 px-6 rounded-lg hover:from-yellow-500 hover:to-yellow-400 transition-all duration-300"
+                className="bg-[var(--color-secondary)] text-white font-bold py-2 px-6 rounded-lg transition-all duration-300 hover:brightness-90"
               >
                 {t("cart.back")}
               </button>
@@ -416,7 +416,7 @@ const ProductDetailPage: React.FC = () => {
                 <div className="flex items-center justify-between">
                   <button
                     onClick={goToSport}
-                    className="text-yellow-400 hover:text-yellow-300 flex items-center gap-2 transition-colors"
+                    className="text-[var(--color-secondary)] flex items-center gap-2 transition-colors hover:brightness-90"
                   >
                     <svg
                       className="w-5 h-5"
@@ -435,7 +435,7 @@ const ProductDetailPage: React.FC = () => {
                   </button>
                   <button
                     onClick={handleShare}
-                    className="text-sm bg-gray-800 hover:bg-gray-700 text-white px-3 py-1 rounded-lg border border-gray-700"
+                    className="text-sm bg-[var(--color-primary)] text-black px-3 py-1 rounded-lg border border-black/20 hover:shadow-md transition-all"
                   >
                     {t("product.share")}
                   </button>
@@ -444,7 +444,7 @@ const ProductDetailPage: React.FC = () => {
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
                 <div
-                  className={`group bg-gray-900/60 rounded-xl overflow-hidden border border-gray-800 shadow-2xl transition-all duration-500 ${
+                  className={`group bg-[var(--color-primary)] rounded-xl overflow-hidden border border-black/10 shadow-[0_12px_36px_rgba(0,0,0,0.08)] transition-all duration-500 ${
                     enter
                       ? "opacity-100 translate-y-0 delay-100"
                       : "opacity-0 translate-y-3"
@@ -477,7 +477,7 @@ const ProductDetailPage: React.FC = () => {
                   }`}
                 >
                   <div className="flex items-center gap-3 flex-wrap">
-                    <span className="text-xs font-semibold text-yellow-400 uppercase tracking-wide">
+                    <span className="text-xs font-semibold text-[var(--color-secondary)] uppercase tracking-wide">
                       {product.category
                         ? typeof product.category === "string"
                           ? product.category
@@ -486,7 +486,7 @@ const ProductDetailPage: React.FC = () => {
                         : ""}
                     </span>
                     {product.sku && (
-                      <span className="text-xs bg-gray-800 text-gray-300 px-2 py-1 rounded-full">
+                      <span className="text-xs bg-black text-white px-2 py-1 rounded-full">
                         SKU {product.sku}
                       </span>
                     )}
@@ -545,7 +545,7 @@ const ProductDetailPage: React.FC = () => {
                           </>
                         );
                       })()}
-                      <span className="text-sm text-gray-300">
+                      <span className="text-sm text-black/60">
                         {typeof product.votes === "number"
                           ? `(${product.votes})`
                           : ""}
@@ -554,7 +554,7 @@ const ProductDetailPage: React.FC = () => {
                   )}
 
                   <div className="flex items-center gap-4">
-                    <span className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent">
+                    <span className="text-2xl font-bold text-[var(--color-secondary)]">
                       {(() => {
                         const bySize = getPriceForSize(
                           selectedSize || undefined,
@@ -569,7 +569,7 @@ const ProductDetailPage: React.FC = () => {
                     </span>
                   </div>
 
-                  <div className="text-xs text-gray-400">
+                  <div className="text-xs text-black/60">
                     {currentLanguage === "es"
                       ? "IVA incl. + gastos de envío"
                       : currentLanguage === "ca"
@@ -584,7 +584,7 @@ const ProductDetailPage: React.FC = () => {
                   </div>
 
                   {(selectedSize || product.size) && (
-                    <div className="text-sm text-gray-300">
+                    <div className="text-sm text-black/70">
                       {currentLanguage === "es"
                         ? "Tamaño del contenido:"
                         : currentLanguage === "ca"
@@ -597,7 +597,7 @@ const ProductDetailPage: React.FC = () => {
                   {product.available &&
                     (product.amazonLinks || product.pricesBySize) && (
                       <div className="flex flex-col gap-3">
-                        <span className="text-sm text-gray-400">
+                        <span className="text-sm text-black/60">
                           {t("product.selectSize")}
                         </span>
                         <div className="flex flex-wrap gap-2">
@@ -617,9 +617,9 @@ const ProductDetailPage: React.FC = () => {
                                 onClick={() => setSelectedSize(size)}
                                 className={`${
                                   selectedSize === size
-                                    ? "bg-yellow-500 text-black"
-                                    : "bg-gray-800 text-gray-200"
-                                } font-semibold px-3 py-1 rounded-lg border border-gray-700`}
+                                    ? "bg-[var(--color-secondary)] text-white"
+                                    : "bg-[var(--color-primary)] text-black"
+                                } font-semibold px-3 py-1 rounded-lg border border-black/20 transition-colors`}
                               >
                                 {product.pricesBySize
                                   ? `${size} - ${priceText}`
@@ -640,7 +640,7 @@ const ProductDetailPage: React.FC = () => {
                     )?.toLowerCase() === "indumentaria" &&
                     typeof product.size === "string" && (
                       <div className="flex flex-col gap-3">
-                        <span className="text-sm text-gray-400">
+                        <span className="text-sm text-black/60">
                           {t("product.selectSize")}
                         </span>
                         <div className="flex flex-wrap gap-2">
@@ -654,9 +654,9 @@ const ProductDetailPage: React.FC = () => {
                                 onClick={() => setSelectedSize(size)}
                                 className={`${
                                   selectedSize === size
-                                    ? "bg-yellow-500 text-black"
-                                    : "bg-gray-800 text-gray-200"
-                                } font-semibold px-3 py-1 rounded-lg border border-gray-700 hover:bg-gray-700 transition-colors`}
+                                    ? "bg-[var(--color-secondary)] text-white"
+                                    : "bg-[var(--color-primary)] text-black hover:bg-black/5"
+                                } font-semibold px-3 py-1 rounded-lg border border-black/20 transition-colors`}
                               >
                                 {size}
                               </button>
@@ -679,13 +679,13 @@ const ProductDetailPage: React.FC = () => {
                         href={product.amazonLinks[selectedSize]}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-black font-bold py-3 px-6 rounded-lg hover:from-yellow-500 hover:to-yellow-400 transition-all duration-300 text-center"
+                        className="bg-[var(--color-secondary)] text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 hover:brightness-90 text-center"
                       >
                         {t("sports.buy")} {selectedSize}
                       </a>
                     ) : (
                       <button
-                        className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-black font-bold py-3 px-6 rounded-lg hover:from-yellow-500 hover:to-yellow-400 transition-all duration-300"
+                        className="bg-[var(--color-secondary)] text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 hover:brightness-90"
                         disabled={!product.available}
                         onClick={() => product.available && handleBuyNow()}
                       >
@@ -698,7 +698,7 @@ const ProductDetailPage: React.FC = () => {
                     {product.available && (
                       <button
                         onClick={handleAddToCart}
-                        className="bg-black hover:bg-gray-900 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300"
+                        className="bg-black hover:bg-black/90 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300"
                       >
                         {t("sports.addToCart")}
                       </button>
@@ -891,8 +891,8 @@ const ProductDetailPage: React.FC = () => {
 
               {product.available && !checkoutOpenGlobal && (
                 <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
-                  <div className="bg-black/80 backdrop-blur border-t border-gray-800 px-4 py-3 flex items-center justify-between">
-                    <div className="font-bold">
+                  <div className="bg-[var(--color-primary)]/95 backdrop-blur border-t border-black/10 px-4 py-3 flex items-center justify-between shadow-[0_-6px_20px_rgba(0,0,0,0.12)]">
+                    <div className="font-bold text-[var(--color-secondary)]">
                       {(() => {
                         const bySize = getPriceForSize(
                           selectedSize || undefined,
@@ -911,21 +911,21 @@ const ProductDetailPage: React.FC = () => {
                           href={product.amazonLinks[selectedSize]}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="bg-yellow-500 text-black font-bold px-4 py-2 rounded-lg"
+                          className="bg-[var(--color-secondary)] text-white font-bold px-4 py-2 rounded-lg"
                         >
                           {t("sports.buy")}
                         </a>
                       ) : (
                         <button
                           onClick={handleBuyNow}
-                          className="bg-yellow-500 text-black font-bold px-4 py-2 rounded-lg"
+                          className="bg-[var(--color-secondary)] text-white font-bold px-4 py-2 rounded-lg"
                         >
                           {t("sports.buy")}
                         </button>
                       )}
                       <button
                         onClick={handleAddToCart}
-                        className="bg-gray-900 text-white font-bold px-4 py-2 rounded-lg"
+                        className="bg-black text-white font-bold px-4 py-2 rounded-lg hover:bg-black/90"
                       >
                         {t("sports.addToCart")}
                       </button>
@@ -939,9 +939,9 @@ const ProductDetailPage: React.FC = () => {
         <InfoStripe />
         {product && (
           <>
-            <div className="w-full border-t border-gray-800">
+            <div className="w-full border-t border-black/10">
               <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-8">
-                <div className="text-2xl md:text-3xl font-extrabold mb-6 text-center bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent">
+                <div className="text-2xl md:text-3xl font-extrabold mb-6 text-center text-[var(--color-secondary)]">
                   {t("recommendedTogether.title")}
                 </div>
                 <RecommendedTogether
@@ -957,16 +957,16 @@ const ProductDetailPage: React.FC = () => {
                 : product.category.es
               )?.toLowerCase() === "indumentaria"
             ) && (
-              <div className="w-full border-t border-gray-800">
+              <div className="w-full border-t border-black/10">
                 <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-8">
-                  <div className="text-2xl md:text-3xl font-extrabold mb-6 text-center bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent">
+                  <div className="text-2xl md:text-3xl font-extrabold mb-6 text-center text-[var(--color-secondary)]">
                     {t("faq.title")}
                   </div>
                   <Faq language={currentLanguage} items={faqItems} />
                 </div>
               </div>
             )}
-            <div className="w-full border-t border-gray-800">
+            <div className="w-full border-t border-black/10">
               <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-8 mb-20">
                 <RelatedProducts
                   sportId={product.sportId}
