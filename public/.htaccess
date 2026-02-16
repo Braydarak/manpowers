@@ -4,6 +4,8 @@ RewriteRule ^.*$ / [R=301,L]
 
 Options -MultiViews
 
+RewriteRule ^comercial/?$ - [E=NOINDEX:1]
+
 RewriteCond %{REQUEST_URI} !^/backend/ [NC]
 RewriteCond %{REQUEST_URI} !^/backendv2/ [NC]
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -33,6 +35,7 @@ SetEnv REDSYS_REALIZAR_PAGO_URL https://sis.redsys.es/sis/realizarPago
   Header set Expires "0"
   # Para proxies/CDN compatibles
   Header set Surrogate-Control "no-store"
+  Header set X-Robots-Tag "noindex, nofollow" env=NOINDEX
 </IfModule>
 
 # Evitar validadores de caché
