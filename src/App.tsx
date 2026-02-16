@@ -18,6 +18,7 @@ import CollaboratorsLoginPage from "./pages/CollaboratorsLoginPage";
 import CollaboratorsDashboardPage from "./pages/CollaboratorsDashboardPage";
 import ChatWidget from "./components/chatWidget";
 import ProductLandingPage from "./pages/ProductLandingPage";
+import Comercial from "./pages/Comercial";
 
 function AppInner() {
   const location = useLocation();
@@ -49,6 +50,7 @@ function AppInner() {
           path="/colaboradores/panel"
           element={<CollaboratorsDashboardPage />}
         />
+        <Route path="/comercial" element={<Comercial />} />
       </Routes>
     </>
   );

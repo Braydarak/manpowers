@@ -1,0 +1,105 @@
+import React, { useState } from "react";
+import { Menu, X, LogOut, History } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
+interface ComercialHeaderProps {
+  onLogout: () => void;
+  onOrdersClick: () => void;
+}
+
+const ComercialHeader: React.FC<ComercialHeaderProps> = ({
+  onLogout,
+  onOrdersClick,
+}) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogoClick = () => {
+    // If we want to go home, or stay in commercial.
+    // Usually logo goes to home, but this is a commercial panel.
+    // Let's go to /comercial root (reload or reset) or just do nothing?
+    // The main header goes to "/".
+    navigate("/");
+  };
+
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-gray-900 to-black border-b border-gray-700 h-20 shadow-lg">
+      <div className="container mx-auto px-4 h-full flex items-center justify-between relative">
+        {/* Mobile Menu Button (Left) */}
+        <button
+          className="md:hidden text-white p-2"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Menu"
+        >
+          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+
+        {/* Logo (Center on mobile, Left on Desktop) */}
+        <div
+          className="cursor-pointer absolute left-1/2 transform -translate-x-1/2 md:static md:transform-none md:flex md:items-center"
+          onClick={handleLogoClick}
+        >
+          <picture>
+            <source media="(min-width: 768px)" srcSet="/MAN-LOGO-BLANCO.png" />
+            <img
+              src="/MAN-BLANCO.png"
+              alt="MΛN POWERS - Comercial"
+              className="h-10 md:h-14 drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
+            />
+          </picture>
+        </div>
+
+        {/* Desktop Actions (Right) */}
+        <div className="hidden md:flex items-center gap-4">
+          <button
+            onClick={onOrdersClick}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-800 text-gray-200 hover:text-white hover:bg-gray-700 transition-all border border-gray-700 hover:border-gray-600"
+          >
+            <History size={18} />
+            <span>Pedidos Anteriores</span>
+          </button>
+
+          <button
+            onClick={onLogout}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-900/20 text-red-400 hover:bg-red-900/40 hover:text-red-300 transition-all border border-red-900/30 hover:border-red-800/50"
+          >
+            <LogOut size={18} />
+            <span>Cerrar Sesión</span>
+          </button>
+        </div>
+
+        {/* Placeholder for alignment on mobile (Right) */}
+        <div className="w-10 md:hidden"></div>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      {isMenuOpen && (
+        <div className="md:hidden absolute top-20 left-0 right-0 bg-black/95 backdrop-blur-md border-b border-gray-700 p-4 flex flex-col gap-3 shadow-xl animate-in slide-in-from-top-5">
+          <button
+            onClick={() => {
+              onOrdersClick();
+              setIsMenuOpen(false);
+            }}
+            className="flex items-center gap-3 px-4 py-4 rounded-lg bg-gray-900 text-gray-200 active:bg-gray-800 border border-gray-800"
+          >
+            <History size={20} />
+            <span className="font-medium">Pedidos Anteriores</span>
+          </button>
+
+          <button
+            onClick={() => {
+              onLogout();
+              setIsMenuOpen(false);
+            }}
+            className="flex items-center gap-3 px-4 py-4 rounded-lg bg-red-900/20 text-red-400 active:bg-red-900/30 border border-red-900/30"
+          >
+            <LogOut size={20} />
+            <span className="font-medium">Cerrar Sesión</span>
+          </button>
+        </div>
+      )}
+    </header>
+  );
+};
+
+export default ComercialHeader;

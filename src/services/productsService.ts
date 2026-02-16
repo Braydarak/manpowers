@@ -31,6 +31,7 @@ interface Product {
     ca?: string;
   };
   price: number;
+  comercial_price?: number;
   price_formatted: string;
   size: string;
   pricesBySize?: { [key: string]: string };
@@ -93,6 +94,14 @@ class ProductsService {
           typeof p.price === "string"
             ? parseFloat((p.price as string).replace(",", "."))
             : p.price,
+        comercial_price:
+          p.comercial_price !== undefined
+            ? typeof p.comercial_price === "string"
+              ? parseFloat((p.comercial_price as string).replace(",", "."))
+              : p.comercial_price
+            : typeof p.price === "string"
+              ? parseFloat((p.price as string).replace(",", "."))
+              : p.price,
         price_formatted: p.price_formatted ?? "",
         size: p.size,
         pricesBySize: p.pricesBySize,

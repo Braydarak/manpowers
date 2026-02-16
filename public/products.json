@@ -28,6 +28,7 @@
         "ca": "No superar la dosi diària. No recomanat per a menors. Consulta el teu metge si estàs embarassada, en lactància o en tractament."
       },
       "price": "26,00",
+      "comercial_price": "26,00",
       "size": "150 cap",
       "image": "/products/MACA-500.jpg",
       "category": {
@@ -124,6 +125,7 @@
         "ca": "Les persones amb trastorns de coagulació o en tractament anticoagulant han de consultar el metge."
       },
       "price": "26,00",
+      "comercial_price": "26,00",
       "size": "220 cap",
       "image": "/products/OMEGA-3.jpg",
       "category": {
@@ -219,6 +221,7 @@
         "100ml": "15,00"
       },
       "price": "15,00",
+      "comercial_price": "15,00",
       "size": "100 ml",
       "image": "/products/MAN-PROTECTOR-SOLAR.jpg",
       "category": { "es": "cuidado", "en": "care", "ca": "cura" },
@@ -320,6 +323,7 @@
         "ca": "Fase de càrrega opcional. Mantén una hidratació adequada. No recomanat per a menors."
       },
       "price": "18,00",
+      "comercial_price": "18,00",
       "size": "300 g",
       "image": "/products/CREATINA.jpg",
       "category": {
@@ -410,7 +414,8 @@
         "en": "Do not apply on open wounds. Patch test if you have sensitive skin.",
         "ca": "No aplicar sobre ferides. Provar en una zona petita si tens la pell sensible."
       },
-      "price": "25,41",
+      "price": "25,40",
+      "comercial_price": "25,40",
       "size": "100 ml",
       "image": "/products/CREMA-ANTI-ROZADURAS.jpg",
       "category": { "es": "cuidado", "en": "care", "ca": "cura" },
@@ -498,6 +503,7 @@
         "ca": "Ús extern. Evitar el contacte amb els ulls."
       },
       "price": "8,00",
+      "comercial_price": "8,00",
       "size": "100 ml",
       "image": "/products/GEL-DE-ALOE-VERA.jpg",
       "category": { "es": "cuidado", "en": "care", "ca": "cura" },
@@ -605,6 +611,7 @@
         "ca": "Ús freqüent. Evitar el contacte amb els ulls."
       },
       "price": "12,10",
+      "comercial_price": "12,10",
       "size": "100 ml",
       "image": "/products/CHAMPU-ANTI-CAIDA-TIRADORES.jpg",
       "category": { "es": "cuidado", "en": "care", "ca": "cura" },
@@ -692,6 +699,7 @@
         "ca": "Ús extern. No aplicar sobre pell irritada."
       },
       "price": "10,00",
+      "comercial_price": "10,00",
       "size": "100 ml",
       "image": "/products/CREMA-MASAJE.jpg",
       "category": { "es": "cuidado", "en": "care", "ca": "cura" },
@@ -758,6 +766,7 @@
         "ca": "Crema de peus amb oli d'espígol"
       },
       "price": "8,00",
+      "comercial_price": "8,00",
       "size": "100 ml",
       "description": {
         "es": "Tras jornadas en cubierta —con zapato náutico o descalzo—, los pies piden alivio. Esta crema con aceite de espliego hidrata, calma y ayuda a neutralizar el olor, dejando una sensación fresca para el próximo bordo. Ideal para talones y plantas que aguantan largas guardias.",
@@ -850,7 +859,8 @@
         "en": "Do not apply on cuts or irritations.",
         "ca": "No aplicar sobre talls o irritacions."
       },
-      "price": "25,41",
+      "price": "25,40",
+      "comercial_price": "25,40",
       "size": "100 ml",
       "image": "/products/ANTI-ROZADURAS-CICLISMO.jpg",
       "category": { "es": "cuidado", "en": "care", "ca": "cura" },
@@ -938,6 +948,7 @@
         "ca": "Fer una prova prèvia en una zona petita. No usar en pell irritada."
       },
       "price": "21,00",
+      "comercial_price": "21,00",
       "size": "100 ml",
       "image": "/products/agarre-tactico.avif",
       "category": { "es": "deportes", "en": "sports", "ca": "esports" },
@@ -1025,6 +1036,7 @@
         "ca": "Evitar el contacte amb els ulls. Rentar les mans després de l'ús."
       },
       "price": "15,00",
+      "comercial_price": "15,00",
       "size": "100 ml",
       "image": "/products/CREMA-EFECTO-FRIO-TIRADORES.jpg",
       "category": { "es": "deportes", "en": "sports", "ca": "esports" },
@@ -1112,6 +1124,7 @@
         "ca": "Ús extern. No aplicar en ferides."
       },
       "price": "15,50",
+      "comercial_price": "15,50",
       "size": "100 ml",
       "image": "/products/CREMIGEL-MASAJE-MUSCULAR-TIRADORES.jpg",
       "category": { "es": "deportes", "en": "sports", "ca": "esports" },
@@ -1199,6 +1212,7 @@
         "ca": "No usar en pell irritada. Rentar les mans després de l'ús."
       },
       "price": "15,80",
+      "comercial_price": "15,80",
       "size": "100 ml",
       "image": "/products/CREMA-EFECTO-CALOR.jpg",
       "category": { "es": "deportes", "en": "sports", "ca": "esports" },
@@ -1286,6 +1300,7 @@
         "ca": "Evitar el contacte amb ulls i mucoses."
       },
       "price": "15,80",
+      "comercial_price": "15,80",
       "size": "100 ml",
       "category": { "es": "deportes", "en": "sports", "ca": "esports" },
       "image": "/products/CREMA-EFECTO-CALOR.jpg",
@@ -1360,6 +1375,7 @@
         "ca": "Després de parades i ripostes, els avantbraços queden tensos. Aquest cremigel de massatge ajuda a alliberar la càrrega i recuperar mobilitat a canells i colzes, amb una textura còmoda que s'integra en la rutina de tornada a la calma."
       },
       "price": "15,50",
+      "comercial_price": "15,50",
       "size": "100 ml",
       "category": { "es": "cuidado", "en": "care", "ca": "cura" },
       "image": "/products/CREMIGEL-MASAJE-MUSCULAR.jpg",
@@ -1434,6 +1450,7 @@
       },
       "image": "/products/CALCIO-MAGNESIO-VITAMINA-K-MAN-POWERS.jpg",
       "price": "22,00",
+      "comercial_price": "22,00",
       "size": "150 cap",
       "sportId": "multisport",
       "available": true,
@@ -1519,6 +1536,7 @@
         "ca": "Evitar el contacte amb els ulls. No usar en pell irritada."
       },
       "price": "11,90",
+      "comercial_price": "11,90",
       "size": "100 ml",
       "image": "/products/CREMA-EFECTO-FRIO.jpg",
       "category": { "es": "deportes", "en": "sports", "ca": "esports" },
@@ -1587,6 +1605,7 @@
         "ca": "Gel d'agarre tècnic per al golf, dissenyat per millorar la subjecció del pal en condicions d'humitat, suor o tensió competitiva. La seva fórmula crea una pel·lícula antilliscant que manté les mans fermes i seques, incrementant el control del swing i la precisió a l'impacte. Ideal per a entrenaments i tornejos; s'aplica a palma i dits sense deixar residus enganxosos ni marcar el grip. Ingredients respectuosos amb la pell que ajuden a prevenir rascades i fatiga de mans durant la volta."
       },
       "price": "21,00",
+      "comercial_price": "21,00",
       "size": "100 ml",
       "image": "/products/GEL-AGARRE-TECNICO.jpg",
       "category": { "es": "deportes", "en": "sports", "ca": "esports" },
@@ -1674,6 +1693,7 @@
         "ca": "Evitar el contacte amb els ulls. Rentar mans després de l'ús."
       },
       "price": "15,00",
+      "comercial_price": "15,00",
       "size": "100 ml",
       "image": "/products/CREMA-EFECTO-FRIO-GOLF.jpg",
       "category": { "es": "deportes", "en": "sports", "ca": "esports" },
@@ -1751,6 +1771,7 @@
         "ca": "En acabar la volta, mima la zona lumbar, les espatlles i els avantbraços. Aquest cremigel de massatge ofereix el lliscament just per treballar la tensió del swing, amb absorció ràpida per a una recuperació còmoda abans de la següent ronda."
       },
       "price": "15,50",
+      "comercial_price": "15,50",
       "size": "100 ml",
       "category": { "es": "cuidado", "en": "care", "ca": "cura" },
       "image": "/products/CREMIGEL-MASAJE-MUSCULAR-GOLF.jpg",
@@ -1838,6 +1859,7 @@
         "ca": "Evitar el contacte amb ulls i mucoses."
       },
       "price": "15,80",
+      "comercial_price": "15,80",
       "size": "100 ml",
       "image": "/products/GEL-EFECTO-CALOR-GOLF.jpg",
       "category": { "es": "deportes", "en": "sports", "ca": "esports" },
@@ -1910,6 +1932,7 @@
         "ca": "Xampú anticaiguda reforçant"
       },
       "price": "16,00",
+      "comercial_price": "16,00",
       "size": "100 ml",
       "description": {
         "es": "Sol, viento y horas en el campo pueden castigar el cabello. Este champú fortalecedor limpia sudor y residuos con suavidad, dejando el cuero cabelludo fresco tras la ronda. Con activos que ayudan a reforzar desde la raíz, acompaña tu juego día tras día.",
@@ -2016,6 +2039,7 @@
         "en": "Tactical Backpack",
         "ca": "Motxilla Tàctica"
       },
+      "comercial_price": "70,00",
       "price": "70,00",
       "description": {
         "es": "Diseñada para la máxima resistencia y funcionalidad. Esta mochila táctica cuenta con múltiples compartimentos, materiales duraderos y un diseño ergonómico ideal para llevar todo tu equipamiento deportivo o para tus aventuras al aire libre.",
@@ -2066,6 +2090,7 @@
         "en": "Canvas Bag - Tactical",
         "ca": "Bossa de Lona - Tàctica"
       },
+      "comercial_price": "35,00",
       "price": "35,00",
       "description": {
         "es": "Diseñada para la máxima resistencia y funcionalidad. Esta bolsa de lona cuenta con múltiples compartimentos, materiales duraderos y un diseño ergonómico ideal para llevar todo tu equipamiento deportivo o para tus aventuras al aire libre.",
@@ -2115,6 +2140,7 @@
         "en": "Tactical Polo",
         "ca": "Polo Tàctic"
       },
+      "comercial_price": "20,00",
       "price": "20,00",
       "description": {
         "es": "Polo táctico de alto rendimiento, fabricado con tejido transpirable y resistente. Ideal para actividades al aire libre y uso diario, combinando estilo y funcionalidad.",
@@ -2165,6 +2191,7 @@
         "en": "Nordic Coat",
         "ca": "Jaqueta Nòrdica"
       },
+      "comercial_price": "80,00",
       "price": "80,00",
       "description": {
         "es": "Chaqueta Softshell de diseño nórdico, ofrece protección superior contra el viento y el frío. Tejido técnico impermeable y transpirable para mantener el confort en climas adversos.",
@@ -2215,6 +2242,7 @@
         "en": "Raincoat",
         "ca": "Impermeable"
       },
+      "comercial_price": "30,00",
       "price": "30,00",
       "description": {
         "es": "Chubasquero ligero y compacto, 100% impermeable. Diseñado para mantenerte seco en las condiciones más húmedas sin sacrificar la transpirabilidad.",
@@ -2265,6 +2293,7 @@
         "en": "Tactical Hunting Backpack",
         "ca": "Motxilla Tàctica de Caça"
       },
+      "comercial_price": "28,00",
       "price": "28,00",
       "description": {
         "es": "Mochila especializada para caza con diseño de camuflaje. Cuenta con compartimentos específicos para equipo, soporte para arma y materiales silenciosos.",
@@ -2314,6 +2343,7 @@
         "en": "Tactical Shoulder Bag",
         "ca": "Bolso de Hombro Tàctic"
       },
+      "comercial_price": "15,00",
       "price": "15,00",
       "description": {
         "es": "Bolso de hombro táctico versátil y resistente. Ideal para transportar equipo esencial de forma cómoda y accesible. Diseño compacto con sistema MOLLE.",
@@ -2363,6 +2393,7 @@
         "en": "Canvas Bag",
         "ca": "Bossa de Lona"
       },
+      "comercial_price": "30,00",
       "price": "30,00",
       "description": {
         "es": "Bolsa de lona resistente y espaciosa en varios colores. Perfecta para gimnasio, viajes o uso diario. Material duradero y diseño clásico.",
@@ -2461,6 +2492,7 @@
         "en": "Tactical Shirt",
         "ca": "Camiseta Tàctica"
       },
+      "comercial_price": "18,00",
       "price": "18,00",
       "description": {
         "es": "Camiseta táctica de alto rendimiento. Tejido transpirable y de secado rápido. Diseño ergonómico para máxima movilidad.",
@@ -2510,6 +2542,7 @@
         "en": "Tactical Parka",
         "ca": "Parka Tàctica"
       },
+      "comercial_price": "80,00",
       "price": "80,00",
       "description": {
         "es": "Parka táctica impermeable y térmica. Diseñada para proteger contra el frío y la lluvia. Incluye capucha plegable y múltiples bolsillos.",
