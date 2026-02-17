@@ -5,11 +5,15 @@ import { useNavigate } from "react-router-dom";
 interface ComercialHeaderProps {
   onLogout: () => void;
   onOrdersClick: () => void;
+  isAdmin?: boolean;
+  onMakeOrderClick?: () => void;
 }
 
 const ComercialHeader: React.FC<ComercialHeaderProps> = ({
   onLogout,
   onOrdersClick,
+  isAdmin,
+  onMakeOrderClick,
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -59,6 +63,15 @@ const ComercialHeader: React.FC<ComercialHeaderProps> = ({
             <span>Pedidos Anteriores</span>
           </button>
 
+          {isAdmin && onMakeOrderClick && (
+            <button
+              onClick={onMakeOrderClick}
+              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--color-secondary)] text-white hover:brightness-90 transition-all border border-transparent"
+            >
+              <span>Hacer Pedido</span>
+            </button>
+          )}
+
           <button
             onClick={onLogout}
             className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--color-secondary)] text-white hover:brightness-90 transition-all border border-transparent"
@@ -85,6 +98,18 @@ const ComercialHeader: React.FC<ComercialHeaderProps> = ({
             <History size={20} />
             <span className="font-medium">Pedidos Anteriores</span>
           </button>
+
+          {isAdmin && onMakeOrderClick && (
+            <button
+              onClick={() => {
+                onMakeOrderClick();
+                setIsMenuOpen(false);
+              }}
+              className="flex items-center gap-3 px-4 py-4 rounded-lg bg-[var(--color-secondary)] text-white active:brightness-90 border border-transparent"
+            >
+              <span className="font-medium">Hacer Pedido</span>
+            </button>
+          )}
 
           <button
             onClick={() => {

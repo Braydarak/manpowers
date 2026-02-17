@@ -9,7 +9,6 @@ export const useScrollAnimation = (threshold = 0.1) => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          // Una vez visible, no necesitamos seguir observando
           observer.unobserve(entry.target);
         }
       },
@@ -19,14 +18,13 @@ export const useScrollAnimation = (threshold = 0.1) => {
       }
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
+    const node = ref.current;
+    if (node) {
+      observer.observe(node);
     }
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
+      observer.disconnect();
     };
   }, [threshold]);
 
@@ -41,7 +39,6 @@ export const useStaggeredAnimation = (itemCount: number, delay = 100) => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          // Animar elementos uno por uno con delay
           for (let i = 0; i < itemCount; i++) {
             setTimeout(() => {
               setVisibleItems(prev => {
@@ -60,14 +57,13 @@ export const useStaggeredAnimation = (itemCount: number, delay = 100) => {
       }
     );
 
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
+    const node = containerRef.current;
+    if (node) {
+      observer.observe(node);
     }
 
     return () => {
-      if (containerRef.current) {
-        observer.unobserve(containerRef.current);
-      }
+      observer.disconnect();
     };
   }, [itemCount, delay]);
 

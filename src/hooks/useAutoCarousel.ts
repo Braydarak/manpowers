@@ -32,12 +32,11 @@ export const useAutoCarousel = ({
     setCurrentIndex(Math.max(0, Math.min(index, maxIndex)));
   };
 
-  // Auto scroll functionality
   useEffect(() => {
     if (isPaused || itemCount <= visibleItems) return;
 
     intervalRef.current = setInterval(() => {
-      goToNext();
+      setCurrentIndex(prev => (prev >= maxIndex ? 0 : prev + 1));
     }, autoScrollInterval);
 
     return () => {

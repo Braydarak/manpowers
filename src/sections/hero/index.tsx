@@ -19,11 +19,11 @@ const Hero: React.FC = () => {
   };
 
   const desktopFlyers = useMemo(
-    () => ["/flyer-maca.jpg", "/flyer-tiro.jpg"],
+    () => ["/flyer-maca.avif", "/flyer-tiro.avif"],
     []
   );
   const mobileFlyers = useMemo(
-    () => ["/flyer-maca-mobile.jpg", "/flyer-tiro-mobile.jpg"],
+    () => ["/flyer-maca-mobile.avif", "/flyer-tiro-mobile.avif"],
     []
   );
   const [idx, setIdx] = useState(0);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import productsService, { type Product } from "../services/productsService";
@@ -27,6 +27,7 @@ interface CustomerData {
   notes: string;
   company?: string;
   callPreference?: string;
+  accountNumber?: string;
 }
 
 interface Order {
@@ -58,9 +59,9 @@ const Comercial: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
   const [showOrderSummary, setShowOrderSummary] = useState(false);
-  const [view, setView] = useState<"products" | "orders" | "checkout">(
-    "products",
-  );
+  const [view, setView] = useState<
+    "products" | "orders" | "checkout" | "confirmed"
+  >("products");
   const [customerData, setCustomerData] = useState<CustomerData>({
     name: "",
     email: "",
@@ -69,10 +70,14 @@ const Comercial: React.FC = () => {
     notes: "",
     company: "",
     callPreference: "",
+    accountNumber: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orders, setOrders] = useState<Order[]>([]);
   const [isLoadingOrders, setIsLoadingOrders] = useState(false);
+  const [expandedOrders, setExpandedOrders] = useState<{
+    [key: number]: boolean;
+  }>({});
 
   useEffect(() => {
     // Check if previously logged in (optional persistence)
@@ -111,6 +116,56 @@ const Comercial: React.FC = () => {
       fetchOrders();
     }
   }, [view, isLoggedIn, fetchOrders]);
+
+  useEffect(() => {
+    if (!isLoggedIn) return;
+    window.scrollTo(0, 0);
+  }, [view, isLoggedIn]);
+
+  const commercialProducts = useMemo(() => {
+    const result: Product[] = [];
+    const existingIds = new Set(products.map((p) => p.id));
+
+    products.forEach((product) => {
+      if (
+        product.id === 3 &&
+        product.pricesBySize &&
+        Object.keys(product.pricesBySize).length > 0
+      ) {
+        const sizeKeys = Object.keys(product.pricesBySize);
+        sizeKeys.forEach((sizeKey, index) => {
+          const raw = product.pricesBySize?.[sizeKey];
+          let priceNum = product.comercial_price || product.price;
+          if (typeof raw === "string") {
+            const num = parseFloat(raw.replace(",", "."));
+            if (!Number.isNaN(num)) {
+              priceNum = num;
+            }
+          }
+
+          let newId = product.id * 100 + (index + 1);
+          while (existingIds.has(newId)) {
+            newId += 1;
+          }
+          existingIds.add(newId);
+
+          result.push({
+            ...product,
+            id: newId,
+            name: {
+              ...product.name,
+              es: `${product.name.es} (${sizeKey})`,
+            },
+            comercial_price: priceNum,
+            price: priceNum,
+          });
+        });
+      } else {
+        result.push(product);
+      }
+    });
+    return result;
+  }, [products]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -180,7 +235,7 @@ const Comercial: React.FC = () => {
   };
 
   const calculateTotal = () => {
-    return products.reduce((acc, product) => {
+    return commercialProducts.reduce((acc, product) => {
       const qty = quantities[product.id] || 0;
       const price = product.comercial_price || product.price;
       return acc + price * qty;
@@ -191,22 +246,44 @@ const Comercial: React.FC = () => {
     const raw = discountPercent.replace(",", ".");
     const value = parseFloat(raw);
     if (Number.isNaN(value) || value < 0) return 0;
-    if (value > 100) return 100;
+    if (value > 30) return 30;
     return value;
   };
 
-  const calculateFinalTotal = () => {
+  const isDiscountOverMax = () => {
+    const raw = discountPercent.replace(",", ".");
+    const value = parseFloat(raw);
+    if (Number.isNaN(value)) return false;
+    return value > 30;
+  };
+
+  const getTotalsWithVat = () => {
     const subtotal = calculateTotal();
     const percent = getDiscountPercentNumber();
     const discountAmount = (subtotal * percent) / 100;
-    const finalTotal = subtotal - discountAmount;
-    return finalTotal > 0 ? finalTotal : 0;
+    const baseAfterDiscount = subtotal - discountAmount;
+    const taxableBase = baseAfterDiscount > 0 ? baseAfterDiscount : 0;
+    const vatAmount = taxableBase * 0.21;
+    const finalTotal = taxableBase + vatAmount;
+    return {
+      subtotal,
+      percent,
+      discountAmount,
+      taxableBase,
+      vatAmount,
+      finalTotal,
+    };
+  };
+
+  const calculateFinalTotal = () => {
+    const { finalTotal } = getTotalsWithVat();
+    return finalTotal;
   };
 
   const totalItems = Object.values(quantities).reduce((acc, q) => acc + q, 0);
 
   const getSelectedProducts = () => {
-    return products
+    return commercialProducts
       .filter((p) => (quantities[p.id] || 0) > 0)
       .map((p) => ({
         ...p,
@@ -215,7 +292,7 @@ const Comercial: React.FC = () => {
   };
 
   // Group products by category for better organization
-  const groupedProducts = products.reduce(
+  const groupedProducts = commercialProducts.reduce(
     (acc, product) => {
       const category =
         typeof product.category === "string"
@@ -237,18 +314,25 @@ const Comercial: React.FC = () => {
 
     setIsSubmitting(true);
 
-    const selectedProducts = getSelectedProducts().map((p) => ({
-      id: p.id,
-      name: p.name.es,
-      quantity: p.quantity,
-      price: p.comercial_price || p.price,
-      total: (p.comercial_price || p.price) * p.quantity,
-    }));
+    const selectedProducts = getSelectedProducts().map((p) => {
+      const unitPrice = p.comercial_price || p.price;
+      return {
+        id: p.id,
+        name: p.name.es,
+        quantity: p.quantity,
+        price: unitPrice,
+        total: unitPrice * p.quantity,
+      };
+    });
 
-    const subtotal = calculateTotal();
-    const discountPercentNumber = getDiscountPercentNumber();
-    const discountAmount = (subtotal * discountPercentNumber) / 100;
-    const finalTotal = subtotal - discountAmount;
+    const {
+      subtotal,
+      percent: discountPercentNumber,
+      discountAmount,
+      taxableBase,
+      vatAmount,
+      finalTotal,
+    } = getTotalsWithVat();
 
     const orderData = {
       customer: customerData,
@@ -274,7 +358,6 @@ const Comercial: React.FC = () => {
       );
 
       if (response.ok) {
-        // Send email via EmailJS
         try {
           const productsHtml = selectedProducts
             .map(
@@ -299,10 +382,13 @@ const Comercial: React.FC = () => {
             customer_address: customerData.address,
             call_preference: customerData.callPreference || "Indiferente",
             customer_notes: customerData.notes || "Sin notas",
+            customer_account_number: customerData.accountNumber || "N/A",
             products_list: productsHtml,
             subtotal_order: subtotal.toFixed(2),
             discount_percent: discountPercentNumber.toFixed(2),
             discount_amount: discountAmount.toFixed(2),
+            taxable_base: taxableBase.toFixed(2),
+            vat_amount: vatAmount.toFixed(2),
             total_order: finalTotal.toFixed(2),
           };
 
@@ -312,7 +398,6 @@ const Comercial: React.FC = () => {
             templateParams,
             "VbS91pBRVJyfs4wc9",
           );
-          alert("Pedido guardado y enviado por correo correctamente.");
         } catch (emailError) {
           console.error("Error sending email:", emailError);
           alert(
@@ -329,9 +414,10 @@ const Comercial: React.FC = () => {
           notes: "",
           company: "",
           callPreference: "",
+          accountNumber: "",
         });
         setDiscountPercent("");
-        setView("products");
+        setView("confirmed");
       } else {
         const errorData = await response.json();
         alert(
@@ -414,135 +500,19 @@ const Comercial: React.FC = () => {
     );
   }
 
-  // Admin View - Only show orders
-  if (isAdmin) {
-    return (
-      <div className="flex flex-col min-h-screen bg-[var(--color-primary)] text-black font-sans">
-        <ComercialHeader
-          onLogout={() => setIsLoggedIn(false)}
-          onOrdersClick={() => {}} // Already in orders view
-        />
-        <main className="flex-grow pt-32 pb-10 px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold mb-6 text-white flex items-center gap-3">
-              <span className="text-yellow-500">
-                <History />
-              </span>
-              Panel de Administración - Todos los Pedidos
-            </h2>
-
-            {isLoadingOrders ? (
-              <div className="flex justify-center items-center py-20">
-                <Loader2 className="animate-spin text-yellow-500" size={48} />
-              </div>
-            ) : orders.length === 0 ? (
-              <div className="text-center py-20 text-gray-500">
-                No hay pedidos registrados en el sistema.
-              </div>
-            ) : (
-              <div className="space-y-4">
-                {orders.map((order, index) => (
-                  <div
-                    key={index}
-                    className="bg-gray-900 border border-gray-800 rounded-xl p-6 shadow-lg hover:border-yellow-500/30 transition-all"
-                  >
-                    <div className="flex flex-col md:flex-row justify-between md:items-center mb-4 pb-4 border-b border-gray-800 gap-4">
-                      <div>
-                        <div className="text-lg font-bold text-white mb-1">
-                          {order.customer.name}
-                        </div>
-                        {order.customer.company && (
-                          <div className="text-sm text-yellow-500 font-medium mb-1">
-                            {order.customer.company}
-                          </div>
-                        )}
-                        <div className="text-xs text-gray-500">
-                          {new Date(order.date).toLocaleString()}
-                        </div>
-                        <div className="text-xs text-gray-400 mt-1">
-                          Comercial:{" "}
-                          <span className="text-yellow-500 font-bold">
-                            {order.agent}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-4">
-                        <div className="text-right space-y-1">
-                          <div className="text-2xl font-bold text-white">
-                            {order.total.toFixed(2)}€
-                          </div>
-                          {typeof order.discount_percent === "number" &&
-                            order.discount_percent > 0 && (
-                              <div className="text-xs text-gray-400">
-                                Descuento: {order.discount_percent.toFixed(0)}%{" "}
-                                {typeof order.discount_amount === "number" &&
-                                  order.discount_amount > 0 && (
-                                    <span>
-                                      (-{order.discount_amount.toFixed(2)} €)
-                                    </span>
-                                  )}
-                              </div>
-                            )}
-                          <div className="text-xs text-green-500 font-medium bg-green-900/20 px-2 py-1 rounded-full inline-block">
-                            Confirmado
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2 text-sm text-gray-300">
-                        <div className="flex items-center gap-2">
-                          <span>📞</span> {order.customer.phone}
-                        </div>
-                        {order.customer.email && (
-                          <div className="flex items-center gap-2">
-                            <span>✉️</span> {order.customer.email}
-                          </div>
-                        )}
-                        <div className="flex items-center gap-2">
-                          <span>📍</span> {order.customer.address}
-                        </div>
-                      </div>
-                      <div className="bg-black/30 p-3 rounded-lg max-h-32 overflow-y-auto custom-scrollbar">
-                        <div className="text-xs text-gray-500 mb-2 uppercase font-bold">
-                          Resumen
-                        </div>
-                        {order.products.map((p, i) => (
-                          <div
-                            key={i}
-                            className="flex justify-between text-xs text-gray-300 mb-1"
-                          >
-                            <span>
-                              {p.quantity}x {p.name}
-                            </span>
-                            <span>{(p.price * p.quantity).toFixed(2)}€</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
-
   return (
     <div className="flex flex-col min-h-screen bg-[var(--color-primary)] text-black font-sans selection:bg-[var(--color-secondary)]/30">
       <ComercialHeader
         onLogout={() => setIsLoggedIn(false)}
         onOrdersClick={() => setView("orders")}
+        isAdmin={isAdmin}
+        onMakeOrderClick={() => setView("products")}
       />
       <main className="flex-grow pt-28 pb-32 px-4 container mx-auto max-w-7xl">
         {view === "orders" ? (
           <div className="flex flex-col items-center py-10 min-h-[50vh] w-full">
             <div className="w-full max-w-4xl mb-8 flex justify-between items-center">
-              <h2 className="text-3xl font-bold text-white flex items-center gap-3">
+              <h2 className="text-3xl font-bold text-black flex items-center gap-3">
                 <History className="text-[var(--color-secondary)]" /> Historial
                 de Pedidos
               </h2>
@@ -563,14 +533,14 @@ const Comercial: React.FC = () => {
                 <p className="text-gray-400">Cargando pedidos...</p>
               </div>
             ) : orders.length === 0 ? (
-              <div className="text-center py-20 bg-gray-900/50 rounded-2xl w-full max-w-2xl border border-gray-800">
-                <div className="text-gray-600 mb-4 flex justify-center">
+              <div className="text-center py-20 bg-[var(--color-primary)] rounded-2xl w-full max-w-2xl border border-black/10">
+                <div className="text-black/40 mb-4 flex justify-center">
                   <History size={64} />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">
+                <h3 className="text-xl font-bold text-black mb-2">
                   No hay pedidos registrados
                 </h3>
-                <p className="text-gray-400 mb-8">
+                <p className="text-black/60 mb-8">
                   Aún no has realizado ningún pedido con este usuario.
                 </p>
                 <button
@@ -582,81 +552,225 @@ const Comercial: React.FC = () => {
               </div>
             ) : (
               <div className="w-full max-w-4xl space-y-4">
-                {orders.map((order, index) => (
-                  <div
-                    key={index}
-                    className="bg-gray-900 border border-gray-800 rounded-xl p-6 hover:border-[var(--color-secondary)] transition-all"
-                  >
-                    <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 border-b border-gray-800 pb-4 mb-4">
-                      <div>
-                        <div className="text-sm text-gray-400 mb-1">
-                          {new Date(order.date).toLocaleDateString()} -{" "}
-                          {new Date(order.date).toLocaleTimeString()}
-                        </div>
-                        <h3 className="text-xl font-bold text-white">
-                          {order.customer.name}
-                        </h3>
-                        {order.customer.company && (
-                          <div className="text-sm text-[var(--color-secondary)]">
-                            {order.customer.company}
+                {orders.map((order, index) => {
+                  const subtotal =
+                    typeof order.subtotal === "number"
+                      ? order.subtotal
+                      : order.products.reduce(
+                          (acc, p) => acc + p.price * p.quantity,
+                          0,
+                        );
+                  const discountPercentValue =
+                    typeof order.discount_percent === "number"
+                      ? order.discount_percent
+                      : 0;
+                  const discountAmountValue =
+                    typeof order.discount_amount === "number"
+                      ? order.discount_amount
+                      : (subtotal * discountPercentValue) / 100;
+                  const taxableBase = subtotal - discountAmountValue;
+                  const vatAmount = taxableBase * 0.21;
+
+                  const isExpanded = !!expandedOrders[index];
+
+                  return (
+                    <div
+                      key={index}
+                      className="bg-[var(--color-primary)] border border-black/10 rounded-xl p-6 hover:border-[var(--color-secondary)] transition-all shadow-lg"
+                    >
+                      <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 border-b border-gray-800 pb-4 mb-4">
+                        <div>
+                          <div className="text-sm text-black/60 mb-1">
+                            {new Date(order.date).toLocaleDateString()} -{" "}
+                            {new Date(order.date).toLocaleTimeString()}
                           </div>
-                        )}
-                      </div>
-                      <div className="text-right space-y-1">
-                        <div className="text-2xl font-bold text-[var(--color-secondary)]">
-                          {order.total.toFixed(2)} €
-                        </div>
-                        {typeof order.discount_percent === "number" &&
-                          order.discount_percent > 0 && (
-                            <div className="text-xs text-gray-400">
-                              Descuento: {order.discount_percent.toFixed(0)}%{" "}
-                              {typeof order.discount_amount === "number" &&
-                                order.discount_amount > 0 && (
-                                  <span>
-                                    (-{order.discount_amount.toFixed(2)} €)
-                                  </span>
-                                )}
+                          <h3 className="text-xl font-bold text-black">
+                            {order.customer.name}
+                          </h3>
+                          {order.customer.company && (
+                            <div className="text-sm text-[var(--color-secondary)]">
+                              {order.customer.company}
                             </div>
                           )}
-                        <div className="text-xs text-gray-500">
-                          {order.products.length} productos
+                        </div>
+                        <div className="text-right space-y-1">
+                          <div className="text-2xl font-bold text-[var(--color-secondary)]">
+                            {order.total.toFixed(2)} €
+                          </div>
+                          {discountPercentValue > 0 && (
+                            <div className="text-xs text-black/60">
+                              Descuento: {discountPercentValue.toFixed(0)}%{" "}
+                              {discountAmountValue > 0 && (
+                                <span>
+                                  (-{discountAmountValue.toFixed(2)} €)
+                                </span>
+                              )}
+                            </div>
+                          )}
+                          <div className="text-xs text-black/60">
+                            {order.products.length} productos
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2 text-sm text-gray-300">
-                        <div className="flex items-center gap-2">
-                          <span>📞</span> {order.customer.phone}
-                        </div>
-                        {order.customer.email && (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2 text-sm text-black/70">
                           <div className="flex items-center gap-2">
-                            <span>✉️</span> {order.customer.email}
+                            <span>📞</span> {order.customer.phone}
                           </div>
-                        )}
-                        <div className="flex items-center gap-2">
-                          <span>📍</span> {order.customer.address}
+                          {order.customer.email && (
+                            <div className="flex items-center gap-2">
+                              <span>✉️</span> {order.customer.email}
+                            </div>
+                          )}
+                          <div className="flex items-center gap-2">
+                            <span>📍</span> {order.customer.address}
+                          </div>
+                        </div>
+                        <div className="bg-black/5 p-3 rounded-lg max-h-32 overflow-y-auto custom-scrollbar border border-black/10">
+                          <div className="text-xs text-black/60 mb-2 uppercase font-bold">
+                            Resumen
+                          </div>
+                          {order.products.map((p, i) => (
+                            <div
+                              key={i}
+                              className="flex justify-between text-xs text-black/70 mb-1"
+                            >
+                              <span>
+                                {p.quantity}x {p.name}
+                              </span>
+                              <span>{(p.price * p.quantity).toFixed(2)}€</span>
+                            </div>
+                          ))}
                         </div>
                       </div>
-                      <div className="bg-black/30 p-3 rounded-lg max-h-32 overflow-y-auto custom-scrollbar">
-                        <div className="text-xs text-gray-500 mb-2 uppercase font-bold">
-                          Resumen
-                        </div>
-                        {order.products.map((p, i) => (
-                          <div
-                            key={i}
-                            className="flex justify-between text-xs text-gray-300 mb-1"
-                          >
-                            <span>
-                              {p.quantity}x {p.name}
-                            </span>
-                            <span>{(p.price * p.quantity).toFixed(2)}€</span>
-                          </div>
-                        ))}
+
+                      <div className="mt-4 flex justify-end">
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setExpandedOrders((prev) => ({
+                              ...prev,
+                              [index]: !prev[index],
+                            }))
+                          }
+                          className="text-xs md:text-sm px-4 py-2 rounded-lg border border-black/15 text-black hover:bg-black/5 transition-colors"
+                        >
+                          {isExpanded
+                            ? "Ocultar datos completos"
+                            : "Ver datos completos"}
+                        </button>
                       </div>
+
+                      {isExpanded && (
+                        <div className="mt-4 border-t border-black/10 pt-4 text-xs md:text-sm text-black/70 space-y-2">
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div className="space-y-1">
+                              <div>
+                                <span className="font-semibold">
+                                  Comercial:{" "}
+                                </span>
+                                <span>{order.agent}</span>
+                              </div>
+                              {order.customer.company && (
+                                <div>
+                                  <span className="font-semibold">
+                                    Empresa:{" "}
+                                  </span>
+                                  <span>{order.customer.company}</span>
+                                </div>
+                              )}
+                              <div>
+                                <span className="font-semibold">Email: </span>
+                                <span>{order.customer.email || "N/A"}</span>
+                              </div>
+                              <div>
+                                <span className="font-semibold">
+                                  Teléfono:{" "}
+                                </span>
+                                <span>{order.customer.phone}</span>
+                              </div>
+                              <div>
+                                <span className="font-semibold">
+                                  Dirección:{" "}
+                                </span>
+                                <span>{order.customer.address}</span>
+                              </div>
+                            </div>
+                            <div className="space-y-1">
+                              <div>
+                                <span className="font-semibold">
+                                  Preferencia de contacto:{" "}
+                                </span>
+                                <span>
+                                  {order.customer.callPreference ||
+                                    "Indiferente"}
+                                </span>
+                              </div>
+                              <div>
+                                <span className="font-semibold">
+                                  Cuenta corriente:{" "}
+                                </span>
+                                <span>
+                                  {order.customer.accountNumber || "N/A"}
+                                </span>
+                              </div>
+                              <div>
+                                <span className="font-semibold">
+                                  Subtotal:{" "}
+                                </span>
+                                <span>{subtotal.toFixed(2)} €</span>
+                              </div>
+                              <div>
+                                <span className="font-semibold">
+                                  Descuento aplicado:{" "}
+                                </span>
+                                <span>
+                                  {discountPercentValue.toFixed(2)}% (
+                                  {discountAmountValue.toFixed(2)} €)
+                                </span>
+                              </div>
+                              <div>
+                                <span className="font-semibold">
+                                  Base imponible:{" "}
+                                </span>
+                                <span>{taxableBase.toFixed(2)} €</span>
+                              </div>
+                              <div>
+                                <span className="font-semibold">
+                                  IVA (21%):{" "}
+                                </span>
+                                <span>{vatAmount.toFixed(2)} €</span>
+                              </div>
+                              <div>
+                                <span className="font-semibold">
+                                  Total final:{" "}
+                                </span>
+                                <span>{order.total.toFixed(2)} €</span>
+                              </div>
+                              {order.filename && (
+                                <div>
+                                  <span className="font-semibold">
+                                    Archivo asociado:{" "}
+                                  </span>
+                                  <span>{order.filename}</span>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                          {order.customer.notes && (
+                            <div className="mt-3">
+                              <div className="font-semibold mb-1">Notas:</div>
+                              <div className="whitespace-pre-wrap">
+                                {order.customer.notes}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      )}
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
           </div>
@@ -672,19 +786,19 @@ const Comercial: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Formulario */}
               <div className="space-y-6">
-                <div className="bg-gray-900 border border-gray-800 rounded-xl p-6 shadow-xl">
-                  <h2 className="text-xl font-bold mb-6 text-white flex items-center gap-2">
+                <div className="bg-[var(--color-primary)] border border-black/10 rounded-xl p-6 shadow-xl">
+                  <h2 className="text-xl font-bold mb-6 text-black flex items-center gap-2">
                     <span className="text-yellow-500">📝</span> Datos del
                     Cliente
                   </h2>
                   <div className="space-y-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-400 mb-1">
+                      <label className="block text-sm font-medium text-black/70 mb-1">
                         Nombre Completo
                       </label>
                       <input
                         type="text"
-                        className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[var(--color-secondary)] transition-colors"
+                        className="w-full bg-white border border-black/15 rounded-lg px-4 py-3 text-black focus:outline-none focus:border-[var(--color-secondary)] transition-colors"
                         placeholder="Ej: Juan Pérez"
                         value={customerData.name}
                         onChange={(e) =>
@@ -696,12 +810,12 @@ const Comercial: React.FC = () => {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-400 mb-1">
+                      <label className="block text-sm font-medium text-black/70 mb-1">
                         Empresa / Comercio (Opcional)
                       </label>
                       <input
                         type="text"
-                        className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[var(--color-secondary)] transition-colors"
+                        className="w-full bg-white border border-black/15 rounded-lg px-4 py-3 text-black focus:outline-none focus:border-[var(--color-secondary)] transition-colors"
                         placeholder="Ej: Gimnasio Hércules"
                         value={customerData.company}
                         onChange={(e) =>
@@ -713,12 +827,12 @@ const Comercial: React.FC = () => {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-400 mb-1">
+                      <label className="block text-sm font-medium text-black/70 mb-1">
                         Teléfono
                       </label>
                       <input
                         type="tel"
-                        className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[var(--color-secondary)] transition-colors"
+                        className="w-full bg-white border border-black/15 rounded-lg px-4 py-3 text-black focus:outline-none focus:border-[var(--color-secondary)] transition-colors"
                         placeholder="Ej: 600 000 000"
                         value={customerData.phone}
                         onChange={(e) =>
@@ -730,12 +844,29 @@ const Comercial: React.FC = () => {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-400 mb-1">
+                      <label className="block text-sm font-medium text-black/70 mb-1">
+                        Número de cuenta corriente (Opcional)
+                      </label>
+                      <input
+                        type="text"
+                        className="w-full bg-white border border-black/15 rounded-lg px-4 py-3 text-black focus:outline-none focus:border-[var(--color-secondary)] transition-colors"
+                        placeholder="ES00 0000 0000 0000 0000 0000"
+                        value={customerData.accountNumber}
+                        onChange={(e) =>
+                          setCustomerData({
+                            ...customerData,
+                            accountNumber: e.target.value,
+                          })
+                        }
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-black/70 mb-1">
                         Preferencia Hora de Llamada (Opcional)
                       </label>
                       <input
                         type="text"
-                        className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[var(--color-secondary)] transition-colors"
+                        className="w-full bg-white border border-black/15 rounded-lg px-4 py-3 text-black focus:outline-none focus:border-[var(--color-secondary)] transition-colors"
                         placeholder="Ej: Por la mañana, 10:00 - 14:00"
                         value={customerData.callPreference}
                         onChange={(e) =>
@@ -747,12 +878,12 @@ const Comercial: React.FC = () => {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-400 mb-1">
+                      <label className="block text-sm font-medium text-black/70 mb-1">
                         Email (Opcional)
                       </label>
                       <input
                         type="email"
-                        className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[var(--color-secondary)] transition-colors"
+                        className="w-full bg-white border border-black/15 rounded-lg px-4 py-3 text-black focus:outline-none focus:border-[var(--color-secondary)] transition-colors"
                         placeholder="cliente@email.com"
                         value={customerData.email}
                         onChange={(e) =>
@@ -764,11 +895,11 @@ const Comercial: React.FC = () => {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-400 mb-1">
+                      <label className="block text-sm font-medium text-black/70 mb-1">
                         Dirección de Envío
                       </label>
                       <textarea
-                        className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[var(--color-secondary)] transition-colors resize-none h-24"
+                        className="w-full bg-white border border-black/15 rounded-lg px-4 py-3 text-black focus:outline-none focus:border-[var(--color-secondary)] transition-colors resize-none h-24"
                         placeholder="Calle, Número, Ciudad, CP..."
                         value={customerData.address}
                         onChange={(e) =>
@@ -780,11 +911,11 @@ const Comercial: React.FC = () => {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-400 mb-1">
+                      <label className="block text-sm font-medium text-black/70 mb-1">
                         Notas Adicionales
                       </label>
                       <textarea
-                        className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[var(--color-secondary)] transition-colors resize-none h-20"
+                        className="w-full bg-white border border-black/15 rounded-lg px-4 py-3 text-black focus:outline-none focus:border-[var(--color-secondary)] transition-colors resize-none h-20"
                         placeholder="Instrucciones especiales..."
                         value={customerData.notes}
                         onChange={(e) =>
@@ -801,8 +932,8 @@ const Comercial: React.FC = () => {
 
               {/* Resumen Final */}
               <div className="space-y-6">
-                <div className="bg-gray-900 border border-gray-800 rounded-xl p-6 shadow-xl sticky top-32">
-                  <h2 className="text-xl font-bold mb-6 text-white flex items-center gap-2">
+                <div className="bg-[var(--color-primary)] border border-black/10 rounded-xl p-6 shadow-xl sticky top-32">
+                  <h2 className="text-xl font-bold mb-6 text-black flex items-center gap-2">
                     <span className="text-[var(--color-secondary)]">🛒</span>{" "}
                     Resumen Final
                   </h2>
@@ -811,17 +942,17 @@ const Comercial: React.FC = () => {
                     {getSelectedProducts().map((p) => (
                       <div
                         key={p.id}
-                        className="flex justify-between items-center text-sm bg-black/30 p-3 rounded-lg border border-gray-800"
+                        className="flex justify-between items-center text-sm bg-black/5 p-3 rounded-lg border border-black/10"
                       >
                         <div className="flex-grow">
-                          <div className="text-white font-medium">
+                          <div className="text-black font-medium">
                             {p.name.es}
                           </div>
-                          <div className="text-gray-500 text-xs">
+                          <div className="text-black/60 text-xs">
                             x{p.quantity}
                           </div>
                         </div>
-                        <div className="text-yellow-400 font-bold whitespace-nowrap">
+                        <div className="text-[var(--color-secondary)] font-bold whitespace-nowrap">
                           {(
                             (p.comercial_price || p.price) * p.quantity
                           ).toFixed(2)}{" "}
@@ -831,30 +962,45 @@ const Comercial: React.FC = () => {
                     ))}
                   </div>
 
-                  <div className="border-t border-gray-800 pt-4 space-y-3">
+                  <div className="border-t border-gray-200 pt-4 space-y-3">
                     <div className="flex justify-between items-center text-sm">
-                      <span className="text-gray-300">Subtotal</span>
-                      <span className="text-gray-200">
+                      <span className="text-black/60">Subtotal</span>
+                      <span className="text-black">
                         {calculateTotal().toFixed(2)} €
                       </span>
                     </div>
                     <div className="flex items-center justify-between gap-3">
-                      <span className="text-gray-300 text-sm">
+                      <span className="text-black/60 text-sm">
                         Descuento (%)
                       </span>
                       <input
                         type="number"
                         min="0"
-                        max="100"
+                        max="30"
                         step="1"
-                        className="w-28 bg-black/40 border border-gray-700 rounded-lg px-3 py-2 text-right text-white focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 text-sm appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                        className={`w-28 bg-white rounded-lg px-3 py-2 text-right text-black focus:outline-none text-sm appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${
+                          isDiscountOverMax()
+                            ? "border border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500"
+                            : "border border-black/15 focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500"
+                        }`}
                         value={discountPercent}
                         onChange={(e) => setDiscountPercent(e.target.value)}
                       />
                     </div>
+                    {isDiscountOverMax() && (
+                      <div className="text-xs text-red-600 text-right">
+                        No se puede aplicar un descuento superior a 30%
+                      </div>
+                    )}
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-black/60">IVA (21%)</span>
+                      <span className="text-black">
+                        {getTotalsWithVat().vatAmount.toFixed(2)} €
+                      </span>
+                    </div>
                     <div className="flex justify-between items-center text-xl font-bold">
-                      <span className="text-white">Total a Pagar</span>
-                      <span className="text-yellow-400">
+                      <span className="text-black">Total a Pagar</span>
+                      <span className="text-[var(--color-secondary)]">
                         {calculateFinalTotal().toFixed(2)} €
                       </span>
                     </div>
@@ -866,7 +1012,8 @@ const Comercial: React.FC = () => {
                       !customerData.name ||
                       !customerData.phone ||
                       !customerData.address ||
-                      isSubmitting
+                      isSubmitting ||
+                      isDiscountOverMax()
                     }
                     onClick={handleConfirmOrder}
                   >
@@ -877,7 +1024,7 @@ const Comercial: React.FC = () => {
                     )}
                     {isSubmitting ? "ENVIANDO..." : "CONFIRMAR PEDIDO"}
                   </button>
-                  <p className="text-xs text-gray-500 text-center mt-4">
+                  <p className="text-xs text-black/60 text-center mt-4">
                     * Todos los campos son obligatorios excepto email, empresa,
                     preferencia horaria y notas.
                   </p>
@@ -885,14 +1032,43 @@ const Comercial: React.FC = () => {
               </div>
             </div>
           </div>
+        ) : view === "confirmed" ? (
+          <div className="max-w-xl mx-auto flex flex-col items-center justify-center py-16">
+            <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-6">
+              <Check className="text-green-600" size={32} />
+            </div>
+            <h2 className="text-2xl md:text-3xl font-bold text-black mb-2 text-center">
+              Pedido confirmado
+            </h2>
+            <p className="text-black/70 text-center mb-8 max-w-md">
+              Hemos registrado tu pedido correctamente. También se ha enviado un
+              correo con el detalle completo.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
+              <button
+                type="button"
+                onClick={() => setView("orders")}
+                className="flex-1 sm:flex-none px-6 py-3 rounded-xl border border-black/15 text-black hover:bg-black/5 transition-colors font-medium"
+              >
+                Ver pedidos
+              </button>
+              <button
+                type="button"
+                onClick={() => setView("products")}
+                className="flex-1 sm:flex-none px-6 py-3 rounded-xl bg-[var(--color-secondary)] text-white hover:brightness-90 transition-colors font-bold"
+              >
+                Pedir más
+              </button>
+            </div>
+          </div>
         ) : (
           <>
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
               <div>
-                <h1 className="text-2xl md:text-3xl font-bold text-white flex items-center gap-2">
-                  <span className="text-yellow-500">⚡</span> Panel Comercial
+                <h1 className="text-2xl md:text-3xl font-bold text-black flex items-center gap-2">
+                  Panel Comercial
                 </h1>
-                <p className="text-gray-400 text-sm mt-1">
+                <p className="text-black/60 text-sm mt-1">
                   Selecciona los productos para el pedido
                 </p>
               </div>
@@ -903,7 +1079,7 @@ const Comercial: React.FC = () => {
               <div className="lg:col-span-2 space-y-8">
                 {Object.entries(groupedProducts).map(([category, items]) => (
                   <div key={category} className="space-y-4">
-                    <h2 className="text-xl font-bold text-yellow-500 uppercase tracking-wider border-b border-gray-800 pb-2">
+                    <h2 className="text-xl font-bold text-[var(--color-secondary)] uppercase tracking-wider border-b border-black/10 pb-2">
                       {category}
                     </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -911,16 +1087,16 @@ const Comercial: React.FC = () => {
                         <div
                           key={product.id}
                           className={`
-                        relative bg-gray-900/60 border rounded-xl overflow-hidden transition-all duration-300
+                        relative bg-[var(--color-primary)] border rounded-xl overflow-hidden transition-all duration-300
                         ${
                           (quantities[product.id] || 0) > 0
-                            ? "border-yellow-500/50 shadow-lg shadow-yellow-500/10"
-                            : "border-gray-800 hover:border-gray-700"
+                            ? "border-[var(--color-secondary)] shadow-lg shadow-[var(--color-secondary)]/20"
+                            : "border-black/10 hover:border-black/30"
                         }
                       `}
                         >
                           <div className="flex p-4 gap-4">
-                            <div className="w-20 h-20 bg-gray-800 rounded-lg flex-shrink-0 overflow-hidden">
+                            <div className="w-20 h-20 bg-black/5 rounded-lg flex-shrink-0 overflow-hidden">
                               <img
                                 src={product.image}
                                 alt={product.name.es}
@@ -929,12 +1105,12 @@ const Comercial: React.FC = () => {
                             </div>
                             <div className="flex-grow flex flex-col justify-between">
                               <div>
-                                <h3 className="font-bold text-white leading-tight mb-1">
+                                <h3 className="font-bold text-black leading-tight mb-1">
                                   {product.name.es}
                                 </h3>
                               </div>
                               <div className="flex justify-between items-end mt-2">
-                                <span className="text-lg font-bold text-yellow-400">
+                                <span className="text-lg font-bold text-[var(--color-secondary)]">
                                   {(
                                     product.comercial_price || product.price
                                   ).toFixed(2)}{" "}
@@ -945,18 +1121,18 @@ const Comercial: React.FC = () => {
                           </div>
 
                           {/* Controls Footer */}
-                          <div className="bg-black/40 p-3 border-t border-gray-800/50 flex items-center justify-between">
-                            <span className="text-xs text-gray-400">
+                          <div className="bg-black/5 p-3 border-t border-black/10 flex items-center justify-between">
+                            <span className="text-xs text-black/60">
                               {(quantities[product.id] || 0) > 0
                                 ? "Cantidad:"
                                 : "Añadir:"}
                             </span>
                             <div className="flex items-center gap-3">
                               <button
-                                className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
+                                className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors border ${
                                   (quantities[product.id] || 0) > 0
-                                    ? "bg-gray-800 hover:bg-gray-700 text-white"
-                                    : "bg-gray-900 text-gray-600 cursor-not-allowed"
+                                    ? "border-[var(--color-secondary)] bg-[var(--color-primary)] text-[var(--color-secondary)] hover:bg-[var(--color-primary)]/80"
+                                    : "border-[var(--color-secondary)]/40 bg-[var(--color-primary)] text-[var(--color-secondary)]/40 cursor-not-allowed"
                                 }`}
                                 onClick={() =>
                                   handleQuantityChange(
@@ -972,10 +1148,10 @@ const Comercial: React.FC = () => {
                               <input
                                 type="number"
                                 min="0"
-                                className={`w-12 bg-transparent text-center font-bold focus:outline-none focus:ring-1 focus:ring-yellow-500/50 rounded appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${
+                                className={`w-12 bg-transparent text-center font-bold focus:outline-none focus:ring-1 focus:ring-[var(--color-secondary)]/50 rounded appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${
                                   (quantities[product.id] || 0) > 0
-                                    ? "text-white"
-                                    : "text-gray-500"
+                                    ? "text-black"
+                                    : "text-black/40"
                                 }`}
                                 value={quantities[product.id] || 0}
                                 onChange={(e) => {
@@ -1010,7 +1186,7 @@ const Comercial: React.FC = () => {
 
               {/* Desktop Sidebar Summary */}
               <div className="hidden lg:block lg:col-span-1">
-                <div className="bg-gray-900 border border-gray-800 rounded-xl p-6 sticky top-32 shadow-2xl">
+                <div className="bg-[var(--color-primary)] border border-black/10 rounded-xl p-6 sticky top-32 shadow-2xl">
                   <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
                     <ShoppingCart className="text-[var(--color-secondary)]" />{" "}
                     Resumen del Pedido
@@ -1021,19 +1197,23 @@ const Comercial: React.FC = () => {
                       getSelectedProducts().map((p) => (
                         <div
                           key={p.id}
-                          className="flex justify-between items-start text-sm bg-black/30 p-3 rounded-lg border border-gray-800"
+                          className="flex justify-between items-start text-sm bg-black/5 p-3 rounded-lg border border-black/10"
                         >
                           <div className="flex-grow">
-                            <div className="text-white font-medium">
+                            <div className="text-black font-medium">
                               {p.name.es}
                             </div>
-                            <div className="text-gray-500 text-xs">
-                              x{p.quantity} unidad{p.quantity > 1 ? "es" : ""}
+                            <div className="text-black/60 text-xs">
+                              x{p.quantity} unidad
+                              {p.quantity > 1 ? "es" : ""}
                             </div>
                           </div>
                           <div className="flex flex-col items-end gap-1">
-                            <span className="text-yellow-400 font-bold">
-                              {(p.price * p.quantity).toFixed(2)} €
+                            <span className="text-[var(--color-secondary)] font-bold">
+                              {(
+                                (p.comercial_price || p.price) * p.quantity
+                              ).toFixed(2)}{" "}
+                              €
                             </span>
                             <button
                               onClick={() => handleQuantityChange(p.id, 0)}
@@ -1045,7 +1225,7 @@ const Comercial: React.FC = () => {
                         </div>
                       ))
                     ) : (
-                      <div className="text-center py-10 text-gray-600 border-2 border-dashed border-gray-800 rounded-xl">
+                      <div className="text-center py-10 text-black/50 border-2 border-dashed border-black/20 rounded-xl">
                         <ShoppingCart
                           size={32}
                           className="mx-auto mb-2 opacity-50"
@@ -1055,14 +1235,14 @@ const Comercial: React.FC = () => {
                     )}
                   </div>
 
-                  <div className="border-t border-gray-800 pt-4 space-y-4">
+                  <div className="border-t border-gray-200 pt-4 space-y-4">
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-400">Total Productos</span>
-                      <span className="text-white font-bold">{totalItems}</span>
+                      <span className="text-black/60">Total Productos</span>
+                      <span className="text-black font-bold">{totalItems}</span>
                     </div>
                     <div className="flex justify-between items-center text-xl">
-                      <span className="text-white font-bold">Total</span>
-                      <span className="text-yellow-400 font-bold">
+                      <span className="text-black font-bold">Total</span>
+                      <span className="text-[var(--color-secondary)] font-bold">
                         {calculateTotal().toFixed(2)} €
                       </span>
                     </div>
@@ -1113,8 +1293,11 @@ const Comercial: React.FC = () => {
                             x{p.quantity}
                           </div>
                         </div>
-                        <div className="text-yellow-400 font-bold whitespace-nowrap">
-                          {(p.price * p.quantity).toFixed(2)} €
+                        <div className="text-[var(--color-secondary)] font-bold whitespace-nowrap">
+                          {(
+                            (p.comercial_price || p.price) * p.quantity
+                          ).toFixed(2)}{" "}
+                          €
                         </div>
                       </div>
                     ))
@@ -1142,7 +1325,7 @@ const Comercial: React.FC = () => {
                         className={`transition-transform ${showOrderSummary ? "rotate-180" : ""}`}
                       />
                     </span>
-                    <span className="font-bold text-lg text-yellow-400">
+                    <span className="font-bold text-lg text-[var(--color-secondary)]">
                       {calculateTotal().toFixed(2)} €
                     </span>
                   </div>
