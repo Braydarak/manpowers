@@ -3,6 +3,7 @@ import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { ShoppingCart } from "lucide-react";
 import useLanguageUpdater from "../hooks/useLanguageUpdater";
 import useIsMobile from "../hooks/useIsMobile";
 import productsService, { type Product } from "../services/productsService";
@@ -1146,7 +1147,7 @@ const ProductDetailPage: React.FC = () => {
         !areMainButtonsVisible && (
           <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
             <div className="bg-[var(--color-primary)]/95 backdrop-blur border-t border-black/10 px-4 py-3 flex items-center justify-between shadow-[0_-6px_20px_rgba(0,0,0,0.12)]">
-              <div className="font-bold text-[var(--color-secondary)]">
+              <div className="font-bold text-2xl text-[var(--color-secondary)]">
                 {(() => {
                   const bySize = getPriceForSize(selectedSize || undefined);
                   if (typeof bySize === "number") {
@@ -1163,7 +1164,7 @@ const ProductDetailPage: React.FC = () => {
                     href={product.amazonLinks[selectedSize]}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-[var(--color-secondary)] text-white font-bold px-4 py-2 rounded-lg"
+                    className="bg-[var(--color-secondary)] text-white font-bold px-6 py-2 rounded-lg"
                   >
                     {t("sports.buy")}
                   </a>
@@ -1177,9 +1178,10 @@ const ProductDetailPage: React.FC = () => {
                 )}
                 <button
                   onClick={handleAddToCart}
-                  className="bg-black text-white font-bold px-4 py-2 rounded-lg hover:bg-black/90"
-                >
-                  {t("sports.addToCart")}
+                  className="bg-black text-white font-bold px-4 py-2 rounded-lg hover:bg-black/90 flex items-center justify-center"
+                  aria-label={t("sports.addToCart")}
+                > 
+                  <ShoppingCart className="w-5 h-5" />
                 </button>
               </div>
             </div>
