@@ -50,6 +50,12 @@ const Header: React.FC = () => {
     setMenuOpen(!menuOpen);
   };
 
+  useEffect(() => {
+    window.dispatchEvent(
+      new CustomEvent("header:menuOpen", { detail: menuOpen }),
+    );
+  }, [menuOpen]);
+
   // Función para navegar al inicio y hacer scroll al top
   const handleLogoClick = () => {
     navigate("/");
@@ -373,7 +379,7 @@ const Header: React.FC = () => {
               : "-translate-x-full md:translate-x-full"
           } flex flex-col overflow-hidden`}
         >
-          <div className="sticky top-0 w-full bg-[var(--color-primary)] border-b border-black/10 px-4 py-4 flex items-center justify-end z-50">
+          <div className="sticky top-0 w-full bg-[var(--color-primary)] border-b border-black/10 px-4 py-1.5 flex items-center justify-end z-50">
             <button
               onClick={toggleMenu}
               className="p-2 hover:bg-black/5 rounded-md transition-colors duration-300 focus:outline-none"

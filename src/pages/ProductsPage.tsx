@@ -229,12 +229,12 @@ const ProductsPage: React.FC = () => {
       <Header />
 
       <main
-        className={`pt-16 md:pt-28 transition-all duration-500 ${
+        className={`pt-10 md:pt-20 transition-all duration-500 ${
           enter ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
         }`}
       >
         {/* Breadcrumb y Header */}
-        <section className="bg-[var(--color-primary)] border-b border-black/10 py-12">
+        <section className="bg-[var(--color-primary)] border-b border-black/10 pt-10 pb-4">
           <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
             <button
               onClick={handleBackToSports}
@@ -266,7 +266,7 @@ const ProductsPage: React.FC = () => {
         </section>
 
         {/* Productos */}
-        <section className="py-20 px-4 md:px-8 lg:px-12">
+        <section className=" py-5 px-4 md:px-8 lg:px-12">
           <div className="max-w-7xl mx-auto space-y-20">
             {loading ? (
               <div className="text-center py-20">

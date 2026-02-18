@@ -20,7 +20,7 @@ const Sports: React.FC = () => {
   return (
     <section
       id="sports"
-      className="mt-12 md:mt-20 bg-[var(--color-primary)] text-black py-20 px-4 md:px-8 lg:px-12"
+      className="md:mt-10 bg-[var(--color-primary)] text-black py-20 px-4 md:px-8 lg:px-12"
     >
       <div className="max-w-full mx-auto">
         {/* Título principal */}

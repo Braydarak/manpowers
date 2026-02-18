@@ -41,6 +41,21 @@ const ChatWidget: React.FC = () => {
   const intervalRef = useRef<number | undefined>(undefined);
   const hideTimeoutRef = useRef<number | undefined>(undefined);
   const [isMobile, setIsMobile] = useState(false);
+  const [isStickyBarVisible, setIsStickyBarVisible] = useState(false);
+
+  useEffect(() => {
+    const handleStickyBarVisibility = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      setIsStickyBarVisible(customEvent.detail);
+    };
+    window.addEventListener("sticky-bar:visibility", handleStickyBarVisibility);
+    return () => {
+      window.removeEventListener(
+        "sticky-bar:visibility",
+        handleStickyBarVisibility,
+      );
+    };
+  }, []);
 
   useEffect(() => {
     if (open && panelRef.current) {
@@ -329,7 +344,9 @@ const ChatWidget: React.FC = () => {
   if (!open)
     return (
       <div
-        className="fixed bottom-6 right-6 z-50 flex items-center gap-3"
+        className={`fixed right-6 z-50 flex items-center gap-3 transition-all duration-300 ${
+          isStickyBarVisible && isMobile ? "bottom-24" : "bottom-6"
+        }`}
         onMouseEnter={showHintForAWhile}
       >
         {showHint && (

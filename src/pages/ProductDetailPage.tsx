@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import useLanguageUpdater from "../hooks/useLanguageUpdater";
+import useIsMobile from "../hooks/useIsMobile";
 import productsService, { type Product } from "../services/productsService";
 import { updateSEOTags } from "../utils/seoConfig";
 import Accordion from "../components/accordion";
@@ -54,15 +55,77 @@ const ProductDetailPage: React.FC = () => {
     "es";
   const currentLanguage: "es" | "en" | "ca" =
     baseLang === "en" ? "en" : baseLang === "ca" ? "ca" : "es";
+  const isMobile = useIsMobile();
 
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [checkoutOpenGlobal, setCheckoutOpenGlobal] = useState<boolean>(false);
+  const [menuOpenGlobal, setMenuOpenGlobal] = useState<boolean>(false);
   const [faqItems, setFaqItems] = useState<
     { id: string; question: string; answer: string }[]
   >([]);
+  const [zoomActive, setZoomActive] = useState(false);
+  const [zoomCoords, setZoomCoords] = useState<{ x: number; y: number }>({
+    x: 0.7,
+    y: 0.7,
+  });
+
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const [areMainButtonsVisible, setAreMainButtonsVisible] = useState(true);
+
+  const mainButtonsRef = useCallback((node: HTMLDivElement | null) => {
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+      observerRef.current = null;
+    }
+
+    if (node) {
+      observerRef.current = new IntersectionObserver(
+        ([entry]) => {
+          setAreMainButtonsVisible(entry.isIntersecting);
+        },
+        {
+          threshold: 0,
+        },
+      );
+      observerRef.current.observe(node);
+    }
+  }, []);
+
+  useEffect(() => {
+    const onMenuToggle = (e: Event) => {
+      const ce = e as CustomEvent<boolean>;
+      setMenuOpenGlobal(Boolean(ce.detail));
+    };
+    window.addEventListener("header:menuOpen", onMenuToggle as EventListener);
+    return () => {
+      window.removeEventListener(
+        "header:menuOpen",
+        onMenuToggle as EventListener,
+      );
+    };
+  }, []);
+
+  useEffect(() => {
+    const isVisible =
+      product?.available &&
+      !checkoutOpenGlobal &&
+      !menuOpenGlobal &&
+      !areMainButtonsVisible;
+    window.dispatchEvent(
+      new CustomEvent("sticky-bar:visibility", { detail: isVisible }),
+    );
+  }, [product, checkoutOpenGlobal, menuOpenGlobal, areMainButtonsVisible]);
+
+  useEffect(() => {
+    return () => {
+      window.dispatchEvent(
+        new CustomEvent("sticky-bar:visibility", { detail: false }),
+      );
+    };
+  }, []);
 
   useLanguageUpdater();
 
@@ -416,7 +479,7 @@ const ProductDetailPage: React.FC = () => {
     <div className="flex flex-col min-h-screen bg-[var(--color-primary)] text-black">
       <Header />
       <main
-        className={`flex-grow pt-10 md:pt-28 transition-all duration-500 ${
+        className={`flex-grow  transition-all duration-500 ${
           enter ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
         }`}
       >
@@ -434,7 +497,7 @@ const ProductDetailPage: React.FC = () => {
               </div>
             </div>
           ) : error ? (
-            <div className="py-24 text-center">
+            <div className="py-20 text-center">
               <h2 className="text-2xl font-bold mb-4">{error}</h2>
               <button
                 onClick={handleBack}
@@ -445,7 +508,7 @@ const ProductDetailPage: React.FC = () => {
             </div>
           ) : product ? (
             <>
-              <section className="py-6 mt-24">
+              <section className="py-6 mt-15 md:mt-24">
                 <div className="flex items-center justify-between gap-4">
                   <button
                     onClick={goToSport}
@@ -470,30 +533,82 @@ const ProductDetailPage: React.FC = () => {
               </section>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-                <div
-                  className={`group bg-[var(--color-primary)] rounded-xl overflow-hidden border border-black/10 shadow-[0_12px_36px_rgba(0,0,0,0.08)] transition-all duration-500 ${
-                    enter
-                      ? "opacity-100 translate-y-0 delay-100"
-                      : "opacity-0 translate-y-3"
-                  }`}
-                >
-                  <div className="relative aspect-[4/3] bg-black">
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <img
-                      src={product.image}
-                      alt={product.name[currentLanguage] || product.name.es}
-                      className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105 group-hover:rotate-[0.5deg]"
-                      onError={(e) => {
-                        const target = e.currentTarget;
-                        target.style.display = "none";
-                        if (target.parentElement) {
-                          target.parentElement.innerHTML = `<span class='block p-6 text-gray-400'>${t(
-                            "sports.imageNotAvailable",
-                          )}</span>`;
-                        }
+                <div className="relative">
+                  <div
+                    className={`group bg-[var(--color-primary)] rounded-xl overflow-hidden border border-black/10 shadow-[0_12px_36px_rgba(0,0,0,0.08)] transition-all duration-500 ${
+                      enter
+                        ? "opacity-100 translate-y-0 delay-100"
+                        : "opacity-0 translate-y-3"
+                    }`}
+                  >
+                    <div
+                      className="relative aspect-[4/3] bg-black"
+                      onMouseEnter={() => {
+                        if (!isMobile) setZoomActive(true);
                       }}
-                    />
+                      onMouseLeave={() => {
+                        setZoomActive(false);
+                      }}
+                      onMouseMove={(e) => {
+                        if (isMobile) return;
+                        const rect = e.currentTarget.getBoundingClientRect();
+                        const rawX = (e.clientX - rect.left) / rect.width;
+                        const rawY = (e.clientY - rect.top) / rect.height;
+                        const x = Math.max(0, Math.min(1, rawX));
+                        const y = Math.max(0, Math.min(1, rawY));
+                        setZoomCoords({ x, y });
+                      }}
+                    >
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <img
+                        src={product.image}
+                        alt={product.name[currentLanguage] || product.name.es}
+                        className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105 group-hover:rotate-[0.5deg]"
+                        onError={(e) => {
+                          const target = e.currentTarget;
+                          target.style.display = "none";
+                          if (target.parentElement) {
+                            target.parentElement.innerHTML = `<span class='block p-6 text-gray-400'>${t(
+                              "sports.imageNotAvailable",
+                            )}</span>`;
+                          }
+                        }}
+                      />
+                      <div
+                        className={`hidden md:block pointer-events-none absolute border border-[var(--color-secondary)] bg-black/10 transition-opacity transition-transform duration-150 ${
+                          zoomActive
+                            ? "opacity-100 scale-100"
+                            : "opacity-0 scale-90"
+                        }`}
+                        style={{
+                          width: 140,
+                          height: 140,
+                          left: `${zoomCoords.x * 100}%`,
+                          top: `${zoomCoords.y * 100}%`,
+                          transform: "translate(-50%, -50%)",
+                        }}
+                      />
+                    </div>
                   </div>
+                  <div
+                    className={`hidden md:block pointer-events-none absolute z-30 border-2 border-[var(--color-secondary)] rounded-xl overflow-hidden bg-black shadow-[0_12px_36px_rgba(0,0,0,0.45)] transition-opacity transition-transform duration-200 ${
+                      zoomActive
+                        ? "opacity-100 scale-100"
+                        : "opacity-0 scale-95"
+                    }`}
+                    style={{
+                      width: 500,
+                      height: 500,
+                      top: "50%",
+                      left: "100%",
+                      marginLeft: 24,
+                      transform: "translateY(-50%)",
+                      backgroundImage: `url(${product.image})`,
+                      backgroundRepeat: "no-repeat",
+                      backgroundSize: "500% 500%",
+                      backgroundPosition: `${zoomCoords.x * 100}% ${zoomCoords.y * 100}%`,
+                    }}
+                  />
                 </div>
 
                 <div
@@ -576,7 +691,7 @@ const ProductDetailPage: React.FC = () => {
                   )}
 
                   <div className="flex items-center gap-4">
-                    <span className="text-2xl font-bold text-[var(--color-secondary)]">
+                    <span className="text-4xl font-bold text-[var(--color-secondary)]">
                       {(() => {
                         const bySize = getPriceForSize(
                           selectedSize || undefined,
@@ -688,6 +803,7 @@ const ProductDetailPage: React.FC = () => {
                     )}
 
                   <div
+                    ref={mainButtonsRef}
                     className={`flex flex-col sm:flex-row gap-3 transition-all duration-500 ${
                       enter
                         ? "opacity-100 translate-y-0 delay-200"
@@ -726,7 +842,7 @@ const ProductDetailPage: React.FC = () => {
                       </button>
                     )}
                   </div>
-                  <div className="flex items-center gap-3 mt-2">
+                  <div className="flex items-center gap-3">
                     <span className="text-xs sm:text-sm text-black/70">
                       Compartir en
                     </span>
@@ -789,7 +905,7 @@ const ProductDetailPage: React.FC = () => {
               </div>
 
               <div
-                className={`mt-10 transition-all mb-10 duration-500 ${
+                className={`mt-5 transition-all mb-5 duration-500 ${
                   enter
                     ? "opacity-100 translate-y-0 delay-200"
                     : "opacity-0 translate-y-3"
@@ -970,50 +1086,13 @@ const ProductDetailPage: React.FC = () => {
                   />
                 )}
 
-              {product.available && !checkoutOpenGlobal && (
-                <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
-                  <div className="bg-[var(--color-primary)]/95 backdrop-blur border-t border-black/10 px-4 py-3 flex items-center justify-between shadow-[0_-6px_20px_rgba(0,0,0,0.12)]">
-                    <div className="font-bold text-[var(--color-secondary)]">
-                      {(() => {
-                        const bySize = getPriceForSize(
-                          selectedSize || undefined,
-                        );
-                        if (typeof bySize === "number") {
-                          return `€ ${bySize.toFixed(2)}`;
-                        }
-                        return product.price_formatted
-                          ? product.price_formatted
-                          : `€ ${Number(product.price).toFixed(2)}`;
-                      })()}
-                    </div>
-                    <div className="flex gap-2">
-                      {product.amazonLinks && selectedSize ? (
-                        <a
-                          href={product.amazonLinks[selectedSize]}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="bg-[var(--color-secondary)] text-white font-bold px-4 py-2 rounded-lg"
-                        >
-                          {t("sports.buy")}
-                        </a>
-                      ) : (
-                        <button
-                          onClick={handleBuyNow}
-                          className="bg-[var(--color-secondary)] text-white font-bold px-4 py-2 rounded-lg"
-                        >
-                          {t("sports.buy")}
-                        </button>
-                      )}
-                      <button
-                        onClick={handleAddToCart}
-                        className="bg-black text-white font-bold px-4 py-2 rounded-lg hover:bg-black/90"
-                      >
-                        {t("sports.addToCart")}
-                      </button>
-                    </div>
+              {product.available &&
+                !checkoutOpenGlobal &&
+                !areMainButtonsVisible && (
+                  <div className="hidden">
+                    {/* Placeholder for removed sticky bar */}
                   </div>
-                </div>
-              )}
+                )}
             </>
           ) : null}
         </div>
@@ -1060,6 +1139,52 @@ const ProductDetailPage: React.FC = () => {
           </>
         )}
       </main>
+      {product &&
+        product.available &&
+        !checkoutOpenGlobal &&
+        !menuOpenGlobal &&
+        !areMainButtonsVisible && (
+          <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
+            <div className="bg-[var(--color-primary)]/95 backdrop-blur border-t border-black/10 px-4 py-3 flex items-center justify-between shadow-[0_-6px_20px_rgba(0,0,0,0.12)]">
+              <div className="font-bold text-[var(--color-secondary)]">
+                {(() => {
+                  const bySize = getPriceForSize(selectedSize || undefined);
+                  if (typeof bySize === "number") {
+                    return `€ ${bySize.toFixed(2)}`;
+                  }
+                  return product.price_formatted
+                    ? product.price_formatted
+                    : `€ ${Number(product.price).toFixed(2)}`;
+                })()}
+              </div>
+              <div className="flex gap-2">
+                {product.amazonLinks && selectedSize ? (
+                  <a
+                    href={product.amazonLinks[selectedSize]}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-[var(--color-secondary)] text-white font-bold px-4 py-2 rounded-lg"
+                  >
+                    {t("sports.buy")}
+                  </a>
+                ) : (
+                  <button
+                    onClick={handleBuyNow}
+                    className="bg-[var(--color-secondary)] text-white font-bold px-4 py-2 rounded-lg"
+                  >
+                    {t("sports.buy")}
+                  </button>
+                )}
+                <button
+                  onClick={handleAddToCart}
+                  className="bg-black text-white font-bold px-4 py-2 rounded-lg hover:bg-black/90"
+                >
+                  {t("sports.addToCart")}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       <Footer />
     </div>
   );
