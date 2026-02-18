@@ -55,7 +55,7 @@ const HomePage: React.FC = () => {
       >
         <Hero />
         <div className="w-full">
-          <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-8">
+          <div className="">
             <AllProducts
               language={currentLanguage}
               title={t("allProducts.title")}

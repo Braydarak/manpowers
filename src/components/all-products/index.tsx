@@ -43,11 +43,7 @@ const ProductSlider: React.FC<{
   const [canRight, setCanRight] = useState<boolean>(false);
   const [pageWidth, setPageWidth] = useState<number | undefined>(undefined);
   const [perPage, setPerPage] = useState<number>(4);
-  const touchStartXRef = useRef<number | null>(null);
-  const touchDeltaXRef = useRef<number>(0);
-  const [autoScrollPaused, setAutoScrollPaused] = useState<boolean>(false);
-  const autoIntervalRef = useRef<number | null>(null);
-  const pauseTimeoutRef = useRef<number | null>(null);
+  const [scrollProgress, setScrollProgress] = useState<number>(0);
 
   const updateArrows = () => {
     const el = containerRef.current;
@@ -66,6 +62,8 @@ const ProductSlider: React.FC<{
     const maxScroll = el.scrollWidth - el.clientWidth;
     const left = el.scrollLeft > 2;
     const right = el.scrollLeft < maxScroll - 2;
+    const progress = maxScroll <= 0 ? 0 : el.scrollLeft / maxScroll;
+    setScrollProgress(progress);
     setCanLeft(left);
     setCanRight(right);
   };
@@ -83,51 +81,6 @@ const ProductSlider: React.FC<{
       window.removeEventListener("resize", onResize);
     };
   }, [items]);
-
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    if (autoScrollPaused || items.length === 0) return;
-    const tick = () => {
-      const firstCard = el.querySelector<HTMLElement>(".rp-card");
-      const cardWidth = firstCard?.offsetWidth || 256;
-      const GAP = 24;
-      const pageDelta = cardWidth * perPage + GAP * (perPage - 1);
-      const maxScroll = el.scrollWidth - el.clientWidth;
-      const next = el.scrollLeft + pageDelta;
-      const target = next >= maxScroll - 2 ? 0 : Math.min(maxScroll, next);
-      el.scrollTo({ left: target, behavior: "smooth" });
-      setTimeout(updateArrows, 350);
-    };
-    // Randomize start to avoid sync
-    const id = window.setTimeout(() => {
-      autoIntervalRef.current = window.setInterval(
-        tick,
-        3500 + Math.random() * 1000,
-      );
-    }, Math.random() * 2000);
-
-    return () => {
-      window.clearTimeout(id);
-      if (autoIntervalRef.current !== null) {
-        window.clearInterval(autoIntervalRef.current);
-        autoIntervalRef.current = null;
-      }
-    };
-  }, [autoScrollPaused, perPage, items]);
-
-  useEffect(() => {
-    return () => {
-      if (pauseTimeoutRef.current !== null) {
-        window.clearTimeout(pauseTimeoutRef.current);
-        pauseTimeoutRef.current = null;
-      }
-      if (autoIntervalRef.current !== null) {
-        window.clearInterval(autoIntervalRef.current);
-        autoIntervalRef.current = null;
-      }
-    };
-  }, []);
 
   const scrollByAmount = (dir: "left" | "right") => {
     const el = containerRef.current;
@@ -148,19 +101,8 @@ const ProductSlider: React.FC<{
     setTimeout(updateArrows, 350);
   };
 
-  const pauseAutoScroll = (ms: number) => {
-    setAutoScrollPaused(true);
-    if (pauseTimeoutRef.current !== null) {
-      window.clearTimeout(pauseTimeoutRef.current);
-    }
-    pauseTimeoutRef.current = window.setTimeout(() => {
-      setAutoScrollPaused(false);
-    }, ms);
-  };
-
   const onArrowClick = (dir: "left" | "right") => {
     scrollByAmount(dir);
-    pauseAutoScroll(15000);
   };
 
   const toSlug = (s: string) =>
@@ -193,12 +135,11 @@ const ProductSlider: React.FC<{
   return (
     <div className="relative py-8">
       {(title || "") && (
-        <div className="flex items-center justify-between mb-8 px-4 md:px-0">
+        <div className="flex items-center justify-between mb-8 max-w-7xl mx-auto px-4 md:px-0">
           <div className="text-2xl md:text-4xl font-extrabold uppercase text-black">
             {title}
           </div>
 
-          {/* Desktop Arrows */}
           <div className="hidden md:flex gap-2">
             <button
               type="button"
@@ -229,64 +170,19 @@ const ProductSlider: React.FC<{
       )}
 
       <div className="relative group/carousel">
-        {/* Mobile Arrows (Overlay) */}
-        {canLeft && (
-          <button
-            className="md:hidden absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-black/70 backdrop-blur-sm p-2 rounded-full text-white border border-black/40"
-            onClick={(e) => {
-              e.stopPropagation();
-              onArrowClick("left");
-            }}
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-        )}
-        {canRight && (
-          <button
-            className="md:hidden absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-black/70 backdrop-blur-sm p-2 rounded-full text-white border border-black/40"
-            onClick={(e) => {
-              e.stopPropagation();
-              onArrowClick("right");
-            }}
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
-        )}
-
         <div
           ref={containerRef}
           className="overflow-x-auto no-scrollbar mx-auto snap-x snap-mandatory px-4 md:px-0 pb-8"
           style={pageWidth ? { width: pageWidth } : undefined}
-          onTouchStart={(e) => {
-            const t = e.touches[0];
-            touchStartXRef.current = t.clientX;
-            touchDeltaXRef.current = 0;
-          }}
-          onTouchMove={(e) => {
-            const t = e.touches[0];
-            if (touchStartXRef.current !== null) {
-              touchDeltaXRef.current = t.clientX - touchStartXRef.current;
-            }
-          }}
-          onTouchEnd={() => {
-            const dx = touchDeltaXRef.current;
-            touchStartXRef.current = null;
-            touchDeltaXRef.current = 0;
-            const TH = 48;
-            if (Math.abs(dx) > TH) {
-              scrollByAmount(dx > 0 ? "left" : "right");
-            }
-            pauseAutoScroll(10000);
-          }}
         >
           <div className="flex gap-6">
             {loading ? (
               Array.from({ length: 4 }).map((_, i) => (
                 <div
                   key={i}
-                  className="min-w-[85vw] md:min-w-[280px] bg-[var(--color-primary)] border border-black/10 rounded-2xl p-4 animate-pulse"
+                  className="min-w-[85vw] md:min-w-[280px] bg-[var(--color-primary)] border border-black/10 p-4 animate-pulse"
                 >
-                  <div className="aspect-[4/3] bg-black/5 rounded-xl mb-4" />
+                  <div className="aspect-[4/3] bg-black/5 mb-4" />
                   <div className="h-4 w-3/4 bg-black/5 rounded mb-2" />
                   <div className="h-4 w-1/2 bg-black/5 rounded" />
                   <div className="mt-6 flex justify-between items-center">
@@ -310,9 +206,9 @@ const ProductSlider: React.FC<{
                 <div
                   key={p.id}
                   onClick={() => openDetail(p)}
-                  className="rp-card group relative min-w-[85vw] md:min-w-[280px] bg-[var(--color-primary)] border border-black/10 rounded-2xl p-4 transition-all duration-300 cursor-pointer snap-center md:snap-start flex flex-col shadow-lg shadow-black/10 hover:shadow-black/20 hover:-translate-y-1"
+                  className="rp-card group relative min-w-[90vw] md:min-w-[320px] bg-[var(--color-primary)] border border-black/10 p-5 transition-all duration-300 cursor-pointer snap-center md:snap-start flex flex-col shadow-lg shadow-black/10 hover:shadow-black/20 hover:-translate-y-1"
                 >
-                  <div className="relative aspect-[4/3] bg-black/5 rounded-xl overflow-hidden mb-4 border border-black/5">
+                  <div className="relative aspect-square bg-black/5 overflow-hidden mb-5 border border-black/5">
                     <img
                       src={p.image}
                       alt={p.name[language] || p.name.es}
@@ -328,71 +224,73 @@ const ProductSlider: React.FC<{
                     )}
                   </div>
 
-                  <div className="flex-1 flex flex-col">
-                    <div className="text-xs font-medium text-[var(--color-secondary)] mb-1.5 uppercase tracking-wider">
-                      {typeof p.category === "string"
-                        ? p.category
-                        : p.category[language] || p.category.es}
-                    </div>
+                  <div className="flex-1 flex flex-col gap-3">
+                    <div className="space-y-1.5">
+                      <div className="text-xs font-medium text-[var(--color-secondary)] uppercase tracking-wider">
+                        {typeof p.category === "string"
+                          ? p.category
+                          : p.category[language] || p.category.es}
+                      </div>
 
-                    <div className="text-lg font-bold text-black leading-tight mb-2 line-clamp-2">
-                      {p.name[language] || p.name.es}
-                    </div>
+                      <div className="text-lg font-bold text-black leading-tight line-clamp-2">
+                        {p.name[language] || p.name.es}
+                      </div>
 
-                    {typeof p.rating === "number" &&
-                      typeof p.votes === "number" &&
-                      p.rating > 0 &&
-                      p.votes > 0 && (
-                        <div className="flex items-center gap-1 mb-3">
-                          {(() => {
-                            const r = Number(p.rating || 0);
-                            const full = Math.floor(r);
-                            const half = r - full >= 0.5;
-                            const empty = 5 - full - (half ? 1 : 0);
-                            const Star = (props: { className?: string }) => (
-                              <svg
-                                {...props}
-                                viewBox="0 0 24 24"
-                                fill="currentColor"
-                              >
-                                <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.163L12 18.897l-7.335 3.864 1.401-8.163L.132 9.211l8.2-1.193z" />
-                              </svg>
-                            );
-                            return (
-                              <>
-                                {Array.from({ length: full }).map((_, i) => (
-                                  <Star
-                                    key={`f-${i}`}
-                                    className="w-3.5 h-3.5 text-yellow-400"
-                                  />
-                                ))}
-                                {half && (
-                                  <span className="relative w-3.5 h-3.5 inline-block">
-                                    <Star className="w-3.5 h-3.5 text-zinc-600" />
-                                    <span
-                                      className="absolute inset-0 overflow-hidden"
-                                      style={{ width: "50%" }}
-                                    >
-                                      <Star className="w-3.5 h-3.5 text-yellow-400" />
+                      {typeof p.rating === "number" &&
+                        typeof p.votes === "number" &&
+                        p.rating > 0 &&
+                        p.votes > 0 && (
+                          <div className="flex items-center gap-1">
+                            {(() => {
+                              const r = Number(p.rating || 0);
+                              const full = Math.floor(r);
+                              const half = r - full >= 0.5;
+                              const empty = 5 - full - (half ? 1 : 0);
+                              const Star = (props: { className?: string }) => (
+                                <svg
+                                  {...props}
+                                  viewBox="0 0 24 24"
+                                  fill="currentColor"
+                                >
+                                  <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.163L12 18.897l-7.335 3.864 1.401-8.163L.132 9.211l8.2-1.193z" />
+                                </svg>
+                              );
+                              return (
+                                <>
+                                  {Array.from({ length: full }).map((_, i) => (
+                                    <Star
+                                      key={`f-${i}`}
+                                      className="w-3.5 h-3.5 text-yellow-400"
+                                    />
+                                  ))}
+                                  {half && (
+                                    <span className="relative w-3.5 h-3.5 inline-block">
+                                      <Star className="w-3.5 h-3.5 text-zinc-600" />
+                                      <span
+                                        className="absolute inset-0 overflow-hidden"
+                                        style={{ width: "50%" }}
+                                      >
+                                        <Star className="w-3.5 h-3.5 text-yellow-400" />
+                                      </span>
                                     </span>
-                                  </span>
-                                )}
-                                {Array.from({ length: empty }).map((_, i) => (
-                                  <Star
-                                    key={`e-${i}`}
-                                    className="w-3.5 h-3.5 text-zinc-600"
-                                  />
-                                ))}
-                              </>
-                            );
-                          })()}
-                          <span className="text-xs text-black/50 ml-1">
-                            ({p.votes})
-                          </span>
-                        </div>
-                      )}
+                                  )}
+                                  {Array.from({ length: empty }).map((_, i) => (
+                                    <Star
+                                      key={`e-${i}`}
+                                      className="w-3.5 h-3.5 text-zinc-600"
+                                    />
+                                  ))}
+                                </>
+                              );
+                            })()}
+                            <span className="text-xs text-black/50 ml-1">
+                              ({p.votes})
+                            </span>
+                          </div>
+                        )}
+                    </div>
 
-                    <div className="mt-auto pt-3 flex items-end justify-between gap-3 border-t border-black/10">
+                    <div className="mt-auto pt-4 flex items-center justify-between gap-4 border-t border-black/10">
                       <div className="flex flex-col">
                         <span className="text-[10px] text-black/60 uppercase font-medium">
                           Precio
@@ -438,6 +336,17 @@ const ProductSlider: React.FC<{
             )}
           </div>
         </div>
+
+        {items.length > 1 && (
+          <div className="mt-2 md:hidden px-6">
+            <div className="h-1 rounded-full bg-black/5 overflow-hidden border border-black/10">
+              <div
+                className="h-full bg-[var(--color-secondary)]/80 transition-all duration-200"
+                style={{ width: `${scrollProgress * 100}%` }}
+              />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
