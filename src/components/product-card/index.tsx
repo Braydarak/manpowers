@@ -125,7 +125,7 @@ const ProductCard: React.FC<Props> = ({
         <img
           src={product.image}
           alt={name}
-          className="w-full h-full object-contain"
+          className="w-full h-full object-cover"
           onError={(e) => {
             const target = e.currentTarget;
             target.style.display = "none";

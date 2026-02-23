@@ -14,7 +14,6 @@ import Faq from "../components/faq";
 import RelatedProducts from "../components/related-products";
 import InfoStripe from "../components/info/InfoStripe";
 
-// Tipado del JSON local para evitar 'any' en el fallback
 type ProductJson = {
   id: number;
   name: Product["name"];
@@ -35,6 +34,12 @@ type ProductJson = {
   rating?: number;
   votes?: number;
   pricesBySize?: { [key: string]: string };
+  img_folder?: string;
+  faqs?: {
+    es?: { question: string; answer: string }[];
+    en?: { question: string; answer: string }[];
+    ca?: { question: string; answer: string }[];
+  };
 };
 
 const ProductDetailPage: React.FC = () => {
@@ -72,6 +77,10 @@ const ProductDetailPage: React.FC = () => {
     x: 0.7,
     y: 0.7,
   });
+  const [mediaItems, setMediaItems] = useState<
+    { type: "image" | "video"; src: string; path: string }[]
+  >([]);
+  const [activeMediaIndex, setActiveMediaIndex] = useState(0);
 
   const observerRef = useRef<IntersectionObserver | null>(null);
   const [areMainButtonsVisible, setAreMainButtonsVisible] = useState(true);
@@ -164,7 +173,10 @@ const ProductDetailPage: React.FC = () => {
         ? product.category
         : product.category[currentLanguage] || product.category.es
     }, MΛN POWERS`;
-    const ogImage = product.image || "/MAN-LOGO-BLANCO.png";
+    const ogImage =
+      mediaItems.find((m) => m.type === "image")?.src ||
+      product.image ||
+      "/MAN-LOGO-BLANCO.png";
     const canonicalPath =
       typeof window !== "undefined"
         ? window.location.pathname
@@ -180,7 +192,7 @@ const ProductDetailPage: React.FC = () => {
       ogImage,
       canonicalUrl: `https://manpowers.es${canonicalPath}`,
     });
-  }, [product, currentLanguage, id, slug]);
+  }, [product, currentLanguage, id, slug, mediaItems]);
 
   useEffect(() => {
     const toSlug = (s: string) =>
@@ -277,6 +289,114 @@ const ProductDetailPage: React.FC = () => {
 
     loadProduct();
   }, [id, slug, sportParam]);
+
+  useEffect(() => {
+    const loadMedia = async () => {
+      if (!product) {
+        setMediaItems([]);
+        setActiveMediaIndex(0);
+        return;
+      }
+      try {
+        const res = await fetch("/products.json");
+        const data = await res.json();
+        const raw = (data.products || []) as ProductJson[];
+        const found = raw.find((x) => String(x.id) === String(product.id));
+        const folder = found?.img_folder;
+        if (folder) {
+          const all = import.meta.glob(
+            "/src/assets/**/*.{png,jpg,jpeg,webp,mp4,webm}",
+            {
+              eager: true,
+              query: "?url",
+              import: "default",
+            },
+          ) as Record<string, string>;
+          const entries = Object.entries(all).filter(([p]) =>
+            p.includes(`/src/assets/${folder}/`),
+          );
+          const isImage = (p: string) =>
+            /\.(png|jpe?g|webp)$/i.test(p.split("?")[0] || p);
+          const isVideo = (p: string) =>
+            /\.(mp4|webm)$/i.test(p.split("?")[0] || p);
+          const mapped = entries
+            .map(([path, url]) => {
+              if (isImage(path))
+                return { type: "image" as const, src: url, path };
+              if (isVideo(path))
+                return { type: "video" as const, src: url, path };
+              return null;
+            })
+            .filter(Boolean) as {
+            type: "image" | "video";
+            src: string;
+            path: string;
+          }[];
+          const images = mapped
+            .filter((m) => m.type === "image")
+            .sort((a, b) => a.path.localeCompare(b.path));
+          const videos = mapped
+            .filter((m) => m.type === "video")
+            .sort((a, b) => a.path.localeCompare(b.path));
+          let finalList = [...images, ...videos];
+          if (product.image) {
+            const desiredName = product.image.split("/").pop();
+            if (desiredName) {
+              const idx = finalList.findIndex(
+                (m) =>
+                  m.type === "image" && m.path.split("/").pop() === desiredName,
+              );
+              if (idx > 0) {
+                const [item] = finalList.splice(idx, 1);
+                finalList = [item, ...finalList];
+              } else if (idx === -1) {
+                finalList = [
+                  {
+                    type: "image",
+                    src: product.image,
+                    path: product.image,
+                  },
+                  ...finalList,
+                ];
+              }
+            }
+          }
+          setMediaItems(finalList);
+          setActiveMediaIndex(0);
+          return;
+        }
+        const fallbackList = product.image
+          ? [
+              {
+                type: "image" as const,
+                src: product.image,
+                path: product.image,
+              },
+            ]
+          : [];
+        setMediaItems(fallbackList);
+        setActiveMediaIndex(0);
+      } catch {
+        const fallbackList = product.image
+          ? [
+              {
+                type: "image" as const,
+                src: product.image,
+                path: product.image,
+              },
+            ]
+          : [];
+        setMediaItems(fallbackList);
+        setActiveMediaIndex(0);
+      }
+    };
+    loadMedia();
+  }, [product]);
+
+  useEffect(() => {
+    const current = mediaItems[activeMediaIndex];
+    if (!current || current.type === "video") setZoomActive(false);
+  }, [activeMediaIndex, mediaItems]);
 
   useEffect(() => {
     const loadFaqs = async () => {
@@ -384,7 +504,7 @@ const ProductDetailPage: React.FC = () => {
       id: finalId,
       name: finalName,
       price: computedPrice,
-      image: product.image,
+      image: mediaItems.find((m) => m.type === "image")?.src || product.image,
       quantity: 1,
     };
     window.dispatchEvent(new CustomEvent("cart:add", { detail }));
@@ -415,7 +535,7 @@ const ProductDetailPage: React.FC = () => {
       id: finalId,
       name: finalName,
       price: computedPrice,
-      image: product.image,
+      image: mediaItems.find((m) => m.type === "image")?.src || product.image,
       quantity: 1,
       buyNow: true,
       openCheckout: true,
@@ -513,7 +633,7 @@ const ProductDetailPage: React.FC = () => {
                 <div className="flex items-center justify-between gap-4">
                   <button
                     onClick={goToSport}
-                    className="text-[var(--color-secondary)] flex items-center gap-2 transition-colors hover:brightness-90"
+                    className="text-[var(--color-secondary)] hover:underline underline-offset-2  cursor-pointer flex items-center gap-2 transition-colors hover:brightness-90"
                   >
                     <svg
                       className="w-5 h-5"
@@ -545,13 +665,17 @@ const ProductDetailPage: React.FC = () => {
                     <div
                       className="relative aspect-[4/3] bg-black"
                       onMouseEnter={() => {
-                        if (!isMobile) setZoomActive(true);
+                        const current = mediaItems[activeMediaIndex];
+                        if (!isMobile && current && current.type === "image")
+                          setZoomActive(true);
                       }}
                       onMouseLeave={() => {
                         setZoomActive(false);
                       }}
                       onMouseMove={(e) => {
-                        if (isMobile) return;
+                        const current = mediaItems[activeMediaIndex];
+                        if (isMobile || !current || current.type !== "image")
+                          return;
                         const rect = e.currentTarget.getBoundingClientRect();
                         const rawX = (e.clientX - rect.left) / rect.width;
                         const rawY = (e.clientY - rect.top) / rect.height;
@@ -561,22 +685,99 @@ const ProductDetailPage: React.FC = () => {
                       }}
                     >
                       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      <img
-                        src={product.image}
-                        alt={product.name[currentLanguage] || product.name.es}
-                        className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105 group-hover:rotate-[0.5deg]"
-                        onError={(e) => {
-                          const target = e.currentTarget;
-                          target.style.display = "none";
-                          if (target.parentElement) {
-                            target.parentElement.innerHTML = `<span class='block p-6 text-gray-400'>${t(
-                              "sports.imageNotAvailable",
-                            )}</span>`;
-                          }
-                        }}
-                      />
+                      {mediaItems.length > 1 && (
+                        <>
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              if (!mediaItems.length) return;
+                              setActiveMediaIndex((prev) =>
+                                prev === 0 ? mediaItems.length - 1 : prev - 1,
+                              );
+                            }}
+                            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black/70 transition-colors"
+                            aria-label="Anterior"
+                          >
+                            <svg
+                              viewBox="0 0 24 24"
+                              className="w-4 h-4"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M15 18l-6-6 6-6" />
+                            </svg>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              if (!mediaItems.length) return;
+                              setActiveMediaIndex((prev) =>
+                                prev === mediaItems.length - 1 ? 0 : prev + 1,
+                              );
+                            }}
+                            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black/70 transition-colors"
+                            aria-label="Siguiente"
+                          >
+                            <svg
+                              viewBox="0 0 24 24"
+                              className="w-4 h-4"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M9 6l6 6-6 6" />
+                            </svg>
+                          </button>
+                        </>
+                      )}
+                      {(() => {
+                        const current = mediaItems[activeMediaIndex];
+                        const altText =
+                          product.name[currentLanguage] || product.name.es;
+                        if (!current || current.type === "image") {
+                          const src =
+                            current?.src ||
+                            mediaItems.find((m) => m.type === "image")?.src ||
+                            product.image;
+                          return (
+                            <img
+                              src={src}
+                              alt={altText}
+                              className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105 group-hover:rotate-[0.5deg]"
+                              onError={(e) => {
+                                const target = e.currentTarget;
+                                target.style.display = "none";
+                                if (target.parentElement) {
+                                  target.parentElement.innerHTML = `<span class='block p-6 text-gray-400'>${t(
+                                    "sports.imageNotAvailable",
+                                  )}</span>`;
+                                }
+                              }}
+                            />
+                          );
+                        }
+                        return (
+                          <video
+                            src={current.src}
+                            className="w-full h-full object-cover"
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                            controls={false}
+                            disablePictureInPicture
+                          />
+                        );
+                      })()}
                       <div
-                        className={`hidden md:block pointer-events-none absolute border border-[var(--color-secondary)] bg-black/10 transition-opacity transition-transform duration-150 ${
+                        className={`hidden md:block pointer-events-none absolute border border-[var(--color-secondary)] bg-black/10 transition-opacity duration-150 ${
                           zoomActive
                             ? "opacity-100 scale-100"
                             : "opacity-0 scale-90"
@@ -592,11 +793,7 @@ const ProductDetailPage: React.FC = () => {
                     </div>
                   </div>
                   <div
-                    className={`hidden md:block pointer-events-none absolute z-30 border-2 border-[var(--color-secondary)] rounded-xl overflow-hidden bg-black shadow-[0_12px_36px_rgba(0,0,0,0.45)] transition-opacity transition-transform duration-200 ${
-                      zoomActive
-                        ? "opacity-100 scale-100"
-                        : "opacity-0 scale-95"
-                    }`}
+                    className={`hidden md:block pointer-events-none absolute z-30 border-2 border-[var(--color-secondary)] rounded-xl overflow-hidden bg-black shadow-[0_12px_36px_rgba(0,0,0,0.45)] transition-opacity duration-200 ${zoomActive ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}
                     style={{
                       width: 500,
                       height: 500,
@@ -604,16 +801,52 @@ const ProductDetailPage: React.FC = () => {
                       left: "100%",
                       marginLeft: 24,
                       transform: "translateY(-50%)",
-                      backgroundImage: `url(${product.image})`,
+                      backgroundImage: (() => {
+                        const current = mediaItems[activeMediaIndex];
+                        return current && current.type === "image"
+                          ? `url(${current.src})`
+                          : "none";
+                      })(),
                       backgroundRepeat: "no-repeat",
                       backgroundSize: "500% 500%",
                       backgroundPosition: `${zoomCoords.x * 100}% ${zoomCoords.y * 100}%`,
                     }}
                   />
+                  {mediaItems.length > 1 && (
+                    <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
+                      {mediaItems.map((m, i) => (
+                        <button
+                          key={`${m.path}-${i}`}
+                          type="button"
+                          onClick={() => setActiveMediaIndex(i)}
+                          className={`relative flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border ${i === activeMediaIndex ? "border-[var(--color-secondary)]" : "border-black/10"} bg-black/5`}
+                          aria-label={`media-${i + 1}`}
+                        >
+                          {m.type === "image" ? (
+                            <img
+                              src={m.src}
+                              alt={`media-${i + 1}`}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <div className="w-full h-full grid place-items-center bg-black/60 text-white">
+                              <svg
+                                viewBox="0 0 24 24"
+                                className="w-6 h-6"
+                                fill="currentColor"
+                              >
+                                <path d="M8 5v14l11-7z" />
+                              </svg>
+                            </div>
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 <div
-                  className={`flex flex-col gap-6 transition-all duration-500 ${
+                  className={`flex flex-col gap-3.5 transition-all duration-500 ${
                     enter
                       ? "opacity-100 translate-y-0 delay-150"
                       : "opacity-0 translate-y-3"
@@ -640,7 +873,7 @@ const ProductDetailPage: React.FC = () => {
                   </h1>
 
                   {typeof product.rating === "number" && product.rating > 0 && (
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-0.5">
                       {(() => {
                         const r = Number(product.rating || 0);
                         const full = Math.floor(r);
@@ -691,7 +924,7 @@ const ProductDetailPage: React.FC = () => {
                     </div>
                   )}
 
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center">
                     <span className="text-4xl font-bold text-[var(--color-secondary)]">
                       {(() => {
                         const bySize = getPriceForSize(
@@ -730,8 +963,8 @@ const ProductDetailPage: React.FC = () => {
                           : "Content size:"}{" "}
                       {selectedSize || product.size}
                     </div>
-                  )}
-
+                      )}
+                      
                   {product.available &&
                     (product.amazonLinks || product.pricesBySize) && (
                       <div className="flex flex-col gap-3">
@@ -818,13 +1051,13 @@ const ProductDetailPage: React.FC = () => {
                         href={product.amazonLinks[selectedSize]}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="bg-[var(--color-secondary)] text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 hover:brightness-90 text-center"
+                        className="bg-[var(--color-secondary)] text-white font-bold py-3 px-6 text-lg rounded-md transition-all duration-300 hover:brightness-90 text-center"
                       >
                         {t("sports.buy")} {selectedSize}
                       </a>
                     ) : (
                       <button
-                        className="bg-[var(--color-secondary)] text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 hover:brightness-90"
+                        className="bg-[var(--color-secondary)] text-white font-bold text-lg py-4 px-10 rounded-md transition-all duration-300 hover:brightness-90"
                         disabled={!product.available}
                         onClick={() => product.available && handleBuyNow()}
                       >
@@ -1075,7 +1308,9 @@ const ProductDetailPage: React.FC = () => {
                           typeof product.name === "string"
                             ? product.name
                             : product.name[currentLanguage],
-                        image: product.image,
+                        image:
+                          mediaItems.find((m) => m.type === "image")?.src ||
+                          product.image,
                         sku: product.sku,
                         aggregateRating: {
                           "@type": "AggregateRating",
@@ -1180,7 +1415,7 @@ const ProductDetailPage: React.FC = () => {
                   onClick={handleAddToCart}
                   className="bg-black text-white font-bold px-4 py-2 rounded-lg hover:bg-black/90 flex items-center justify-center"
                   aria-label={t("sports.addToCart")}
-                > 
+                >
                   <ShoppingCart className="w-5 h-5" />
                 </button>
               </div>
