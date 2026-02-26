@@ -172,7 +172,7 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
 
   useEffect(() => {
     const newSubtotal = checkoutList.reduce(
-      (acc, i) => acc + parsePrice(i.price) * i.quantity,
+      (acc, i) => acc + parsePrice(i.price) * 1.21 * i.quantity,
       0,
     );
     setSubtotal(newSubtotal);
@@ -389,9 +389,21 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                         <div className="flex items-center justify-between">
                           <span className="font-semibold">{item.name}</span>
                           {item.price !== undefined ? (
-                            <span className="text-black font-semibold">
-                              €{parsePrice(item.price).toFixed(2)}
-                            </span>
+                            <div className="flex flex-col items-end">
+                              <span className="text-black font-semibold">
+                                €{(parsePrice(item.price) * 1.21).toFixed(2)}
+                              </span>
+                              <span className="text-[10px] text-gray-500">
+                                IVA incluido
+                              </span>
+                              <span className="text-[10px] text-gray-400">
+                                (sin IVA: €
+                                {(
+                                  parsePrice(item.price) * item.quantity
+                                ).toFixed(2)}
+                                )
+                              </span>
+                            </div>
                           ) : (
                             <span className="text-black/50 text-sm">
                               {t("cart.noPrice")}
@@ -433,7 +445,9 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
 
             <div className="px-5 py-4 border-t border-black/10">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-black/70">{t("cart.total")}</span>
+                <span className="text-black/70">
+                  {t("cart.total")} <span className="text-xs">(incl. IVA)</span>
+                </span>
                 <span className="text-2xl font-bold">
                   €{totalPrice.toFixed(2)}
                 </span>
@@ -508,7 +522,7 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                       </h4>
                       <div className="space-y-1 text-sm">
                         {checkoutList.map((item) => {
-                          const itemPrice = parsePrice(item.price);
+                          const itemPrice = parsePrice(item.price) * 1.21;
                           const itemTotal = itemPrice * item.quantity;
                           return (
                             <div
@@ -518,12 +532,24 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                               <span>
                                 {item.name} x{item.quantity}
                               </span>
-                              <span>€{itemTotal.toFixed(2)}</span>
+                              <div className="flex flex-col items-end">
+                                <span>€{itemTotal.toFixed(2)}</span>
+                                <span className="text-[10px] text-gray-500">
+                                  IVA incluido
+                                </span>
+                                <span className="text-[10px] text-gray-400">
+                                  (sin IVA: €
+                                  {(
+                                    parsePrice(item.price) * item.quantity
+                                  ).toFixed(2)}
+                                  )
+                                </span>
+                              </div>
                             </div>
                           );
                         })}
                         <div className="border-t border-black/10 pt-2 space-y-2">
-                          <div className="flex justify-between text-sm">
+                          <div className="flex justify-between text-sm text-black/60">
                             <span>{t("cart.subtotal")}:</span>
                             <span>€{subtotal.toFixed(2)}</span>
                           </div>
@@ -534,7 +560,13 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                             </div>
                           )}
                           <div className="font-semibold flex justify-between text-black">
-                            <span>{t("cart.total")}:</span>
+                            <span>
+                              {t("cart.total")}{" "}
+                              <span className="text-xs font-normal">
+                                (IVA incluido)
+                              </span>
+                              :
+                            </span>
                             <span>€{totalPrice.toFixed(2)}</span>
                           </div>
                         </div>

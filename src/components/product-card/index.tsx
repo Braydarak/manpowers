@@ -86,7 +86,12 @@ const ProductCard: React.FC<Props> = ({
           <div className="text-xs font-semibold text-black truncate">
             {name}
           </div>
-          <div className="text-xs text-black/70">{priceLabel}</div>
+          <div className="text-xs text-black/70 flex items-center">
+            {priceLabel}
+            {priceLabel && (
+              <span className="text-[10px] text-gray-400 ml-1">+ IVA</span>
+            )}
+          </div>
         </div>
         <div className="px-3 pb-3">
           <button
@@ -118,8 +123,11 @@ const ProductCard: React.FC<Props> = ({
           </span>
         )}
         {priceLabel && (
-          <span className="absolute top-2 right-2 text-xs bg-[var(--color-secondary)] text-white px-2 py-1 rounded-full font-bold">
+          <span className="absolute top-2 right-2 text-xs bg-[var(--color-secondary)] text-white px-2 py-1 rounded-full font-bold flex items-center">
             {priceLabel}
+            <span className="text-[10px] text-gray-200 font-normal ml-1">
+              + IVA
+            </span>
           </span>
         )}
         <img

@@ -291,10 +291,13 @@ const RelatedProducts: React.FC<Props> = ({
                         ? p.category
                         : p.category[language]}
                     </div>
-                    <div className="mt-2 text-base font-bold text-[var(--color-secondary)]">
+                    <div className="mt-2 text-base font-bold text-[var(--color-secondary)] flex items-baseline">
                       {p.price_formatted
                         ? p.price_formatted
                         : `€ ${Number(p.price).toFixed(2)}`}
+                      <span className="text-xs text-gray-500 font-normal ml-1">
+                        + IVA
+                      </span>
                     </div>
                     {typeof p.rating === "number" &&
                       typeof p.votes === "number" &&

@@ -128,15 +128,21 @@ const RecommendedTogether: React.FC<Props> = ({
               </div>
               <div className="text-xs md:text-sm text-black/60">{p.size}</div>
             </div>
-            <div className="text-base md:text-lg font-bold text-[var(--color-secondary)]">
+            <div className="text-base md:text-lg font-bold text-[var(--color-secondary)] flex items-baseline">
               {p.price ? `€ ${Number(p.price).toFixed(2)}` : ""}
+              {p.price && (
+                <span className="text-xs text-gray-500 font-normal ml-1">
+                  + IVA
+                </span>
+              )}
             </div>
           </div>
         ))}
       </div>
       <div className="mt-5 flex flex-col items-center gap-3">
-        <div className="text-xl md:text-2xl font-extrabold text-[var(--color-secondary)]">
+        <div className="text-xl md:text-2xl font-extrabold text-[var(--color-secondary)] flex items-center justify-center">
           {t("recommendedTogether.total")}: {`€ ${total.toFixed(2)}`}
+          <span className="text-sm text-gray-500 font-normal ml-2">+ IVA</span>
         </div>
         <button
           onClick={addSelected}

@@ -924,7 +924,7 @@ const ProductDetailPage: React.FC = () => {
                     </div>
                   )}
 
-                  <div className="flex items-center">
+                  <div className="flex items-baseline">
                     <span className="text-4xl font-bold text-[var(--color-secondary)]">
                       {(() => {
                         const bySize = getPriceForSize(
@@ -938,15 +938,11 @@ const ProductDetailPage: React.FC = () => {
                           : `€ ${Number(product.price).toFixed(2)}`;
                       })()}
                     </span>
+                    <span className="text-sm text-gray-500 ml-2 font-normal">
+                      + IVA
+                    </span>
                   </div>
-
                   <div className="text-xs text-black/60">
-                    {currentLanguage === "es"
-                      ? "IVA incl. + gastos de envío"
-                      : currentLanguage === "ca"
-                        ? "IVA incl. + despeses d'enviament"
-                        : "VAT incl. + shipping"}{" "}
-                    ·{" "}
                     {currentLanguage === "es"
                       ? "Plazo de entrega 3–5 días laborables"
                       : currentLanguage === "ca"
@@ -963,8 +959,8 @@ const ProductDetailPage: React.FC = () => {
                           : "Content size:"}{" "}
                       {selectedSize || product.size}
                     </div>
-                      )}
-                      
+                  )}
+
                   {product.available &&
                     (product.amazonLinks || product.pricesBySize) && (
                       <div className="flex flex-col gap-3">

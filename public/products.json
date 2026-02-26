@@ -27,7 +27,7 @@
         "en": "Do not exceed the daily dose. Not recommended for minors. Consult your physician if pregnant, breastfeeding, or under treatment.",
         "ca": "No superar la dosi diària. No recomanat per a menors. Consulta el teu metge si estàs embarassada, en lactància o en tractament."
       },
-      "price": "26,00",
+      "price": "18,00",
       "size": "150 cap",
       "image": "/products/MACA-500.jpg",
       "category": {
@@ -123,7 +123,7 @@
         "en": "People with bleeding disorders or on anticoagulants should consult a physician.",
         "ca": "Les persones amb trastorns de coagulació o en tractament anticoagulant han de consultar el metge."
       },
-      "price": "26,00",
+      "price": "21,00",
       "img_folder": "omega-3",
       "size": "220 cap",
       "image": "/products/OMEGA-3.jpg",
@@ -411,7 +411,7 @@
         "en": "Do not apply on open wounds. Patch test if you have sensitive skin.",
         "ca": "No aplicar sobre ferides. Provar en una zona petita si tens la pell sensible."
       },
-      "price": "25,40",
+      "price": "15,00",
       "size": "100 ml",
       "image": "/products/CREMA-ANTI-ROZADURAS.jpg",
       "category": { "es": "cuidado", "en": "care", "ca": "cura" },
@@ -498,7 +498,7 @@
         "en": "External use. Avoid contact with eyes.",
         "ca": "Ús extern. Evitar el contacte amb els ulls."
       },
-      "price": "8,00",
+      "price": "9,00",
       "size": "100 ml",
       "image": "/products/GEL-DE-ALOE-VERA.jpg",
       "category": { "es": "cuidado", "en": "care", "ca": "cura" },
@@ -758,7 +758,7 @@
         "en": "Lavender Oil Foot Cream",
         "ca": "Crema de peus amb oli d'espígol"
       },
-      "price": "8,00",
+      "price": "6,00",
       "size": "100 ml",
       "description": {
         "es": "Tras jornadas en cubierta —con zapato náutico o descalzo—, los pies piden alivio. Esta crema con aceite de espliego hidrata, calma y ayuda a neutralizar el olor, dejando una sensación fresca para el próximo bordo. Ideal para talones y plantas que aguantan largas guardias.",
@@ -938,7 +938,7 @@
         "en": "Patch test first. Do not use on irritated skin.",
         "ca": "Fer una prova prèvia en una zona petita. No usar en pell irritada."
       },
-      "price": "19,00",
+      "price": "15,00",
       "size": "100 ml",
       "image": "/products/agarre-tactico.avif",
       "category": { "es": "deportes", "en": "sports", "ca": "esports" },
@@ -1025,7 +1025,7 @@
         "en": "Avoid eye contact. Wash hands after use.",
         "ca": "Evitar el contacte amb els ulls. Rentar les mans després de l'ús."
       },
-      "price": "16,00",
+      "price": "12,00",
       "size": "100 ml",
       "image": "/products/CREMA-EFECTO-FRIO-TIRADORES.jpg",
       "category": { "es": "deportes", "en": "sports", "ca": "esports" },
@@ -1112,7 +1112,7 @@
         "en": "External use. Do not apply on wounds.",
         "ca": "Ús extern. No aplicar en ferides."
       },
-      "price": "15,50",
+      "price": "15,00",
       "size": "100 ml",
       "image": "/products/CREMIGEL-MASAJE-MUSCULAR-TIRADORES.jpg",
       "category": { "es": "deportes", "en": "sports", "ca": "esports" },
@@ -1199,7 +1199,7 @@
         "en": "Do not use on irritated skin. Wash hands after use.",
         "ca": "No usar en pell irritada. Rentar les mans després de l'ús."
       },
-      "price": "15,80",
+      "price": "12,00",
       "size": "100 ml",
       "image": "/products/CREMA-EFECTO-CALOR.jpg",
       "category": { "es": "deportes", "en": "sports", "ca": "esports" },
@@ -1286,7 +1286,7 @@
         "en": "Avoid contact with eyes and mucous membranes.",
         "ca": "Evitar el contacte amb ulls i mucoses."
       },
-      "price": "15,80",
+      "price": "12,00",
       "size": "100 ml",
       "category": { "es": "deportes", "en": "sports", "ca": "esports" },
       "image": "/products/CREMA-EFECTO-CALOR.jpg",
@@ -1360,7 +1360,7 @@
         "en": "After parries and ripostes, forearms feel tight. This massage cream‑gel helps release load and restore mobility in wrists and elbows, with a comfortable texture that fits your cool‑down routine.",
         "ca": "Després de parades i ripostes, els avantbraços queden tensos. Aquest cremigel de massatge ajuda a alliberar la càrrega i recuperar mobilitat a canells i colzes, amb una textura còmoda que s'integra en la rutina de tornada a la calma."
       },
-      "price": "15,50",
+      "price": "15,00",
       "size": "100 ml",
       "category": { "es": "cuidado", "en": "care", "ca": "cura" },
       "image": "/products/CREMIGEL-MASAJE-MUSCULAR.jpg",
@@ -1434,7 +1434,7 @@
         "ca": "suplements"
       },
       "image": "/products/CALCIO-MAGNESIO-VITAMINA-K-MAN-POWERS.jpg",
-      "price": "22,00",
+      "price": "9,00",
       "size": "150 cap",
       "sportId": "multisport",
       "available": true,
@@ -1519,7 +1519,7 @@
         "en": "Avoid eye contact. Do not use on irritated skin.",
         "ca": "Evitar el contacte amb els ulls. No usar en pell irritada."
       },
-      "price": "16,00",
+      "price": "12,00",
       "size": "100 ml",
       "image": "/products/CREMA-EFECTO-FRIO.jpg",
       "category": { "es": "deportes", "en": "sports", "ca": "esports" },
@@ -1587,7 +1587,7 @@
         "en": "Professional grip gel for golf, engineered to enhance club hold in humidity, sweat, or pressure situations. The formula forms a thin anti-slip film that keeps hands dry and steady, improving swing control and strike precision. Perfect for practice and competition; apply to palms and fingers without sticky residue or marking the grip. Skin-friendly ingredients help prevent chafing and hand fatigue throughout the round.",
         "ca": "Gel d'agarre tècnic per al golf, dissenyat per millorar la subjecció del pal en condicions d'humitat, suor o tensió competitiva. La seva fórmula crea una pel·lícula antilliscant que manté les mans fermes i seques, incrementant el control del swing i la precisió a l'impacte. Ideal per a entrenaments i tornejos; s'aplica a palma i dits sense deixar residus enganxosos ni marcar el grip. Ingredients respectuosos amb la pell que ajuden a prevenir rascades i fatiga de mans durant la volta."
       },
-      "price": "19,00",
+      "price": "15,00",
       "size": "100 ml",
       "image": "/products/GEL-AGARRE-TECNICO.jpg",
       "category": { "es": "deportes", "en": "sports", "ca": "esports" },
@@ -1674,7 +1674,7 @@
         "en": "Avoid eye contact. Wash hands after use.",
         "ca": "Evitar el contacte amb els ulls. Rentar mans després de l'ús."
       },
-      "price": "16,00",
+      "price": "12,00",
       "size": "100 ml",
       "image": "/products/CREMA-EFECTO-FRIO-GOLF.jpg",
       "category": { "es": "deportes", "en": "sports", "ca": "esports" },
@@ -1751,7 +1751,7 @@
         "en": "Post‑round, treat lower back, shoulders, and forearms. This massage cream‑gel offers just‑right glide to work swing tension, with quick absorption for a comfortable recovery before the next round.",
         "ca": "En acabar la volta, mima la zona lumbar, les espatlles i els avantbraços. Aquest cremigel de massatge ofereix el lliscament just per treballar la tensió del swing, amb absorció ràpida per a una recuperació còmoda abans de la següent ronda."
       },
-      "price": "18,00",
+      "price": "15,00",
       "size": "100 ml",
       "category": { "es": "cuidado", "en": "care", "ca": "cura" },
       "image": "/products/CREMIGEL-MASAJE-MUSCULAR-GOLF.jpg",
@@ -1838,7 +1838,7 @@
         "en": "Avoid contact with eyes and mucous membranes.",
         "ca": "Evitar el contacte amb ulls i mucoses."
       },
-      "price": "16,00",
+      "price": "12,00",
       "size": "100 ml",
       "image": "/products/GEL-EFECTO-CALOR-GOLF.jpg",
       "category": { "es": "deportes", "en": "sports", "ca": "esports" },
@@ -1910,7 +1910,7 @@
         "en": "Anti-Hair Loss Strengthening Shampoo",
         "ca": "Xampú anticaiguda reforçant"
       },
-      "price": "16,00",
+      "price": "19,00",
       "size": "100 ml",
       "description": {
         "es": "Sol, viento y horas en el campo pueden castigar el cabello. Este champú fortalecedor limpia sudor y residuos con suavidad, dejando el cuero cabelludo fresco tras la ronda. Con activos que ayudan a reforzar desde la raíz, acompaña tu juego día tras día.",
@@ -2017,7 +2017,7 @@
         "en": "Tactical Backpack",
         "ca": "Motxilla Tàctica"
       },
-      "price": "70,00",
+      "price": "102,00",
       "description": {
         "es": "Diseñada para la máxima resistencia y funcionalidad. Esta mochila táctica cuenta con múltiples compartimentos, materiales duraderos y un diseño ergonómico ideal para llevar todo tu equipamiento deportivo o para tus aventuras al aire libre.",
         "en": "Designed for maximum durability and functionality. This tactical backpack features multiple compartments, rugged materials, and an ergonomic design ideal for carrying all your sports gear or for your outdoor adventures.",
@@ -2067,7 +2067,7 @@
         "en": "Canvas Bag - Tactical",
         "ca": "Bossa de Lona - Tàctica"
       },
-      "price": "35,00",
+      "price": "18,00",
       "description": {
         "es": "Diseñada para la máxima resistencia y funcionalidad. Esta bolsa de lona cuenta con múltiples compartimentos, materiales duraderos y un diseño ergonómico ideal para llevar todo tu equipamiento deportivo o para tus aventuras al aire libre.",
         "en": "Designed for maximum durability and functionality. This canvas bag features multiple compartments, rugged materials, and an ergonomic design ideal for carrying all your sports gear or for your outdoor adventures.",
@@ -2116,7 +2116,7 @@
         "en": "Tactical Polo",
         "ca": "Polo Tàctic"
       },
-      "price": "20,00",
+      "price": "30,00",
       "description": {
         "es": "Polo táctico de alto rendimiento, fabricado con tejido transpirable y resistente. Ideal para actividades al aire libre y uso diario, combinando estilo y funcionalidad.",
         "en": "High-performance tactical polo, made with breathable and durable fabric. Ideal for outdoor activities and daily use, combining style and functionality.",
@@ -2166,7 +2166,7 @@
         "en": "Nordic Coat",
         "ca": "Jaqueta Nòrdica"
       },
-      "price": "80,00",
+      "price": "90,00",
       "description": {
         "es": "Chaqueta Softshell de diseño nórdico, ofrece protección superior contra el viento y el frío. Tejido técnico impermeable y transpirable para mantener el confort en climas adversos.",
         "en": "Nordic design Softshell jacket, offering superior protection against wind and cold. Technical waterproof and breathable fabric to maintain comfort in adverse climates.",
@@ -2212,13 +2212,13 @@
     {
       "id": 28,
       "name": {
-        "es": "Chubasquero",
+        "es": "Traje de lluvia",
         "en": "Raincoat",
         "ca": "Impermeable"
       },
-      "price": "30,00",
+      "price": "48,00",
       "description": {
-        "es": "Chubasquero ligero y compacto, 100% impermeable. Diseñado para mantenerte seco en las condiciones más húmedas sin sacrificar la transpirabilidad.",
+        "es": "Traje de lluvia ligero y compacto, 100% impermeable. Diseñado para mantenerte seco en las condiciones más húmedas sin sacrificar la transpirabilidad.",
         "en": "Lightweight and compact raincoat, 100% waterproof. Designed to keep you dry in the wettest conditions without sacrificing breathability.",
         "ca": "Impermeable lleuger i compacte, 100% resistent a l'aigua. Dissenyat per mantenir-te sec en les condicions més humides sense sacrificar la transpirabilitat."
       },
@@ -2266,7 +2266,7 @@
         "en": "Tactical Hunting Backpack",
         "ca": "Motxilla Tàctica de Caça"
       },
-      "price": "28,00",
+      "price": "108,00",
       "description": {
         "es": "Mochila especializada para caza con diseño de camuflaje. Cuenta con compartimentos específicos para equipo, soporte para arma y materiales silenciosos.",
         "en": "Specialized hunting backpack with camouflage design. Features specific compartments for gear, weapon holder, and silent materials.",
@@ -2315,7 +2315,7 @@
         "en": "Tactical Shoulder Bag",
         "ca": "Bolso de Hombro Tàctic"
       },
-      "price": "15,00",
+      "price": "18,00",
       "description": {
         "es": "Bolso de hombro táctico versátil y resistente. Ideal para transportar equipo esencial de forma cómoda y accesible. Diseño compacto con sistema MOLLE.",
         "en": "Versatile and rugged tactical shoulder bag. Ideal for carrying essential gear comfortably and accessibly. Compact design with MOLLE system.",
@@ -2364,7 +2364,7 @@
         "en": "Canvas Bag",
         "ca": "Bossa de Lona"
       },
-      "price": "30,00",
+      "price": "102,00",
       "description": {
         "es": "Bolsa de lona resistente y espaciosa en varios colores. Perfecta para gimnasio, viajes o uso diario. Material duradero y diseño clásico.",
         "en": "Durable and spacious canvas bag available in colors. Perfect for gym, travel, or daily use. Rugged material and classic design.",
@@ -2413,7 +2413,7 @@
         "en": "Breathable Cap",
         "ca": "Gorra Transpirable"
       },
-      "price": "19,00",
+      "price": "21,00",
       "description": {
         "es": "Gorra táctica transpirable diseñada para climas cálidos. Paneles de malla para ventilación superior y visera para protección solar.",
         "en": "Breathable tactical cap designed for warm climates. Mesh panels for superior ventilation and visor for sun protection.",
@@ -2462,7 +2462,7 @@
         "en": "Tactical Shirt",
         "ca": "Camiseta Tàctica"
       },
-      "price": "18,00",
+      "price": "21,00",
       "description": {
         "es": "Camiseta táctica de alto rendimiento. Tejido transpirable y de secado rápido. Diseño ergonómico para máxima movilidad.",
         "en": "High performance tactical shirt. Breathable and quick-drying fabric. Ergonomic design for maximum mobility.",
@@ -2511,7 +2511,7 @@
         "en": "Tactical Parka",
         "ca": "Parka Tàctica"
       },
-      "price": "80,00",
+      "price": "96,00",
       "description": {
         "es": "Parka táctica impermeable y térmica. Diseñada para proteger contra el frío y la lluvia. Incluye capucha plegable y múltiples bolsillos.",
         "en": "Waterproof and thermal tactical parka. Designed to protect against cold and rain. Includes foldable hood and multiple pockets.",

@@ -295,10 +295,13 @@ const ProductSlider: React.FC<{
                         <span className="text-[10px] text-black/60 uppercase font-medium">
                           Precio
                         </span>
-                        <span className="text-xl font-bold text-[var(--color-secondary)] tracking-tight">
+                        <span className="text-xl font-bold text-[var(--color-secondary)] tracking-tight flex items-baseline">
                           {p.price_formatted
                             ? p.price_formatted
                             : `€ ${Number(p.price).toFixed(2)}`}
+                          <span className="text-xs text-gray-500 font-normal ml-1">
+                            + IVA
+                          </span>
                         </span>
                       </div>
 
