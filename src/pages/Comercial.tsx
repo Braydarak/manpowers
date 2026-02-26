@@ -125,6 +125,7 @@ const Comercial: React.FC = () => {
   const commercialProducts = useMemo(() => {
     const result: Product[] = [];
     const existingIds = new Set(products.map((p) => p.id));
+    const seenNames = new Set<string>();
 
     products.forEach((product) => {
       if (
@@ -135,7 +136,7 @@ const Comercial: React.FC = () => {
         const sizeKeys = Object.keys(product.pricesBySize);
         sizeKeys.forEach((sizeKey, index) => {
           const raw = product.pricesBySize?.[sizeKey];
-          let priceNum = product.comercial_price || product.price;
+          let priceNum = product.price;
           if (typeof raw === "string") {
             const num = parseFloat(raw.replace(",", "."));
             if (!Number.isNaN(num)) {
@@ -149,19 +150,26 @@ const Comercial: React.FC = () => {
           }
           existingIds.add(newId);
 
-          result.push({
-            ...product,
-            id: newId,
-            name: {
-              ...product.name,
-              es: `${product.name.es} (${sizeKey})`,
-            },
-            comercial_price: priceNum,
-            price: priceNum,
-          });
+          const newNameEs = `${product.name.es} (${sizeKey})`;
+
+          if (!seenNames.has(newNameEs)) {
+            seenNames.add(newNameEs);
+            result.push({
+              ...product,
+              id: newId,
+              name: {
+                ...product.name,
+                es: newNameEs,
+              },
+              price: priceNum,
+            });
+          }
         });
       } else {
-        result.push(product);
+        if (!seenNames.has(product.name.es)) {
+          seenNames.add(product.name.es);
+          result.push(product);
+        }
       }
     });
     return result;
@@ -237,7 +245,7 @@ const Comercial: React.FC = () => {
   const calculateTotal = () => {
     return commercialProducts.reduce((acc, product) => {
       const qty = quantities[product.id] || 0;
-      const price = product.comercial_price || product.price;
+      const price = product.price;
       return acc + price * qty;
     }, 0);
   };
@@ -315,7 +323,7 @@ const Comercial: React.FC = () => {
     setIsSubmitting(true);
 
     const selectedProducts = getSelectedProducts().map((p) => {
-      const unitPrice = p.comercial_price || p.price;
+      const unitPrice = p.price;
       return {
         id: p.id,
         name: p.name.es,
@@ -953,10 +961,7 @@ const Comercial: React.FC = () => {
                           </div>
                         </div>
                         <div className="text-[var(--color-secondary)] font-bold whitespace-nowrap">
-                          {(
-                            (p.comercial_price || p.price) * p.quantity
-                          ).toFixed(2)}{" "}
-                          €
+                          {(p.price * p.quantity).toFixed(2)} €
                         </div>
                       </div>
                     ))}
@@ -1111,10 +1116,7 @@ const Comercial: React.FC = () => {
                               </div>
                               <div className="flex justify-between items-end mt-2">
                                 <span className="text-lg font-bold text-[var(--color-secondary)]">
-                                  {(
-                                    product.comercial_price || product.price
-                                  ).toFixed(2)}{" "}
-                                  €
+                                  {product.price.toFixed(2)} €
                                 </span>
                               </div>
                             </div>
@@ -1210,10 +1212,7 @@ const Comercial: React.FC = () => {
                           </div>
                           <div className="flex flex-col items-end gap-1">
                             <span className="text-[var(--color-secondary)] font-bold">
-                              {(
-                                (p.comercial_price || p.price) * p.quantity
-                              ).toFixed(2)}{" "}
-                              €
+                              {(p.price * p.quantity).toFixed(2)} €
                             </span>
                             <button
                               onClick={() => handleQuantityChange(p.id, 0)}
@@ -1294,10 +1293,7 @@ const Comercial: React.FC = () => {
                           </div>
                         </div>
                         <div className="text-[var(--color-secondary)] font-bold whitespace-nowrap">
-                          {(
-                            (p.comercial_price || p.price) * p.quantity
-                          ).toFixed(2)}{" "}
-                          €
+                          {(p.price * p.quantity).toFixed(2)} €
                         </div>
                       </div>
                     ))
