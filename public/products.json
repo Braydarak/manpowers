@@ -232,10 +232,6 @@
       },
       "rating": 4.5,
       "votes": 73,
-      "amazonLinks": {
-        "100ml": "https://www.amazon.es/dp/B0FMRZL91K",
-        "50ml": "https://www.amazon.es/dp/B0FMRYF82L"
-      },
       "faqs": {
         "es": [
           {
@@ -605,7 +601,7 @@
         "en": "Frequent use. Avoid contact with eyes.",
         "ca": "Ús freqüent. Evitar el contacte amb els ulls."
       },
-      "price": "12,10",
+      "price": "12,00",
       "size": "100 ml",
       "image": "/products/CHAMPU-ANTI-CAIDA-TIRADORES.jpg",
       "category": { "es": "cuidado", "en": "care", "ca": "cura" },
@@ -1910,7 +1906,7 @@
         "en": "Anti-Hair Loss Strengthening Shampoo",
         "ca": "Xampú anticaiguda reforçant"
       },
-      "price": "19,00",
+      "price": "12,00",
       "size": "100 ml",
       "description": {
         "es": "Sol, viento y horas en el campo pueden castigar el cabello. Este champú fortalecedor limpia sudor y residuos con suavidad, dejando el cuero cabelludo fresco tras la ronda. Con activos que ayudan a reforzar desde la raíz, acompaña tu juego día tras día.",
@@ -2017,7 +2013,7 @@
         "en": "Tactical Backpack",
         "ca": "Motxilla Tàctica"
       },
-      "price": "102,00",
+      "price": "25,00",
       "description": {
         "es": "Diseñada para la máxima resistencia y funcionalidad. Esta mochila táctica cuenta con múltiples compartimentos, materiales duraderos y un diseño ergonómico ideal para llevar todo tu equipamiento deportivo o para tus aventuras al aire libre.",
         "en": "Designed for maximum durability and functionality. This tactical backpack features multiple compartments, rugged materials, and an ergonomic design ideal for carrying all your sports gear or for your outdoor adventures.",

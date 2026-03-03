@@ -27,6 +27,34 @@ SetEnv REDSYS_MERCHANT_KEY eW2Hep6mOWuqMHOlWqdAti1SC8xOuIlw
 SetEnv REDSYS_REALIZAR_PAGO_URL https://sis.redsys.es/sis/realizarPago
 ############################################################
 
+# ----------------------------------------------------------------------
+# SEGURIDAD: Restringir acceso directo a archivos PHP
+# ----------------------------------------------------------------------
+<FilesMatch "\.php$">
+    # Permitir acceso desde el propio dominio
+    SetEnvIf Origin "^https://manpowers\.es" allowed_origin
+    SetEnvIf Referer "^https://manpowers\.es" allowed_referer
+    
+    # Permitir acceso desde entorno local (desarrollo)
+    SetEnvIf Origin "^http://localhost" allowed_origin
+    SetEnvIf Referer "^http://localhost" allowed_referer
+    
+    Order Deny,Allow
+    Deny from all
+    Allow from env=allowed_origin
+    Allow from env=allowed_referer
+</FilesMatch>
+
+# ----------------------------------------------------------------------
+# SEGURIDAD: Bloquear acceso directo a "orders" (solo desde la app)
+# ----------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+    RewriteCond %{REQUEST_URI} ^/(orders|backend/orders)/ [NC]
+    RewriteCond %{HTTP_REFERER} !^https://manpowers\.es [NC]
+    RewriteCond %{HTTP_REFERER} !^http://localhost [NC]
+    RewriteRule ^ - [F,L]
+</IfModule>
+
 ############################################################
 
 <IfModule mod_headers.c>
