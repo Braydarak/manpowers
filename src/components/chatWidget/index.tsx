@@ -42,6 +42,7 @@ const ChatWidget: React.FC = () => {
   const hideTimeoutRef = useRef<number | undefined>(undefined);
   const [isMobile, setIsMobile] = useState(false);
   const [isStickyBarVisible, setIsStickyBarVisible] = useState(false);
+  const [lastSent, setLastSent] = useState(0);
 
   useEffect(() => {
     const handleStickyBarVisibility = (e: Event) => {
@@ -324,18 +325,35 @@ const ChatWidget: React.FC = () => {
   const onSend = async () => {
     const text = input.trim();
     if (!text || loading) return;
+
+    const now = Date.now();
+    if (now - lastSent < 2000) {
+      setError("Por favor espera un momento antes de enviar otro mensaje.");
+      return;
+    }
+
+    if (text.length > 500) {
+      setError("El mensaje es demasiado largo (máximo 500 caracteres).");
+      return;
+    }
+
     setError(null);
+    setLastSent(now);
+
+    // Optimistic UI update
     const userMsg: ChatMessage = { role: "user", content: text };
     const next = [...messages, userMsg];
     setMessages(next);
     setInput("");
     setLoading(true);
+
     try {
       const { reply } = await sendChat(next, context, i18n.language);
       const assistantMsg: ChatMessage = { role: "assistant", content: reply };
       setMessages((prev) => [...prev, assistantMsg]);
     } catch {
-      setError("No se pudo enviar el mensaje");
+      setError("No se pudo enviar el mensaje. Inténtalo de nuevo.");
+      // Revert optimistic update if needed, but for now just showing error is enough
     } finally {
       setLoading(false);
     }
@@ -462,6 +480,7 @@ const ChatWidget: React.FC = () => {
             if (e.key === "Enter") onSend();
           }}
           placeholder="Escribe tu mensaje"
+          maxLength={500}
           className="flex-1 bg-[var(--color-primary)] border border-black/15 rounded-full text-black px-4 py-2 focus:outline-none placeholder:text-black/40"
         />
         <button
