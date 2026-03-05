@@ -1,0 +1,536 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": {
+        "es": "Crema de Pies con Aceite de Espliego",
+        "en": "Lavender Oil Foot Cream"
+      },
+      "story": {
+        "es": "Inspirada en los campos de lavanda de Provenza, esta crema nació del deseo de crear un momento de relajación después de largas jornadas. Cada aplicación es un ritual de bienestar que transporta tus sentidos.",
+        "en": "Inspired by the lavender fields of Provence, this cream was born from the desire to create a moment of relaxation after long days. Each application is a wellness ritual that transports your senses."
+      },
+      "description": {
+        "es": "Crema premium para pies con aceite de espliego que hidrata profundamente y elimina olores. Su fórmula natural alivia la fatiga, suaviza callosidades y proporciona frescura duradera.",
+        "en": "Premium foot cream with lavender oil that deeply moisturizes and eliminates odors. Its natural formula relieves fatigue, softens calluses and provides lasting freshness."
+      },
+      "ingredients": {
+        "es": [
+          "Aceite de Espliego",
+          "Manteca de Karité",
+          "Aceite de Oliva",
+          "Vitamina E",
+          "Extracto de Menta"
+        ],
+        "en": [
+          "Lavender Oil",
+          "Shea Butter",
+          "Olive Oil",
+          "Vitamin E",
+          "Mint Extract"
+        ]
+      },
+      "image": "/products/ALMA DE OLIVA - CREMA DE PIES.png",
+      "category": "cuidado",
+      "brand": "Alma de Oliva",
+      "price": 8.47,
+      "available": true
+    },
+    {
+      "id": 2,
+      "name": {
+        "es": "Pomada Masaje muscular",
+        "en": "Muscle Massage Pomade"
+      },
+      "story": {
+        "es": "Desarrollada junto a fisioterapeutas deportivos, esta pomada nació en los vestuarios de atletas de élite. Cada aplicación cuenta la historia de superación, resistencia y la búsqueda constante de la excelencia deportiva.",
+        "en": "Developed alongside sports physiotherapists, this pomade was born in elite athletes' locker rooms. Each application tells the story of overcoming, endurance and the constant pursuit of sporting excellence."
+      },
+      "description": {
+        "es": "Pomada terapéutica Viteline para masaje muscular que alivia tensiones, reduce inflamación y acelera la recuperación. Especialmente diseñada para dolores musculares.",
+        "en": "Viteline therapeutic muscle massage pomade that relieves tension, reduces inflammation and accelerates recovery. Specially designed for muscle pain."
+      },
+      "ingredients": {
+        "es": [
+          "Árnica Montana",
+          "Mentol",
+          "Aceite de Eucalipto",
+          "Capsaicina",
+          "Extracto de Caléndula"
+        ],
+        "en": [
+          "Arnica Montana",
+          "Menthol",
+          "Eucalyptus Oil",
+          "Capsaicin",
+          "Calendula Extract"
+        ]
+      },
+      "image": "/products/masaje muscular.png",
+      "category": "cuidado",
+      "brand": "Viteline",
+      "price": 12.1,
+      "available": true
+    },
+    {
+      "id": 3,
+      "name": {
+        "es": "Crema Omega 3 - Anti Age",
+        "en": "Omega 3 Anti Age Cream"
+      },
+      "story": {
+        "es": "Inspirada en la sabiduría del mar Mediterráneo, esta crema captura la esencia del tiempo detenido. Cada aplicación es un viaje hacia la juventud, donde la ciencia marina se encuentra con la belleza atemporal.",
+        "en": "Inspired by the wisdom of the Mediterranean Sea, this cream captures the essence of time standing still. Each application is a journey towards youth, where marine science meets timeless beauty."
+      },
+      "description": {
+        "es": "Crema antiedad enriquecida con Omega 3 que combate arrugas, mejora elasticidad y regenera la piel. Fórmula avanzada que estimula la producción de colágeno para un rostro más joven.",
+        "en": "Anti-aging cream enriched with Omega 3 that fights wrinkles, improves elasticity and regenerates skin. Advanced formula that stimulates collagen production for a younger face."
+      },
+      "ingredients": {
+        "es": [
+          "Omega 3 Marino",
+          "Péptidos de Colágeno",
+          "Ácido Hialurónico",
+          "Vitamina C",
+          "Extracto de Algas"
+        ],
+        "en": [
+          "Marine Omega 3",
+          "Collagen Peptides",
+          "Hyaluronic Acid",
+          "Vitamin C",
+          "Seaweed Extract"
+        ]
+      },
+      "image": "/products/CREMA ANTIAGE.png",
+      "category": "cuidado",
+      "brand": "Celularys",
+      "price": 30.25,
+      "available": true
+    },
+    {
+      "id": 4,
+      "name": {
+        "es": "Crema Blanqueante antimanchas",
+        "en": "Blanqueating Cream"
+      },
+      "story": {
+        "es": "Nacida de la búsqueda de la perfección luminosa, esta crema es el resultado de años de investigación en laboratorios suizos. Cada gota contiene la promesa de una piel uniforme y radiante como la luz del amanecer.",
+        "en": "Born from the pursuit of luminous perfection, this cream is the result of years of research in Swiss laboratories. Each drop contains the promise of uniform, radiant skin like the light of dawn."
+      },
+      "description": {
+        "es": "Crema despigmentante que reduce manchas oscuras, unifica el tono y aporta luminosidad. Fórmula suave pero efectiva que revela una piel más clara y radiante sin irritaciones.",
+        "en": "Depigmenting cream that reduces dark spots, unifies tone and adds luminosity. Gentle but effective formula that reveals clearer, more radiant skin without irritation."
+      },
+      "ingredients": {
+        "es": [
+          "Vitamina C Estabilizada",
+          "Kojic Acid",
+          "Niacinamida",
+          "Extracto de Regaliz",
+          "Alfa Arbutina"
+        ],
+        "en": [
+          "Stabilized Vitamin C",
+          "Kojic Acid",
+          "Niacinamide",
+          "Licorice Extract",
+          "Alpha Arbutin"
+        ]
+      },
+      "image": "/products/Anti-manchas.png",
+      "category": "cuidado",
+      "brand": "Celularys",
+      "price": 70.18,
+      "available": true
+    },
+    {
+      "id": 5,
+      "name": {
+        "es": "Serum",
+        "en": "Serum"
+      },
+      "story": {
+        "es": "Formulado en los laboratorios de biotecnología más avanzados, este sérum es la culminación de la ciencia celular moderna. Cada gota es un concentrado de innovación que desafía las leyes del tiempo.",
+        "en": "Formulated in the most advanced biotechnology laboratories, this serum is the culmination of modern cellular science. Each drop is a concentrate of innovation that defies the laws of time."
+      },
+      "description": {
+        "es": "Sérum concentrado antiedad que penetra profundamente para reducir líneas de expresión y mejorar firmeza. Textura ligera de absorción rápida con resultados visibles desde la primera semana.",
+        "en": "Concentrated anti-aging serum that penetrates deeply to reduce expression lines and improve firmness. Light texture with fast absorption and visible results from the first week."
+      },
+      "ingredients": {
+        "es": [
+          "Retinol Encapsulado",
+          "Péptidos Biomimétricos",
+          "Ácido Hialurónico",
+          "Vitamina E",
+          "Extracto de Células Madre"
+        ],
+        "en": [
+          "Encapsulated Retinol",
+          "Biomimetic Peptides",
+          "Hyaluronic Acid",
+          "Vitamin E",
+          "Stem Cell Extract"
+        ]
+      },
+      "image": "/products/serum.png",
+      "category": "cuidado",
+      "brand": "Celularys",
+      "price": 8.47,
+      "available": true
+    },
+    {
+      "id": 6,
+      "name": {
+        "es": "Gel de Aloe Vera",
+        "en": "Aloe Vera Gel"
+      },
+      "story": {
+        "es": "Extraído de los oasis del desierto donde el aloe vera crece bajo el sol implacable, este gel captura la esencia de la supervivencia y regeneración. Cada aplicación es un oasis de frescura para tu piel.",
+        "en": "Extracted from desert oases where aloe vera grows under the relentless sun, this gel captures the essence of survival and regeneration. Each application is an oasis of freshness for your skin."
+      },
+      "description": {
+        "es": "Gel hidratante enriquecido con extractos de Aloe Vera 100% puro. Hidrata, regenera, alivia y calma reestructurando la barrera cutánea. Se funde con la piel ayudando a que esta se regenere, protegiéndola de las agresiones externas producidas por el clima. Indicada para pieles sensibles al sol, reduciendo el riesgo de alergias o irritaciones.",
+        "en": "Hydrating gel enriched with 100% pure Aloe Vera extracts. Hydrates, regenerates, relieves, and calms by restructuring the skin barrier. Folds with the skin, helping it regenerate and protect against external aggressions produced by the climate. Indicated for sensitive skin to the sun, reducing the risk of allergies or irritations."
+      },
+      "ingredients": {
+        "es": [
+          "Aloe Vera 100% Puro",
+          "Ácido Hialurónico",
+          "Pantenol",
+          "Extracto de Manzanilla",
+          "Vitamina B5"
+        ],
+        "en": [
+          "100% Pure Aloe Vera",
+          "Hyaluronic Acid",
+          "Panthenol",
+          "Chamomile Extract",
+          "Vitamin B5"
+        ]
+      },
+      "technicalSheet": {
+        "es": "INGREDIENTES ACTIVOS:\n\nAloe Barbadensis Leaf Extract (Aloe Vera) - 95%\nAqua (Agua purificada)\nSodium Hyaluronate (Ácido Hialurónico)\nPanthenol (Pro-Vitamina B5)\nChamomilla Recutita Flower Extract (Extracto de Manzanilla)\nTocopherol (Vitamina E)\nGlycerin (Glicerina Vegetal)\nCarbomer\nTriethanolamine\nPhenoxyethanol\nEthylhexylglycerin\n\nCONCENTRACIÓN:\n- Aloe Vera: 95% puro\n- Ácido Hialurónico: 0.5%\n- Pantenol: 2%\n- Vitamina E: 0.1%\n\nPROPIEDADES:\n✓ Hidratante intensivo\n✓ Cicatrizante natural\n✓ Antiinflamatorio\n✓ Calmante para pieles sensibles\n✓ Regenerador celular\n✓ Antioxidante\n\nTEXTURA: Gel transparente de rápida absorción\nPH: 5.5 - 6.5 (Compatible con pH de la piel)\nTEST DERMATOLÓGICO: Aprobado para pieles sensibles",
+        "en": "ACTIVE INGREDIENTS:\n\nAloe Barbadensis Leaf Extract (Aloe Vera) - 95%\nAqua (Purified Water)\nSodium Hyaluronate (Hyaluronic Acid)\nPanthenol (Pro-Vitamin B5)\nChamomilla Recutita Flower Extract (Chamomile Extract)\nTocopherol (Vitamin E)\nGlycerin (Vegetable Glycerin)\nCarbomer\nTriethanolamine\nPhenoxy ethanol\nEthylhexylglycerin\n\nCONCENTRATION:\n- Aloe Vera: 95% pure\n- Hyaluronic Acid: 0.5%\n- Panthenol: 2%\n- Vitamin E: 0.1%\n\nPROPERTIES:\n✓ Intensive moisturizer\n✓ Natural healing\n✓ Anti-inflammatory\n✓ Soothing for sensitive skin\n✓ Cellular regenerator\n✓ Antioxidant\n\nTEXTURE: Transparent gel with fast absorption\nPH: 5.5 - 6.5 (Compatible with skin pH)\nDERMATOLOGICAL TEST: Approved for sensitive skin"
+      },
+      "usageInstructions": {
+        "es": "Aplicar mañana y noche sobre rostro, cuello y escote, previamente desmaquillado y limpio, realizando un ligero masaje hasta su completa absorción.\n\nEvitar el contacto con los ojos.\n\nPara pieles sensibles o irritadas, aplicar según necesidad durante el día.",
+        "en": "Apply morning and evening to face, neck and décolletage, previously cleansed and makeup-free, performing a gentle massage until completely absorbed.\n\nAvoid contact with eyes.\n\nFor sensitive or irritated skin, apply as needed during the day."
+      },
+      "image": "/products/Gel-de-Aloe-Vera-Alma.jpg",
+      "category": "cuidado",
+      "brand": "Alma de Oliva",
+      "price": 9.0,
+      "available": true
+    },
+    {
+      "id": 7,
+      "name": {
+        "es": "Gel de Baño Aceite de Oliva",
+        "en": "Olive Oil Bath Gel"
+      },
+      "story": {
+        "es": "El oro líquido del Mediterráneo baña tu piel. Inspirado en los olivares milenarios, este gel aporta la nutrición y suavidad que solo el aceite de oliva tradicional puede ofrecer.",
+        "en": "The liquid gold of the Mediterranean bathes your skin. Inspired by ancient olive groves, this gel provides the nutrition and softness that only traditional olive oil can offer."
+      },
+      "description": {
+        "es": "Gel de baño enriquecido con Aceite de Oliva virgen. Conocido por sus propiedades antioxidantes y su alto contenido en Vitamina E, protege la piel contra el envejecimiento prematuro y restaura su elasticidad natural. Ideal para pieles secas que necesitan un extra de hidratación.",
+        "en": "Bath gel enriched with Virgin Olive Oil. Known for its antioxidant properties and high Vitamin E content, it protects the skin against premature aging and restores its natural elasticity. Ideal for dry skin needing extra hydration."
+      },
+      "ingredients": {
+        "es": ["Aceite de Oliva", "Vitamina E", "Glicerina", "Pantenol"],
+        "en": ["Olive Oil", "Vitamin E", "Glycerin", "Panthenol"]
+      },
+      "technicalSheet": {
+        "es": "INGREDIENTES ACTIVOS:\n\nOlea Europaea Fruit Oil (Aceite de Oliva)\nAqua (Agua purificada)\nSodium Laureth Sulfate\nCocamidopropyl Betaine\nGlycerin\nSodium Chloride\nTocopherol (Vitamina E)\n\nPROPIEDADES:\n✓ Hidratante y nutritivo\n✓ Antioxidante natural\n✓ Protege la barrera cutánea\n✓ Suavizante\n\nTEXTURA: Gel cremoso\nPH: 5.5 (Neutro)",
+        "en": "ACTIVE INGREDIENTS:\n\nOlea Europaea Fruit Oil (Olive Oil)\nAqua (Purified Water)\nSodium Laureth Sulfate\nCocamidopropyl Betaine\nGlycerin\nSodium Chloride\nTocopherol (Vitamin E)\n\nPROPERTIES:\n✓ Hydrating and nourishing\n✓ Natural antioxidant\n✓ Protects skin barrier\n✓ Softening\n\nTEXTURE: Creamy gel\nPH: 5.5 (Neutral)"
+      },
+      "usageInstructions": {
+        "es": "Aplicar sobre la piel húmeda masajeando suavemente hasta obtener espuma. Aclarar con abundante agua.",
+        "en": "Apply to damp skin, massaging gently until foam is obtained. Rinse with plenty of water."
+      },
+      "image": "/products/Gel-de-Baño-Aceite-de-Oliva.jpg",
+      "category": "cuidado",
+      "brand": "Alma de Oliva",
+      "price": 4.13,
+      "available": true
+    },
+    {
+      "id": 8,
+      "name": {
+        "es": "Gel de Baño Chocolate",
+        "en": "Chocolate Bath Gel"
+      },
+      "story": {
+        "es": "Un placer culpable para tus sentidos. Sumérgete en un baño de chocolate que no solo relaja tu mente, sino que despierta la vitalidad de tu piel con el poder antioxidante del cacao.",
+        "en": "A guilty pleasure for your senses. Immerse yourself in a chocolate bath that not only relaxes your mind but awakens your skin's vitality with the antioxidant power of cocoa."
+      },
+      "description": {
+        "es": "Gel de baño estimulante con extracto de Cacao. El chocolate es rico en antioxidantes que combaten los radicales libres, mejorando la circulación y dejando la piel tersa y luminosa. Su aroma dulce y envolvente convierte la ducha en una experiencia spa.",
+        "en": "Stimulating bath gel with Cocoa extract. Chocolate is rich in antioxidants that fight free radicals, improving circulation and leaving skin smooth and luminous. Its sweet and enveloping aroma turns the shower into a spa experience."
+      },
+      "ingredients": {
+        "es": ["Extracto de Cacao", "Glicerina", "Vitamina E"],
+        "en": ["Cocoa Extract", "Glycerin", "Vitamin E"]
+      },
+      "technicalSheet": {
+        "es": "INGREDIENTES ACTIVOS:\n\nTheobroma Cacao Extract (Extracto de Cacao)\nAqua\nSodium Laureth Sulfate\nGlycerin\n\nPROPIEDADES:\n✓ Antioxidante\n✓ Estimulante\n✓ Suavizante\n✓ Aroma-terapéutico\n\nTEXTURA: Gel fluido\nPH: 5.5",
+        "en": "ACTIVE INGREDIENTS:\n\nTheobroma Cacao Extract\nAqua\nSodium Laureth Sulfate\nGlycerin\n\nPROPERTIES:\n✓ Antioxidant\n✓ Stimulating\n✓ Softening\n✓ Aroma-therapeutic\n\nTEXTURE: Fluid gel\nPH: 5.5"
+      },
+      "usageInstructions": {
+        "es": "Aplicar sobre la piel húmeda. Disfrutar del aroma antes de aclarar.",
+        "en": "Apply to damp skin. Enjoy the aroma before rinsing."
+      },
+      "image": "/products/Gel-de-Baño-Chocolate.jpg",
+      "category": "cuidado",
+      "brand": "Alma de Oliva",
+      "price": 4.13,
+      "available": true
+    },
+    {
+      "id": 9,
+      "name": {
+        "es": "Gel de Baño Aloe Vera Puro",
+        "en": "Pure Aloe Vera Gel for Bathing"
+      },
+      "story": {
+        "es": "Extraído de los oasis del desierto donde el aloe vera crece bajo el sol implacable, este gel captura la esencia de la supervivencia y regeneración. Cada aplicación es un oasis de frescura para tu piel.",
+        "en": "Extracted from desert oases where aloe vera grows under the relentless sun, this gel captures the essence of survival and regeneration. Each application is an oasis of freshness for your skin."
+      },
+      "description": {
+        "es": "Gel hidratante enriquecido con extractos de Aloe Vera 100% puro. Hidrata, regenera, alivia y calma reestructurando la barrera cutánea. Se funde con la piel ayudando a que esta se regenere, protegiéndola de las agresiones externas producidas por el clima. Indicada para pieles sensibles al sol, reduciendo el riesgo de alergias o irritaciones.",
+        "en": "Hydrating gel enriched with 100% pure Aloe Vera extracts. Hydrates, regenerates, relieves, and calms by restructuring the skin barrier. Folds with the skin, helping it regenerate and protect against external aggressions produced by the climate. Indicated for sensitive skin to the sun, reducing the risk of allergies or irritations."
+      },
+      "ingredients": {
+        "es": [
+          "Aloe Vera 100% Puro",
+          "Ácido Hialurónico",
+          "Pantenol",
+          "Extracto de Manzanilla",
+          "Vitamina B5"
+        ],
+        "en": [
+          "100% Pure Aloe Vera",
+          "Hyaluronic Acid",
+          "Panthenol",
+          "Chamomile Extract",
+          "Vitamin B5"
+        ]
+      },
+      "technicalSheet": {
+        "es": "INGREDIENTES ACTIVOS:\n\nAloe Barbadensis Leaf Extract (Aloe Vera) - 95%\nAqua (Agua purificada)\nSodium Hyaluronate (Ácido Hialurónico)\nPanthenol (Pro-Vitamina B5)\nChamomilla Recutita Flower Extract (Extracto de Manzanilla)\nTocopherol (Vitamina E)\nGlycerin (Glicerina Vegetal)\nCarbomer\nTriethanolamine\nPhenoxyethanol\nEthylhexylglycerin\n\nCONCENTRACIÓN:\n- Aloe Vera: 95% puro\n- Ácido Hialurónico: 0.5%\n- Pantenol: 2%\n- Vitamina E: 0.1%\n\nPROPIEDADES:\n✓ Hidratante intensivo\n✓ Cicatrizante natural\n✓ Antiinflamatorio\n✓ Calmante para pieles sensibles\n✓ Regenerador celular\n✓ Antioxidante\n\nTEXTURA: Gel transparente de rápida absorción\nPH: 5.5 - 6.5 (Compatible con pH de la piel)\nTEST DERMATOLÓGICO: Aprobado para pieles sensibles",
+        "en": "ACTIVE INGREDIENTS:\n\nAloe Barbadensis Leaf Extract (Aloe Vera) - 95%\nAqua (Purified Water)\nSodium Hyaluronate (Hyaluronic Acid)\nPanthenol (Pro-Vitamin B5)\nChamomilla Recutita Flower Extract (Chamomile Extract)\nTocopherol (Vitamin E)\nGlycerin (Vegetable Glycerin)\nCarbomer\nTriethanolamine\nPhenoxy ethanol\nEthylhexylglycerin\n\nCONCENTRATION:\n- Aloe Vera: 95% pure\n- Hyaluronic Acid: 0.5%\n- Panthenol: 2%\n- Vitamin E: 0.1%\n\nPROPERTIES:\n✓ Intensive moisturizer\n✓ Natural healing\n✓ Anti-inflammatory\n✓ Soothing for sensitive skin\n✓ Cellular regenerator\n✓ Antioxidant\n\nTEXTURE: Transparent gel with fast absorption\nPH: 5.5 - 6.5 (Compatible with skin pH)\nDERMATOLOGICAL TEST: Approved for sensitive skin"
+      },
+      "usageInstructions": {
+        "es": "Aplicar mañana y noche sobre rostro, cuello y escote, previamente desmaquillado y limpio, realizando un ligero masaje hasta su completa absorción.\n\nEvitar el contacto con los ojos.\n\nPara pieles sensibles o irritadas, aplicar según necesidad durante el día.",
+        "en": "Apply morning and evening to face, neck and décolletage, previously cleansed and makeup-free, performing a gentle massage until completely absorbed.\n\nAvoid contact with eyes.\n\nFor sensitive or irritated skin, apply as needed during the day."
+      },
+      "image": "/products/Gel-de-Baño-de-Aloe-Vera.jpg",
+      "category": "cuidado",
+      "brand": "Alma de Oliva",
+      "price": 4.13,
+      "available": true
+    },
+    {
+      "id": 10,
+      "name": {
+        "es": "Gel de Baño Dermo Nutriente",
+        "en": "Dermo-Nutrient Bath Gel"
+      },
+      "story": {
+        "es": "Cuidado experto para la piel de toda la familia. Formulado para proteger y nutrir en profundidad, respetando el equilibrio natural de la dermis.",
+        "en": "Expert care for the whole family's skin. Formulated to protect and nourish in depth, respecting the dermis's natural balance."
+      },
+      "description": {
+        "es": "Gel de baño dermo-protector altamente nutritivo. Su fórmula rica en agentes emolientes limpia suavemente sin resecar, reforzando la barrera cutánea. Ideal para uso diario en todo tipo de pieles, especialmente las más delicadas.",
+        "en": "Highly nourishing dermo-protective bath gel. Its formula rich in emollient agents cleanses gently without drying, reinforcing the skin barrier. Ideal for daily use on all skin types, especially the most delicate."
+      },
+      "ingredients": {
+        "es": ["Agentes Emolientes", "Glicerina", "Vitaminas"],
+        "en": ["Emollients", "Glycerin", "Vitamins"]
+      },
+      "technicalSheet": {
+        "es": "PROPIEDADES:\n✓ Alta nutrición\n✓ Dermo-protector\n✓ pH Neutro\n✓ Hipoalergénico",
+        "en": "PROPERTIES:\n✓ High nutrition\n✓ Dermo-protective\n✓ Neutral pH\n✓ Hypoallergenic"
+      },
+      "usageInstructions": {
+        "es": "Aplicar sobre la piel mojada y aclarar.",
+        "en": "Apply to wet skin and rinse."
+      },
+      "image": "/products/Gel-de-Baño-Dermo-Nutrienete.jpg",
+      "category": "cuidado",
+      "brand": "Alma de Oliva",
+      "price": 4.13,
+      "available": true
+    },
+
+    {
+      "id": 11,
+      "name": {
+        "es": "Gel de Baño Rosa Mosqueta",
+        "en": "Rosehip Bath Gel"
+      },
+      "story": {
+        "es": "El secreto de la regeneración natural. La Rosa Mosqueta, conocida como la flor de la juventud, aporta a este gel propiedades reparadoras únicas para una piel visiblemente más sana.",
+        "en": "The secret of natural regeneration. Rosehip, known as the flower of youth, gives this gel unique restorative properties for visibly healthier skin."
+      },
+      "description": {
+        "es": "Gel de baño regenerador con Aceite de Rosa Mosqueta. Ayuda a atenuar cicatrices y marcas en la piel gracias a su alto poder de cicatrización y nutrición. Mantiene la hidratación y devuelve la elasticidad a la piel.",
+        "en": "Regenerating bath gel with Rosehip Oil. Helps attenuate scars and skin marks thanks to its high healing and nourishing power. Maintains hydration and returns elasticity to the skin."
+      },
+      "ingredients": {
+        "es": ["Aceite de Rosa Mosqueta", "Vitamina E", "Glicerina"],
+        "en": ["Rosehip Oil", "Vitamin E", "Glycerin"]
+      },
+      "technicalSheet": {
+        "es": "INGREDIENTES ACTIVOS:\n\nRosa Moschata Seed Oil (Aceite de Rosa Mosqueta)\nAqua\nGlycerin\n\nPROPIEDADES:\n✓ Regenerador\n✓ Cicatrizante\n✓ Nutritivo\n✓ Mejora la elasticidad\n\nTEXTURA: Gel suave\nPH: 5.5",
+        "en": "ACTIVE INGREDIENTS:\n\nRosa Moschata Seed Oil\nAqua\nGlycerin\n\nPROPERTIES:\n✓ Regenerating\n✓ Healing\n✓ Nourishing\n✓ Improves elasticity\n\nTEXTURE: Soft gel\nPH: 5.5"
+      },
+      "usageInstructions": {
+        "es": "Uso diario en ducha o baño.",
+        "en": "Daily use in shower or bath."
+      },
+      "image": "/products/Gel-de-Baño-Rosa-Mosqueta.jpg",
+      "category": "cuidado",
+      "brand": "Alma de Oliva",
+      "price": 4.13,
+      "available": true
+    },
+    {
+      "id": 12,
+      "name": {
+        "es": "Gel de Baño Coco",
+        "en": "Coconut Bath Gel"
+      },
+      "story": {
+        "es": "Un viaje tropical en tu ducha. El aceite de coco, tesoro de las islas, envuelve tu piel en una caricia exótica y nutritiva.",
+        "en": "A tropical journey in your shower. Coconut oil, treasure of the islands, envelops your skin in an exotic and nourishing caress."
+      },
+      "description": {
+        "es": "Gel de baño cremoso con Aceite de Coco. Nutre en profundidad y suaviza la piel, dejándola delicadamente perfumada. Su espuma rica y cremosa convierte el baño en una experiencia relajante.",
+        "en": "Creamy bath gel with Coconut Oil. Deeply nourishes and softens the skin, leaving it delicately scented. Its rich and creamy foam turns the bath into a relaxing experience."
+      },
+      "ingredients": {
+        "es": ["Aceite de Coco", "Vitamina E", "Glicerina"],
+        "en": ["Coconut Oil", "Vitamin E", "Glycerin"]
+      },
+      "technicalSheet": {
+        "es": "INGREDIENTES ACTIVOS:\n\nCocos Nucifera Oil (Aceite de Coco)\nAqua\nGlycerin\n\nPROPIEDADES:\n✓ Nutritivo\n✓ Suavizante\n✓ Aroma relajante\n✓ Hidratante\n\nTEXTURA: Gel cremoso perlado\nPH: 5.5",
+        "en": "ACTIVE INGREDIENTS:\n\nCocos Nucifera Oil (Coconut Oil)\nAqua\nGlycerin\n\nPROPERTIES:\n✓ Nourishing\n✓ Softening\n✓ Relaxing scent\n✓ Moisturizing\n\nTEXTURE: Pearly creamy gel\nPH: 5.5"
+      },
+      "usageInstructions": {
+        "es": "Uso diario en ducha o baño.",
+        "en": "Daily use in shower or bath."
+      },
+      "image": "/products/Gel-de-Baño-coco.jpg",
+      "category": "cuidado",
+      "brand": "Alma de Oliva",
+      "price": 4.13,
+      "available": true
+    },
+    {
+      "id": 13,
+      "name": {
+        "es": "Champú con pH Neutro",
+        "en": "Neutral pH Shampoo"
+      },
+      "story": {
+        "es": "Equilibrio y suavidad para tu cabello. Una fórmula diseñada para respetar la naturaleza de tu cuero cabelludo, aportando limpieza y brillo día tras día.",
+        "en": "Balance and softness for your hair. A formula designed to respect the nature of your scalp, providing cleanliness and shine day after day."
+      },
+      "description": {
+        "es": "Champú suave de uso frecuente con pH neutro (5.5). Limpia eficazmente sin agredir el manto hidrolipídico, dejando el cabello suelto, brillante y fácil de peinar. Ideal para toda la familia y para cueros cabelludos sensibles.",
+        "en": "Gentle frequent-use shampoo with neutral pH (5.5). Cleans effectively without damaging the hydrolipidic film, leaving hair loose, shiny, and easy to comb. Ideal for the whole family and sensitive scalps."
+      },
+      "ingredients": {
+        "es": ["Pantenol", "Extractos Vegetales", "Vitamina E"],
+        "en": ["Panthenol", "Vegetable Extracts", "Vitamin E"]
+      },
+      "technicalSheet": {
+        "es": "INGREDIENTES ACTIVOS:\n\nPanthenol (Pro-Vitamina B5)\nAqua\nSodium Laureth Sulfate\nCocamidopropyl Betaine\n\nPROPIEDADES:\n✓ Limpieza suave\n✓ Respeta el pH natural\n✓ Aporta brillo y volumen\n✓ Uso diario\n\nTEXTURA: Gel fluido transparente\nPH: 5.5 (Neutro)",
+        "en": "ACTIVE INGREDIENTS:\n\nPanthenol (Pro-Vitamin B5)\nAqua\nSodium Laureth Sulfate\nCocamidopropyl Betaine\n\nPROPERTIES:\n✓ Gentle cleansing\n✓ Respects natural pH\n✓ Adds shine and volume\n✓ Daily use\n\nTEXTURE: Transparent fluid gel\nPH: 5.5 (Neutral)"
+      },
+      "usageInstructions": {
+        "es": "Aplicar sobre el cabello mojado, masajear suavemente hasta obtener espuma y aclarar. Repetir si es necesario.",
+        "en": "Apply to wet hair, massage gently until lather forms, and rinse. Repeat if necessary."
+      },
+      "image": "/products/Champu-Ph-Neutro-Alma-de-Oliva.jpg",
+      "category": "cuidado",
+      "brand": "Alma de Oliva",
+      "price": 4.13,
+      "available": true
+    },
+    {
+      "id": 14,
+      "name": {
+        "es": "Aceite de Almendras",
+        "en": "Sweet Almond Oil"
+      },
+      "story": {
+        "es": "La caricia más pura para tu piel. El aceite de almendras dulces es un tesoro de la naturaleza que nutre, suaviza y protege, devolviendo la elasticidad perdida.",
+        "en": "The purest caress for your skin. Sweet almond oil is a treasure of nature that nourishes, softens, and protects, restoring lost elasticity."
+      },
+      "description": {
+        "es": "Aceite corporal de Almendras Dulces 100% puro. Rico en ácidos grasos esenciales y vitaminas, hidrata intensamente y previene la aparición de estrías. Perfecto para masajes, pieles secas y el cuidado de la piel del bebé.",
+        "en": "100% pure Sweet Almond body oil. Rich in essential fatty acids and vitamins, it intensely hydrates and prevents stretch marks. Perfect for massages, dry skin, and baby skin care."
+      },
+      "ingredients": {
+        "es": [
+          "Aceite de Almendras Dulces (Prunus Amygdalus Dulcis)",
+          "Vitamina E"
+        ],
+        "en": ["Sweet Almond Oil (Prunus Amygdalus Dulcis)", "Vitamin E"]
+      },
+      "technicalSheet": {
+        "es": "INGREDIENTES ACTIVOS:\n\nPrunus Amygdalus Dulcis Oil (Aceite de Almendras)\nTocopherol (Vitamina E)\n\nPROPIEDADES:\n✓ Alta hidratación\n✓ Mejora la elasticidad\n✓ Previene estrías\n✓ Emoliente y calmante\n\nTEXTURA: Aceite de rápida absorción\nTIPOLOGÍA: Aceite vegetal natural",
+        "en": "ACTIVE INGREDIENTS:\n\nPrunus Amygdalus Dulcis Oil (Sweet Almond Oil)\nTocopherol (Vitamin E)\n\nPROPERTIES:\n✓ High hydration\n✓ Improves elasticity\n✓ Prevents stretch marks\n✓ Emollient and soothing\n\nTEXTURE: Fast-absorbing oil\nTYPOLOGY: Natural vegetable oil"
+      },
+      "usageInstructions": {
+        "es": "Aplicar sobre la piel húmeda o seca con un suave masaje hasta su total absorción. Ideal para usar después de la ducha.",
+        "en": "Apply to damp or dry skin with a gentle massage until fully absorbed. Ideal for use after showering."
+      },
+      "image": "/products/Aceite-de-Almendras-Dulces-Alma-de-Oliva.jpg",
+      "category": "cuidado",
+      "brand": "Alma de Oliva",
+      "price": 27.0,
+      "available": true
+    },
+    {
+      "id": 15,
+      "name": {
+        "es": "Protector Solar Facial y Corporal SPF 50+ ",
+        "en": "Facial and Body Sunscreen SPF 50+"
+      },
+      "story": {
+        "es": "Tu escudo diario contra el sol. Este protector solar SPF 50+ ha sido formulado para quienes buscan la máxima seguridad sin renunciar al confort. Su tecnología avanzada no solo bloquea la radiación dañina, sino que cuida tu piel manteniéndola hidratada y suave bajo el sol más intenso, previniendo el envejecimiento prematuro.",
+        "en": "Your daily shield against the sun. This SPF 50+ sunscreen is formulated for those seeking maximum safety without compromising comfort. Its advanced technology not only blocks harmful radiation but also cares for your skin, keeping it hydrated and soft under the most intense sun, preventing premature aging."
+      },
+      "description": {
+        "es": "Emulsión protectora de alta eficacia con SPF 50+ para rostro y cuerpo. Su fórmula ligera y de rápida absorción ofrece una defensa completa contra los rayos UVA y UVB, previniendo el fotoenvejecimiento y las quemaduras solares. Enriquecida con ingredientes antioxidantes, es ideal para todo tipo de pieles.",
+        "en": "High-efficacy protective emulsion with SPF 50+ for face and body. Its light, fast-absorbing formula offers complete defense against UVA and UVB rays, preventing photoaging and sunburn. Enriched with antioxidant ingredients, it is ideal for all skin types."
+      },
+      "ingredients": {
+        "es": ["Filtros Solares UVA/UVB", "Vitamina E", "Aloe Vera"],
+        "en": ["UVA/UVB Sun Filters", "Vitamin E", "Aloe Vera"]
+      },
+      "technicalSheet": {
+        "es": "INGREDIENTES ACTIVOS:\n\nFiltros Solares de Amplio Espectro\nTocopherol (Vitamina E)\nAloe Barbadensis Extract\n\nPROPIEDADES:\n✓ Protección muy alta SPF 50+\n✓ Prevención del fotoenvejecimiento\n✓ Hidratante y antioxidante\n✓ Resistente al agua\n\nTEXTURA: Crema ligera no grasa\nTIPOLOGÍA: Fotoprotector corporal y facial",
+        "en": "ACTIVE INGREDIENTS:\n\nBroad Spectrum Sun Filters\nTocopherol (Vitamin E)\nAloe Barbadensis Extract\n\nPROPERTIES:\n✓ Very high protection SPF 50+\n✓ Photoaging prevention\n✓ Hydrating and antioxidant\n✓ Water resistant\n\nTEXTURE: Light non-greasy cream\nTYPOLOGY: Body and facial sunscreen"
+      },
+      "usageInstructions": {
+        "es": "Aplicar generosamente sobre la piel seca 30 minutos antes de la exposición solar. Reaplicar cada 2 horas y tras transpirar, bañarse o secarse.",
+        "en": "Apply generously to dry skin 30 minutes before sun exposure. Reapply every 2 hours and after perspiring, swimming, or towel drying."
+      },
+      "image": "/products/Protector-Solar-Celularys.png",
+      "category": "cuidado",
+      "brand": "Celularys",
+      "price": 24.2,
+      "sizes": [
+        { "size": "100ml", "price": 24.2 },
+        { "size": "50ml", "price": 14.52 }
+      ],
+      "available": true
+    }
+  ]
+}

@@ -56,8 +56,8 @@ const resources = {
         description: "Descripción",
         objectives: "Objetivos",
         nutritionalValues: "Valores nutricionales",
-        application: "Aplicación",
-        recommendations: "Recomendaciones",
+        application: "Modo de empleo, conservación y envase",
+        recommendations: "Alérgenos",
       },
 
       // Products Section
@@ -475,8 +475,8 @@ const resources = {
         description: "Descripció",
         objectives: "Objectius",
         nutritionalValues: "Valors nutricionals",
-        application: "Aplicació",
-        recommendations: "Recomanacions",
+        application: "Mode d'ús, conservació i envàs",
+        recommendations: "Al·lèrgens",
       },
       productsTitle: "Els nostres Suplements",
       productsSubtitle:
@@ -774,8 +774,8 @@ const resources = {
         description: "Description",
         objectives: "Objectives",
         nutritionalValues: "Nutritional values",
-        application: "Application",
-        recommendations: "Recommendations",
+        application: "Application, storage and packaging",
+        recommendations: "Allergens",
       },
 
       // Products Section

@@ -49,6 +49,18 @@ interface Product {
   };
   rating?: number;
   votes?: number;
+  story?: {
+    es: string;
+    en: string;
+    ca?: string;
+  };
+  ingredients?: {
+    es: string[];
+    en: string[];
+    ca?: string[];
+  };
+  brand?: string;
+  source?: "manpowers" | "tamd";
 }
 
 interface ProductsResponse {
@@ -139,6 +151,56 @@ class ProductsService {
         });
       }
       return products;
+    } catch {
+      return [];
+    }
+  }
+
+  async getTamdProducts(): Promise<Product[]> {
+    try {
+      const response = await fetch("/tamdProducts.json");
+      const data = await response.json();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const arr = ((data.products || []) as any[]).map((p) => ({
+        id: p.id + 10000, // Offset IDs to avoid collision
+        name: p.name,
+        description: p.description,
+        story: p.story,
+        ingredients: p.ingredients,
+        price:
+          typeof p.price === "string"
+            ? parseFloat((p.price as string).replace(",", "."))
+            : p.price,
+        comercial_price:
+          p.comercial_price !== undefined
+            ? typeof p.comercial_price === "string"
+              ? parseFloat((p.comercial_price as string).replace(",", "."))
+              : p.comercial_price
+            : typeof p.price === "string"
+              ? parseFloat((p.price as string).replace(",", "."))
+              : p.price,
+        price_formatted: p.price_formatted ?? "",
+        size: p.size || "",
+        pricesBySize: p.pricesBySize,
+        image: p.image,
+        category:
+          typeof p.category === "string"
+            ? { es: p.category, en: p.category }
+            : p.category,
+        sportId: p.sportId || "cosmetics",
+        available: p.available,
+        sku: p.sku ?? "",
+        amazonLinks: p.amazonLinks,
+        nutritionalValues: p.nutritionalValues,
+        application: p.application,
+        recommendations: p.recommendations,
+        rating: p.rating,
+        votes: p.votes,
+        brand: p.brand || "TAMD Cosmetics",
+        source: "tamd" as const,
+      })) as Product[];
+
+      return arr;
     } catch {
       return [];
     }

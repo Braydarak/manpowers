@@ -108,8 +108,8 @@ const Accordion: React.FC<AccordionProps> = ({
               <div
                 className={
                   white
-                    ? "px-4 md:px-6 pb-5 pt-5 mt-2 border-t border-black/10 text-black text-sm md:text-base leading-relaxed"
-                    : "px-4 md:px-6 pb-5 pt-5 text-black/70 text-sm md:text-base leading-relaxed bg-[var(--color-primary)]"
+                    ? "px-4 md:px-6 pb-5 pt-5 mt-2 border-t border-black/10 text-black text-sm md:text-base leading-relaxed whitespace-pre-wrap"
+                    : "px-4 md:px-6 pb-5 pt-5 text-black/70 text-sm md:text-base leading-relaxed bg-[var(--color-primary)] whitespace-pre-wrap"
                 }
               >
                 {content}

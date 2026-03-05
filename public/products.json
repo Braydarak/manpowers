@@ -104,24 +104,24 @@
         "ca": "Omega 3 - Oli de peix pur"
       },
       "description": {
-        "es": "Omega 3 puro aceite de pescado, enriquecido con Vitamina E. Esencial para la salud cardiovascular, función cerebral y bienestar general.",
-        "en": "Pure fish oil Omega 3, enriched with Vitamin E. Essential for cardiovascular health, brain function and overall wellness.",
-        "ca": "Omega 3 d'oli de peix pur, enriquit amb vitamina E. Essencial per a la salut cardiovascular, la funció cerebral i el benestar general."
+        "es": "El Omega 3 es un ácido graso esencial que nuestro cuerpo no puede producir y debemos obtener a través de la dieta. Nuestra fórmula concentrada aporta 650 mg de Omega 3 por perla, combinando EPA y DHA en proporciones equilibradas.\n\nContribuye a la salud cardiovascular ayudando a regular los niveles de colesterol, mejora la función visual gracias al DHA presente en la retina y favorece el rendimiento cognitivo, el descanso y el estado de ánimo al intervenir en la producción de neurotransmisores. Además, refuerza la barrera cutánea, aporta hidratación y elasticidad a la piel y ayuda a modular la inflamación, reduciendo la hinchazón y las molestias asociadas a procesos inflamatorios crónicos.",
+        "en": "Omega 3 is an essential fatty acid that our body cannot produce and we must obtain through diet. Our concentrated formula provides 650 mg of Omega 3 per softgel, combining EPA and DHA in balanced proportions.\n\nIt contributes to cardiovascular health by helping to regulate cholesterol levels, improves visual function thanks to the DHA present in the retina, and favors cognitive performance, rest, and mood by intervening in the production of neurotransmitters. In addition, it strengthens the skin barrier, provides hydration and elasticity to the skin, and helps modulate inflammation, reducing swelling and discomfort associated with chronic inflammatory processes.",
+        "ca": "L'Omega 3 és un àcid gras essencial que el nostre cos no pot produir i hem d'obtenir a través de la dieta. La nostra fórmula concentrada aporta 650 mg d'Omega 3 per perla, combinant EPA i DHA en proporcions equilibrades.\n\nContribueix a la salut cardiovascular ajudant a regular els nivells de colesterol, millora la funció visual gràcies al DHA present a la retina i afavoreix el rendiment cognitiu, el descans i l'estat d'ànim en intervenir en la producció de neurotransmissors. A més, reforça la barrera cutània, aporta hidratació i elasticitat a la pell i ajuda a modular la inflamació, reduint la inflor i les molèsties associades a processos inflamatoris crònics."
       },
       "nutritionalValues": {
-        "es": "Por ración: Aceite de pescado purificado rico en EPA/DHA, con Vitamina E.",
-        "en": "Per serving: Purified fish oil rich in EPA/DHA, with Vitamin E.",
-        "ca": "Per ració: Oli de peix purificat ric en EPA/DHA, amb vitamina E."
+        "es": "MΛN POWERS Omega 3 aporta por perla 1000 mg de aceite de pescado, de los cuales 650 mg corresponden a ácidos grasos Omega 3, con 350 mg de EPA y 250 mg de DHA. La fórmula se completa con 5 mg de vitamina E (D-alfa tocoferol), que contribuye a la protección frente al daño oxidativo. La cápsula blanda está compuesta por gelatina bovina y glicerina como agente humectante.",
+        "en": "MΛN POWERS Omega 3 provides 1000 mg of fish oil per softgel, of which 650 mg correspond to Omega 3 fatty acids, with 350 mg of EPA and 250 mg of DHA. The formula is completed with 5 mg of vitamin E (D-alpha tocopherol), which contributes to protection against oxidative damage. The softgel is composed of bovine gelatin and glycerin as a humectant agent.",
+        "ca": "MΛN POWERS Omega 3 aporta per perla 1000 mg d'oli de peix, dels quals 650 mg corresponen a àcids grassos Omega 3, amb 350 mg d'EPA i 250 mg de DHA. La fórmula es completa amb 5 mg de vitamina E (D-alfa tocoferol), que contribueix a la protecció enfront del dany oxidatiu. La càpsula tova està composta per gelatina bovina i glicerina com a agent humectant."
       },
       "application": {
-        "es": "Tomar 2 cápsulas al día con agua.",
-        "en": "Take 2 capsules daily with water.",
-        "ca": "Prendre 2 càpsules al dia amb aigua."
+        "es": "Se recomienda tomar una perla al día. No superar la dosis diaria recomendada. Conservar en un lugar fresco y oscuro, protegido de la luz y de fuentes de calor.\n\nEl producto se presenta en un envase ámbar que protege el contenido frente a la oxidación, con 220 perlas por bote y tapa metálica autosellada. El lote y la fecha de caducidad están indicados en el envase. Los complementos alimenticios no deben utilizarse como sustituto de una dieta variada y equilibrada ni de un estilo de vida saludable.",
+        "en": "It is recommended to take one softgel per day. Do not exceed the recommended daily dose. Store in a cool, dark place, protected from light and heat sources.\n\nThe product is presented in an amber container that protects the content against oxidation, with 220 softgels per bottle and a self-sealing metal lid. The batch and expiration date are indicated on the packaging. Food supplements should not be used as a substitute for a varied and balanced diet or a healthy lifestyle.",
+        "ca": "Es recomana prendre una perla al dia. No superar la dosi diària recomanada. Conservar en un lloc fresc i fosc, protegit de la llum i de fonts de calor.\n\nEl producte es presenta en un envàs ambre que protegeix el contingut enfront de l'oxidació, amb 220 perles per pot i tapa metàl·lica autosegellada. El lot i la data de caducitat estan indicats a l'envàs. Els complements alimentosos no s'han d'utilitzar com a substitut d'una dieta variada i equilibrada ni d'un estil de vida saludable."
       },
       "recommendations": {
-        "es": "Personas con trastornos de coagulación o en tratamiento anticoagulante deben consultar con su médico.",
-        "en": "People with bleeding disorders or on anticoagulants should consult a physician.",
-        "ca": "Les persones amb trastorns de coagulació o en tractament anticoagulant han de consultar el metge."
+        "es": "Contiene pescado. No es apto para veganos ni vegetarianos. El proceso de fabricación incluye procedimientos de limpieza validados para minimizar el riesgo de contaminación cruzada.",
+        "en": "Contains fish. Not suitable for vegans or vegetarians. The manufacturing process includes validated cleaning procedures to minimize the risk of cross-contamination.",
+        "ca": "Conté peix. No és apte per a vegans ni vegetarians. El procés de fabricació inclou procediments de neteja validats per minimitzar el risc de contaminació creuada."
       },
       "price": "21,00",
       "img_folder": "omega-3",

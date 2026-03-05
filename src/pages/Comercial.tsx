@@ -78,6 +78,8 @@ const Comercial: React.FC = () => {
   const [expandedOrders, setExpandedOrders] = useState<{
     [key: number]: boolean;
   }>({});
+  const [showManpowers, setShowManpowers] = useState(true);
+  const [showTamd, setShowTamd] = useState(true);
 
   useEffect(() => {
     // Check if previously logged in (optional persistence)
@@ -86,8 +88,15 @@ const Comercial: React.FC = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      productsService.getProducts().then((data) => {
-        setProducts(data);
+      Promise.all([
+        productsService.getProducts(),
+        productsService.getTamdProducts(),
+      ]).then(([manpowers, tamd]) => {
+        const mp = manpowers.map((p) => ({
+          ...p,
+          source: "manpowers" as const,
+        }));
+        setProducts([...mp, ...tamd]);
       });
     }
   }, [isLoggedIn]);
@@ -242,10 +251,17 @@ const Comercial: React.FC = () => {
     setQuantities((prev) => ({ ...prev, [id]: qty }));
   };
 
+  const getEffectivePrice = (product: Product) => {
+    if (product.id === 10006) {
+      return product.price * 0.65; // 35% discount
+    }
+    return product.price;
+  };
+
   const calculateTotal = () => {
     return commercialProducts.reduce((acc, product) => {
       const qty = quantities[product.id] || 0;
-      const price = product.price;
+      const price = getEffectivePrice(product);
       return acc + price * qty;
     }, 0);
   };
@@ -300,21 +316,29 @@ const Comercial: React.FC = () => {
   };
 
   // Group products by category for better organization
-  const groupedProducts = commercialProducts.reduce(
-    (acc, product) => {
-      const category =
-        typeof product.category === "string"
-          ? product.category
-          : product.category.es; // Default to ES for commercial view
+  const groupProductsByCategory = (list: Product[]) => {
+    return list.reduce(
+      (acc, product) => {
+        const category =
+          typeof product.category === "string"
+            ? product.category
+            : product.category.es; // Default to ES for commercial view
 
-      if (!acc[category]) {
-        acc[category] = [];
-      }
-      acc[category].push(product);
-      return acc;
-    },
-    {} as { [key: string]: Product[] },
-  );
+        if (!acc[category]) {
+          acc[category] = [];
+        }
+        acc[category].push(product);
+        return acc;
+      },
+      {} as { [key: string]: Product[] },
+    );
+  };
+
+  const manpowersList = commercialProducts.filter((p) => p.source !== "tamd");
+  const tamdList = commercialProducts.filter((p) => p.source === "tamd");
+
+  const manpowersGrouped = groupProductsByCategory(manpowersList);
+  const tamdGrouped = groupProductsByCategory(tamdList);
 
   const handleConfirmOrder = async () => {
     if (!customerData.name || !customerData.phone || !customerData.address)
@@ -323,7 +347,7 @@ const Comercial: React.FC = () => {
     setIsSubmitting(true);
 
     const selectedProducts = getSelectedProducts().map((p) => {
-      const unitPrice = p.price;
+      const unitPrice = getEffectivePrice(p);
       return {
         id: p.id,
         name: p.name.es,
@@ -507,6 +531,115 @@ const Comercial: React.FC = () => {
       </div>
     );
   }
+
+  const renderProductGroup = (category: string, items: Product[]) => (
+    <div key={category} className="space-y-4">
+      <h2 className="text-xl font-bold text-[var(--color-secondary)] uppercase tracking-wider border-b border-black/10 pb-2">
+        {category}
+      </h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {items.map((product) => (
+          <div
+            key={product.id}
+            className={`
+              relative bg-[var(--color-primary)] border rounded-xl overflow-hidden transition-all duration-300
+              ${
+                (quantities[product.id] || 0) > 0
+                  ? "border-[var(--color-secondary)] shadow-lg shadow-[var(--color-secondary)]/20"
+                  : "border-black/10 hover:border-black/30"
+              }
+            `}
+          >
+            <div className="flex p-4 gap-4">
+              <div className="w-20 h-20 bg-black/5 rounded-lg flex-shrink-0 overflow-hidden">
+                <img
+                  src={product.image}
+                  alt={product.name.es}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="flex-grow flex flex-col justify-between">
+                <div>
+                  <h3 className="font-bold text-black leading-tight mb-1">
+                    {product.name.es}
+                  </h3>
+                </div>
+                <div className="flex justify-between items-end mt-2">
+                  {product.id === 10006 ? (
+                    <div className="flex flex-col items-end">
+                      <span className="text-sm line-through text-black/40">
+                        {product.price.toFixed(2)} €
+                      </span>
+                      <span className="text-lg font-bold text-red-600">
+                        {getEffectivePrice(product).toFixed(2)} €
+                      </span>
+                    </div>
+                  ) : (
+                    <span className="text-lg font-bold text-[var(--color-secondary)]">
+                      {product.price.toFixed(2)} €
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Controls Footer */}
+            <div className="bg-black/5 p-3 border-t border-black/10 flex items-center justify-between">
+              <span className="text-xs text-black/60">
+                {(quantities[product.id] || 0) > 0 ? "Cantidad:" : "Añadir:"}
+              </span>
+              <div className="flex items-center gap-3">
+                <button
+                  className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors border ${
+                    (quantities[product.id] || 0) > 0
+                      ? "border-[var(--color-secondary)] bg-[var(--color-primary)] text-[var(--color-secondary)] hover:bg-[var(--color-primary)]/80"
+                      : "border-[var(--color-secondary)]/40 bg-[var(--color-primary)] text-[var(--color-secondary)]/40 cursor-not-allowed"
+                  }`}
+                  onClick={() =>
+                    handleQuantityChange(
+                      product.id,
+                      (quantities[product.id] || 0) - 1,
+                    )
+                  }
+                  disabled={(quantities[product.id] || 0) === 0}
+                >
+                  <Minus size={14} />
+                </button>
+
+                <input
+                  type="number"
+                  min="0"
+                  className={`w-12 bg-transparent text-center font-bold focus:outline-none focus:ring-1 focus:ring-[var(--color-secondary)]/50 rounded appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${
+                    (quantities[product.id] || 0) > 0
+                      ? "text-black"
+                      : "text-black/40"
+                  }`}
+                  value={quantities[product.id] || 0}
+                  onChange={(e) => {
+                    const val = parseInt(e.target.value);
+                    handleQuantityChange(product.id, isNaN(val) ? 0 : val);
+                  }}
+                  onFocus={(e) => e.target.select()}
+                />
+
+                <button
+                  className="w-8 h-8 rounded-full bg-[var(--color-secondary)] hover:brightness-95 text-white flex items-center justify-center transition-colors shadow-lg"
+                  onClick={() =>
+                    handleQuantityChange(
+                      product.id,
+                      (quantities[product.id] || 0) + 1,
+                    )
+                  }
+                >
+                  <Plus size={14} />
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 
   return (
     <div className="flex flex-col min-h-screen bg-[var(--color-primary)] text-black font-sans selection:bg-[var(--color-secondary)]/30">
@@ -961,7 +1094,7 @@ const Comercial: React.FC = () => {
                           </div>
                         </div>
                         <div className="text-[var(--color-secondary)] font-bold whitespace-nowrap">
-                          {(p.price * p.quantity).toFixed(2)} €
+                          {(getEffectivePrice(p) * p.quantity).toFixed(2)} €
                         </div>
                       </div>
                     ))}
@@ -1081,109 +1214,63 @@ const Comercial: React.FC = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Products List */}
-              <div className="lg:col-span-2 space-y-8">
-                {Object.entries(groupedProducts).map(([category, items]) => (
-                  <div key={category} className="space-y-4">
-                    <h2 className="text-xl font-bold text-[var(--color-secondary)] uppercase tracking-wider border-b border-black/10 pb-2">
-                      {category}
-                    </h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {items.map((product) => (
-                        <div
-                          key={product.id}
-                          className={`
-                        relative bg-[var(--color-primary)] border rounded-xl overflow-hidden transition-all duration-300
-                        ${
-                          (quantities[product.id] || 0) > 0
-                            ? "border-[var(--color-secondary)] shadow-lg shadow-[var(--color-secondary)]/20"
-                            : "border-black/10 hover:border-black/30"
-                        }
-                      `}
-                        >
-                          <div className="flex p-4 gap-4">
-                            <div className="w-20 h-20 bg-black/5 rounded-lg flex-shrink-0 overflow-hidden">
-                              <img
-                                src={product.image}
-                                alt={product.name.es}
-                                className="w-full h-full object-cover"
-                              />
-                            </div>
-                            <div className="flex-grow flex flex-col justify-between">
-                              <div>
-                                <h3 className="font-bold text-black leading-tight mb-1">
-                                  {product.name.es}
-                                </h3>
-                              </div>
-                              <div className="flex justify-between items-end mt-2">
-                                <span className="text-lg font-bold text-[var(--color-secondary)]">
-                                  {product.price.toFixed(2)} €
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Controls Footer */}
-                          <div className="bg-black/5 p-3 border-t border-black/10 flex items-center justify-between">
-                            <span className="text-xs text-black/60">
-                              {(quantities[product.id] || 0) > 0
-                                ? "Cantidad:"
-                                : "Añadir:"}
-                            </span>
-                            <div className="flex items-center gap-3">
-                              <button
-                                className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors border ${
-                                  (quantities[product.id] || 0) > 0
-                                    ? "border-[var(--color-secondary)] bg-[var(--color-primary)] text-[var(--color-secondary)] hover:bg-[var(--color-primary)]/80"
-                                    : "border-[var(--color-secondary)]/40 bg-[var(--color-primary)] text-[var(--color-secondary)]/40 cursor-not-allowed"
-                                }`}
-                                onClick={() =>
-                                  handleQuantityChange(
-                                    product.id,
-                                    (quantities[product.id] || 0) - 1,
-                                  )
-                                }
-                                disabled={(quantities[product.id] || 0) === 0}
-                              >
-                                <Minus size={14} />
-                              </button>
-
-                              <input
-                                type="number"
-                                min="0"
-                                className={`w-12 bg-transparent text-center font-bold focus:outline-none focus:ring-1 focus:ring-[var(--color-secondary)]/50 rounded appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${
-                                  (quantities[product.id] || 0) > 0
-                                    ? "text-black"
-                                    : "text-black/40"
-                                }`}
-                                value={quantities[product.id] || 0}
-                                onChange={(e) => {
-                                  const val = parseInt(e.target.value);
-                                  handleQuantityChange(
-                                    product.id,
-                                    isNaN(val) ? 0 : val,
-                                  );
-                                }}
-                                onFocus={(e) => e.target.select()}
-                              />
-
-                              <button
-                                className="w-8 h-8 rounded-full bg-[var(--color-secondary)] hover:brightness-95 text-white flex items-center justify-center transition-colors shadow-lg"
-                                onClick={() =>
-                                  handleQuantityChange(
-                                    product.id,
-                                    (quantities[product.id] || 0) + 1,
-                                  )
-                                }
-                              >
-                                <Plus size={14} />
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
+              <div className="lg:col-span-2 space-y-12">
+                {/* MANPOWERS Section */}
+                <div>
+                  <button
+                    onClick={() => setShowManpowers(!showManpowers)}
+                    className="w-full flex items-center justify-between text-3xl font-black text-black mb-6 border-b-2 border-black pb-2 hover:text-[var(--color-secondary)] transition-colors group"
+                  >
+                    <span>Productos MANPOWERS</span>
+                    {showManpowers ? (
+                      <ChevronUp
+                        size={32}
+                        className="transform transition-transform group-hover:scale-110"
+                      />
+                    ) : (
+                      <ChevronDown
+                        size={32}
+                        className="transform transition-transform group-hover:scale-110"
+                      />
+                    )}
+                  </button>
+                  {showManpowers && (
+                    <div className="space-y-8 animate-fade-in">
+                      {Object.entries(manpowersGrouped).map(
+                        ([category, items]) =>
+                          renderProductGroup(category, items),
+                      )}
                     </div>
-                  </div>
-                ))}
+                  )}
+                </div>
+
+                {/* TAMD Section */}
+                <div>
+                  <button
+                    onClick={() => setShowTamd(!showTamd)}
+                    className="w-full flex items-center justify-between text-3xl font-black text-black mb-6 border-b-2 border-black pb-2 hover:text-[var(--color-secondary)] transition-colors group"
+                  >
+                    <span>Productos TAMD Cosmetics</span>
+                    {showTamd ? (
+                      <ChevronUp
+                        size={32}
+                        className="transform transition-transform group-hover:scale-110"
+                      />
+                    ) : (
+                      <ChevronDown
+                        size={32}
+                        className="transform transition-transform group-hover:scale-110"
+                      />
+                    )}
+                  </button>
+                  {showTamd && (
+                    <div className="space-y-8 animate-fade-in">
+                      {Object.entries(tamdGrouped).map(([category, items]) =>
+                        renderProductGroup(category, items),
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* Desktop Sidebar Summary */}
@@ -1212,7 +1299,7 @@ const Comercial: React.FC = () => {
                           </div>
                           <div className="flex flex-col items-end gap-1">
                             <span className="text-[var(--color-secondary)] font-bold">
-                              {(p.price * p.quantity).toFixed(2)} €
+                              {(getEffectivePrice(p) * p.quantity).toFixed(2)} €
                             </span>
                             <button
                               onClick={() => handleQuantityChange(p.id, 0)}
@@ -1293,7 +1380,7 @@ const Comercial: React.FC = () => {
                           </div>
                         </div>
                         <div className="text-[var(--color-secondary)] font-bold whitespace-nowrap">
-                          {(p.price * p.quantity).toFixed(2)} €
+                          {(getEffectivePrice(p) * p.quantity).toFixed(2)} €
                         </div>
                       </div>
                     ))
