@@ -31,6 +31,7 @@ type ProductJson = {
   nutritionalValues?: { es: string; en: string };
   application?: { es: string; en: string };
   recommendations?: { es: string; en: string };
+  cautions?: { es: string; en: string; ca?: string };
   rating?: number;
   votes?: number;
   pricesBySize?: { [key: string]: string };
@@ -246,6 +247,7 @@ const ProductDetailPage: React.FC = () => {
             nutritionalValues: p.nutritionalValues,
             application: p.application,
             recommendations: p.recommendations,
+            cautions: p.cautions,
             rating: p.rating,
             votes: p.votes,
           }),
@@ -1178,6 +1180,11 @@ const ProductDetailPage: React.FC = () => {
                     product.recommendations
                       ? product.recommendations[currentLanguage] ||
                         product.recommendations.es
+                      : undefined
+                  }
+                  cautions={
+                    product.cautions
+                      ? product.cautions[currentLanguage] || product.cautions.es
                       : undefined
                   }
                   defaultOpenId="descripcion"

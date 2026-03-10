@@ -6,6 +6,7 @@ type SectionId =
   | "objetivos"
   | "valores"
   | "aplicacion"
+  | "cautions"
   | "recomendaciones";
 
 export interface AccordionProps {
@@ -13,6 +14,7 @@ export interface AccordionProps {
   objectives?: string | React.ReactNode;
   nutritionalValues?: string | React.ReactNode;
   application?: string | React.ReactNode;
+  cautions?: string | React.ReactNode;
   recommendations?: string | React.ReactNode;
   defaultOpenId?: SectionId;
   white?: boolean;
@@ -24,6 +26,7 @@ const Accordion: React.FC<AccordionProps> = ({
   nutritionalValues,
   application,
   recommendations,
+  cautions,
   defaultOpenId,
   white = false,
 }) => {
@@ -51,6 +54,11 @@ const Accordion: React.FC<AccordionProps> = ({
       id: "recomendaciones",
       title: t("accordion.recommendations"),
       content: recommendations,
+    },
+    {
+      id: "cautions",
+      title: t("accordion.cautions"),
+      content: cautions,
     },
   ];
 

@@ -22,6 +22,7 @@ type ProductJson = {
   nutritionalValues?: { es: string; en: string; ca?: string };
   application?: { es: string; en: string; ca?: string };
   recommendations?: { es: string; en: string; ca?: string };
+  cautions?: { es: string; en: string; ca?: string };
   rating?: number;
   votes?: number;
 };
@@ -201,6 +202,7 @@ const ChatWidget: React.FC = () => {
             nutritionalValues: p.nutritionalValues,
             application: p.application,
             recommendations: p.recommendations,
+            cautions: p.cautions,
             rating: p.rating,
             votes: p.votes,
           })) as Product[];

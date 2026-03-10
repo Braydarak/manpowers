@@ -30,6 +30,11 @@ interface Product {
     en: string;
     ca?: string;
   };
+  cautions?: {
+    es: string;
+    en: string;
+    ca?: string;
+  };
   price: number;
   comercial_price?: number;
   price_formatted: string;
@@ -95,7 +100,7 @@ class ProductsService {
 
   async getProducts(filters?: ProductsFilters): Promise<Product[]> {
     try {
-      const response = await fetch("/products.json");
+      const response = await fetch("/products.json?v=" + new Date().getTime());
       const data = await response.json();
       const arr = ((data.products || []) as Product[]).map((p) => ({
         id: p.id,
@@ -129,6 +134,7 @@ class ProductsService {
         nutritionalValues: p.nutritionalValues,
         application: p.application,
         recommendations: p.recommendations,
+        cautions: p.cautions,
         rating: p.rating,
         votes: p.votes,
       })) as Product[];
@@ -194,6 +200,7 @@ class ProductsService {
         nutritionalValues: p.nutritionalValues,
         application: p.application,
         recommendations: p.recommendations,
+        cautions: p.cautions,
         rating: p.rating,
         votes: p.votes,
         brand: p.brand || "TAMD Cosmetics",
@@ -227,6 +234,9 @@ class ProductsService {
             : undefined,
           objectives: p.objectives
             ? { ...p.objectives, ...(t.objectives || {}) }
+            : undefined,
+          cautions: p.cautions
+            ? { ...p.cautions, ...(t.cautions || {}) }
             : undefined,
         } as Product;
       });

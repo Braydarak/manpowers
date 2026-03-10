@@ -104,24 +104,29 @@
         "ca": "Omega 3 - Oli de peix pur"
       },
       "description": {
+        "es": "MɅN Powers Omega 3 contiene: aceite de pescado (35% EPA, 25% DHA), gelatina bovina, humectante (glicerina), D-alfa tocoferol (vitamina E).",
+        "en": "MɅN Powers Omega 3 contains: fish oil (35% EPA, 25% DHA), bovine gelatin, humectant (glycerin), D-alpha tocopherol (vitamin E).",
+        "ca": "MɅN Powers Omega 3 conté: oli de peix (35% EPA, 25% DHA), gelatina bovina, humectant (glicerina), D-alfa tocoferol (vitamina E)."
+      },
+      "nutritionalValues": {
         "es": "El Omega 3 es un ácido graso esencial que nuestro cuerpo no puede producir y debemos obtener a través de la dieta. Nuestra fórmula concentrada aporta 650 mg de Omega 3 por perla, combinando EPA y DHA en proporciones equilibradas.\n\nContribuye a la salud cardiovascular ayudando a regular los niveles de colesterol, mejora la función visual gracias al DHA presente en la retina y favorece el rendimiento cognitivo, el descanso y el estado de ánimo al intervenir en la producción de neurotransmisores. Además, refuerza la barrera cutánea, aporta hidratación y elasticidad a la piel y ayuda a modular la inflamación, reduciendo la hinchazón y las molestias asociadas a procesos inflamatorios crónicos.",
         "en": "Omega 3 is an essential fatty acid that our body cannot produce and we must obtain through diet. Our concentrated formula provides 650 mg of Omega 3 per softgel, combining EPA and DHA in balanced proportions.\n\nIt contributes to cardiovascular health by helping to regulate cholesterol levels, improves visual function thanks to the DHA present in the retina, and favors cognitive performance, rest, and mood by intervening in the production of neurotransmitters. In addition, it strengthens the skin barrier, provides hydration and elasticity to the skin, and helps modulate inflammation, reducing swelling and discomfort associated with chronic inflammatory processes.",
         "ca": "L'Omega 3 és un àcid gras essencial que el nostre cos no pot produir i hem d'obtenir a través de la dieta. La nostra fórmula concentrada aporta 650 mg d'Omega 3 per perla, combinant EPA i DHA en proporcions equilibrades.\n\nContribueix a la salut cardiovascular ajudant a regular els nivells de colesterol, millora la funció visual gràcies al DHA present a la retina i afavoreix el rendiment cognitiu, el descans i l'estat d'ànim en intervenir en la producció de neurotransmissors. A més, reforça la barrera cutània, aporta hidratació i elasticitat a la pell i ajuda a modular la inflamació, reduint la inflor i les molèsties associades a processos inflamatoris crònics."
       },
-      "nutritionalValues": {
-        "es": "MΛN POWERS Omega 3 aporta por perla 1000 mg de aceite de pescado, de los cuales 650 mg corresponden a ácidos grasos Omega 3, con 350 mg de EPA y 250 mg de DHA. La fórmula se completa con 5 mg de vitamina E (D-alfa tocoferol), que contribuye a la protección frente al daño oxidativo. La cápsula blanda está compuesta por gelatina bovina y glicerina como agente humectante.",
-        "en": "MΛN POWERS Omega 3 provides 1000 mg of fish oil per softgel, of which 650 mg correspond to Omega 3 fatty acids, with 350 mg of EPA and 250 mg of DHA. The formula is completed with 5 mg of vitamin E (D-alpha tocopherol), which contributes to protection against oxidative damage. The softgel is composed of bovine gelatin and glycerin as a humectant agent.",
-        "ca": "MΛN POWERS Omega 3 aporta per perla 1000 mg d'oli de peix, dels quals 650 mg corresponen a àcids grassos Omega 3, amb 350 mg d'EPA i 250 mg de DHA. La fórmula es completa amb 5 mg de vitamina E (D-alfa tocoferol), que contribueix a la protecció enfront del dany oxidatiu. La càpsula tova està composta per gelatina bovina i glicerina com a agent humectant."
-      },
       "application": {
-        "es": "Se recomienda tomar una perla al día. No superar la dosis diaria recomendada. Conservar en un lugar fresco y oscuro, protegido de la luz y de fuentes de calor.\n\nEl producto se presenta en un envase ámbar que protege el contenido frente a la oxidación, con 220 perlas por bote y tapa metálica autosellada. El lote y la fecha de caducidad están indicados en el envase. Los complementos alimenticios no deben utilizarse como sustituto de una dieta variada y equilibrada ni de un estilo de vida saludable.",
-        "en": "It is recommended to take one softgel per day. Do not exceed the recommended daily dose. Store in a cool, dark place, protected from light and heat sources.\n\nThe product is presented in an amber container that protects the content against oxidation, with 220 softgels per bottle and a self-sealing metal lid. The batch and expiration date are indicated on the packaging. Food supplements should not be used as a substitute for a varied and balanced diet or a healthy lifestyle.",
-        "ca": "Es recomana prendre una perla al dia. No superar la dosi diària recomanada. Conservar en un lloc fresc i fosc, protegit de la llum i de fonts de calor.\n\nEl producte es presenta en un envàs ambre que protegeix el contingut enfront de l'oxidació, amb 220 perles per pot i tapa metàl·lica autosegellada. El lot i la data de caducitat estan indicats a l'envàs. Els complements alimentosos no s'han d'utilitzar com a substitut d'una dieta variada i equilibrada ni d'un estil de vida saludable."
+        "es": "Se recomienda tomar una cápsula al día. No superar la dosis diaria recomendada. Es preferible tomarla junto con una comida, ya que al tratarse de un ácido graso su absorción mejora cuando se consume con otros alimentos que contienen grasas. Conservar en un lugar fresco y oscuro, protegido de la luz y de fuentes de calor.\n\nEl producto se presenta en un envase ámbar que protege el contenido frente a la oxidación, con 30/90 cápsulas por bote y tapa metálica autosellada. El lote y la fecha de caducidad están indicados en el envase. Los complementos alimenticios no deben utilizarse comosustituto de una dieta variada y equilibrada ni de un estilo de vida saludable.",
+        "en": "It is recommended to take one capsule per day. Do not exceed the recommended daily dose. It is preferable to take it with a meal, since as a fatty acid its absorption improves when consumed with other foods containing fats. Store in a cool, dark place, protected from light and heat sources.\n\nThe product is presented in an amber container that protects the content against oxidation, with 30/90 capsules per bottle and a self-sealing metal lid. The batch and expiration date are indicated on the packaging. Food supplements should not be used as a substitute for a varied and balanced diet or a healthy lifestyle.",
+        "ca": "Es recomana prendre una càpsula al dia. No superar la dosi diària recomanada. És preferible prendre-la juntament amb un àpat, ja que en tractar-se d'un àcid gras la seva absorció millora quan es consumeix amb altres aliments que contenen greixos. Conservar en un lloc fresc i fosc, protegit de la llum i de fonts de calor.\n\nEl producte es presenta en un envàs ambre que protegeix el contingut enfront de l'oxidació, amb 30/90 càpsules per pot i tapa metàl·lica autosegellada. El lot i la data de caducitat estan indicats a l'envàs. Els complements alimentosos no s'han d'utilitzar com a substitut d'una dieta variada i equilibrada ni d'un estil de vida saludable."
       },
       "recommendations": {
         "es": "Contiene pescado. No es apto para veganos ni vegetarianos. El proceso de fabricación incluye procedimientos de limpieza validados para minimizar el riesgo de contaminación cruzada.",
         "en": "Contains fish. Not suitable for vegans or vegetarians. The manufacturing process includes validated cleaning procedures to minimize the risk of cross-contamination.",
         "ca": "Conté peix. No és apte per a vegans ni vegetarians. El procés de fabricació inclou procediments de neteja validats per minimitzar el risc de contaminació creuada."
+      },
+      "cautions": {
+        "es": "Si estás tomando medicación anticoagulante o antiagregante (como sintrom o aspirina) o tienes programada una intervención quirúrgica, consulta previamente con tu médico antes de consumir suplementos de Omega-3.",
+        "en": "If you are taking anticoagulant or antiplatelet medication (such as Sintrom or aspirin) or have a scheduled surgery, consult your doctor before consuming Omega-3 supplements.",
+        "ca": "Si estàs prenent medicació anticoagulant o antiagregant (com Sintrom o aspirina) o tens programada una intervenció quirúrgica, consulta prèviament amb el teu metge abans de consumir suplements d'Omega-3."
       },
       "price": "21,00",
       "img_folder": "omega-3",
@@ -201,19 +206,25 @@
         "ca": "Protector solar facial i corporal SPF 50+"
       },
       "description": {
-        "es": "Tu aliado aliado para el verano. Este innovador protector solar SPF 50+ te ofrece una protección total frente a los rayos UVA/UVB, combinada con un acelerador del bronceado. Su fórmula avanzada está enriquecida con Ácido Hialurónico.",
-        "en": "Your perfect summer ally. This innovative SPF 50+ sunscreen offers total protection against UVA/UVB rays, combined with a tanning accelerator. Its advanced formula is enriched with Hyaluronic Acid.",
-        "ca": "El teu aliat perfecte per a l'estiu. Aquest innovador protector solar SPF 50+ ofereix una protecció total davant dels raigs UVA/UVB, combinada amb un accelerador del bronzejat. La seva fórmula avançada està enriquida amb àcid hialurònic."
+        "es": "El protector solar es esencial para proteger la piel frente a los efectos de la radiación ultravioleta. MɅN Powers Protector Solar SPF50+ ayuda a proteger la piel frente a los rayos UVA y UVB, responsables de las quemaduras solares, el envejecimiento prematuro y la aparición de manchas cutáneas.\n\nLa fórmula incorpora ácido hialurónico, un activo presente de forma natural en la piel que destaca por su capacidad para retener grandes cantidades de agua. Esto ayuda a mantener la hidratación, mejorar la elasticidad y aportar un aspecto más suave y saludable incluso durante la exposición solar.\n\nAdemás, su acción aceleradora del bronceado favorece la producción natural de melanina, ayudando a conseguir un bronceado más rápido, uniforme y duradero. Gracias a la combinación de protección solar, hidratación y estimulación del bronceado, la piel se mantiene protegida, luminosa y confortable incluso durante largas exposiciones al sol.",
+        "en": "Sunscreen is essential to protect the skin against the effects of ultraviolet radiation. MɅN Powers Sunscreen SPF50+ helps protect the skin against UVA and UVB rays, responsible for sunburn, premature aging, and the appearance of skin spots.\n\nThe formula incorporates hyaluronic acid, an active ingredient naturally present in the skin that stands out for its ability to retain large amounts of water. This helps maintain hydration, improve elasticity, and provide a smoother and healthier appearance even during sun exposure.\n\nIn addition, its tanning accelerator action favors the natural production of melanin, helping to achieve a faster, more uniform, and lasting tan. Thanks to the combination of sun protection, hydration, and tan stimulation, the skin remains protected, luminous, and comfortable even during long exposures to the sun.",
+        "ca": "El protector solar és essencial per protegir la pell davant els efectes de la radiació ultraviolada. MɅN Powers Protector Solar SPF50+ ajuda a protegir la pell davant els raigs UVA i UVB, responsables de les cremades solars, l'envelliment prematur i l'aparició de taques cutànies.\n\nLa fórmula incorpora àcid hialurònic, un actiu present de forma natural a la pell que destaca per la seva capacitat per retenir grans quantitats d'aigua. Això ajuda a mantenir la hidratació, millorar l'elasticitat i aportar un aspecte més suau i saludable fins i tot durant l'exposició solar.\n\nA més, la seva acció acceleradora del bronzejat afavoreix la producció natural de melanina, ajudant a aconseguir un bronzejat més ràpid, uniforme i durador. Gràcies a la combinació de protecció solar, hidratació i estimulació del bronzejat, la pell es manté protegida, lluminosa i confortable fins i tot durant llargues exposicions al sol."
       },
       "application": {
-        "es": "Aplicar generosamente sobre piel limpia, 15 minutos antes de la exposición. Reaplicar cada 2 horas o tras sudor intenso.",
-        "en": "Apply generously to clean skin 15 minutes before sun exposure. Reapply every 2 hours or after heavy sweating.",
-        "ca": "Aplicar generosament sobre pell neta, 15 minuts abans de l'exposició. Reaplicar cada 2 hores o després de suor intens."
+        "es": "Aplicar generosamente sobre la piel limpia y seca antes de la exposición al sol. Extender de forma uniforme sobre rostro y cuerpo hasta su completa absorción. Se recomienda reaplicar con frecuencia, especialmente después del baño, de sudoración intensa o tras secarse con la toalla.\n\nConservar en un lugar fresco y protegido de la luz directa y de fuentes de calor. El lote y la fecha de caducidad están indicados en el envase.",
+        "en": "Apply generously to clean, dry skin before sun exposure. Spread evenly over face and body until completely absorbed. It is recommended to reapply frequently, especially after bathing, intense sweating, or towel drying.\n\nStore in a cool place protected from direct light and heat sources. The lot number and expiration date are indicated on the packaging.",
+        "ca": "Aplicar generosament sobre la pell neta i seca abans de l'exposició al sol. Estendre de forma uniforme sobre rostre i cos fins a la seva completa absorció. Es recomana reaplicar amb freqüència, especialment després del bany, de sudoració intensa o després d'assecar-se amb la tovallola.\n\nConservar en un lloc fresc i protegit de la llum directa i de fonts de calor. El lot i la data de caducitat estan indicats a l'envàs."
       },
       "recommendations": {
-        "es": "Evitar contacto con ojos. No usar sobre piel irritada. Mantener fuera del alcance de niños.",
-        "en": "Avoid contact with eyes. Do not use on irritated skin. Keep out of reach of children.",
-        "ca": "Evitar el contacte amb els ulls. No utilitzar sobre pell irritada. Mantenir fora de l'abast dels nens."
+        "es": "Este producto no contiene alérgenos alimentarios en su formulación. Se trata de un producto cosmético de uso tópico. Evitar el contacto directo con los ojos y mucosas. En caso de irritación, suspender su uso.",
+
+        "en": "This product does not contain food allergens in its formulation. It is a cosmetic product for topical use. Avoid direct contact with eyes and mucous membranes. In case of irritation, discontinue use.",
+        "ca": "Aquest producte no conté al·lèrgens alimentaris en la seva formulació. Es tracta d'un producte cosmètic d'ús tòpic. Evitar el contacte directe amb els ulls i mucoses. En cas d'irritació, suspendre el seu ús."
+      },
+      "nutritionalValues": {
+        "es": "MɅN Powers Protector Solar SPF50+ es una emulsión fotoprotectora formulada para proteger la piel durante la exposición solar. La fórmula se basa en una combinación de filtros solares como Octocrylene, Ethylhexyl Salicylate, Butyl Methoxydibenzoylmethane, Ethylhexyl Triazone, Diethylhexyl Butamido Triazone, Phenylbenzimidazole Sulfonic Acid, Bis-Ethylhexyloxyphenol Methoxyphenyl Triazine y Methylene Bis-Benzotriazolyl Tetramethylbutylphenol (nano), que ayudan a proteger la piel frente a la radiación ultravioleta.\n\nLa fórmula se completa con agua (Aqua), emolientes y agentes acondicionadores como C12-15 Alkyl Benzoate, Diisopropyl Adipate y Caprylic/Capric Triglyceride, además de polímeros formadores de película como VP/Eicosene Copolymer. Incorpora también ácido hialurónico (Sodium Hyaluronate) para ayudar a mantener la hidratación de la piel y vitamina E (Tocopheryl Acetate) con acción antioxidante.\n\nEl sistema estabilizante de la emulsión incluye ingredientes como Aminomethyl Propanol, C14-22 Alcohols, C12-20 Alkyl Glucoside, Carbomer, Decyl Glucoside, Acrylates/C10-30 Alkyl Acrylate Crosspolymer y Xanthan Gum, junto con agentes conservantes y acondicionadores como Phenoxyethanol, Ethylhexylglycerin y Propylene Glycol, que contribuyen a mantener la estabilidad y seguridad del producto.",
+        "en": "MɅN Powers Sunscreen SPF50+ is a photoprotective emulsion formulated to protect the skin during sun exposure. The formula is based on a combination of sun filters such as Octocrylene, Ethylhexyl Salicylate, Butyl Methoxydibenzoylmethane, Ethylhexyl Triazone, Diethylhexyl Butamido Triazone, Phenylbenzimidazole Sulfonic Acid, Bis-Ethylhexyloxyphenol Methoxyphenyl Triazine, and Methylene Bis-Benzotriazolyl Tetramethylbutylphenol (nano), which help protect the skin against ultraviolet radiation.\n\nThe formula is completed with water (Aqua), emollients, and conditioning agents such as C12-15 Alkyl Benzoate, Diisopropyl Adipate, and Caprylic/Capric Triglyceride, as well as film-forming polymers such as VP/Eicosene Copolymer. It also incorporates hyaluronic acid (Sodium Hyaluronate) to help maintain skin hydration and Vitamin E (Tocopheryl Acetate) with antioxidant action.\n\nThe emulsion stabilizing system includes ingredients such as Aminomethyl Propanol, C14-22 Alcohols, C12-20 Alkyl Glucoside, Carbomer, Decyl Glucoside, Acrylates/C10-30 Alkyl Acrylate Crosspolymer, and Xanthan Gum, along with preservatives and conditioning agents such as Phenoxyethanol, Ethylhexylglycerin, and Propylene Glycol, which contribute to maintaining the stability and safety of the product.",
+        "ca": "MɅN Powers Protector Solar SPF50+ és una emulsió fotoprotectora formulada per protegir la pell durant l'exposició solar. La fórmula es basa en una combinació de filtres solars com Octocrylene, Ethylhexyl Salicylate, Butyl Methoxydibenzoylmethane, Ethylhexyl Triazone, Diethylhexyl Butamido Triazone, Phenylbenzimidazole Sulfonic Acid, Bis-Ethylhexyloxyphenol Methoxyphenyl Triazine i Methylene Bis-Benzotriazolyl Tetramethylbutylphenol (nano), que ajuden a protegir la pell davant la radiació ultraviolada.\n\nLa fórmula es completa amb aigua (Aqua), emol·lients i agents condicionadors com C12-15 Alkyl Benzoate, Diisopropyl Adipate i Caprylic/Capric Triglyceride, a més de polímers formadors de pel·lícula com VP/Eicosene Copolymer. Incorpora també àcid hialurònic (Sodium Hyaluronate) per ajudar a mantenir la hidratació de la pell i vitamina E (Tocopheryl Acetate) amb acció antioxidant.\n\nEl sistema estabilitzant de l'emulsió inclou ingredients com Aminomethyl Propanol, C14-22 Alcohols, C12-20 Alkyl Glucoside, Carbomer, Decyl Glucoside, Acrylates/C10-30 Alkyl Acrylate Crosspolymer i Xanthan Gum, juntament amb agents conservants i condicionadors com Phenoxyethanol, Ethylhexylglycerin i Propylene Glycol, que contribueixen a mantenir l'estabilitat i seguretat del producte."
       },
       "pricesBySize": {
         "50ml": "12,00",
@@ -2034,7 +2045,7 @@
         "en": "Designed for maximum durability and functionality. This tactical backpack features multiple compartments, rugged materials, and an ergonomic design ideal for carrying all your sports gear or for your outdoor adventures.",
         "ca": "Dissenyada per a la màxima resistència i funcionalitat. Aquesta motxilla tàctica compta amb múltiples compartiments, materials duradors i un disseny ergonòmic ideal per portar tot el teu equipament esportiu o per a les teves aventures a l'aire lliure."
       },
-      "image": "/products/Mochila-Táctica.jpg",
+      "image": "/products/Mochila-Tactica.jpg",
       "category": {
         "es": "indumentaria",
         "en": "clothing",
@@ -2332,7 +2343,7 @@
         "en": "Versatile and rugged tactical shoulder bag. Ideal for carrying essential gear comfortably and accessibly. Compact design with MOLLE system.",
         "ca": "Bolso d'espatlla tàctic versàtil i resistent. Ideal per transportar equip essencial de forma còmoda i accessible. Disseny compacte amb sistema MOLLE."
       },
-      "image": "/products/Bolso-de-Hombro-Táctico.jpg",
+      "image": "/products/Bolso-de-Hombro-Tactico.jpg",
       "category": {
         "es": "indumentaria",
         "en": "clothing",
@@ -2430,7 +2441,7 @@
         "en": "Breathable tactical cap designed for warm climates. Mesh panels for superior ventilation and visor for sun protection.",
         "ca": "Gorra tàctica transpirable dissenyada per a climes càlids. Panells de malla per a ventilació superior i visera per a protecció solar."
       },
-      "image": "/products/Gorra-Táctica-Transpirable.jpg",
+      "image": "/products/Gorra-Tactica-Transpirable.jpg",
       "category": {
         "es": "indumentaria",
         "en": "clothing",
@@ -2528,7 +2539,7 @@
         "en": "Waterproof and thermal tactical parka. Designed to protect against cold and rain. Includes foldable hood and multiple pockets.",
         "ca": "Parka tàctica impermeable i tèrmica. Dissenyada per protegir contra el fred i la pluja. Inclou caputxa plegable i múltiples butxaques."
       },
-      "image": "/products/Parka-Táctica.jpg",
+      "image": "/products/Parka-Tactica.jpg",
       "category": {
         "es": "indumentaria",
         "en": "clothing",

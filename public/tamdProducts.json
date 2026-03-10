@@ -33,7 +33,7 @@
       "image": "/products/ALMA DE OLIVA - CREMA DE PIES.png",
       "category": "cuidado",
       "brand": "Alma de Oliva",
-      "price": 8.47,
+      "price": 5.80,
       "available": true
     },
     {
@@ -69,121 +69,13 @@
       "image": "/products/masaje muscular.png",
       "category": "cuidado",
       "brand": "Viteline",
-      "price": 12.1,
-      "available": true
-    },
-    {
-      "id": 3,
-      "name": {
-        "es": "Crema Omega 3 - Anti Age",
-        "en": "Omega 3 Anti Age Cream"
-      },
-      "story": {
-        "es": "Inspirada en la sabiduría del mar Mediterráneo, esta crema captura la esencia del tiempo detenido. Cada aplicación es un viaje hacia la juventud, donde la ciencia marina se encuentra con la belleza atemporal.",
-        "en": "Inspired by the wisdom of the Mediterranean Sea, this cream captures the essence of time standing still. Each application is a journey towards youth, where marine science meets timeless beauty."
-      },
-      "description": {
-        "es": "Crema antiedad enriquecida con Omega 3 que combate arrugas, mejora elasticidad y regenera la piel. Fórmula avanzada que estimula la producción de colágeno para un rostro más joven.",
-        "en": "Anti-aging cream enriched with Omega 3 that fights wrinkles, improves elasticity and regenerates skin. Advanced formula that stimulates collagen production for a younger face."
-      },
-      "ingredients": {
-        "es": [
-          "Omega 3 Marino",
-          "Péptidos de Colágeno",
-          "Ácido Hialurónico",
-          "Vitamina C",
-          "Extracto de Algas"
-        ],
-        "en": [
-          "Marine Omega 3",
-          "Collagen Peptides",
-          "Hyaluronic Acid",
-          "Vitamin C",
-          "Seaweed Extract"
-        ]
-      },
-      "image": "/products/CREMA ANTIAGE.png",
-      "category": "cuidado",
-      "brand": "Celularys",
-      "price": 30.25,
-      "available": true
-    },
-    {
-      "id": 4,
-      "name": {
-        "es": "Crema Blanqueante antimanchas",
-        "en": "Blanqueating Cream"
-      },
-      "story": {
-        "es": "Nacida de la búsqueda de la perfección luminosa, esta crema es el resultado de años de investigación en laboratorios suizos. Cada gota contiene la promesa de una piel uniforme y radiante como la luz del amanecer.",
-        "en": "Born from the pursuit of luminous perfection, this cream is the result of years of research in Swiss laboratories. Each drop contains the promise of uniform, radiant skin like the light of dawn."
-      },
-      "description": {
-        "es": "Crema despigmentante que reduce manchas oscuras, unifica el tono y aporta luminosidad. Fórmula suave pero efectiva que revela una piel más clara y radiante sin irritaciones.",
-        "en": "Depigmenting cream that reduces dark spots, unifies tone and adds luminosity. Gentle but effective formula that reveals clearer, more radiant skin without irritation."
-      },
-      "ingredients": {
-        "es": [
-          "Vitamina C Estabilizada",
-          "Kojic Acid",
-          "Niacinamida",
-          "Extracto de Regaliz",
-          "Alfa Arbutina"
-        ],
-        "en": [
-          "Stabilized Vitamin C",
-          "Kojic Acid",
-          "Niacinamide",
-          "Licorice Extract",
-          "Alpha Arbutin"
-        ]
-      },
-      "image": "/products/Anti-manchas.png",
-      "category": "cuidado",
-      "brand": "Celularys",
-      "price": 70.18,
-      "available": true
-    },
-    {
-      "id": 5,
-      "name": {
-        "es": "Serum",
-        "en": "Serum"
-      },
-      "story": {
-        "es": "Formulado en los laboratorios de biotecnología más avanzados, este sérum es la culminación de la ciencia celular moderna. Cada gota es un concentrado de innovación que desafía las leyes del tiempo.",
-        "en": "Formulated in the most advanced biotechnology laboratories, this serum is the culmination of modern cellular science. Each drop is a concentrate of innovation that defies the laws of time."
-      },
-      "description": {
-        "es": "Sérum concentrado antiedad que penetra profundamente para reducir líneas de expresión y mejorar firmeza. Textura ligera de absorción rápida con resultados visibles desde la primera semana.",
-        "en": "Concentrated anti-aging serum that penetrates deeply to reduce expression lines and improve firmness. Light texture with fast absorption and visible results from the first week."
-      },
-      "ingredients": {
-        "es": [
-          "Retinol Encapsulado",
-          "Péptidos Biomimétricos",
-          "Ácido Hialurónico",
-          "Vitamina E",
-          "Extracto de Células Madre"
-        ],
-        "en": [
-          "Encapsulated Retinol",
-          "Biomimetic Peptides",
-          "Hyaluronic Acid",
-          "Vitamin E",
-          "Stem Cell Extract"
-        ]
-      },
-      "image": "/products/serum.png",
-      "category": "cuidado",
-      "brand": "Celularys",
-      "price": 8.47,
+      "price": 12.0,
       "available": true
     },
     {
       "id": 6,
       "name": {
-        "es": "Gel de Aloe Vera",
+        "es": "Gel de Aloe Vera ",
         "en": "Aloe Vera Gel"
       },
       "story": {
@@ -221,7 +113,7 @@
       "image": "/products/Gel-de-Aloe-Vera-Alma.jpg",
       "category": "cuidado",
       "brand": "Alma de Oliva",
-      "price": 9.0,
+      "price": 4.80,
       "available": true
     },
     {
@@ -253,7 +145,7 @@
       "image": "/products/Gel-de-Baño-Aceite-de-Oliva.jpg",
       "category": "cuidado",
       "brand": "Alma de Oliva",
-      "price": 4.13,
+      "price": 3.0,
       "available": true
     },
     {
@@ -285,7 +177,7 @@
       "image": "/products/Gel-de-Baño-Chocolate.jpg",
       "category": "cuidado",
       "brand": "Alma de Oliva",
-      "price": 4.13,
+      "price": 3.0,
       "available": true
     },
     {
@@ -329,7 +221,7 @@
       "image": "/products/Gel-de-Baño-de-Aloe-Vera.jpg",
       "category": "cuidado",
       "brand": "Alma de Oliva",
-      "price": 4.13,
+      "price": 3.0,
       "available": true
     },
     {
@@ -361,7 +253,7 @@
       "image": "/products/Gel-de-Baño-Dermo-Nutrienete.jpg",
       "category": "cuidado",
       "brand": "Alma de Oliva",
-      "price": 4.13,
+      "price": 3.0,
       "available": true
     },
 
@@ -394,7 +286,7 @@
       "image": "/products/Gel-de-Baño-Rosa-Mosqueta.jpg",
       "category": "cuidado",
       "brand": "Alma de Oliva",
-      "price": 4.13,
+      "price": 3.0,
       "available": true
     },
     {
@@ -426,7 +318,7 @@
       "image": "/products/Gel-de-Baño-coco.jpg",
       "category": "cuidado",
       "brand": "Alma de Oliva",
-      "price": 4.13,
+      "price": 3.0,
       "available": true
     },
     {
@@ -458,8 +350,8 @@
       "image": "/products/Champu-Ph-Neutro-Alma-de-Oliva.jpg",
       "category": "cuidado",
       "brand": "Alma de Oliva",
-      "price": 4.13,
-      "available": true
+      "price": 3.0,
+      "available": false
     },
     {
       "id": 14,
@@ -493,13 +385,68 @@
       "image": "/products/Aceite-de-Almendras-Dulces-Alma-de-Oliva.jpg",
       "category": "cuidado",
       "brand": "Alma de Oliva",
-      "price": 27.0,
+      "price": 3.50,
       "available": true
     },
     {
       "id": 15,
       "name": {
-        "es": "Protector Solar Facial y Corporal SPF 50+ ",
+        "es": "Protector Solar Facial y Corporal SPF 50+ (100ml)",
+        "en": "Facial and Body Sunscreen SPF 50+ (100ml)"
+      },
+      "story": {
+        "es": "Tu escudo diario contra el sol. Este protector solar SPF 50+ ha sido formulado para quienes buscan la máxima seguridad sin renunciar al confort. Su tecnología avanzada no solo bloquea la radiación dañina, sino que cuida tu piel manteniéndola hidratada y suave bajo el sol más intenso, previniendo el envejecimiento prematuro.",
+        "en": "Your daily shield against the sun. This SPF 50+ sunscreen is formulated for those seeking maximum safety without compromising comfort. Its advanced technology not only blocks harmful radiation but also cares for your skin, keeping it hydrated and soft under the most intense sun, preventing premature aging."
+      },
+      "description": {
+        "es": "Emulsión protectora de alta eficacia con SPF 50+ para rostro y cuerpo. Su fórmula ligera y de rápida absorción ofrece una defensa completa contra los rayos UVA y UVB, previniendo el fotoenvejecimiento y las quemaduras solares. Enriquecida con ingredientes antioxidantes, es ideal para todo tipo de pieles.",
+        "en": "High-efficacy protective emulsion with SPF 50+ for face and body. Its light, fast-absorbing formula offers complete defense against UVA and UVB rays, preventing photoaging and sunburn. Enriched with antioxidant ingredients, it is ideal for all skin types."
+      },
+      "ingredients": {
+        "es": ["Filtros Solares UVA/UVB", "Vitamina E", "Aloe Vera"],
+        "en": ["UVA/UVB Sun Filters", "Vitamin E", "Aloe Vera"]
+      },
+      "technicalSheet": {
+        "es": "INGREDIENTES ACTIVOS:\n\nFiltros Solares de Amplio Espectro\nTocopherol (Vitamina E)\nAloe Barbadensis Extract\n\nPROPIEDADES:\n✓ Protección muy alta SPF 50+\n✓ Prevención del fotoenvejecimiento\n✓ Hidratante y antioxidante\n✓ Resistente al agua\n\nTEXTURA: Crema ligera no grasa\nTIPOLOGÍA: Fotoprotector corporal y facial",
+        "en": "ACTIVE INGREDIENTS:\n\nBroad Spectrum Sun Filters\nTocopherol (Vitamin E)\nAloe Barbadensis Extract\n\nPROPERTIES:\n✓ Very high protection SPF 50+\n✓ Photoaging prevention\n✓ Hydrating and antioxidant\n✓ Water resistant\n\nTEXTURE: Light non-greasy cream\nTYPOLOGY: Body and facial sunscreen"
+      },
+      "usageInstructions": {
+        "es": "Aplicar generosamente sobre la piel seca 30 minutos antes de la exposición solar. Reaplicar cada 2 horas y tras transpirar, bañarse o secarse.",
+        "en": "Apply generously to dry skin 30 minutes before sun exposure. Reapply every 2 hours and after perspiring, swimming, or towel drying."
+      },
+      "image": "/products/Protector-Solar-Celularys.png",
+      "category": "cuidado",
+      "brand": "Celularys",
+      "price": 15.0,
+      "sizes": [
+        { "size": "100ml", "price": 15.0 }
+      ],
+      "available": false
+    },
+        {
+      "id": 16,
+      "name": {
+        "es": "Agua de rosas 250ml",
+        "en": "Rose Water 250ml"
+      },
+      "price": 3.0,
+      "category": "cuidado",
+      "available": true
+    },
+            {
+      "id": 17,
+      "name": {
+        "es": "Antimosquitos aceites escenciales",
+        "en": "Antimosquito Essential Oil"
+      },
+      "price": 3.50,
+      "category": "cuidado",
+      "available": true
+    },
+        {
+      "id": 18,
+      "name": {
+        "es": "Protector Solar Facial y Corporal SPF 50+ (50ml)",
         "en": "Facial and Body Sunscreen SPF 50+"
       },
       "story": {
@@ -525,12 +472,12 @@
       "image": "/products/Protector-Solar-Celularys.png",
       "category": "cuidado",
       "brand": "Celularys",
-      "price": 24.2,
+      "price": 12.0,
       "sizes": [
-        { "size": "100ml", "price": 24.2 },
-        { "size": "50ml", "price": 14.52 }
+        { "size": "50ml", "price": 12.0 }
       ],
-      "available": true
+      "available": false
     }
+
   ]
 }

@@ -5,6 +5,7 @@ type CaTrans = {
   nutritionalValues?: { ca: string };
   application?: { ca: string };
   recommendations?: { ca: string };
+  cautions?: { ca: string };
   objectives?: { ca: string[] };
 };
 

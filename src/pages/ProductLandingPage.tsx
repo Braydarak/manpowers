@@ -304,6 +304,12 @@ const ProductLandingPage: React.FC = () => {
                             product.recommendations.es
                           : undefined
                       }
+                      cautions={
+                        product.cautions
+                          ? product.cautions[currentLanguage] ||
+                            product.cautions.es
+                          : undefined
+                      }
                     />
                   </div>
                 </div>

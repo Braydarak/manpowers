@@ -22,6 +22,7 @@ type ProductJson = {
   nutritionalValues?: { es: string; en: string };
   application?: { es: string; en: string };
   recommendations?: { es: string; en: string };
+  cautions?: { es: string; en: string };
   rating?: number;
   votes?: number;
 };
@@ -88,6 +89,7 @@ const ProductSearch: React.FC<{
               nutritionalValues: p.nutritionalValues,
               application: p.application,
               recommendations: p.recommendations,
+              cautions: p.cautions,
               rating: p.rating,
               votes: p.votes,
             }),

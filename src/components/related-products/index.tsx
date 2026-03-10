@@ -27,6 +27,7 @@ type ProductJson = {
   nutritionalValues?: { es: string; en: string };
   application?: { es: string; en: string };
   recommendations?: { es: string; en: string };
+  cautions?: { es: string; en: string };
   rating?: number;
   votes?: number;
 };
@@ -87,7 +88,8 @@ const RelatedProducts: React.FC<Props> = ({
               amazonLinks: p.amazonLinks,
               nutritionalValues: p.nutritionalValues,
               application: p.application,
-              recommendations: p.recommendations,
+              recommendations: p.recommendations, 
+              cautions: p.cautions,
               rating: p.rating,
               votes: p.votes,
             }),

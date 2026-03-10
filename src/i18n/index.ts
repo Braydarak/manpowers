@@ -58,6 +58,7 @@ const resources = {
         nutritionalValues: "Valores nutricionales",
         application: "Modo de empleo, conservación y envase",
         recommendations: "Alérgenos",
+        cautions: "Precauciones",
       },
 
       // Products Section
@@ -477,6 +478,7 @@ const resources = {
         nutritionalValues: "Valors nutricionals",
         application: "Mode d'ús, conservació i envàs",
         recommendations: "Al·lèrgens",
+        cautions: "Precaucions",
       },
       productsTitle: "Els nostres Suplements",
       productsSubtitle:
@@ -776,6 +778,7 @@ const resources = {
         nutritionalValues: "Nutritional values",
         application: "Application, storage and packaging",
         recommendations: "Allergens",
+        cautions: "Cautions",
       },
 
       // Products Section
