@@ -5,6 +5,8 @@ import Hero from "../sections/hero";
 import AboutUs from "../sections/aboutUs";
 import Locations from "../sections/locations";
 import AllProducts from "../components/all-products";
+import Shops from "../sections/shops";
+import SearchShopModal from "../components/searchShopModal";
 import useLanguageUpdater from "../hooks/useLanguageUpdater";
 import { useTranslation } from "react-i18next";
 import { updateSEOTags, seoConfigs } from "../utils/seoConfig";
@@ -62,10 +64,12 @@ const HomePage: React.FC = () => {
             />
           </div>
         </div>
+        <Shops />
         <AboutUs />
         <Locations />
       </main>
       <Footer />
+      <SearchShopModal />
     </div>
   );
 };

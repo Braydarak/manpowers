@@ -13,6 +13,7 @@ import RecommendedTogether from "../components/recommended-together";
 import Faq from "../components/faq";
 import RelatedProducts from "../components/related-products";
 import InfoStripe from "../components/info/InfoStripe";
+import Shops from "../sections/shops";
 
 type ProductJson = {
   id: number;
@@ -584,6 +585,16 @@ const ProductDetailPage: React.FC = () => {
     window.open(instagramUrl, "_blank");
   };
 
+  const handleScrollToShops = () => {
+    try {
+      document
+        .getElementById("shops")
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    } catch {
+      return;
+    }
+  };
+
   const sportLabelName = (() => {
     const s = sportParam || product?.sportId;
     if (!s) return "";
@@ -1074,6 +1085,24 @@ const ProductDetailPage: React.FC = () => {
                       </button>
                     )}
                   </div>
+                  <button
+                    type="button"
+                    onClick={handleScrollToShops}
+                    className="mt-4 w-full rounded-lg cursor-pointer border border-black/15 bg-[var(--color-primary)] px-5 py-3 text-sm font-semibold text-black hover:bg-black/5 transition-all"
+                  >
+                    <span className="text-black/80">
+                      {t(
+                        "product.physicalStoreCta",
+                        "¿Quieres comprarlo físicamente?",
+                      )}
+                    </span>{" "}
+                    <span className="font-bold text-[var(--color-secondary)]">
+                      {t(
+                        "product.physicalStoreCtaLink",
+                        "Busca tu tienda más cercana",
+                      )}
+                    </span>
+                  </button>
                   <div className="flex items-center gap-3">
                     <span className="text-xs sm:text-sm text-black/70">
                       Compartir en
@@ -1425,6 +1454,7 @@ const ProductDetailPage: React.FC = () => {
             </div>
           </div>
         )}
+      <Shops />
       <Footer />
     </div>
   );
