@@ -189,58 +189,33 @@ const Comercial: React.FC = () => {
     setError("");
 
     try {
-      const response = await fetch(
-        "https://manpowers.es/backend/comercial.php",
-      );
+      const response = await fetch("/backend/comercial_login.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
 
-      if (response.ok) {
-        const users = await response.json();
-        const userList = Array.isArray(users) ? users : users.users || [];
+      const data = (await response.json()) as
+        | { ok: true; username: string; is_admin: boolean }
+        | { ok: false; error?: string };
 
-        const validUser = userList.find(
-          (u: { username: string; password: string; role?: string }) =>
-            u.username === username && u.password === password,
-        );
-
-        if (validUser) {
-          setIsLoggedIn(true);
-          if (validUser.role === "admin") {
-            setIsAdmin(true);
-            setView("orders");
-          } else {
-            setIsAdmin(false);
-          }
-          return;
-        }
-      } else {
-        console.warn(
-          "Backend PHP no disponible, usando validación local de respaldo.",
-        );
-        if (username === "comercial" && password === "manpowers2024") {
-          setIsLoggedIn(true);
-          setIsAdmin(false);
-          return;
-        }
-        if (username === "admin" && password === "manpowersAdmin2024") {
-          setIsLoggedIn(true);
-          setIsAdmin(true);
-          setView("orders");
-          return;
-        }
+      if (response.ok && data.ok) {
+        setIsLoggedIn(true);
+        setIsAdmin(Boolean(data.is_admin));
+        if (data.is_admin) setView("orders");
+        return;
       }
+
+      setError(
+        data.ok
+          ? "Usuario o contraseña incorrectos"
+          : data.error || "Usuario o contraseña incorrectos",
+      );
+      return;
     } catch (err) {
       console.error("Error al conectar con el servidor:", err);
-      if (username === "comercial" && password === "manpowers2024") {
-        setIsLoggedIn(true);
-        setIsAdmin(false);
-        return;
-      }
-      if (username === "admin" && password === "manpowersAdmin2024") {
-        setIsLoggedIn(true);
-        setIsAdmin(true);
-        setView("orders");
-        return;
-      }
+      setError("No se pudo conectar con el servidor");
+      return;
     }
 
     setError("Usuario o contraseña incorrectos");
@@ -378,16 +353,13 @@ const Comercial: React.FC = () => {
     };
 
     try {
-      const response = await fetch(
-        "https://manpowers.es/backend/save_order.php",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(orderData),
+      const response = await fetch("/backend/save_order.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify(orderData),
+      });
 
       if (response.ok) {
         try {
@@ -1219,7 +1191,7 @@ const Comercial: React.FC = () => {
                 <div>
                   <button
                     onClick={() => setShowManpowers(!showManpowers)}
-                    className="w-full flex items-center justify-between text-3xl font-black text-black mb-6 border-b-2 border-black pb-2 hover:text-[var(--color-secondary)] transition-colors group"
+                    className="w-full flex items-center text-start justify-between text-3xl font-black text-black mb-6 border-b-2 border-black pb-2 hover:text-[var(--color-secondary)] transition-colors group"
                   >
                     <span>Productos MANPOWERS</span>
                     {showManpowers ? (
@@ -1248,7 +1220,7 @@ const Comercial: React.FC = () => {
                 <div>
                   <button
                     onClick={() => setShowTamd(!showTamd)}
-                    className="w-full flex items-center justify-between text-3xl font-black text-black mb-6 border-b-2 border-black pb-2 hover:text-[var(--color-secondary)] transition-colors group"
+                    className="w-full flex items-center text-start justify-between text-3xl font-black text-black mb-6 border-b-2 border-black pb-2 hover:text-[var(--color-secondary)] transition-colors group"
                   >
                     <span>Productos TAMD Cosmetics</span>
                     {showTamd ? (
@@ -1353,12 +1325,12 @@ const Comercial: React.FC = () => {
           <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50">
             {/* Expanded Summary Drawer */}
             {showOrderSummary && (
-              <div className="absolute bottom-full left-0 right-0 bg-gray-900 border-t border-gray-800 rounded-t-2xl shadow-2xl p-4 max-h-[70vh] overflow-y-auto animate-slide-up">
-                <div className="flex justify-between items-center mb-4 sticky top-0 bg-gray-900 pb-2 border-b border-gray-800">
-                  <h3 className="font-bold text-white">Detalle del Pedido</h3>
+              <div className="absolute bottom-full left-0 right-0 bg-white border-t border-gray-800 rounded-t-2xl shadow-2xl p-4 max-h-[70vh] overflow-y-auto animate-slide-up">
+                <div className="flex justify-between items-center mb-4 sticky top-0 bg-white pb-2 border-b border-black/10">
+                  <h3 className="font-bold text-black">Detalle del Pedido</h3>
                   <button
                     onClick={() => setShowOrderSummary(false)}
-                    className="p-2 bg-gray-800 rounded-full"
+                    className="p-2 bg-white border border-black rounded-full"
                   >
                     <ChevronDown size={20} />
                   </button>
@@ -1369,10 +1341,10 @@ const Comercial: React.FC = () => {
                     getSelectedProducts().map((p) => (
                       <div
                         key={p.id}
-                        className="flex justify-between items-center text-sm bg-black/30 p-3 rounded-lg"
+                        className="flex justify-between items-center text-sm bg-white p-3 rounded-lg"
                       >
                         <div className="flex-grow pr-4">
-                          <div className="text-white font-medium">
+                          <div className="text-black font-medium">
                             {p.name.es}
                           </div>
                           <div className="text-gray-500 text-xs">
@@ -1394,18 +1366,18 @@ const Comercial: React.FC = () => {
             )}
 
             {/* Collapsed Bar */}
-            <div className="bg-gray-900/95 backdrop-blur-md border-t border-gray-800 p-4 pb-safe shadow-2xl">
+            <div className="bg-white backdrop-blur-md border-t border-white/10 p-4 pb-safe shadow-2xl shadow-black/40">
               <div className="flex gap-4 items-center">
                 <button
                   onClick={() => setShowOrderSummary(!showOrderSummary)}
-                  className="flex-1 bg-gray-800 hover:bg-gray-700 text-white p-3 rounded-xl flex items-center justify-between px-4 transition-colors"
+                  className="flex-1 bg-white text-black p-3 rounded-xl flex items-center justify-between px-4 transition-colors border border-white/10 hover:border-[var(--color-secondary)]/60"
                 >
                   <div className="flex flex-col items-start">
-                    <span className="text-xs text-gray-400 flex items-center gap-1">
+                    <span className="text-xs text-black flex items-center gap-1">
                       {totalItems} items{" "}
                       <ChevronUp
                         size={12}
-                        className={`transition-transform ${showOrderSummary ? "rotate-180" : ""}`}
+                        className={`text-[var(--color-secondary)] transition-transform ${showOrderSummary ? "rotate-180" : ""}`}
                       />
                     </span>
                     <span className="font-bold text-lg text-[var(--color-secondary)]">
@@ -1415,7 +1387,7 @@ const Comercial: React.FC = () => {
                 </button>
 
                 <button
-                  className="flex-[1.5] bg-yellow-600 hover:bg-yellow-500 text-black font-bold py-3 px-6 rounded-xl shadow-lg shadow-yellow-500/20 disabled:opacity-50 disabled:grayscale transition-all"
+                  className="flex-[1.5] bg-[var(--color-secondary)] hover:brightness-90 text-white font-bold py-3 px-6 rounded-xl shadow-lg shadow-[var(--color-secondary)]/20 disabled:opacity-50 disabled:grayscale transition-all"
                   disabled={calculateTotal() === 0}
                   onClick={() => setView("checkout")}
                 >
