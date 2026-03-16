@@ -180,13 +180,23 @@ function PaymentResultPage() {
     }
 
     // Dirección del comprador desde sessionStorage
+    let buyerFirstName = "";
+    let buyerLastName = "";
+    let buyerSecondLastName = "";
     let buyerAddress = "";
     let buyerPostalCode = "";
     let buyerLocality = "";
     let buyerProvince = "";
     let buyerPhone = "";
+    let promoCode = "";
+    let discountPercent = "";
     let marketingOptIn = "";
     try {
+      buyerFirstName = (sessionStorage.getItem("buyerFirstName") || "").trim();
+      buyerLastName = (sessionStorage.getItem("buyerLastName") || "").trim();
+      buyerSecondLastName = (
+        sessionStorage.getItem("buyerSecondLastName") || ""
+      ).trim();
       buyerAddress = (sessionStorage.getItem("buyerAddress") || "").trim();
       buyerPostalCode = (
         sessionStorage.getItem("buyerPostalCode") || ""
@@ -194,6 +204,10 @@ function PaymentResultPage() {
       buyerLocality = (sessionStorage.getItem("buyerLocality") || "").trim();
       buyerProvince = (sessionStorage.getItem("buyerProvince") || "").trim();
       buyerPhone = (sessionStorage.getItem("buyerPhone") || "").trim();
+      promoCode = (sessionStorage.getItem("promoCode") || "").trim();
+      discountPercent = (
+        sessionStorage.getItem("discountPercent") || ""
+      ).trim();
       marketingOptIn = (sessionStorage.getItem("marketingOptIn") || "").trim();
     } catch (err) {
       console.warn(
@@ -219,12 +233,17 @@ function PaymentResultPage() {
       total_price: totalPrice,
       website_link: "https://manpowers.es",
       year: new Date().getFullYear(),
+      buyer_first_name: buyerFirstName,
+      buyer_last_name: buyerLastName,
+      buyer_second_last_name: buyerSecondLastName,
       buyer_address: buyerAddress,
       buyer_postal_code: buyerPostalCode,
       buyer_locality: buyerLocality,
       buyer_province: buyerProvince,
       buyer_address_full: buyerAddressFull,
       buyer_phone: buyerPhone,
+      promo_code: promoCode,
+      discount_percent: discountPercent,
       marketing_opt_in:
         marketingOptIn === "true"
           ? "Sí"

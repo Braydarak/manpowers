@@ -19,7 +19,7 @@ const AutoEmailSender = () => {
         const k = sessionStorage.key(i);
         if (k) dump[k] = sessionStorage.getItem(k);
       }
-      console.log('[sessionStorage dump en /pago-ok] ', dump);
+      console.log("[sessionStorage dump en /pago-ok] ", dump);
     } catch (err) {
       console.warn("No se pudo leer sessionStorage:", err);
     }
@@ -33,7 +33,9 @@ const AutoEmailSender = () => {
       console.warn("No se pudo acceder al sessionStorage (buyerEmail):", error);
     }
     if (!email) {
-      console.warn("No hay email en sessionStorage (buyerEmail). Se aborta envío.");
+      console.warn(
+        "No hay email en sessionStorage (buyerEmail). Se aborta envío.",
+      );
       return;
     }
 
@@ -41,7 +43,8 @@ const AutoEmailSender = () => {
     let orderId = "N/A";
     try {
       const savedOrderId = sessionStorage.getItem("orderId");
-      if (savedOrderId && savedOrderId.trim() !== "") orderId = savedOrderId.trim();
+      if (savedOrderId && savedOrderId.trim() !== "")
+        orderId = savedOrderId.trim();
     } catch (error) {
       console.warn("No se pudo acceder al sessionStorage (orderId):", error);
     }
@@ -56,10 +59,16 @@ const AutoEmailSender = () => {
     try {
       const savedNames = sessionStorage.getItem("productNames");
       if (savedNames && savedNames.trim() !== "") {
-        namesArr = savedNames.split("|").map((n) => n.trim()).filter(Boolean);
+        namesArr = savedNames
+          .split("|")
+          .map((n) => n.trim())
+          .filter(Boolean);
       }
     } catch (error) {
-      console.warn("No se pudo acceder al sessionStorage (productNames):", error);
+      console.warn(
+        "No se pudo acceder al sessionStorage (productNames):",
+        error,
+      );
     }
     if (namesArr.length === 0) {
       try {
@@ -69,7 +78,10 @@ const AutoEmailSender = () => {
           namesArr = parsed.map((i) => i.name);
         }
       } catch (err) {
-        console.warn("No se pudo derivar productos desde localStorage(cart):", err);
+        console.warn(
+          "No se pudo derivar productos desde localStorage(cart):",
+          err,
+        );
       }
     }
 
@@ -91,33 +103,68 @@ const AutoEmailSender = () => {
       try {
         const raw = localStorage.getItem("cart");
         if (raw) {
-          const parsed = JSON.parse(raw) as Array<{ price?: number; quantity?: number }>;
-          const sum = parsed.reduce((acc, i) => acc + (typeof i.price === "number" ? i.price : 0) * (i.quantity ?? 1), 0);
+          const parsed = JSON.parse(raw) as Array<{
+            price?: number;
+            quantity?: number;
+          }>;
+          const sum = parsed.reduce(
+            (acc, i) =>
+              acc +
+              (typeof i.price === "number" ? i.price : 0) * (i.quantity ?? 1),
+            0,
+          );
           totalPrice = sum.toFixed(2);
         }
       } catch (err) {
-        console.warn("No se pudo calcular totalPrice desde localStorage(cart):", err);
+        console.warn(
+          "No se pudo calcular totalPrice desde localStorage(cart):",
+          err,
+        );
       }
     }
 
     // Dirección del comprador desde sessionStorage
+    let buyerFirstName = "";
+    let buyerLastName = "";
+    let buyerSecondLastName = "";
     let buyerAddress = "";
     let buyerPostalCode = "";
     let buyerLocality = "";
     let buyerProvince = "";
     let buyerPhone = "";
+    let promoCode = "";
+    let discountPercent = "";
     let marketingOptIn = "";
     try {
+      buyerFirstName = (sessionStorage.getItem("buyerFirstName") || "").trim();
+      buyerLastName = (sessionStorage.getItem("buyerLastName") || "").trim();
+      buyerSecondLastName = (
+        sessionStorage.getItem("buyerSecondLastName") || ""
+      ).trim();
       buyerAddress = (sessionStorage.getItem("buyerAddress") || "").trim();
-      buyerPostalCode = (sessionStorage.getItem("buyerPostalCode") || "").trim();
+      buyerPostalCode = (
+        sessionStorage.getItem("buyerPostalCode") || ""
+      ).trim();
       buyerLocality = (sessionStorage.getItem("buyerLocality") || "").trim();
       buyerProvince = (sessionStorage.getItem("buyerProvince") || "").trim();
       buyerPhone = (sessionStorage.getItem("buyerPhone") || "").trim();
+      promoCode = (sessionStorage.getItem("promoCode") || "").trim();
+      discountPercent = (
+        sessionStorage.getItem("discountPercent") || ""
+      ).trim();
       marketingOptIn = (sessionStorage.getItem("marketingOptIn") || "").trim();
     } catch (err) {
-      console.warn("No se pudo leer dirección del comprador desde sessionStorage:", err);
+      console.warn(
+        "No se pudo leer dirección del comprador desde sessionStorage:",
+        err,
+      );
     }
-    const buyerAddressFull = [buyerAddress, buyerPostalCode, buyerLocality, buyerProvince]
+    const buyerAddressFull = [
+      buyerAddress,
+      buyerPostalCode,
+      buyerLocality,
+      buyerProvince,
+    ]
       .filter(Boolean)
       .join(", ");
 
@@ -131,13 +178,23 @@ const AutoEmailSender = () => {
       total_price: totalPrice,
       website_link: "https://manpowers.es",
       year: new Date().getFullYear(),
+      buyer_first_name: buyerFirstName,
+      buyer_last_name: buyerLastName,
+      buyer_second_last_name: buyerSecondLastName,
       buyer_address: buyerAddress,
       buyer_postal_code: buyerPostalCode,
       buyer_locality: buyerLocality,
       buyer_province: buyerProvince,
       buyer_address_full: buyerAddressFull,
       buyer_phone: buyerPhone,
-      marketing_opt_in: marketingOptIn === "true" ? "Sí" : marketingOptIn === "false" ? "No" : marketingOptIn,
+      promo_code: promoCode,
+      discount_percent: discountPercent,
+      marketing_opt_in:
+        marketingOptIn === "true"
+          ? "Sí"
+          : marketingOptIn === "false"
+            ? "No"
+            : marketingOptIn,
     };
 
     // Flag para evitar duplicar por pedido
@@ -153,17 +210,15 @@ const AutoEmailSender = () => {
 
     // Envío con EmailJS usando el template acordado
     emailjs
-      .send(
-        "service_gu7sauk",
-        "template_2d2243c",
-        payload,
-        "Gim0n7JTTYUJVWPuC"
-      )
+      .send("service_gu7sauk", "template_2d2243c", payload, "Gim0n7JTTYUJVWPuC")
       .then(() => {
         try {
           sessionStorage.setItem(sentKey, "1");
         } catch (error) {
-          console.warn("No se pudo escribir flag de envío en sessionStorage:", error);
+          console.warn(
+            "No se pudo escribir flag de envío en sessionStorage:",
+            error,
+          );
         }
         hasSentRef.current = true;
       })

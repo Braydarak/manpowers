@@ -157,6 +157,11 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
   const [promoError, setPromoError] = useState("");
   const [buyerEmail, setBuyerEmail] = useState("");
   const [buyerEmailError, setBuyerEmailError] = useState("");
+  const [buyerFirstName, setBuyerFirstName] = useState("");
+  const [buyerLastName, setBuyerLastName] = useState("");
+  const [buyerSecondLastName, setBuyerSecondLastName] = useState("");
+  const [buyerFirstNameError, setBuyerFirstNameError] = useState("");
+  const [buyerLastNameError, setBuyerLastNameError] = useState("");
   const [buyerPhone, setBuyerPhone] = useState("");
   const [buyerPhoneError, setBuyerPhoneError] = useState("");
   const [marketingOptIn, setMarketingOptIn] = useState(false);
@@ -235,11 +240,24 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
         setPaymentError(t("cart.invalidEmail"));
         return;
       }
-      if (buyerPhone.trim() && !isValidPhone(buyerPhone)) {
-        setBuyerPhoneError(t("cart.invalidPhone"));
-      }
+
       // Validación de campos requeridos
       let hasError = false;
+      if (!buyerFirstName.trim()) {
+        setBuyerFirstNameError(t("cart.firstNameRequired"));
+        hasError = true;
+      }
+      if (!buyerLastName.trim()) {
+        setBuyerLastNameError(t("cart.lastNameRequired"));
+        hasError = true;
+      }
+      if (!buyerPhone.trim()) {
+        setBuyerPhoneError(t("cart.phoneRequired"));
+        hasError = true;
+      } else if (!isValidPhone(buyerPhone)) {
+        setBuyerPhoneError(t("cart.invalidPhone"));
+        hasError = true;
+      }
       if (!address.trim()) {
         setAddressError(t("cart.addressRequired"));
         hasError = true;
@@ -263,13 +281,20 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
       // Guardar email y dirección del comprador
       try {
         sessionStorage.setItem("buyerEmail", buyerEmail.trim());
+        sessionStorage.setItem("buyerFirstName", buyerFirstName.trim());
+        sessionStorage.setItem("buyerLastName", buyerLastName.trim());
+        sessionStorage.setItem(
+          "buyerSecondLastName",
+          buyerSecondLastName.trim(),
+        );
         sessionStorage.setItem("buyerPhone", buyerPhone.trim());
         sessionStorage.setItem("buyerAddress", address.trim());
         sessionStorage.setItem("buyerPostalCode", postalCode.trim());
         sessionStorage.setItem("buyerLocality", locality.trim());
         sessionStorage.setItem("buyerProvince", province.trim());
+        sessionStorage.setItem("promoCode", promoCode.trim());
+        sessionStorage.setItem("discountPercent", String(discount));
         sessionStorage.setItem("marketingOptIn", marketingOptIn ? "Sí" : "No");
-        // Log del sessionStorage para depuración
         try {
           const dump: Record<string, string | null> = {};
           for (let i = 0; i < sessionStorage.length; i++) {
@@ -321,6 +346,12 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
       setPaymentStep("summary");
     }
   };
+
+  const requiredMark = (
+    <span className="text-red-600 ml-1" aria-hidden="true">
+      *
+    </span>
+  );
 
   return (
     <div className="m-0">
@@ -576,6 +607,10 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                       <h4 className="font-semibold mb-2 text-black">
                         {t("cart.emailLabel")}
                       </h4>
+                      <label className="block text-sm text-black/80">
+                        {t("cart.emailInputLabel")}
+                        {requiredMark}
+                      </label>
                       <input
                         type="email"
                         required
@@ -593,108 +628,201 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                           {buyerEmailError}
                         </p>
                       )}
-                      <div className="mt-3 space-y-2">
-                        <label className="block text-sm text-black/80">
-                          {t("cart.phoneLabel")}
-                        </label>
-                        <input
-                          type="tel"
-                          value={buyerPhone}
-                          onChange={(e) => {
-                            const val = e.target.value;
-                            setBuyerPhone(val);
-                            if (!val.trim()) {
-                              setBuyerPhoneError("");
-                            } else if (!isValidPhone(val)) {
-                              setBuyerPhoneError(t("cart.invalidPhone"));
-                            } else {
-                              setBuyerPhoneError("");
-                            }
-                          }}
-                          placeholder={t("cart.phonePlaceholder")}
-                          className="w-full bg-[var(--color-primary)] text-black rounded-md px-3 py-2 text-sm border border-black/20 focus:ring-2 focus:ring-black/20 focus:outline-none"
-                        />
-                        {buyerPhoneError && (
-                          <p className="text-red-600 text-xs mt-2">
-                            {buyerPhoneError}
-                          </p>
-                        )}
+                      <div className="mt-4">
+                        <h5 className="text-sm font-semibold text-black mb-2">
+                          {t("cart.contactDetailsTitle")}
+                        </h5>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          <div>
+                            <label className="block text-sm text-black/80">
+                              {t("cart.firstNameLabel")}
+                              {requiredMark}
+                            </label>
+                            <input
+                              type="text"
+                              required
+                              value={buyerFirstName}
+                              onChange={(e) => {
+                                setBuyerFirstName(e.target.value);
+                                if (buyerFirstNameError)
+                                  setBuyerFirstNameError("");
+                                if (paymentError) setPaymentError("");
+                              }}
+                              className="w-full bg-[var(--color-primary)] text-black rounded-md px-3 py-2 text-sm border border-black/20 focus:ring-2 focus:ring-black/20 focus:outline-none"
+                            />
+                            {buyerFirstNameError && (
+                              <p className="text-red-600 text-xs mt-2">
+                                {buyerFirstNameError}
+                              </p>
+                            )}
+                          </div>
+                          <div>
+                            <label className="block text-sm text-black/80">
+                              {t("cart.lastNameLabel")}
+                              {requiredMark}
+                            </label>
+                            <input
+                              type="text"
+                              required
+                              value={buyerLastName}
+                              onChange={(e) => {
+                                setBuyerLastName(e.target.value);
+                                if (buyerLastNameError)
+                                  setBuyerLastNameError("");
+                                if (paymentError) setPaymentError("");
+                              }}
+                              className="w-full bg-[var(--color-primary)] text-black rounded-md px-3 py-2 text-sm border border-black/20 focus:ring-2 focus:ring-black/20 focus:outline-none"
+                            />
+                            {buyerLastNameError && (
+                              <p className="text-red-600 text-xs mt-2">
+                                {buyerLastNameError}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
+                          <div>
+                            <label className="block text-sm text-black/80">
+                              {t("cart.secondLastNameLabel")}
+                            </label>
+                            <input
+                              type="text"
+                              value={buyerSecondLastName}
+                              onChange={(e) => {
+                                setBuyerSecondLastName(e.target.value);
+                                if (paymentError) setPaymentError("");
+                              }}
+                              className="w-full bg-[var(--color-primary)] text-black rounded-md px-3 py-2 text-sm border border-black/20 focus:ring-2 focus:ring-black/20 focus:outline-none"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm text-black/80">
+                              {t("cart.phoneLabel")}
+                              {requiredMark}
+                            </label>
+                            <input
+                              type="tel"
+                              required
+                              value={buyerPhone}
+                              onChange={(e) => {
+                                const val = e.target.value;
+                                setBuyerPhone(val);
+                                if (!val.trim()) {
+                                  setBuyerPhoneError(t("cart.phoneRequired"));
+                                } else if (!isValidPhone(val)) {
+                                  setBuyerPhoneError(t("cart.invalidPhone"));
+                                } else {
+                                  setBuyerPhoneError("");
+                                }
+                              }}
+                              placeholder={t("cart.phonePlaceholder")}
+                              className="w-full bg-[var(--color-primary)] text-black rounded-md px-3 py-2 text-sm border border-black/20 focus:ring-2 focus:ring-black/20 focus:outline-none"
+                            />
+                            {buyerPhoneError && (
+                              <p className="text-red-600 text-xs mt-2">
+                                {buyerPhoneError}
+                              </p>
+                            )}
+                          </div>
+                        </div>
                       </div>
-                      <div className="mt-3 space-y-2">
-                        <label className="block text-sm text-black/80">
-                          {t("cart.addressLabel")}
-                        </label>
-                        <input
-                          type="text"
-                          required
-                          value={address}
-                          onChange={(e) => {
-                            setAddress(e.target.value);
-                            if (addressError) setAddressError("");
-                          }}
-                          placeholder={t("cart.addressPlaceholder")}
-                          className="w-full bg-[var(--color-primary)] text-black rounded-md px-3 py-2 text-sm border border-black/20 focus:ring-2 focus:ring-black/20 focus:outline-none"
-                        />
-                        {addressError && (
-                          <p className="text-red-600 text-xs">{addressError}</p>
-                        )}
-                        <label className="block text-sm text-black/80">
-                          {t("cart.postalCodeLabel")}
-                        </label>
-                        <input
-                          type="text"
-                          required
-                          value={postalCode}
-                          onChange={(e) => {
-                            setPostalCode(e.target.value);
-                            if (postalCodeError) setPostalCodeError("");
-                          }}
-                          placeholder={t("cart.postalCodePlaceholder")}
-                          className="w-full bg-[var(--color-primary)] text-black rounded-md px-3 py-2 text-sm border border-black/20 focus:ring-2 focus:ring-black/20 focus:outline-none"
-                        />
-                        {postalCodeError && (
-                          <p className="text-red-600 text-xs">
-                            {postalCodeError}
-                          </p>
-                        )}
-                        <label className="block text-sm text-black/80">
-                          {t("cart.localityLabel")}
-                        </label>
-                        <input
-                          type="text"
-                          required
-                          value={locality}
-                          onChange={(e) => {
-                            setLocality(e.target.value);
-                            if (localityError) setLocalityError("");
-                          }}
-                          placeholder={t("cart.localityPlaceholder")}
-                          className="w-full bg-[var(--color-primary)] text-black rounded-md px-3 py-2 text-sm border border-black/20 focus:ring-2 focus:ring-black/20 focus:outline-none"
-                        />
-                        {localityError && (
-                          <p className="text-red-600 text-xs">
-                            {localityError}
-                          </p>
-                        )}
-                        <label className="block text-sm text-black/80">
-                          {t("cart.provinceLabel")}
-                        </label>
-                        <input
-                          type="text"
-                          required
-                          value={province}
-                          onChange={(e) => {
-                            setProvince(e.target.value);
-                            if (provinceError) setProvinceError("");
-                          }}
-                          placeholder={t("cart.provincePlaceholder")}
-                          className="w-full bg-[var(--color-primary)] text-black rounded-md px-3 py-2 text-sm border border-black/20 focus:ring-2 focus:ring-black/20 focus:outline-none"
-                        />
-                        {provinceError && (
-                          <p className="text-red-600 text-xs">
-                            {provinceError}
-                          </p>
-                        )}
+
+                      <div className="mt-4 pt-4 border-t border-black/10">
+                        <h5 className="text-sm font-semibold text-black mb-2">
+                          {t("cart.shippingDetailsTitle")}
+                        </h5>
+                        <div className="space-y-2">
+                          <label className="block text-sm text-black/80">
+                            {t("cart.addressLabel")}
+                            {requiredMark}
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            value={address}
+                            onChange={(e) => {
+                              setAddress(e.target.value);
+                              if (addressError) setAddressError("");
+                            }}
+                            placeholder={t("cart.addressPlaceholder")}
+                            className="w-full bg-[var(--color-primary)] text-black rounded-md px-3 py-2 text-sm border border-black/20 focus:ring-2 focus:ring-black/20 focus:outline-none"
+                          />
+                          {addressError && (
+                            <p className="text-red-600 text-xs">
+                              {addressError}
+                            </p>
+                          )}
+
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                              <label className="block text-sm text-black/80">
+                                {t("cart.postalCodeLabel")}
+                                {requiredMark}
+                              </label>
+                              <input
+                                type="text"
+                                required
+                                value={postalCode}
+                                onChange={(e) => {
+                                  setPostalCode(e.target.value);
+                                  if (postalCodeError) setPostalCodeError("");
+                                }}
+                                placeholder={t("cart.postalCodePlaceholder")}
+                                className="w-full bg-[var(--color-primary)] text-black rounded-md px-3 py-2 text-sm border border-black/20 focus:ring-2 focus:ring-black/20 focus:outline-none"
+                              />
+                              {postalCodeError && (
+                                <p className="text-red-600 text-xs mt-2">
+                                  {postalCodeError}
+                                </p>
+                              )}
+                            </div>
+                            <div>
+                              <label className="block text-sm text-black/80">
+                                {t("cart.localityLabel")}
+                                {requiredMark}
+                              </label>
+                              <input
+                                type="text"
+                                required
+                                value={locality}
+                                onChange={(e) => {
+                                  setLocality(e.target.value);
+                                  if (localityError) setLocalityError("");
+                                }}
+                                placeholder={t("cart.localityPlaceholder")}
+                                className="w-full bg-[var(--color-primary)] text-black rounded-md px-3 py-2 text-sm border border-black/20 focus:ring-2 focus:ring-black/20 focus:outline-none"
+                              />
+                              {localityError && (
+                                <p className="text-red-600 text-xs mt-2">
+                                  {localityError}
+                                </p>
+                              )}
+                            </div>
+                          </div>
+
+                          <label className="block text-sm text-black/80">
+                            {t("cart.provinceLabel")}
+                            {requiredMark}
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            value={province}
+                            onChange={(e) => {
+                              setProvince(e.target.value);
+                              if (provinceError) setProvinceError("");
+                            }}
+                            placeholder={t("cart.provincePlaceholder")}
+                            className="w-full bg-[var(--color-primary)] text-black rounded-md px-3 py-2 text-sm border border-black/20 focus:ring-2 focus:ring-black/20 focus:outline-none"
+                          />
+                          {provinceError && (
+                            <p className="text-red-600 text-xs">
+                              {provinceError}
+                            </p>
+                          )}
+                        </div>
+
                         <div className="mt-3 flex items-center gap-3 p-2 rounded-lg border border-black/10 bg-black/5 hover:border-black/20 transition-colors">
                           <input
                             id="marketingOptIn"
@@ -763,6 +891,10 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                     disabled={
                       checkoutTotalItems === 0 ||
                       !isValidEmail(buyerEmail) ||
+                      !buyerFirstName.trim() ||
+                      !buyerLastName.trim() ||
+                      !buyerPhone.trim() ||
+                      !isValidPhone(buyerPhone) ||
                       !address.trim() ||
                       !postalCode.trim() ||
                       !locality.trim() ||
@@ -771,6 +903,10 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                     className={`w-full font-semibold rounded-lg px-4 py-3 transition-all duration-200 ${
                       checkoutTotalItems > 0 &&
                       isValidEmail(buyerEmail) &&
+                      buyerFirstName.trim() &&
+                      buyerLastName.trim() &&
+                      buyerPhone.trim() &&
+                      isValidPhone(buyerPhone) &&
                       address.trim() &&
                       postalCode.trim() &&
                       locality.trim() &&

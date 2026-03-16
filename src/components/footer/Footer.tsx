@@ -15,6 +15,9 @@ const Footer: React.FC = () => {
             className="h-10 mr-4 invert"
           />
           <p className="text-black/70 mb-4 max-w-xs">{t("footerCompany")}</p>
+          <p className="text-black/60 text-sm mb-4 max-w-xs">
+            N°RGSEAA 26.026334/M
+          </p>
           <div className="flex space-x-4">
             {/* Iconos de redes sociales */}
             <a
