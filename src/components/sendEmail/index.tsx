@@ -123,6 +123,29 @@ const AutoEmailSender = () => {
       }
     }
 
+    let cartItems: Array<{
+      id?: string;
+      name?: string;
+      price?: number;
+      image?: string;
+      quantity?: number;
+    }> = [];
+    try {
+      const raw = localStorage.getItem("cart");
+      if (raw) {
+        const parsed = JSON.parse(raw) as Array<{
+          id?: string;
+          name?: string;
+          price?: number;
+          image?: string;
+          quantity?: number;
+        }>;
+        cartItems = parsed.filter((i) => typeof i?.name === "string" && i.name);
+      }
+    } catch {
+      cartItems = [];
+    }
+
     // Dirección del comprador desde sessionStorage
     let buyerFirstName = "";
     let buyerLastName = "";
@@ -199,6 +222,7 @@ const AutoEmailSender = () => {
 
     // Flag para evitar duplicar por pedido
     const sentKey = `emailSent:${orderId}`;
+    const savedKey = `purchaseSaved:${orderId}`;
     try {
       if (sessionStorage.getItem(sentKey) === "1") {
         hasSentRef.current = true;
@@ -209,9 +233,46 @@ const AutoEmailSender = () => {
     }
 
     // Envío con EmailJS usando el template acordado
-    emailjs
-      .send("service_gu7sauk", "template_2d2243c", payload, "Gim0n7JTTYUJVWPuC")
-      .then(() => {
+    const emailPromise = emailjs.send(
+      "service_gu7sauk",
+      "template_2d2243c",
+      payload,
+      "Gim0n7JTTYUJVWPuC",
+    );
+
+    let savePromise: Promise<void> | null = null;
+    try {
+      if (sessionStorage.getItem(savedKey) !== "1") {
+        savePromise = fetch("/backend/save_purchase.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...payload, items: cartItems }),
+        })
+          .then((r) => {
+            if (!r.ok) throw new Error(`save_purchase_http_${r.status}`);
+            return r.json().catch(() => null);
+          })
+          .then(() => {
+            try {
+              sessionStorage.setItem(savedKey, "1");
+            } catch {
+              void 0;
+            }
+          })
+          .catch((e) => {
+            console.error("Error al guardar compra en backend:", e);
+          });
+      }
+    } catch (e) {
+      console.warn("No se pudo gestionar flag purchaseSaved en sessionStorage:", e);
+    }
+
+    Promise.allSettled([emailPromise, savePromise ?? Promise.resolve()])
+      .then((results) => {
+        const emailResult = results[0];
+        if (emailResult.status !== "fulfilled") {
+          throw emailResult.reason;
+        }
         try {
           sessionStorage.setItem(sentKey, "1");
         } catch (error) {

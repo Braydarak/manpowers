@@ -1215,8 +1215,6 @@ const Comercial: React.FC = () => {
                     </div>
                   )}
                 </div>
-
-                {/* TAMD Section */}
                 <div>
                   <button
                     onClick={() => setShowTamd(!showTamd)}

@@ -224,6 +224,29 @@ function PaymentResultPage() {
       .filter(Boolean)
       .join(", ");
 
+    let cartItems: Array<{
+      id?: string;
+      name?: string;
+      price?: number;
+      image?: string;
+      quantity?: number;
+    }> = [];
+    try {
+      const raw = localStorage.getItem("cart");
+      if (raw) {
+        const parsed = JSON.parse(raw) as Array<{
+          id?: string;
+          name?: string;
+          price?: number;
+          image?: string;
+          quantity?: number;
+        }>;
+        cartItems = parsed.filter((i) => typeof i?.name === "string" && i.name);
+      }
+    } catch {
+      cartItems = [];
+    }
+
     const payload = {
       message: t("email.receiptMessage"),
       order_id: orderId,
@@ -253,12 +276,47 @@ function PaymentResultPage() {
     };
 
     try {
-      await emailjs.send(
+      const emailPromise = emailjs.send(
         "service_gu7sauk",
         "template_2d2243c",
         payload,
         "Gim0n7JTTYUJVWPuC",
       );
+
+      const savedKey = `purchaseSaved:${orderId}`;
+      const savePromise = (async () => {
+        try {
+          if (sessionStorage.getItem(savedKey) === "1") return;
+        } catch {
+          void 0;
+        }
+        try {
+          const r = await fetch("/backend/save_purchase.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ ...payload, items: cartItems }),
+          });
+          if (!r.ok) throw new Error(`save_purchase_http_${r.status}`);
+          try {
+            await r.json();
+          } catch {
+            void 0;
+          }
+          try {
+            sessionStorage.setItem(savedKey, "1");
+          } catch {
+            void 0;
+          }
+        } catch (e) {
+          console.error("Error al guardar compra en backend:", e);
+        }
+      })();
+
+      const results = await Promise.allSettled([emailPromise, savePromise]);
+      const emailResult = results[0];
+      if (emailResult.status !== "fulfilled") {
+        throw emailResult.reason;
+      }
       setResendMsg(t("resend.success"));
       try {
         sessionStorage.setItem("lastResendAt", Date.now().toString());
