@@ -10,6 +10,28 @@ type CartItem = {
   quantity: number;
 };
 
+type CategoryI18n = {
+  es?: string;
+  en?: string;
+  ca?: string;
+};
+
+type PromoCategories =
+  | null
+  | string[]
+  | {
+      es?: string[];
+      en?: string[];
+      ca?: string[];
+    };
+
+type PromoEntry = {
+  percent: number;
+  categories?: PromoCategories;
+};
+
+type PromoResponse = Record<string, number | PromoEntry>;
+
 const STORAGE_KEY = "cart";
 
 // Helper function to convert European price format to number
@@ -28,6 +50,34 @@ const parsePrice = (price: string | number | undefined): number => {
 const isValidEmail = (email: string) => /\S+@\S+\.\S+/.test(email.trim());
 const isValidPhone = (phone: string) =>
   /^(\+?\d[\d\s-]{6,})$/.test(phone.trim());
+
+const normalizeText = (value: string) =>
+  value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim();
+
+const getBaseProductIdNumber = (value: string) => {
+  const base = value.split("-")[0] || "";
+  const n = Number(base);
+  return Number.isFinite(n) ? n : null;
+};
+
+const resolvePromoCategoriesList = (
+  promoCategories: PromoCategories,
+  currentLanguage: "es" | "en" | "ca",
+) => {
+  if (promoCategories === null) return null;
+  if (Array.isArray(promoCategories)) return promoCategories;
+  const preferred = promoCategories[currentLanguage];
+  if (preferred?.length) return preferred;
+  return [
+    ...(promoCategories.es || []),
+    ...(promoCategories.en || []),
+    ...(promoCategories.ca || []),
+  ];
+};
 
 const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
   hideSidebar,
@@ -48,9 +98,16 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
   );
 
   const [paymentError, setPaymentError] = useState<string>("");
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [autoCardOnOpen, setAutoCardOnOpen] = useState(false);
+
+  const baseLang =
+    i18n.resolvedLanguage?.split("-")[0] ||
+    i18n.language?.split("-")[0] ||
+    "es";
+  const currentLanguage: "es" | "en" | "ca" =
+    baseLang === "en" ? "en" : baseLang === "ca" ? "ca" : "es";
 
   // Guardar carrito en localStorage
   useEffect(() => {
@@ -155,6 +212,11 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
   const [discount, setDiscount] = useState(0);
   const [promoCode, setPromoCode] = useState("");
   const [promoError, setPromoError] = useState("");
+  const [promoCategories, setPromoCategories] = useState<PromoCategories>(null);
+  const [categoryByProductId, setCategoryByProductId] = useState<
+    Record<number, CategoryI18n>
+  >({});
+  const [eligibleSubtotal, setEligibleSubtotal] = useState(0);
   const [buyerEmail, setBuyerEmail] = useState("");
   const [buyerEmailError, setBuyerEmailError] = useState("");
   const [buyerFirstName, setBuyerFirstName] = useState("");
@@ -175,34 +237,165 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
   const [localityError, setLocalityError] = useState("");
   const [provinceError, setProvinceError] = useState("");
 
-  useEffect(() => {
-    const newSubtotal = checkoutList.reduce(
-      (acc, i) => acc + parsePrice(i.price) * 1.21 * i.quantity,
-      0,
+  const promoCategoriesList = useMemo(
+    () => resolvePromoCategoriesList(promoCategories, currentLanguage),
+    [promoCategories, currentLanguage],
+  );
+  const promoCategoriesLabel = useMemo(() => {
+    if (!promoCategoriesList?.length) return "";
+    const uniq = Array.from(
+      new Map(promoCategoriesList.map((c) => [normalizeText(c), c])).values(),
     );
-    setSubtotal(newSubtotal);
-  }, [checkoutList]);
+    return uniq.join(", ");
+  }, [promoCategoriesList]);
 
   useEffect(() => {
-    const finalPrice = subtotal * (1 - discount / 100);
-    setTotalPrice(finalPrice);
-  }, [subtotal, discount]);
+    const load = async () => {
+      try {
+        const [mpRes, tamdRes] = await Promise.allSettled([
+          fetch("/products.json?v=" + new Date().getTime()),
+          fetch("/tamdProducts.json?v=" + new Date().getTime()),
+        ]);
+
+        const next: Record<number, CategoryI18n> = {};
+
+        if (mpRes.status === "fulfilled" && mpRes.value.ok) {
+          const data = await mpRes.value.json();
+          const products = (data?.products || []) as Array<{
+            id: number;
+            category?: string | CategoryI18n;
+          }>;
+          products.forEach((p) => {
+            if (!p?.id) return;
+            const cat =
+              typeof p.category === "string"
+                ? { es: p.category, en: p.category }
+                : p.category;
+            if (cat) next[p.id] = cat;
+          });
+        }
+
+        if (tamdRes.status === "fulfilled" && tamdRes.value.ok) {
+          const data = await tamdRes.value.json();
+          const products = (data?.products || []) as Array<{
+            id: number;
+            category?: string | CategoryI18n;
+          }>;
+          products.forEach((p) => {
+            const id = Number(p?.id);
+            if (!Number.isFinite(id)) return;
+            const offsetId = id + 10000;
+            const cat =
+              typeof p.category === "string"
+                ? { es: p.category, en: p.category }
+                : p.category;
+            if (cat) next[offsetId] = cat;
+          });
+        }
+
+        setCategoryByProductId(next);
+      } catch {
+        setCategoryByProductId({});
+      }
+    };
+
+    load();
+  }, []);
+
+  useEffect(() => {
+    const promoCats = resolvePromoCategoriesList(
+      promoCategories,
+      currentLanguage,
+    );
+    const promoSet = promoCats ? new Set(promoCats.map(normalizeText)) : null;
+
+    let newSubtotal = 0;
+    let newEligibleSubtotal = 0;
+
+    checkoutList.forEach((item) => {
+      const itemTotal = parsePrice(item.price) * 1.21 * item.quantity;
+      newSubtotal += itemTotal;
+
+      if (!promoSet) {
+        newEligibleSubtotal += itemTotal;
+        return;
+      }
+
+      const baseId = getBaseProductIdNumber(item.id);
+      if (baseId === null) return;
+
+      const category = categoryByProductId[baseId];
+      const candidates = [
+        category?.[currentLanguage],
+        category?.es,
+        category?.en,
+        category?.ca,
+      ].filter((v): v is string => Boolean(v && typeof v === "string"));
+
+      const isEligible = candidates.some((c) => promoSet.has(normalizeText(c)));
+      if (isEligible) newEligibleSubtotal += itemTotal;
+    });
+
+    setSubtotal(newSubtotal);
+    setEligibleSubtotal(newEligibleSubtotal);
+  }, [checkoutList, promoCategories, categoryByProductId, currentLanguage]);
+
+  useEffect(() => {
+    const nextDiscountAmount = eligibleSubtotal * (discount / 100);
+    setTotalPrice(Math.max(0, subtotal - nextDiscountAmount));
+  }, [subtotal, eligibleSubtotal, discount]);
 
   const applyPromoCode = async () => {
     try {
-      const response = await fetch(
-        "https://manpowers.es/backend/api/promo.php",
-      );
-      const promos = await response.json();
-      if (promos[promoCode]) {
-        setDiscount(promos[promoCode]);
+      const rawCode = promoCode.trim();
+      if (!rawCode) {
+        setDiscount(0);
+        setPromoCategories(null);
         setPromoError("");
+        return;
+      }
+
+      const res1 = await fetch("/backend/promo.php");
+      const response = res1.ok
+        ? res1
+        : await fetch("https://manpowers.es/backend/api/promo.php");
+      if (!response.ok) throw new Error("promo");
+
+      const promos = (await response.json()) as PromoResponse;
+      const entry =
+        promos[rawCode] ??
+        promos[rawCode.toUpperCase()] ??
+        promos[rawCode.toLowerCase()] ??
+        promos[
+          Object.keys(promos).find(
+            (k) => k.toLowerCase() === rawCode.toLowerCase(),
+          ) || ""
+        ];
+
+      if (typeof entry === "number") {
+        setDiscount(entry);
+        setPromoCategories(null);
+        setPromoError("");
+        return;
+      }
+
+      if (
+        entry &&
+        typeof entry === "object" &&
+        typeof entry.percent === "number"
+      ) {
+        setDiscount(entry.percent);
+        setPromoCategories(entry.categories ?? null);
+        setPromoError("");
+        return;
       } else {
         setDiscount(0);
+        setPromoCategories(null);
         setPromoError(t("cart.promoInvalid"));
       }
     } catch {
       setDiscount(0);
+      setPromoCategories(null);
       setPromoError(t("cart.promoError"));
     }
   };
@@ -584,12 +777,27 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                             <span>{t("cart.subtotal")}:</span>
                             <span>€{subtotal.toFixed(2)}</span>
                           </div>
-                          {discount > 0 && (
-                            <div className="flex justify-between text-sm text-green-700">
-                              <span>{t("cart.discount")}:</span>
-                              <span>-{discount}%</span>
-                            </div>
-                          )}
+
+                          {discount > 0 &&
+                            (promoCategories === null ||
+                              eligibleSubtotal > 0) && (
+                              <div className="flex justify-between text-sm text-green-700">
+                                <span>
+                                  {promoCategories !== null
+                                    ? t("cart.discountApplied")
+                                    : t("cart.discount")}
+                                  :
+                                </span>
+                                <span>
+                                  -€
+                                  {(
+                                    (eligibleSubtotal * discount) /
+                                    100
+                                  ).toFixed(2)}{" "}
+                                  ({discount}%)
+                                </span>
+                              </div>
+                            )}
                           <div className="font-semibold flex justify-between text-black">
                             <span>
                               {t("cart.total")}{" "}
@@ -602,6 +810,42 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                           </div>
                         </div>
                       </div>
+                    </div>
+                    <div className="bg-black/5 rounded-lg p-3 border border-black/10">
+                      <h4 className="font-semibold mb-2 text-black">
+                        {t("cart.promoTitle")}
+                      </h4>
+                      <div className="flex gap-2">
+                        <input
+                          type="text"
+                          value={promoCode}
+                          onChange={(e) => setPromoCode(e.target.value)}
+                          placeholder={t("cart.promoPlaceholder")}
+                          aria-label={t("cart.promoAriaLabel")}
+                          className="flex-1 bg-[var(--color-primary)] text-black rounded-md px-3 py-2 text-sm border border-black/20 focus:ring-2 focus:ring-black/20 focus:outline-none"
+                        />
+                        <button
+                          onClick={applyPromoCode}
+                          className="bg-yellow-500 hover:bg-yellow-400 text-black font-bold px-3 py-1 rounded text-sm"
+                        >
+                          {t("cart.apply")}
+                        </button>
+                      </div>
+                      {promoError && (
+                        <p className="text-red-600 text-xs mt-2">
+                          {promoError}
+                        </p>
+                      )}
+                      {!promoError &&
+                        discount > 0 &&
+                        promoCategories !== null &&
+                        eligibleSubtotal <= 0 && (
+                          <p className="text-amber-700 text-xs mt-2">
+                            {t("cart.promoExclusiveCategory", {
+                              category: promoCategoriesLabel,
+                            })}
+                          </p>
+                        )}
                     </div>
                     <div className="bg-black/5 rounded-lg p-3 border border-black/10">
                       <h4 className="font-semibold mb-2 text-black">
@@ -841,32 +1085,6 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                           </label>
                         </div>
                       </div>
-                    </div>
-                    <div className="bg-black/5 rounded-lg p-3 border border-black/10">
-                      <h4 className="font-semibold mb-2 text-black">
-                        {t("cart.promoTitle")}
-                      </h4>
-                      <div className="flex gap-2">
-                        <input
-                          type="text"
-                          value={promoCode}
-                          onChange={(e) => setPromoCode(e.target.value)}
-                          placeholder={t("cart.promoPlaceholder")}
-                          aria-label={t("cart.promoAriaLabel")}
-                          className="flex-1 bg-[var(--color-primary)] text-black rounded-md px-3 py-2 text-sm border border-black/20 focus:ring-2 focus:ring-black/20 focus:outline-none"
-                        />
-                        <button
-                          onClick={applyPromoCode}
-                          className="bg-yellow-500 hover:bg-yellow-400 text-black font-bold px-3 py-1 rounded text-sm"
-                        >
-                          {t("cart.apply")}
-                        </button>
-                      </div>
-                      {promoError && (
-                        <p className="text-red-600 text-xs mt-2">
-                          {promoError}
-                        </p>
-                      )}
                     </div>
                     {paymentError && (
                       <div className="bg-red-100 border border-red-400 rounded-lg p-3">

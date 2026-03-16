@@ -839,42 +839,75 @@ const Shops: React.FC = () => {
                     </CircleMarker>
                   )}
 
-                  {filtered.map((shop) => (
-                    <Marker
-                      key={shop.id}
-                      position={[shop.lat, shop.lng]}
-                      icon={shopMarkerIcon ?? undefined}
-                    >
-                      <Popup>
-                        <div className="min-w-[220px]">
-                          <div className="text-base font-semibold text-black">
-                            {shop.name}
+                  {filtered.map((shop) =>
+                    shopMarkerIcon ? (
+                      <Marker
+                        key={shop.id}
+                        position={[shop.lat, shop.lng]}
+                        icon={shopMarkerIcon}
+                      >
+                        <Popup>
+                          <div className="min-w-[220px]">
+                            <div className="text-base font-semibold text-black">
+                              {shop.name}
+                            </div>
+                            <div className="mt-1 text-sm text-black/70">
+                              {shop.location}
+                            </div>
+                            <div className="mt-2 flex items-center justify-between gap-3">
+                              <a
+                                className="text-sm font-semibold text-[var(--color-secondary)]"
+                                href={mapsLinkFor(shop.name, shop.location, {
+                                  lat: shop.lat,
+                                  lng: shop.lng,
+                                })}
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                {t("shops.openInMaps")}
+                              </a>
+                              {shop.distanceKm !== null && (
+                                <div className="text-sm font-semibold text-black/70">
+                                  {formatKm(shop.distanceKm)}
+                                </div>
+                              )}
+                            </div>
                           </div>
-                          <div className="mt-1 text-sm text-black/70">
-                            {shop.location}
+                        </Popup>
+                      </Marker>
+                    ) : (
+                      <Marker key={shop.id} position={[shop.lat, shop.lng]}>
+                        <Popup>
+                          <div className="min-w-[220px]">
+                            <div className="text-base font-semibold text-black">
+                              {shop.name}
+                            </div>
+                            <div className="mt-1 text-sm text-black/70">
+                              {shop.location}
+                            </div>
+                            <div className="mt-2 flex items-center justify-between gap-3">
+                              <a
+                                className="text-sm font-semibold text-[var(--color-secondary)]"
+                                href={mapsLinkFor(shop.name, shop.location, {
+                                  lat: shop.lat,
+                                  lng: shop.lng,
+                                })}
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                {t("shops.openInMaps")}
+                              </a>
+                              {shop.distanceKm !== null && (
+                                <div className="text-sm font-semibold text-black/70">
+                                  {formatKm(shop.distanceKm)}
+                                </div>
+                              )}
+                            </div>
                           </div>
-                          <div className="mt-2 flex items-center justify-between gap-3">
-                            <a
-                              className="text-sm font-semibold text-[var(--color-secondary)]"
-                              href={mapsLinkFor(shop.name, shop.location, {
-                                lat: shop.lat,
-                                lng: shop.lng,
-                              })}
-                              target="_blank"
-                              rel="noreferrer"
-                            >
-                              {t("shops.openInMaps")}
-                            </a>
-                            {shop.distanceKm !== null && (
-                              <div className="text-sm font-semibold text-black/70">
-                                {formatKm(shop.distanceKm)}
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      </Popup>
-                    </Marker>
-                  ))}
+                        </Popup>
+                      </Marker>
+                    ),
+                  )}
                 </MapContainer>
               </div>
             </div>
