@@ -9,27 +9,6 @@ type Props = {
   title?: string;
 };
 
-type ProductJson = {
-  id: number;
-  name: { es: string; en: string };
-  description: { es: string; en: string };
-  price: string | number;
-  price_formatted?: string;
-  size: string;
-  image: string;
-  category: { es: string; en: string } | string;
-  sportId: string;
-  available: boolean;
-  sku?: string;
-  amazonLinks?: { [key: string]: string };
-  nutritionalValues?: { es: string; en: string };
-  application?: { es: string; en: string };
-  recommendations?: { es: string; en: string };
-  cautions?: { es: string; en: string };
-  rating?: number;
-  votes?: number;
-};
-
 const ProductSlider: React.FC<{
   title: string;
   items: Product[];
@@ -366,45 +345,7 @@ const AllProducts: React.FC<Props> = ({ language }) => {
       setLoading(true);
       setError("");
       try {
-        let all: Product[] = [];
-        try {
-          const fetched = await productsService.getProducts();
-          all = fetched;
-        } catch {
-          all = [];
-        }
-        if (!all || all.length === 0) {
-          const response = await fetch("/products.json");
-          const data = await response.json();
-          all = ((data.products as ProductJson[]) || []).map(
-            (p: ProductJson) => ({
-              id: p.id,
-              name: p.name,
-              description: p.description,
-              price:
-                typeof p.price === "string"
-                  ? parseFloat(p.price.replace(",", "."))
-                  : p.price,
-              price_formatted: p.price_formatted ?? "",
-              size: p.size,
-              image: p.image,
-              category:
-                typeof p.category === "string"
-                  ? { es: p.category, en: p.category }
-                  : p.category,
-              sportId: p.sportId,
-              available: p.available,
-              sku: p.sku ?? "",
-              amazonLinks: p.amazonLinks,
-              nutritionalValues: p.nutritionalValues,
-              application: p.application,
-              recommendations: p.recommendations, 
-              cautions: p.cautions,
-              rating: p.rating,
-              votes: p.votes,
-            }),
-          );
-        }
+        const all = await productsService.getProducts();
         setItems(all);
       } catch {
         setError("Error al cargar productos");
