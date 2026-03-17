@@ -1,4 +1,11 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, {
+  Suspense,
+  lazy,
+  useEffect,
+  useState,
+  useRef,
+  useCallback,
+} from "react";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import { useParams, useNavigate } from "react-router-dom";
@@ -13,7 +20,8 @@ import RecommendedTogether from "../components/recommended-together";
 import Faq from "../components/faq";
 import RelatedProducts from "../components/related-products";
 import InfoStripe from "../components/info/InfoStripe";
-import Shops from "../sections/shops";
+
+const Shops = lazy(() => import("../sections/shops"));
 
 type ProductJson = {
   id: number;
@@ -46,6 +54,8 @@ type ProductJson = {
 
 const ProductDetailPage: React.FC = () => {
   const [enter, setEnter] = useState(false);
+  const shopsMountRef = useRef<HTMLDivElement | null>(null);
+  const [loadShops, setLoadShops] = useState(false);
   const {
     sportId: sportParam,
     id,
@@ -136,6 +146,40 @@ const ProductDetailPage: React.FC = () => {
       window.dispatchEvent(
         new CustomEvent("sticky-bar:visibility", { detail: false }),
       );
+    };
+  }, []);
+
+  useEffect(() => {
+    if (loadShops) return;
+    const node = shopsMountRef.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry) return;
+        if (entry.isIntersecting) {
+          setLoadShops(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.01, rootMargin: "800px 0px" },
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [loadShops]);
+
+  useEffect(() => {
+    const onOpen = (e: Event) => {
+      const ce = e as CustomEvent<{ targetId?: string }>;
+      if (ce.detail?.targetId && ce.detail.targetId !== "shops") return;
+      setLoadShops(true);
+      void import("../sections/shops");
+    };
+
+    window.addEventListener("shops:open", onOpen as EventListener);
+    return () => {
+      window.removeEventListener("shops:open", onOpen as EventListener);
     };
   }, []);
 
@@ -586,6 +630,17 @@ const ProductDetailPage: React.FC = () => {
   };
 
   const handleScrollToShops = () => {
+    setLoadShops(true);
+    try {
+      window.dispatchEvent(
+        new CustomEvent("shops:open", {
+          detail: { targetId: "shops" },
+        }),
+      );
+    } catch {
+      // ignore
+    }
+
     try {
       document
         .getElementById("shops")
@@ -1454,7 +1509,19 @@ const ProductDetailPage: React.FC = () => {
             </div>
           </div>
         )}
-      <Shops />
+      <div id="shops" ref={shopsMountRef} className="min-h-[1px]">
+        {loadShops ? (
+          <Suspense
+            fallback={
+              <div className="py-16 text-center text-black/60">
+                {t("search.loading")}
+              </div>
+            }
+          >
+            <Shops id={null} />
+          </Suspense>
+        ) : null}
+      </div>
       <Footer />
     </div>
   );

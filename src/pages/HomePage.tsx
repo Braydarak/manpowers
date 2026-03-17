@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, lazy, useEffect, useRef, useState } from "react";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import Hero from "../sections/hero";
 import AboutUs from "../sections/aboutUs";
 import Locations from "../sections/locations";
 import AllProducts from "../components/all-products";
-import Shops from "../sections/shops";
 import SearchShopModal from "../components/searchShopModal";
 import useLanguageUpdater from "../hooks/useLanguageUpdater";
 import { useTranslation } from "react-i18next";
 import { updateSEOTags, seoConfigs } from "../utils/seoConfig";
+
+const Shops = lazy(() => import("../sections/shops"));
 
 const HomePage: React.FC = () => {
   const [enter, setEnter] = useState(false);
@@ -44,9 +45,46 @@ const HomePage: React.FC = () => {
     }
   }, []);
 
+  const shopsMountRef = useRef<HTMLDivElement | null>(null);
+  const [loadShops, setLoadShops] = useState(false);
+
   useEffect(() => {
     const id = requestAnimationFrame(() => setEnter(true));
     return () => cancelAnimationFrame(id);
+  }, []);
+
+  useEffect(() => {
+    if (loadShops) return;
+    const node = shopsMountRef.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry) return;
+        if (entry.isIntersecting) {
+          setLoadShops(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.01, rootMargin: "600px 0px" },
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [loadShops]);
+
+  useEffect(() => {
+    const onOpen = (e: Event) => {
+      const ce = e as CustomEvent<{ targetId?: string }>;
+      if (ce.detail?.targetId && ce.detail.targetId !== "shops") return;
+      setLoadShops(true);
+      void import("../sections/shops");
+    };
+
+    window.addEventListener("shops:open", onOpen as EventListener);
+    return () => {
+      window.removeEventListener("shops:open", onOpen as EventListener);
+    };
   }, []);
 
   return (
@@ -64,7 +102,21 @@ const HomePage: React.FC = () => {
             />
           </div>
         </div>
-        <Shops />
+
+        <div id="shops" ref={shopsMountRef} className="min-h-[1px]">
+          {loadShops ? (
+            <Suspense
+              fallback={
+                <div className="py-16 text-center text-black/60">
+                  {t("search.loading")}
+                </div>
+              }
+            >
+              <Shops id={null} />
+            </Suspense>
+          ) : null}
+        </div>
+
         <AboutUs />
         <Locations />
       </main>

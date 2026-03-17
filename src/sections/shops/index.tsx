@@ -279,8 +279,13 @@ const FlyTo: React.FC<{ center: [number, number] }> = ({ center }) => {
   return null;
 };
 
-const Shops: React.FC = () => {
+type Props = {
+  id?: string | null;
+};
+
+const Shops: React.FC<Props> = ({ id }) => {
   const { t } = useTranslation();
+  const resolvedId = id === undefined ? "shops" : id || undefined;
   const [shops, setShops] = useState<Shop[]>([]);
   const [resolved, setResolved] = useState<ResolvedShop[]>([]);
   const [loading, setLoading] = useState(true);
@@ -526,7 +531,10 @@ const Shops: React.FC = () => {
 
   if (error) {
     return (
-      <section className="bg-[var(--color-primary)] text-black py-16 px-4">
+      <section
+        id={resolvedId}
+        className="bg-[var(--color-primary)] text-black py-16 px-4"
+      >
         <div className="max-w-7xl mx-auto">
           <div className="w-full rounded-xl border border-black/10 bg-[var(--color-primary)] px-6 py-6 text-black shadow-[0_8px_30px_rgba(0,0,0,0.08)]">
             <div className="text-lg font-bold">{t("shops.errorTitle")}</div>
@@ -539,7 +547,7 @@ const Shops: React.FC = () => {
 
   return (
     <section
-      id="shops"
+      id={resolvedId}
       className="bg-[var(--color-primary)] text-black py-16 px-4"
     >
       <div className="max-w-7xl mx-auto">

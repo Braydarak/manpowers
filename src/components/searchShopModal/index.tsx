@@ -149,6 +149,16 @@ const SearchShopModal: React.FC<Props> = ({ targetId = "shops" }) => {
   };
 
   const handleOpen = () => {
+    try {
+      window.dispatchEvent(
+        new CustomEvent("shops:open", {
+          detail: { targetId },
+        }),
+      );
+    } catch {
+      // ignore
+    }
+
     scrollToId(targetId);
     setEnter(false);
     setVisible(false);
