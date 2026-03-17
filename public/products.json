@@ -29,7 +29,7 @@
       },
       "price": "18,00",
       "size": "150 cap",
-      "image": "/products/MACA-500.jpg",
+      "image": "/products/MACA-500.avif",
       "category": {
         "es": "suplementos",
         "en": "supplements",
@@ -131,7 +131,7 @@
       "price": "21,00",
       "img_folder": "omega-3",
       "size": "220 cap",
-      "image": "/products/OMEGA-3.jpg",
+      "image": "/products/OMEGA-3.avif",
       "category": {
         "es": "suplementos",
         "en": "supplements",
@@ -232,7 +232,7 @@
       },
       "price": "15,00",
       "size": "100 ml",
-      "image": "/products/MAN-PROTECTOR-SOLAR.jpg",
+      "image": "/products/MAN-PROTECTOR-SOLAR.avif",
       "category": { "es": "cuidado", "en": "care", "ca": "cura" },
       "sportId": "multisport",
       "available": true,
@@ -329,7 +329,7 @@
       },
       "price": "18,00",
       "size": "300 g",
-      "image": "/products/CREATINA.jpg",
+      "image": "/products/CREATINA.avif",
       "category": {
         "es": "suplementos",
         "en": "supplements",
@@ -420,7 +420,7 @@
       },
       "price": "15,00",
       "size": "100 ml",
-      "image": "/products/CREMA-ANTI-ROZADURAS.jpg",
+      "image": "/products/CREMA-ANTI-ROZADURAS.avif",
       "category": { "es": "cuidado", "en": "care", "ca": "cura" },
       "sportId": "fencing",
       "available": true,
@@ -507,7 +507,7 @@
       },
       "price": "9,00",
       "size": "100 ml",
-      "image": "/products/GEL-DE-ALOE-VERA.jpg",
+      "image": "/products/GEL-DE-ALOE-VERA.avif",
       "category": { "es": "cuidado", "en": "care", "ca": "cura" },
       "sportId": "multisport",
       "available": true,
@@ -614,7 +614,7 @@
       },
       "price": "12,00",
       "size": "100 ml",
-      "image": "/products/CHAMPU-ANTI-CAIDA-TIRADORES.jpg",
+      "image": "/products/CHAMPU-ANTI-CAIDA-TIRADORES.avif",
       "category": { "es": "cuidado", "en": "care", "ca": "cura" },
       "sportId": "archery",
       "available": true,
@@ -701,7 +701,7 @@
       },
       "price": "10,00",
       "size": "100 ml",
-      "image": "/products/CREMA-MASAJE.jpg",
+      "image": "/products/CREMA-MASAJE.avif",
       "category": { "es": "cuidado", "en": "care", "ca": "cura" },
       "sportId": "sailing",
       "available": true,
@@ -782,7 +782,7 @@
         "en": "Use daily as needed.",
         "ca": "Ús diari segons necessitat."
       },
-      "image": "/products/CREMA-PIES.jpg",
+      "image": "/products/CREMA-PIES.avif",
       "category": { "es": "cuidado", "en": "care", "ca": "cura" },
       "sportId": "sailing",
       "available": true,
@@ -860,7 +860,7 @@
       },
       "price": "25,40",
       "size": "100 ml",
-      "image": "/products/ANTI-ROZADURAS-CICLISMO.jpg",
+      "image": "/products/ANTI-ROZADURAS-CICLISMO.avif",
       "category": { "es": "cuidado", "en": "care", "ca": "cura" },
       "sportId": "cycling",
       "available": true,
@@ -1034,7 +1034,7 @@
       },
       "price": "12,00",
       "size": "100 ml",
-      "image": "/products/CREMA-EFECTO-FRIO-TIRADORES.jpg",
+      "image": "/products/CREMA-EFECTO-FRIO-TIRADORES.avif",
       "category": { "es": "deportes", "en": "sports", "ca": "esports" },
       "sportId": "archery",
       "available": true,
@@ -1121,7 +1121,7 @@
       },
       "price": "15,00",
       "size": "100 ml",
-      "image": "/products/CREMIGEL-MASAJE-MUSCULAR-TIRADORES.jpg",
+      "image": "/products/CREMIGEL-MASAJE-MUSCULAR-TIRADORES.avif",
       "category": { "es": "deportes", "en": "sports", "ca": "esports" },
       "sportId": "archery",
       "available": true,
@@ -1208,7 +1208,7 @@
       },
       "price": "12,00",
       "size": "100 ml",
-      "image": "/products/CREMA-EFECTO-CALOR.jpg",
+      "image": "/products/CREMA-EFECTO-CALOR.avif",
       "category": { "es": "deportes", "en": "sports", "ca": "esports" },
       "sportId": "archery",
       "available": true,
@@ -1296,7 +1296,7 @@
       "price": "12,00",
       "size": "100 ml",
       "category": { "es": "deportes", "en": "sports", "ca": "esports" },
-      "image": "/products/CREMA-EFECTO-CALOR.jpg",
+      "image": "/products/CREMA-EFECTO-CALOR.avif",
       "sportId": "fencing",
       "available": true,
       "rating": 4.2,
@@ -1370,7 +1370,7 @@
       "price": "15,00",
       "size": "100 ml",
       "category": { "es": "cuidado", "en": "care", "ca": "cura" },
-      "image": "/products/CREMIGEL-MASAJE-MUSCULAR.jpg",
+      "image": "/products/CREMIGEL-MASAJE-MUSCULAR.avif",
       "sportId": "fencing",
       "available": true,
       "rating": 4.1,
@@ -1455,7 +1455,7 @@
         "en": "supplements",
         "ca": "suplements"
       },
-      "image": "/products/CALCIO-MAGNESIO-VITAMINA-K-MAN-POWERS.jpg",
+      "image": "/products/CALCIO-MAGNESIO-VITAMINA-K-MAN-POWERS.avif",
       "price": "9,00",
       "size": "150 cap",
       "sportId": "multisport",
@@ -1543,7 +1543,7 @@
       },
       "price": "12,00",
       "size": "100 ml",
-      "image": "/products/CREMA-EFECTO-FRIO.jpg",
+      "image": "/products/CREMA-EFECTO-FRIO.avif",
       "category": { "es": "deportes", "en": "sports", "ca": "esports" },
       "sportId": "fencing",
       "available": true,
@@ -1611,7 +1611,7 @@
       },
       "price": "15,00",
       "size": "100 ml",
-      "image": "/products/GEL-AGARRE-TECNICO.jpg",
+      "image": "/products/GEL-AGARRE-TECNICO.avif",
       "category": { "es": "deportes", "en": "sports", "ca": "esports" },
       "sportId": "golf",
       "available": true,
@@ -1698,7 +1698,7 @@
       },
       "price": "12,00",
       "size": "100 ml",
-      "image": "/products/CREMA-EFECTO-FRIO-GOLF.jpg",
+      "image": "/products/CREMA-EFECTO-FRIO-GOLF.avif",
       "category": { "es": "deportes", "en": "sports", "ca": "esports" },
       "sportId": "golf",
       "available": true,
@@ -1776,7 +1776,7 @@
       "price": "15,00",
       "size": "100 ml",
       "category": { "es": "cuidado", "en": "care", "ca": "cura" },
-      "image": "/products/CREMIGEL-MASAJE-MUSCULAR-GOLF.jpg",
+      "image": "/products/CREMIGEL-MASAJE-MUSCULAR-GOLF.avif",
       "sportId": "golf",
       "available": true,
       "rating": 4.2,
@@ -1862,7 +1862,7 @@
       },
       "price": "12,00",
       "size": "100 ml",
-      "image": "/products/GEL-EFECTO-CALOR-GOLF.jpg",
+      "image": "/products/GEL-EFECTO-CALOR-GOLF.avif",
       "category": { "es": "deportes", "en": "sports", "ca": "esports" },
       "sportId": "golf",
       "available": true,
@@ -1939,7 +1939,7 @@
         "en": "Sun, wind, and hours on the course can stress hair. This strengthening shampoo gently clears sweat and residue, leaving your scalp fresh after the round. With root‑supporting actives, it pairs with your game day after day.",
         "ca": "Sol, vent i hores al camp poden castigar el cabell. Aquest xampú reforçant neteja suaument la suor i els residus, deixant el cuir cabellut fresc després de la ronda. Amb actius que ajuden a reforçar des de l'arrel, acompanya el teu joc dia rere dia."
       },
-      "image": "/products/CHAMPÚ-ANTICAIDA-GOLF.jpg",
+      "image": "/products/CHAMPU-ANTICAIDA-GOLF.avif",
       "category": { "es": "cuidado", "en": "care", "ca": "cura" },
       "sportId": "golf",
       "available": true,
@@ -2045,7 +2045,7 @@
         "en": "Designed for maximum durability and functionality. This tactical backpack features multiple compartments, rugged materials, and an ergonomic design ideal for carrying all your sports gear or for your outdoor adventures.",
         "ca": "Dissenyada per a la màxima resistència i funcionalitat. Aquesta motxilla tàctica compta amb múltiples compartiments, materials duradors i un disseny ergonòmic ideal per portar tot el teu equipament esportiu o per a les teves aventures a l'aire lliure."
       },
-      "image": "/products/Mochila-Tactica.jpg",
+      "image": "/products/Mochila-Tactica.avif",
       "category": {
         "es": "indumentaria",
         "en": "clothing",
@@ -2095,7 +2095,7 @@
         "en": "Designed for maximum durability and functionality. This canvas bag features multiple compartments, rugged materials, and an ergonomic design ideal for carrying all your sports gear or for your outdoor adventures.",
         "ca": "Dissenyada per a la màxima resistència i funcionalitat. Aquesta bossa de lona compta amb múltiples compartiments, materials duradors i un disseny ergonòmic ideal per portar tot el teu equipament esportiu o per a les teves aventures a l'aire lliure."
       },
-      "image": "/products/Bolsa-de-Lona.jpg",
+      "image": "/products/Bolsa-de-Lona.avif",
       "category": {
         "es": "indumentaria",
         "en": "clothing",
@@ -2144,7 +2144,7 @@
         "en": "High-performance tactical polo, made with breathable and durable fabric. Ideal for outdoor activities and daily use, combining style and functionality.",
         "ca": "Polo tàctic d'alt rendiment, fabricat amb teixit transpirable i resistent. Ideal per a activitats a l'aire lliure i ús diari, combinant estil i funcionalitat."
       },
-      "image": "/products/Polo-Tactico.jpg",
+      "image": "/products/Polo-Tactico.avif",
       "category": {
         "es": "indumentaria",
         "en": "clothing",
@@ -2194,7 +2194,7 @@
         "en": "Nordic design Softshell jacket, offering superior protection against wind and cold. Technical waterproof and breathable fabric to maintain comfort in adverse climates.",
         "ca": "Jaqueta Softshell de disseny nòrdic, ofereix protecció superior contra el vent i el fred. Teixit tècnic impermeable i transpirable per mantenir el confort en climes adversos."
       },
-      "image": "/products/Softshell-Nordic.jpg",
+      "image": "/products/Softshell-Nordic.avif",
       "category": {
         "es": "indumentaria",
         "en": "clothing",
@@ -2244,7 +2244,7 @@
         "en": "Lightweight and compact raincoat, 100% waterproof. Designed to keep you dry in the wettest conditions without sacrificing breathability.",
         "ca": "Impermeable lleuger i compacte, 100% resistent a l'aigua. Dissenyat per mantenir-te sec en les condicions més humides sense sacrificar la transpirabilitat."
       },
-      "image": "/products/Chubasquero.jpg",
+      "image": "/products/Chubasquero.avif",
       "category": {
         "es": "indumentaria",
         "en": "clothing",
@@ -2294,7 +2294,7 @@
         "en": "Specialized hunting backpack with camouflage design. Features specific compartments for gear, weapon holder, and silent materials.",
         "ca": "Motxilla especialitzada per a caça amb disseny de camuflatge. Compta amb compartiments específics per a equip, suport per a arma i materials silenciosos."
       },
-      "image": "/products/Mochila-Tactica-Caza.jpg",
+      "image": "/products/Mochila-Tactica-Caza.avif",
       "category": {
         "es": "indumentaria",
         "en": "clothing",
@@ -2343,7 +2343,7 @@
         "en": "Versatile and rugged tactical shoulder bag. Ideal for carrying essential gear comfortably and accessibly. Compact design with MOLLE system.",
         "ca": "Bolso d'espatlla tàctic versàtil i resistent. Ideal per transportar equip essencial de forma còmoda i accessible. Disseny compacte amb sistema MOLLE."
       },
-      "image": "/products/Bolso-de-Hombro-Tactico.jpg",
+      "image": "/products/Bolso-de-Hombro-Tactico.avif",
       "category": {
         "es": "indumentaria",
         "en": "clothing",
@@ -2392,7 +2392,7 @@
         "en": "Durable and spacious canvas bag available in colors. Perfect for gym, travel, or daily use. Rugged material and classic design.",
         "ca": "Bossa de lona resistent i espaiosa en diversos colors. Perfecta per gimnàs, viatges o ús diari. Material durador i disseny clàssic."
       },
-      "image": "/products/Bolsa-de-Lona-color.jpg",
+      "image": "/products/Bolsa-de-Lona-color.avif",
       "category": {
         "es": "indumentaria",
         "en": "clothing",
@@ -2441,7 +2441,7 @@
         "en": "Breathable tactical cap designed for warm climates. Mesh panels for superior ventilation and visor for sun protection.",
         "ca": "Gorra tàctica transpirable dissenyada per a climes càlids. Panells de malla per a ventilació superior i visera per a protecció solar."
       },
-      "image": "/products/Gorra-Tactica-Transpirable.jpg",
+      "image": "/products/Gorra-Tactica-Transpirable.avif",
       "category": {
         "es": "indumentaria",
         "en": "clothing",
@@ -2490,7 +2490,7 @@
         "en": "High performance tactical shirt. Breathable and quick-drying fabric. Ergonomic design for maximum mobility.",
         "ca": "Camiseta tàctica d'alt rendiment. Teixit transpirable i d'assecat ràpid. Disseny ergonòmic per a màxima mobilitat."
       },
-      "image": "/products/Camiseta-Tactica.jpg",
+      "image": "/products/Camiseta-Tactica.avif",
       "category": {
         "es": "indumentaria",
         "en": "clothing",
@@ -2539,7 +2539,7 @@
         "en": "Waterproof and thermal tactical parka. Designed to protect against cold and rain. Includes foldable hood and multiple pockets.",
         "ca": "Parka tàctica impermeable i tèrmica. Dissenyada per protegir contra el fred i la pluja. Inclou caputxa plegable i múltiples butxaques."
       },
-      "image": "/products/Parka-Tactica.jpg",
+      "image": "/products/Parka-Tactica.avif",
       "category": {
         "es": "indumentaria",
         "en": "clothing",

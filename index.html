@@ -42,6 +42,23 @@
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
+    <link
+      rel="preload"
+      as="image"
+      href="/flyer-maca-mobile.avif"
+      type="image/avif"
+      fetchpriority="high"
+      media="(max-width: 639px)"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="/flyer-maca.avif"
+      type="image/avif"
+      fetchpriority="high"
+      media="(min-width: 640px)"
+    />
+
     <!-- Redsys InSite script for production environment -->
     <script src="https://sis.redsys.es/sis/NC/redsysV3.js"></script>
 

@@ -198,6 +198,27 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
     }
   }, [checkoutOpen]);
 
+  useEffect(() => {
+    try {
+      window.dispatchEvent(new CustomEvent("cart:open", { detail: open }));
+    } catch {
+      // ignore
+    }
+  }, [open]);
+
+  useEffect(() => {
+    const shouldLock = open || checkoutOpen;
+    if (!shouldLock) return;
+    const prevBodyOverflow = document.body.style.overflow;
+    const prevHtmlOverflow = document.documentElement.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prevBodyOverflow;
+      document.documentElement.style.overflow = prevHtmlOverflow;
+    };
+  }, [open, checkoutOpen]);
+
   const totalItems = useMemo(
     () => items.reduce((acc, i) => acc + i.quantity, 0),
     [items],
@@ -587,7 +608,7 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
               </button>
             </div>
 
-            <div className="px-5 py-4 overflow-y-hidden sm:overflow-y-auto flex-1 min-h-0">
+            <div className="px-5 py-4 overflow-y-auto overscroll-contain flex-1 min-h-0">
               {items.length === 0 ? (
                 <p className="text-black/70">{t("cart.empty")}</p>
               ) : (

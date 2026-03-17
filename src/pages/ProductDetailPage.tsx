@@ -60,6 +60,9 @@ const ProductDetailPage: React.FC = () => {
     x: 0.7,
     y: 0.7,
   });
+  const zoomRectRef = useRef<DOMRect | null>(null);
+  const zoomRafRef = useRef<number | null>(null);
+  const zoomPendingRef = useRef<{ x: number; y: number } | null>(null);
   const [mediaItems, setMediaItems] = useState<
     { type: "image" | "video"; src: string; path: string }[]
   >([]);
@@ -647,24 +650,45 @@ const ProductDetailPage: React.FC = () => {
                   >
                     <div
                       className="relative aspect-[4/3] bg-black"
-                      onMouseEnter={() => {
+                      onMouseEnter={(e) => {
                         const current = mediaItems[activeMediaIndex];
-                        if (!isMobile && current && current.type === "image")
+                        if (!isMobile && current && current.type === "image") {
+                          zoomRectRef.current =
+                            e.currentTarget.getBoundingClientRect();
                           setZoomActive(true);
+                        }
                       }}
                       onMouseLeave={() => {
                         setZoomActive(false);
+                        zoomRectRef.current = null;
+                        zoomPendingRef.current = null;
+                        if (zoomRafRef.current !== null) {
+                          window.cancelAnimationFrame(zoomRafRef.current);
+                          zoomRafRef.current = null;
+                        }
                       }}
                       onMouseMove={(e) => {
                         const current = mediaItems[activeMediaIndex];
                         if (isMobile || !current || current.type !== "image")
                           return;
-                        const rect = e.currentTarget.getBoundingClientRect();
+
+                        const rect =
+                          zoomRectRef.current ||
+                          e.currentTarget.getBoundingClientRect();
+                        zoomRectRef.current = rect;
+
                         const rawX = (e.clientX - rect.left) / rect.width;
                         const rawY = (e.clientY - rect.top) / rect.height;
                         const x = Math.max(0, Math.min(1, rawX));
                         const y = Math.max(0, Math.min(1, rawY));
-                        setZoomCoords({ x, y });
+
+                        zoomPendingRef.current = { x, y };
+                        if (zoomRafRef.current !== null) return;
+                        zoomRafRef.current = window.requestAnimationFrame(() => {
+                          zoomRafRef.current = null;
+                          const next = zoomPendingRef.current;
+                          if (next) setZoomCoords(next);
+                        });
                       }}
                     >
                       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

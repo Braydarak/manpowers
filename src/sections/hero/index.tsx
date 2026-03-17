@@ -122,6 +122,9 @@ const Hero: React.FC = () => {
             <img
               src={mobileFlyers[idx]}
               alt="Flyer"
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
               className="w-full h-full object-cover"
             />
           </picture>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import productsService, { type Product } from "../../services/productsService";
@@ -25,50 +25,79 @@ const ProductSlider: React.FC<{
   const [perPage, setPerPage] = useState<number>(4);
   const [scrollProgress, setScrollProgress] = useState<number>(0);
 
-  const updateArrows = () => {
+  const rafRef = useRef<number | null>(null);
+  const cardWidthRef = useRef<number>(256);
+
+  const updateScrollState = useCallback(() => {
     const el = containerRef.current;
     if (!el) {
       setCanLeft(false);
       setCanRight(false);
+      setScrollProgress(0);
       return;
     }
-    const firstCard = el.querySelector<HTMLElement>(".rp-card");
-    const cardWidth = firstCard?.offsetWidth || 256;
-    const GAP = 24; // Updated gap to match new design
-    const pp = window.innerWidth < 768 ? 1 : 4;
-    const width = cardWidth * pp + GAP * (pp - 1);
-    setPerPage(pp);
-    setPageWidth(width);
+
     const maxScroll = el.scrollWidth - el.clientWidth;
     const left = el.scrollLeft > 2;
     const right = el.scrollLeft < maxScroll - 2;
     const progress = maxScroll <= 0 ? 0 : el.scrollLeft / maxScroll;
-    setScrollProgress(progress);
+
     setCanLeft(left);
     setCanRight(right);
-  };
+    setScrollProgress(progress);
+  }, []);
+
+  const measureLayout = useCallback(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const firstCard = el.querySelector<HTMLElement>(".rp-card");
+    if (firstCard) cardWidthRef.current = firstCard.offsetWidth || 256;
+
+    const GAP = 24;
+    const pp = window.innerWidth < 768 ? 1 : 4;
+    const width = cardWidthRef.current * pp + GAP * (pp - 1);
+
+    setPerPage(pp);
+    setPageWidth(width);
+    updateScrollState();
+  }, [updateScrollState]);
+
+  const scheduleScrollState = useCallback(() => {
+    if (rafRef.current !== null) return;
+    rafRef.current = window.requestAnimationFrame(() => {
+      rafRef.current = null;
+      updateScrollState();
+    });
+  }, [updateScrollState]);
 
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-    updateArrows();
-    const onScroll = () => updateArrows();
-    const onResize = () => updateArrows();
-    el.addEventListener("scroll", onScroll);
+
+    const onScroll = () => scheduleScrollState();
+    const onResize = () => {
+      measureLayout();
+    };
+
+    const id = window.requestAnimationFrame(() => measureLayout());
+    el.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onResize);
+
     return () => {
+      window.cancelAnimationFrame(id);
+      if (rafRef.current !== null) window.cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
       el.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
     };
-  }, [items]);
+  }, [items, measureLayout, scheduleScrollState]);
 
   const scrollByAmount = (dir: "left" | "right") => {
     const el = containerRef.current;
     if (!el) return;
-    const firstCard = el.querySelector<HTMLElement>(".rp-card");
-    const cardWidth = firstCard?.offsetWidth || 256;
     const GAP = 24;
-    const pageDelta = cardWidth * perPage + GAP * (perPage - 1);
+    const pageDelta = cardWidthRef.current * perPage + GAP * (perPage - 1);
     const maxScroll = el.scrollWidth - el.clientWidth;
     const target = Math.max(
       0,
@@ -78,7 +107,7 @@ const ProductSlider: React.FC<{
       ),
     );
     el.scrollTo({ left: target, behavior: "smooth" });
-    setTimeout(updateArrows, 350);
+    window.setTimeout(() => scheduleScrollState(), 350);
   };
 
   const onArrowClick = (dir: "left" | "right") => {

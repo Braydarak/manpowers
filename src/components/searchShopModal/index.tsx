@@ -47,6 +47,8 @@ const SearchShopModal: React.FC<Props> = ({ targetId = "shops" }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [isStickyBarVisible, setIsStickyBarVisible] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [collapsed, setCollapsed] = useState(() =>
     typeof window === "undefined" ? false : readCollapsed(),
   );
@@ -76,6 +78,29 @@ const SearchShopModal: React.FC<Props> = ({ targetId = "shops" }) => {
       window.removeEventListener(
         "sticky-bar:visibility",
         handleStickyBarVisibility,
+      );
+    };
+  }, []);
+
+  useEffect(() => {
+    const onCartOpen = (e: Event) => {
+      const ce = e as CustomEvent<boolean>;
+      setCartOpen(Boolean(ce.detail));
+    };
+    const onCheckoutOpen = (e: Event) => {
+      const ce = e as CustomEvent<boolean>;
+      setCheckoutOpen(Boolean(ce.detail));
+    };
+    window.addEventListener("cart:open", onCartOpen as EventListener);
+    window.addEventListener(
+      "cart:checkoutOpen",
+      onCheckoutOpen as EventListener,
+    );
+    return () => {
+      window.removeEventListener("cart:open", onCartOpen as EventListener);
+      window.removeEventListener(
+        "cart:checkoutOpen",
+        onCheckoutOpen as EventListener,
       );
     };
   }, []);
@@ -164,7 +189,9 @@ const SearchShopModal: React.FC<Props> = ({ targetId = "shops" }) => {
     setVisible(false);
   };
 
-  if (!visible || (isMobile && menuOpen)) return null;
+  if (!visible || (isMobile && menuOpen) || cartOpen || checkoutOpen) {
+    return null;
+  }
 
   return (
     <div
