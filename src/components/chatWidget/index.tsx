@@ -5,28 +5,6 @@ import productsService, { type Product } from "../../services/productsService";
 import { useTranslation } from "react-i18next";
 import gsap from "gsap";
 
-type ProductJson = {
-  id: number;
-  name: { es: string; en: string; ca?: string };
-  description: { es: string; en: string; ca?: string };
-  objectives?: { es: string[]; en: string[]; ca?: string[] };
-  price: string | number;
-  price_formatted?: string;
-  size: string;
-  image: string;
-  category: { es: string; en: string; ca?: string } | string;
-  sportId: string;
-  available: boolean;
-  sku?: string;
-  amazonLinks?: { [key: string]: string };
-  nutritionalValues?: { es: string; en: string; ca?: string };
-  application?: { es: string; en: string; ca?: string };
-  recommendations?: { es: string; en: string; ca?: string };
-  cautions?: { es: string; en: string; ca?: string };
-  rating?: number;
-  votes?: number;
-};
-
 const ChatWidget: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -176,40 +154,7 @@ const ChatWidget: React.FC = () => {
         const items = await productsService.getProducts();
         if (mounted) setProducts(items);
       } catch {
-        try {
-          const r = await fetch("/products.json");
-          const data = await r.json();
-          const arr = ((data.products || []) as ProductJson[]).map((p) => ({
-            id: p.id,
-            name: p.name,
-            description: p.description,
-            objectives: p.objectives,
-            price:
-              typeof p.price === "string"
-                ? parseFloat(p.price.replace(",", "."))
-                : p.price,
-            price_formatted: p.price_formatted ?? "",
-            size: p.size,
-            image: p.image,
-            category:
-              typeof p.category === "string"
-                ? { es: p.category, en: p.category }
-                : p.category,
-            sportId: p.sportId,
-            available: p.available,
-            sku: p.sku ?? "",
-            amazonLinks: p.amazonLinks,
-            nutritionalValues: p.nutritionalValues,
-            application: p.application,
-            recommendations: p.recommendations,
-            cautions: p.cautions,
-            rating: p.rating,
-            votes: p.votes,
-          })) as Product[];
-          if (mounted) setProducts(arr);
-        } catch {
-          if (mounted) setProducts([]);
-        }
+        if (mounted) setProducts([]);
       }
     };
     load();

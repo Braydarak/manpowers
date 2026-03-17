@@ -23,35 +23,6 @@ import InfoStripe from "../components/info/InfoStripe";
 
 const Shops = lazy(() => import("../sections/shops"));
 
-type ProductJson = {
-  id: number;
-  name: Product["name"];
-  description: Product["description"];
-  objectives?: { es: string[]; en: string[] };
-  price: string | number;
-  price_formatted?: string;
-  size: string;
-  image: string;
-  category: Product["category"] | string;
-  sportId: string;
-  available: boolean;
-  sku?: string;
-  amazonLinks?: { [key: string]: string };
-  nutritionalValues?: { es: string; en: string };
-  application?: { es: string; en: string };
-  recommendations?: { es: string; en: string };
-  cautions?: { es: string; en: string; ca?: string };
-  rating?: number;
-  votes?: number;
-  pricesBySize?: { [key: string]: string };
-  img_folder?: string;
-  faqs?: {
-    es?: { question: string; answer: string }[];
-    en?: { question: string; answer: string }[];
-    ca?: { question: string; answer: string }[];
-  };
-};
-
 const ProductDetailPage: React.FC = () => {
   const [enter, setEnter] = useState(false);
   const shopsMountRef = useRef<HTMLDivElement | null>(null);
@@ -255,79 +226,32 @@ const ProductDetailPage: React.FC = () => {
       setError("");
 
       try {
+        const all = await productsService.getProducts();
+        let found: Product | null = null;
         if (id) {
-          const productsById = await productsService.getProducts({
-            id: Number(id),
-          });
-          if (productsById && productsById.length > 0) {
-            setProduct(productsById[0]);
-            return;
-          }
+          found = all.find((p) => String(p.id) === String(id)) || null;
         }
-
-        const response = await fetch("/products.json");
-        const data = await response.json();
-        const normalized: Product[] = (data.products as ProductJson[]).map(
-          (p: ProductJson) => ({
-            id: p.id,
-            name: p.name,
-            description: p.description,
-            objectives: p.objectives,
-            price:
-              typeof p.price === "string"
-                ? parseFloat(p.price.replace(",", "."))
-                : p.price,
-            price_formatted: p.price_formatted ?? "",
-            size: p.size,
-            image: p.image,
-            category:
-              typeof p.category === "string"
-                ? { es: p.category, en: p.category }
-                : p.category,
-            sportId: p.sportId,
-            available: p.available,
-            sku: p.sku ?? "",
-            amazonLinks: p.amazonLinks,
-            pricesBySize: p.pricesBySize,
-            nutritionalValues: p.nutritionalValues,
-            application: p.application,
-            recommendations: p.recommendations,
-            cautions: p.cautions,
-            rating: p.rating,
-            votes: p.votes,
-          }),
-        );
-
-        if (id) {
-          const byId = normalized.find(
-            (p: Product) => String(p.id) === String(id),
-          );
-          if (byId) {
-            setProduct(byId);
-            return;
-          }
-        }
-
-        if (slug) {
+        if (!found && slug) {
           const base = sportParam
-            ? normalized.filter(
+            ? all.filter(
                 (p) => p.sportId === sportParam || p.sportId === "multisport",
               )
-            : normalized;
-          const found = base.find(
-            (p) =>
-              toSlug(p.name.es) === slug ||
-              toSlug(p.name.en) === slug ||
-              toSlug(p.name.ca || "") === slug,
-          );
-          if (found) {
-            setProduct(found);
-            return;
-          }
+            : all;
+          found =
+            base.find(
+              (p) =>
+                toSlug(p.name.es) === slug ||
+                toSlug(p.name.en) === slug ||
+                toSlug(p.name.ca || "") === slug,
+            ) || null;
         }
-        setError("Producto no encontrado");
+        if (found) {
+          setProduct(found);
+        } else {
+          setError("Producto no encontrado");
+        }
       } catch (err) {
-        console.error("Error cargando producto por id:", err);
+        console.error("Error cargando producto:", err);
         setError("Error al cargar el producto");
       } finally {
         setLoading(false);
@@ -345,11 +269,7 @@ const ProductDetailPage: React.FC = () => {
         return;
       }
       try {
-        const res = await fetch("/products.json");
-        const data = await res.json();
-        const raw = (data.products || []) as ProductJson[];
-        const found = raw.find((x) => String(x.id) === String(product.id));
-        const folder = found?.img_folder;
+        const folder = product.img_folder;
         if (folder) {
           const all = import.meta.glob(
             "/src/assets/**/*.{png,jpg,jpeg,webp,mp4,webm}",
@@ -447,17 +367,12 @@ const ProductDetailPage: React.FC = () => {
 
   useEffect(() => {
     const loadFaqs = async () => {
-      if (!id) return;
+      if (!id || !product) return;
       try {
-        const response = await fetch("/products.json");
-        const data = await response.json();
-        const p = (data.products || []).find(
-          (x: ProductJson) => String(x.id) === String(id),
-        );
-        const langItems = Array.isArray(p?.faqs?.[currentLanguage])
-          ? p.faqs[currentLanguage]
-          : Array.isArray(p?.faqs?.es)
-            ? p.faqs.es
+        const langItems = Array.isArray(product?.faqs?.[currentLanguage])
+          ? product!.faqs![currentLanguage]
+          : Array.isArray(product?.faqs?.es)
+            ? product!.faqs!.es
             : [];
         const items = (langItems as { question: string; answer: string }[])
           .slice(0, 4)
@@ -472,7 +387,7 @@ const ProductDetailPage: React.FC = () => {
       }
     };
     loadFaqs();
-  }, [id, currentLanguage]);
+  }, [id, currentLanguage, product]);
 
   useEffect(() => {
     const onCheckoutToggle = (e: Event) => {

@@ -5,27 +5,6 @@ import productsService, { type Product } from "../../services/productsService";
 import { Search } from "lucide-react";
 
 type Suggestion = Product & { score: number };
-type ProductJson = {
-  id: number;
-  name: { es: string; en: string };
-  description: { es: string; en: string };
-  objectives?: { es: string[]; en: string[] };
-  price: string | number;
-  price_formatted?: string;
-  size: string;
-  image: string;
-  category: { es: string; en: string } | string;
-  sportId: string;
-  available: boolean;
-  sku?: string;
-  amazonLinks?: { [key: string]: string };
-  nutritionalValues?: { es: string; en: string };
-  application?: { es: string; en: string };
-  recommendations?: { es: string; en: string };
-  cautions?: { es: string; en: string };
-  rating?: number;
-  votes?: number;
-};
 
 const ProductSearch: React.FC<{
   className?: string;
@@ -56,45 +35,7 @@ const ProductSearch: React.FC<{
       setLoading(true);
       setError("");
       try {
-        let items: Product[] = [];
-        try {
-          items = await productsService.getProducts();
-        } catch {
-          items = [];
-        }
-        if (!items || items.length === 0) {
-          const r = await fetch("/products.json");
-          const data = await r.json();
-          items = ((data.products as ProductJson[]) || []).map(
-            (p: ProductJson) => ({
-              id: p.id,
-              name: p.name,
-              description: p.description,
-              objectives: p.objectives,
-              price:
-                typeof p.price === "string"
-                  ? parseFloat(p.price.replace(",", "."))
-                  : p.price,
-              price_formatted: p.price_formatted ?? "",
-              size: p.size,
-              image: p.image,
-              category:
-                typeof p.category === "string"
-                  ? { es: p.category, en: p.category }
-                  : p.category,
-              sportId: p.sportId,
-              available: p.available,
-              sku: p.sku ?? "",
-              amazonLinks: p.amazonLinks,
-              nutritionalValues: p.nutritionalValues,
-              application: p.application,
-              recommendations: p.recommendations,
-              cautions: p.cautions,
-              rating: p.rating,
-              votes: p.votes,
-            }),
-          );
-        }
+        const items = await productsService.getProducts();
         if (mounted) setAll(items);
       } catch {
         setError("No se pudieron cargar productos");
