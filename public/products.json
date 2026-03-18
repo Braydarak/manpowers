@@ -7,6 +7,7 @@
         "en": "Maca Forte 10:1 - 5000",
         "ca": "Maca Forte 10:1 - 5000"
       },
+      "url": "https://www.manpowers.es/products/multisport/maca-forte-10-1-5000",
       "description": {
         "es": "Suplemento premium elaborado a partir de raíz de Maca Andina concentrada, que ofrece una potencia de 5000mg por cápsula. Su fórmula está diseñada para brindarte energía explosiva, resistencia física y un mayor enfoque mental.",
         "en": "Premium supplement made from concentrated Andean Maca root, offering a potency of 5000mg per capsule. Its formula is designed to provide explosive energy, physical endurance and enhanced mental focus.",
@@ -103,6 +104,7 @@
         "en": "Omega 3 - Pure fish oil",
         "ca": "Omega 3 - Oli de peix pur"
       },
+      "url": "https://www.manpowers.es/products/multisport/omega-3-puro-aceite-de-pescado",
       "description": {
         "es": "MɅN Powers Omega 3 contiene: aceite de pescado (35% EPA, 25% DHA), gelatina bovina, humectante (glicerina), D-alfa tocoferol (vitamina E).",
         "en": "MɅN Powers Omega 3 contains: fish oil (35% EPA, 25% DHA), bovine gelatin, humectant (glycerin), D-alpha tocopherol (vitamin E).",
@@ -205,6 +207,7 @@
         "en": "Facial and Body Sunscreen SPF 50+",
         "ca": "Protector solar facial i corporal SPF 50+"
       },
+      "url": "https://www.manpowers.es/products/multisport/protector-solar-facial-y-corporal-spf-50",
       "description": {
         "es": "El protector solar es esencial para proteger la piel frente a los efectos de la radiación ultravioleta. MɅN Powers Protector Solar SPF50+ ayuda a proteger la piel frente a los rayos UVA y UVB, responsables de las quemaduras solares, el envejecimiento prematuro y la aparición de manchas cutáneas.\n\nLa fórmula incorpora ácido hialurónico, un activo presente de forma natural en la piel que destaca por su capacidad para retener grandes cantidades de agua. Esto ayuda a mantener la hidratación, mejorar la elasticidad y aportar un aspecto más suave y saludable incluso durante la exposición solar.\n\nAdemás, su acción aceleradora del bronceado favorece la producción natural de melanina, ayudando a conseguir un bronceado más rápido, uniforme y duradero. Gracias a la combinación de protección solar, hidratación y estimulación del bronceado, la piel se mantiene protegida, luminosa y confortable incluso durante largas exposiciones al sol.",
         "en": "Sunscreen is essential to protect the skin against the effects of ultraviolet radiation. MɅN Powers Sunscreen SPF50+ helps protect the skin against UVA and UVB rays, responsible for sunburn, premature aging, and the appearance of skin spots.\n\nThe formula incorporates hyaluronic acid, an active ingredient naturally present in the skin that stands out for its ability to retain large amounts of water. This helps maintain hydration, improve elasticity, and provide a smoother and healthier appearance even during sun exposure.\n\nIn addition, its tanning accelerator action favors the natural production of melanin, helping to achieve a faster, more uniform, and lasting tan. Thanks to the combination of sun protection, hydration, and tan stimulation, the skin remains protected, luminous, and comfortable even during long exposures to the sun.",
@@ -307,6 +310,7 @@
         "en": "Premium Creatine Monohydrate",
         "ca": "Creatina monohidrat premium"
       },
+      "url": "https://www.manpowers.es/products/multisport/creatina-monohidrato-premium",
       "description": {
         "es": "Creatina monohidrato de máxima pureza para aumentar la fuerza, potencia y masa muscular. Ideal para entrenamientos de alta intensidad y deportes de fuerza.",
         "en": "Maximum purity creatine monohydrate to increase strength, power and muscle mass. Ideal for high-intensity training and strength sports.",
@@ -399,10 +403,11 @@
     {
       "id": 5,
       "name": {
-        "es": "Crema Anti-Rozaduras",
-        "en": "Anti-Chafing Cream",
-        "ca": "Crema anti-rascades"
+        "es": "Crema Antifricción",
+        "en": "Anti‑chafing Cream",
+        "ca": "Crema anti‑rascades"
       },
+      "url": "https://manpowers.es/products/fencing/crema-antifriccion",
       "description": {
         "es": "Antes de enfundarte la chaqueta y el plastrón, prepara la piel para los asaltos. Esta crema anti‑rozaduras crea una barrera invisible que reduce la fricción en axilas, ingles y cintura, incluso bajo el calor de la máscara. Se mantiene firme con el sudor y permite moverte con libertad en cada finta y desplazamiento.",
         "en": "Before you zip up the jacket and plastron, prep your skin for the bout. This anti‑chafing cream builds an invisible shield that reduces friction on underarms, groin and waist, even under the mask’s heat. Sweat‑resistant and movement‑friendly for every feint and footwork.",
@@ -490,6 +495,7 @@
         "en": "Pure Aloe Vera Gel",
         "ca": "Gel d'àloe vera pur"
       },
+      "url": "https://www.manpowers.es/products/multisport/gel-de-aloe-vera-puro",
       "description": {
         "es": "Gel de aloe vera 100% puro para hidratar, calmar y regenerar la piel. Ideal para quemaduras solares, irritaciones y cuidado diario de la piel.",
         "en": "100% pure aloe vera gel to hydrate, soothe and regenerate skin. Ideal for sunburns, irritations and daily skin care.",
@@ -505,7 +511,7 @@
         "en": "External use. Avoid contact with eyes.",
         "ca": "Ús extern. Evitar el contacte amb els ulls."
       },
-      "price": "9,00",
+      "price": "4,50",
       "size": "100 ml",
       "image": "/products/GEL-DE-ALOE-VERA.avif",
       "category": { "es": "cuidado", "en": "care", "ca": "cura" },
@@ -573,10 +579,11 @@
     {
       "id": 7,
       "name": {
-        "es": "Champú Anti-Caída Fortalecedor",
-        "en": "Anti-Hair Loss Strengthening Shampoo",
+        "es": "Champú Anticaída Fortalecedor",
+        "en": "AntiHair Loss Strengthening Shampoo",
         "ca": "Xampú anticaiguda reforçant"
       },
+      "url": "https://manpowers.es/products/archery/champu-anticaida-fortalecedor",
       "description": {
         "es": "El Champú Anticaída Manpowers - Anti Hair Loss, con la fórmula \"Hair Denseer\", es un tratamiento capilar de uso diario diseñado para combatir las principales causas de la caída del cabello masculino. Su mezcla de ingredientes activos estimula la raíz y fortalece la estructura capilar. No solo limpia, sino que trata el cuero cabelludo, ofreciendo un cabello más fuerte, denso y con mayor vitalidad.",
         "en": "Manpowers Anti-Hair Loss Shampoo, with the \"Hair Denseer\" formula, is a daily hair treatment designed to combat the main causes of male hair loss. Its blend of active ingredients stimulates the root and strengthens the hair structure. It not only cleans but also treats the scalp, offering stronger, denser, and more vibrant hair.",
@@ -684,6 +691,7 @@
         "en": "Relaxing Massage Cream",
         "ca": "Crema de massatge relaxant"
       },
+      "url": "https://www.manpowers.es/products/sailing/crema-para-masajes-relajante",
       "description": {
         "es": "Termina la regata y notas hombros y zona lumbar cargados. Esta crema de masaje se desliza con facilidad y ayuda a descomprimir la tensión tras las maniobras y las horas de mar. Textura cómoda, aroma discreto y una sensación de descanso que te prepara para la siguiente salida.",
         "en": "After the regatta, your shoulders and lower back feel tight. This massage cream glides smoothly and helps ease tension after maneuvers and hours at sea. Comfortable texture, subtle scent, and a rested feel that readies you for the next outing.",
@@ -765,6 +773,7 @@
         "en": "Lavender Oil Foot Cream",
         "ca": "Crema de peus amb oli d'espígol"
       },
+      "url": "https://www.manpowers.es/products/sailing/crema-para-pies-con-aceite-de-espliego",
       "price": "6,00",
       "size": "100 ml",
       "description": {
@@ -839,10 +848,11 @@
     {
       "id": 10,
       "name": {
-        "es": "Crema Anti-Rozaduras Deportivo",
+        "es": "Crema Antifricción Deportiva",
         "en": "Sports Anti-Chafing Cream",
         "ca": "Crema anti-rascades esportiva"
       },
+      "url": "https://manpowers.es/products/cycling/crema-antifriccion-deportiva",
       "description": {
         "es": "Antes de salir, protege los puntos de contacto con el sillín. Nuestro stick anti‑rozaduras forma una película resistente al sudor y al agua que reduce la fricción en rutas largas, manteniendo la piel cómoda bajo el culotte. Ligero y de fácil aplicación para entrenos y marchas.",
         "en": "Pre‑ride protection for saddle contact points. Our anti‑chafing stick forms a sweat‑ and water‑resistant film that reduces friction on long routes, keeping skin comfortable under your bibs. Lightweight and easy to apply for training and gran fondos.",
@@ -930,6 +940,7 @@
         "en": "Professional Tactical Grip",
         "ca": "Agarre tàctic professional"
       },
+      "url": "https://www.manpowers.es/products/archery/agarre-tactico-profesional",
       "description": {
         "es": "A mitad de serie, las manos sudan y la sujeción del arco debe seguir siendo constante. Este gel de agarre técnico ofrece una firmeza seca y controlada para que tu mano soporte el tiro sin deslizamientos, cuidando la piel durante la sesión. Integra el agarre en tu rutina previa al disparo.",
         "en": "Mid‑series, palms sweat and bow hold must stay consistent. This technical grip gel delivers dry, steady firmness so your bow hand resists slip while caring for the skin through the session. Fold the grip into your pre‑shot routine.",
@@ -1017,6 +1028,7 @@
         "en": "Cooling Cream",
         "ca": "Crema efecte fred"
       },
+      "url": "https://www.manpowers.es/products/archery/crema-efecto-frio",
       "description": {
         "es": "Entre tandas, un respiro para antebrazos y hombros. Nuestra crema efecto frío ofrece una sensación refrescante que ayuda a aliviar la carga tras las repeticiones de tiro, dejándote preparado para el siguiente end. Se absorbe rápido y no deja residuos, ideal para uso en campo.",
         "en": "Between ends, give forearms and shoulders a breather. Our cooling cream delivers a refreshing feel that helps ease the load after repeated shots, leaving you ready for the next end. Fast‑absorbing and residue‑free — ideal on the range.",
@@ -1104,6 +1116,7 @@
         "en": "Muscle Massage Cream-Gel",
         "ca": "Cremigel de massatge muscular"
       },
+      "url": "https://www.manpowers.es/products/archery/cremigel-masaje-muscular",
       "description": {
         "es": "Después de la práctica, trabaja la zona escapular y el manguito rotador con un masaje cómodo. Este cremigel ayuda a suavizar la tensión acumulada por el gesto del disparo, con deslizamiento justo y rápida absorción para recuperar sensaciones.",
         "en": "Post‑practice, treat the scapular area and rotator cuff with a comfortable massage. This cream‑gel helps ease tension built up by the shooting motion, with just‑right glide and quick absorption to restore feel.",
@@ -1191,6 +1204,7 @@
         "en": "Heat Effect Gel",
         "ca": "Gel efecte calor"
       },
+      "url": "https://www.manpowers.es/products/archery/gel-efecto-calor",
       "description": {
         "es": "Calienta antes de la primera serie. Nuestro gel efecto calor proporciona una sensación térmica progresiva en hombros, espalda y muñecas para activar antes de entrar a tirar. Integra el calentamiento en tu ritual, con textura que no molesta al agarre.",
         "en": "Warm up before the first series. Our heat effect gel provides a gradual thermal feel to shoulders, back, and wrists to activate before you shoot. Make warm‑up part of your ritual with a texture that won’t interfere with grip.",
@@ -1278,6 +1292,7 @@
         "en": "Heat Effect Gel",
         "ca": "Gel efecte calor"
       },
+      "url": "https://www.manpowers.es/products/fencing/gel-efecto-calor",
       "description": {
         "es": "En la sala, antes del asalto, activa piernas y brazos. El gel efecto calor despierta gemelos, cuádriceps y antebrazos con una sensación térmica suave que acompaña tu calentamiento sin saturar la piel. Ideal para reaccionar rápido desde el primer toque.",
         "en": "In the salle, before the bout, activate legs and arms. The heat effect gel wakes calves, quads, and forearms with a gentle thermal feel that supports warm‑up without overloading the skin. Ideal for moving fast from the first touch.",
@@ -1362,6 +1377,7 @@
         "en": "Cremigel Massage Gel",
         "ca": "Cremigel"
       },
+      "url": "https://www.manpowers.es/products/fencing/cremigel",
       "description": {
         "es": "Tras paradas y ripostas, los antebrazos quedan tensos. Este cremigel de masaje ayuda a soltar la carga y recuperar movilidad en muñecas y codos, con una textura cómoda que se integra en tu rutina de vuelta a la calma.",
         "en": "After parries and ripostes, forearms feel tight. This massage cream‑gel helps release load and restore mobility in wrists and elbows, with a comfortable texture that fits your cool‑down routine.",
@@ -1430,6 +1446,7 @@
         "en": "Calcium + Magnesium Vitamin K",
         "ca": "Calci + Magnesi Vitamina K"
       },
+      "url": "https://www.manpowers.es/products/fencing/calcio-magnesio-vitamina-k",
       "description": {
         "es": "La vitamina D3 y la vitamina K2 son nutrientes esenciales que trabajan de forma complementaria en el organismo. Nuestra fórmula aporta 50 µg de vitamina D3 y 75 µg de vitamina K2 por cápsula, una combinación equilibrada que ayuda a aprovechar mejor los beneficios de ambas vitaminas.\n\nLa vitamina D, conocida como la “vitamina del sol”, contribuye al funcionamiento normal del sistema inmunitario y favorece la absorción y utilización del calcio y el fósforo, minerales fundamentales para mantener los huesos y los dientes en condiciones normales. También participa en el mantenimiento de la función muscular y en el equilibrio general del organismo.\n\nLa vitamina K2 actúa de forma complementaria ayudando a dirigir el calcio hacia los huesos, donde es necesario, y contribuyendo al mantenimiento normal de la salud ósea.",
         "en": "Vitamin D3 and Vitamin K2 are essential nutrients that work complementarily in the body. Our formula provides 50 µg of Vitamin D3 and 75 µg of Vitamin K2 per capsule, a balanced combination that helps to better utilize the benefits of both vitamins.\n\nVitamin D, known as the “sunshine vitamin”, contributes to the normal function of the immune system and promotes the absorption and utilization of calcium and phosphorus, fundamental minerals for maintaining bones and teeth in normal conditions. It also participates in the maintenance of muscle function and the general balance of the organism.\n\nVitamin K2 acts complementarily by helping to direct calcium towards the bones, where it is needed, and contributing to the normal maintenance of bone health.",
@@ -1526,6 +1543,7 @@
         "en": "Cooling Cream",
         "ca": "Crema efecte fred"
       },
+      "url": "https://www.manpowers.es/products/fencing/crema-efecto-frio",
       "description": {
         "es": "Termina el asalto y dedica un minuto a bajar pulsaciones. Nuestra crema efecto frío aporta una sensación refrescante que ayuda a aliviar la fatiga en antebrazos, hombros y piernas después de tirar. Se absorbe rápido y acompaña la recuperación entre combates.",
         "en": "After a bout, take a minute to come down. Our cooling cream brings a refreshing feel that helps ease fatigue in forearms, shoulders, and legs after fencing. Quick‑absorbing to support recovery between matches.",
@@ -1604,6 +1622,7 @@
         "en": "Professional Technical Grip",
         "ca": "Agarre tècnic professional"
       },
+      "url": "https://www.manpowers.es/products/golf/agarre-tecnico-profesional",
       "description": {
         "es": "Gel de agarre técnico para golf, diseñado para mejorar la sujeción del palo en condiciones de humedad, sudor o tensión competitiva. Su fórmula crea una película antideslizante que mantiene las manos firmes y secas, incrementando el control del swing y la precisión en el impacto. Ideal para entrenamientos y torneos; se aplica en palma y dedos sin dejar residuos pegajosos ni marcar el grip. Ingredientes respetuosos con la piel que ayudan a prevenir rozaduras y fatiga de manos durante la vuelta.",
         "en": "Professional grip gel for golf, engineered to enhance club hold in humidity, sweat, or pressure situations. The formula forms a thin anti-slip film that keeps hands dry and steady, improving swing control and strike precision. Perfect for practice and competition; apply to palms and fingers without sticky residue or marking the grip. Skin-friendly ingredients help prevent chafing and hand fatigue throughout the round.",
@@ -1681,6 +1700,7 @@
         "en": "Cooling Cream",
         "ca": "Crema efecte fred"
       },
+      "url": "https://www.manpowers.es/products/fencing/crema-efecto-frio",
       "description": {
         "es": "Tras el campo de prácticas o los últimos nueve hoyos, refresca antebrazos y hombros. Esta crema efecto frío ayuda a aliviar la fatiga del swing repetido, dejando la piel cómoda y lista para seguir. Textura ligera, se absorbe rápido y no deja residuo en el grip.",
         "en": "After the range or the closing nine, cool down forearms and shoulders. This cooling cream helps ease swing‑induced fatigue, leaving skin comfortable and ready to carry on. Lightweight, fast‑absorbing, and won’t leave residue on the grip.",
@@ -1768,6 +1788,7 @@
         "en": "Cremigel Massage Gel",
         "ca": "Cremigel"
       },
+      "url": "https://www.manpowers.es/products/fencing/cremigel",
       "description": {
         "es": "Al terminar la vuelta, mima zona lumbar, hombros y antebrazos. Este cremigel de masaje ofrece el deslizamiento justo para trabajar la tensión del swing, con absorción rápida para una recuperación cómoda antes de la siguiente ronda.",
         "en": "Post‑round, treat lower back, shoulders, and forearms. This massage cream‑gel offers just‑right glide to work swing tension, with quick absorption for a comfortable recovery before the next round.",
@@ -1845,6 +1866,7 @@
         "en": "Heat Effect Gel",
         "ca": "Gel efecte calor"
       },
+      "url": "https://www.manpowers.es/products/fencing/gel-efecto-calor",
       "description": {
         "es": "Antes de salir al tee 1, activa la movilidad. El gel efecto calor aporta una sensación térmica gradual en hombros, muñecas y espalda para preparar el cuerpo, sin dejar sensación pegajosa ni molestar el agarre.",
         "en": "On the first tee, get mobility going. The heat effect gel gives a gradual thermal feel to shoulders, wrists, and back to prep the body, without stickiness or affecting grip.",
@@ -1928,10 +1950,11 @@
     {
       "id": 23,
       "name": {
-        "es": "Champú Anti-Caída Fortalecedor",
-        "en": "Anti-Hair Loss Strengthening Shampoo",
+        "es": "Champú AntiCaída Fortalecedor",
+        "en": "AntiHair Loss Strengthening Shampoo",
         "ca": "Xampú anticaiguda reforçant"
       },
+      "url": "https://manpowers.es/products/golf/champu-anticaida-fortalecedor",
       "price": "12,00",
       "size": "100 ml",
       "description": {
@@ -2039,6 +2062,7 @@
         "en": "Tactical Backpack",
         "ca": "Motxilla Tàctica"
       },
+      "url": "https://www.manpowers.es/products/archery/mochila-tactica",
       "price": "25,00",
       "description": {
         "es": "Diseñada para la máxima resistencia y funcionalidad. Esta mochila táctica cuenta con múltiples compartimentos, materiales duraderos y un diseño ergonómico ideal para llevar todo tu equipamiento deportivo o para tus aventuras al aire libre.",
@@ -2089,6 +2113,7 @@
         "en": "Canvas Bag - Tactical",
         "ca": "Bossa de Lona - Tàctica"
       },
+      "url": "https://www.manpowers.es/products/archery/bolsa-de-lona-tactica",
       "price": "18,00",
       "description": {
         "es": "Diseñada para la máxima resistencia y funcionalidad. Esta bolsa de lona cuenta con múltiples compartimentos, materiales duraderos y un diseño ergonómico ideal para llevar todo tu equipamiento deportivo o para tus aventuras al aire libre.",
@@ -2138,6 +2163,7 @@
         "en": "Tactical Polo",
         "ca": "Polo Tàctic"
       },
+      "url": "https://www.manpowers.es/products/multisport/polo-tactico",
       "price": "30,00",
       "description": {
         "es": "Polo táctico de alto rendimiento, fabricado con tejido transpirable y resistente. Ideal para actividades al aire libre y uso diario, combinando estilo y funcionalidad.",
@@ -2188,6 +2214,7 @@
         "en": "Nordic Coat",
         "ca": "Jaqueta Nòrdica"
       },
+      "url": "https://www.manpowers.es/products/multisport/chaqueta-nordica",
       "price": "90,00",
       "description": {
         "es": "Chaqueta Softshell de diseño nórdico, ofrece protección superior contra el viento y el frío. Tejido técnico impermeable y transpirable para mantener el confort en climas adversos.",
@@ -2238,6 +2265,7 @@
         "en": "Raincoat",
         "ca": "Impermeable"
       },
+      "url": "https://www.manpowers.es/products/multisport/traje-de-lluvia",
       "price": "48,00",
       "description": {
         "es": "Traje de lluvia ligero y compacto, 100% impermeable. Diseñado para mantenerte seco en las condiciones más húmedas sin sacrificar la transpirabilidad.",
@@ -2288,6 +2316,7 @@
         "en": "Tactical Hunting Backpack",
         "ca": "Motxilla Tàctica de Caça"
       },
+      "url": "https://www.manpowers.es/products/archery/mochila-tactica-de-caza",
       "price": "108,00",
       "description": {
         "es": "Mochila especializada para caza con diseño de camuflaje. Cuenta con compartimentos específicos para equipo, soporte para arma y materiales silenciosos.",
@@ -2337,6 +2366,7 @@
         "en": "Tactical Shoulder Bag",
         "ca": "Bolso de Hombro Tàctic"
       },
+      "url": "https://www.manpowers.es/products/archery/bolso-de-hombro-tactico",
       "price": "18,00",
       "description": {
         "es": "Bolso de hombro táctico versátil y resistente. Ideal para transportar equipo esencial de forma cómoda y accesible. Diseño compacto con sistema MOLLE.",
@@ -2386,6 +2416,7 @@
         "en": "Canvas Bag",
         "ca": "Bossa de Lona"
       },
+      "url": "https://www.manpowers.es/products/archery/bolsa-de-lona",
       "price": "18,00",
       "description": {
         "es": "Bolsa de lona resistente y espaciosa en varios colores. Perfecta para gimnasio, viajes o uso diario. Material duradero y diseño clásico.",
@@ -2435,6 +2466,7 @@
         "en": "Breathable Cap",
         "ca": "Gorra Transpirable"
       },
+      "url": "https://www.manpowers.es/products/multisport/gorra-transpirable",
       "price": "21,00",
       "description": {
         "es": "Gorra táctica transpirable diseñada para climas cálidos. Paneles de malla para ventilación superior y visera para protección solar.",
@@ -2484,6 +2516,7 @@
         "en": "Tactical Shirt",
         "ca": "Camiseta Tàctica"
       },
+      "url": "https://www.manpowers.es/products/multisport/camiseta-tactica",
       "price": "21,00",
       "description": {
         "es": "Camiseta táctica de alto rendimiento. Tejido transpirable y de secado rápido. Diseño ergonómico para máxima movilidad.",
@@ -2533,6 +2566,7 @@
         "en": "Tactical Parka",
         "ca": "Parka Tàctica"
       },
+      "url": "https://www.manpowers.es/products/multisport/parka-tactica",
       "price": "96,00",
       "description": {
         "es": "Parka táctica impermeable y térmica. Diseñada para proteger contra el frío y la lluvia. Incluye capucha plegable y múltiples bolsillos.",
