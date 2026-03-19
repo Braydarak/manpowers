@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ShoppingCart, X } from "lucide-react";
+import productsService from "../../services/productsService";
 
 type CartItem = {
   id: string;
@@ -273,31 +274,23 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
   useEffect(() => {
     const load = async () => {
       try {
-        const [mpRes, tamdRes] = await Promise.allSettled([
-          fetch("/products.json?v=" + new Date().getTime()),
-          fetch("/tamdProducts.json?v=" + new Date().getTime()),
-        ]);
-
         const next: Record<number, CategoryI18n> = {};
 
-        if (mpRes.status === "fulfilled" && mpRes.value.ok) {
-          const data = await mpRes.value.json();
-          const products = (data?.products || []) as Array<{
-            id: number;
-            category?: string | CategoryI18n;
-          }>;
-          products.forEach((p) => {
-            if (!p?.id) return;
-            const cat =
-              typeof p.category === "string"
-                ? { es: p.category, en: p.category }
-                : p.category;
-            if (cat) next[p.id] = cat;
-          });
-        }
+        const manpowersProducts = await productsService.getProducts();
+        manpowersProducts.forEach((p) => {
+          if (!p?.id) return;
+          const cat =
+            typeof p.category === "string"
+              ? { es: p.category, en: p.category }
+              : p.category;
+          if (cat) next[p.id] = cat;
+        });
 
-        if (tamdRes.status === "fulfilled" && tamdRes.value.ok) {
-          const data = await tamdRes.value.json();
+        const tamdRes = await fetch(
+          "/tamdProducts.json?v=" + new Date().getTime(),
+        );
+        if (tamdRes.ok) {
+          const data = await tamdRes.json();
           const products = (data?.products || []) as Array<{
             id: number;
             category?: string | CategoryI18n;

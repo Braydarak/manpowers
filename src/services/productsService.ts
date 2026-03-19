@@ -141,11 +141,21 @@ class ProductsService {
       if (_cache) return _cache;
       if (_inflight) return _inflight;
       _inflight = (async () => {
-        const response = await fetch("/products.json");
-        const data = await response.json();
-        const raw = (Array.isArray(data?.products) ? data.products : []) as
-          | RawProduct[]
-          | [];
+        const load = async (url: string) => {
+          const r = await fetch(url);
+          if (!r.ok) throw new Error(`products_http_${r.status}`);
+          return r.json();
+        };
+
+        const data: unknown = await load("/backend/get_products.php");
+
+        const payload =
+          data && typeof data === "object"
+            ? (data as Record<string, unknown>)
+            : {};
+        const raw = (
+          Array.isArray(payload.products) ? payload.products : []
+        ) as RawProduct[] | [];
         const arr = raw.map((p) => ({
           id:
             typeof p.id === "number"

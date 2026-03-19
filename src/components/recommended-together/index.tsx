@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { type Product } from "../../services/productsService";
+import productsService, { type Product } from "../../services/productsService";
 
 type Props = {
   currentId: number;
@@ -21,27 +21,7 @@ const RecommendedTogether: React.FC<Props> = ({
   useEffect(() => {
     const load = async () => {
       try {
-        const response = await fetch("/products.json");
-        const data = await response.json();
-        const arr = (data.products as Product[]).map((p) => ({
-          id: p.id,
-          name: p.name,
-          description: p.description,
-          price:
-            typeof p.price === "string"
-              ? parseFloat((p.price as string).replace(",", "."))
-              : p.price,
-          price_formatted: p.price_formatted ?? "",
-          size: p.size,
-          image: p.image,
-          category:
-            typeof p.category === "string"
-              ? { es: p.category, en: p.category }
-              : p.category,
-          sportId: p.sportId,
-          available: p.available,
-          sku: p.sku ?? "",
-        })) as Product[];
+        const arr = await productsService.getProducts();
         const baseSport = String(sportId || "")
           .toLowerCase()
           .trim();
