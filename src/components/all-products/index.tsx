@@ -130,10 +130,12 @@ const ProductSlider: React.FC<{
   };
 
   const addToCart = (p: Product) => {
+    const hasDiscount =
+      typeof p.discount_price === "number" && Number.isFinite(p.discount_price);
     const detail = {
       id: String(p.id),
       name: p.name[language] || p.name.es,
-      price: p.price,
+      price: hasDiscount ? p.discount_price : p.price,
       image: p.image,
       quantity: 1,
       openCart: true,
@@ -211,140 +213,198 @@ const ProductSlider: React.FC<{
                 {t("email.noProducts")}
               </div>
             ) : (
-              items.map((p) => (
-                <div
-                  key={p.id}
-                  onClick={() => openDetail(p)}
-                  className="rp-card group relative min-w-[90vw] md:min-w-[320px] bg-[var(--color-primary)] border border-black/10 p-5 transition-all duration-300 cursor-pointer snap-center md:snap-start flex flex-col shadow-lg shadow-black/10 hover:shadow-black/20 hover:-translate-y-1"
-                >
-                  <div className="relative aspect-square bg-black/5 overflow-hidden mb-5 border border-black/5">
-                    <img
-                      src={p.image}
-                      alt={p.name[language] || p.name.es}
-                      className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 ease-out"
-                      loading="lazy"
-                    />
-                    {!p.available && (
-                      <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px] flex items-center justify-center">
-                        <span className="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">
-                          {t("products.outOfStock") || "Agotado"}
+              items.map((p) => {
+                const hasDiscount =
+                  typeof p.discount_price === "number" &&
+                  Number.isFinite(p.discount_price);
+                const basePrice =
+                  typeof p.price === "number" && Number.isFinite(p.price)
+                    ? p.price
+                    : undefined;
+                const discountedPrice =
+                  typeof p.discount_price === "number" &&
+                  Number.isFinite(p.discount_price)
+                    ? p.discount_price
+                    : undefined;
+                const apiOriginal =
+                  typeof p.original_price === "number" &&
+                  Number.isFinite(p.original_price)
+                    ? p.original_price
+                    : undefined;
+                const finalPrice = discountedPrice ?? basePrice;
+                const candidateOriginal = apiOriginal ?? basePrice;
+                const showOriginal =
+                  hasDiscount &&
+                  candidateOriginal !== undefined &&
+                  finalPrice !== undefined &&
+                  candidateOriginal > finalPrice + 0.0001;
+
+                return (
+                  <div
+                    key={p.id}
+                    onClick={() => openDetail(p)}
+                    className="rp-card group relative min-w-[90vw] md:min-w-[320px] bg-[var(--color-primary)] border border-black/10 p-5 transition-all duration-300 cursor-pointer snap-center md:snap-start flex flex-col shadow-lg shadow-black/10 hover:shadow-black/20 hover:-translate-y-1"
+                  >
+                    <div className="relative aspect-square bg-black/5 overflow-hidden mb-5 border border-black/5">
+                      {hasDiscount && (
+                        <span className="absolute top-2 left-2 z-10 text-xs bg-[var(--color-secondary)] text-white px-2 py-1 rounded-full font-bold">
+                          {t("product.clearance")}
                         </span>
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="flex-1 flex flex-col gap-3">
-                    <div className="space-y-1.5">
-                      <div className="text-xs font-medium text-[var(--color-secondary)] uppercase tracking-wider">
-                        {typeof p.category === "string"
-                          ? p.category
-                          : p.category[language] || p.category.es}
-                      </div>
-
-                      <div className="text-lg font-bold text-black leading-tight line-clamp-2">
-                        {p.name[language] || p.name.es}
-                      </div>
-
-                      {typeof p.rating === "number" &&
-                        typeof p.votes === "number" &&
-                        p.rating > 0 &&
-                        p.votes > 0 && (
-                          <div className="flex items-center gap-1">
-                            {(() => {
-                              const r = Number(p.rating || 0);
-                              const full = Math.floor(r);
-                              const half = r - full >= 0.5;
-                              const empty = 5 - full - (half ? 1 : 0);
-                              const Star = (props: { className?: string }) => (
-                                <svg
-                                  {...props}
-                                  viewBox="0 0 24 24"
-                                  fill="currentColor"
-                                >
-                                  <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.163L12 18.897l-7.335 3.864 1.401-8.163L.132 9.211l8.2-1.193z" />
-                                </svg>
-                              );
-                              return (
-                                <>
-                                  {Array.from({ length: full }).map((_, i) => (
-                                    <Star
-                                      key={`f-${i}`}
-                                      className="w-3.5 h-3.5 text-yellow-400"
-                                    />
-                                  ))}
-                                  {half && (
-                                    <span className="relative w-3.5 h-3.5 inline-block">
-                                      <Star className="w-3.5 h-3.5 text-zinc-600" />
-                                      <span
-                                        className="absolute inset-0 overflow-hidden"
-                                        style={{ width: "50%" }}
-                                      >
-                                        <Star className="w-3.5 h-3.5 text-yellow-400" />
-                                      </span>
-                                    </span>
-                                  )}
-                                  {Array.from({ length: empty }).map((_, i) => (
-                                    <Star
-                                      key={`e-${i}`}
-                                      className="w-3.5 h-3.5 text-zinc-600"
-                                    />
-                                  ))}
-                                </>
-                              );
-                            })()}
-                            <span className="text-xs text-black/50 ml-1">
-                              ({p.votes})
-                            </span>
-                          </div>
-                        )}
-                    </div>
-
-                    <div className="mt-auto pt-4 flex items-center justify-between gap-4 border-t border-black/10">
-                      <div className="flex flex-col">
-                        <span className="text-[10px] text-black/60 uppercase font-medium">
-                          Precio
-                        </span>
-                        <span className="text-xl font-bold text-[var(--color-secondary)] tracking-tight flex items-baseline">
-                          {p.price_formatted
-                            ? p.price_formatted
-                            : `€ ${Number(p.price).toFixed(2)}`}
-                          <span className="text-xs text-gray-500 font-normal ml-1">
-                            + IVA
+                      )}
+                      <img
+                        src={p.image}
+                        alt={p.name[language] || p.name.es}
+                        className="relative z-0 w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 ease-out"
+                        loading="lazy"
+                      />
+                      {!p.available && (
+                        <div className="absolute inset-0 z-20 bg-black/60 backdrop-blur-[2px] flex items-center justify-center">
+                          <span className="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                            {t("products.outOfStock") || "Agotado"}
                           </span>
-                        </span>
-                      </div>
-
-                      {p.available && (
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            addToCart(p);
-                          }}
-                          className="bg-[var(--color-secondary)] hover:brightness-90 text-white p-2.5 rounded-xl transition-all shadow-lg shadow-black/10 hover:shadow-black/20 hover:scale-105 active:scale-95 flex items-center justify-center group/btn"
-                          aria-label={t("sports.addToCart")}
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="group-hover/btn:rotate-[-10deg] transition-transform"
-                          >
-                            <circle cx="9" cy="21" r="1" />
-                            <circle cx="20" cy="21" r="1" />
-                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-                          </svg>
-                        </button>
+                        </div>
                       )}
                     </div>
+
+                    <div className="flex-1 flex flex-col gap-3">
+                      <div className="space-y-1.5">
+                        <div className="text-xs font-medium text-[var(--color-secondary)] uppercase tracking-wider">
+                          {typeof p.category === "string"
+                            ? p.category
+                            : p.category[language] || p.category.es}
+                        </div>
+
+                        <div className="text-lg font-bold text-black leading-tight line-clamp-2">
+                          {p.name[language] || p.name.es}
+                        </div>
+
+                        {typeof p.rating === "number" &&
+                          typeof p.votes === "number" &&
+                          p.rating > 0 &&
+                          p.votes > 0 && (
+                            <div className="flex items-center gap-1">
+                              {(() => {
+                                const r = Number(p.rating || 0);
+                                const full = Math.floor(r);
+                                const half = r - full >= 0.5;
+                                const empty = 5 - full - (half ? 1 : 0);
+                                const Star = (props: {
+                                  className?: string;
+                                }) => (
+                                  <svg
+                                    {...props}
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                  >
+                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.163L12 18.897l-7.335 3.864 1.401-8.163L.132 9.211l8.2-1.193z" />
+                                  </svg>
+                                );
+                                return (
+                                  <>
+                                    {Array.from({ length: full }).map(
+                                      (_, i) => (
+                                        <Star
+                                          key={`f-${i}`}
+                                          className="w-3.5 h-3.5 text-yellow-400"
+                                        />
+                                      ),
+                                    )}
+                                    {half && (
+                                      <span className="relative w-3.5 h-3.5 inline-block">
+                                        <Star className="w-3.5 h-3.5 text-zinc-600" />
+                                        <span
+                                          className="absolute inset-0 overflow-hidden"
+                                          style={{ width: "50%" }}
+                                        >
+                                          <Star className="w-3.5 h-3.5 text-yellow-400" />
+                                        </span>
+                                      </span>
+                                    )}
+                                    {Array.from({ length: empty }).map(
+                                      (_, i) => (
+                                        <Star
+                                          key={`e-${i}`}
+                                          className="w-3.5 h-3.5 text-zinc-600"
+                                        />
+                                      ),
+                                    )}
+                                  </>
+                                );
+                              })()}
+                              <span className="text-xs text-black/50 ml-1">
+                                ({p.votes})
+                              </span>
+                            </div>
+                          )}
+                      </div>
+
+                      <div className="mt-auto pt-4 flex items-center justify-between gap-4 border-t border-black/10">
+                        <div className="flex flex-col">
+                          <span className="text-[10px] text-black/60 uppercase font-medium">
+                            Precio
+                          </span>
+                          {hasDiscount ? (
+                            <div className="flex items-baseline gap-2 flex-wrap">
+                              {showOriginal &&
+                                candidateOriginal !== undefined && (
+                                  <span className="text-sm line-through text-black/40 font-semibold">
+                                    € {candidateOriginal.toFixed(2)}
+                                  </span>
+                                )}
+                              <span className="text-xl font-bold text-[var(--color-secondary)] tracking-tight flex items-baseline">
+                                €{" "}
+                                {finalPrice !== undefined
+                                  ? finalPrice.toFixed(2)
+                                  : "0.00"}
+                                <span className="text-xs text-gray-500 font-normal ml-1">
+                                  + IVA
+                                </span>
+                              </span>
+                            </div>
+                          ) : (
+                            <span className="text-xl font-bold text-[var(--color-secondary)] tracking-tight flex items-baseline">
+                              {p.price_formatted
+                                ? p.price_formatted
+                                : `€ ${Number(p.price).toFixed(2)}`}
+                              <span className="text-xs text-gray-500 font-normal ml-1">
+                                + IVA
+                              </span>
+                            </span>
+                          )}
+                        </div>
+
+                        {p.available && (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              addToCart(p);
+                            }}
+                            className="bg-[var(--color-secondary)] hover:brightness-90 text-white p-2.5 rounded-xl transition-all shadow-lg shadow-black/10 hover:shadow-black/20 hover:scale-105 active:scale-95 flex items-center justify-center group/btn"
+                            aria-label={t("sports.addToCart")}
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="20"
+                              height="20"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              className="group-hover/btn:rotate-[-10deg] transition-transform"
+                            >
+                              <circle cx="9" cy="21" r="1" />
+                              <circle cx="20" cy="21" r="1" />
+                              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                            </svg>
+                          </button>
+                        )}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              ))
+                );
+              })
             )}
           </div>
         </div>

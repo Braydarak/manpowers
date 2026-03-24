@@ -44,9 +44,35 @@ const ProductCard: React.FC<Props> = ({
     typeof product.category === "string"
       ? product.category
       : product.category?.[language] || product.category?.es || "";
-  const priceLabel =
-    product.price_formatted ||
-    (product.price ? `${product.price} €` : undefined);
+  const hasDiscount =
+    typeof product.discount_price === "number" &&
+    Number.isFinite(product.discount_price);
+  const discountedPrice =
+    typeof product.discount_price === "number" &&
+    Number.isFinite(product.discount_price)
+      ? product.discount_price
+      : undefined;
+  const basePrice =
+    typeof product.price === "number" && Number.isFinite(product.price)
+      ? product.price
+      : undefined;
+  const finalPrice = discountedPrice ?? basePrice;
+  const apiOriginal =
+    typeof product.original_price === "number" &&
+    Number.isFinite(product.original_price)
+      ? product.original_price
+      : undefined;
+  const candidateOriginal = apiOriginal ?? basePrice;
+  const showOriginal =
+    hasDiscount &&
+    candidateOriginal !== undefined &&
+    finalPrice !== undefined &&
+    candidateOriginal > finalPrice + 0.0001;
+  const priceLabel = hasDiscount
+    ? finalPrice !== undefined
+      ? `${finalPrice.toFixed(2)} €`
+      : undefined
+    : product.price_formatted || (finalPrice ? `${finalPrice} €` : undefined);
 
   if (variant === "compact") {
     return (
@@ -59,7 +85,7 @@ const ProductCard: React.FC<Props> = ({
           if (e.key === "Enter" || e.key === " ") handleOpen();
         }}
       >
-        <div className="aspect-square bg-[var(--color-primary)] flex items-center justify-center overflow-hidden border-b border-black/5">
+        <div className="relative aspect-square bg-[var(--color-primary)] flex items-center justify-center overflow-hidden border-b border-black/5">
           {product.image ? (
             <img
               src={product.image}
@@ -78,20 +104,50 @@ const ProductCard: React.FC<Props> = ({
               {t("sports.imageNot available")}
             </div>
           )}
+          {!product.available && (
+            <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px] flex items-center justify-center">
+              <span className="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                {t("products.outOfStock") || "Agotado"}
+              </span>
+            </div>
+          )}
         </div>
         <div className="p-3 space-y-1">
-          <div className="text-[11px] font-semibold text-[var(--color-secondary)] uppercase tracking-wide truncate">
-            {category}
+          <div className="flex items-center justify-between gap-2">
+            <div className="text-[11px] font-semibold text-[var(--color-secondary)] uppercase tracking-wide truncate">
+              {category}
+            </div>
+            {hasDiscount && (
+              <span className="text-[10px] bg-[var(--color-secondary)] text-white px-2 py-0.5 rounded-full font-bold flex-shrink-0">
+                {t("product.clearance")}
+              </span>
+            )}
           </div>
           <div className="text-xs font-semibold text-black truncate">
             {name}
           </div>
-          <div className="text-xs text-black/70 flex items-center">
-            {priceLabel}
-            {priceLabel && (
+          {hasDiscount ? (
+            <div className="text-xs text-black/70 flex items-center gap-2">
+              {showOriginal && candidateOriginal !== undefined && (
+                <span className="line-through text-black/40">
+                  {candidateOriginal.toFixed(2)} €
+                </span>
+              )}
+              {finalPrice !== undefined && (
+                <span className="text-[var(--color-secondary)] font-bold">
+                  {finalPrice.toFixed(2)} €
+                </span>
+              )}
               <span className="text-[10px] text-gray-400 ml-1">+ IVA</span>
-            )}
-          </div>
+            </div>
+          ) : (
+            <div className="text-xs text-black/70 flex items-center">
+              {priceLabel}
+              {priceLabel && (
+                <span className="text-[10px] text-gray-400 ml-1">+ IVA</span>
+              )}
+            </div>
+          )}
         </div>
         <div className="px-3 pb-3">
           <button
@@ -117,23 +173,48 @@ const ProductCard: React.FC<Props> = ({
       }}
     >
       <div className="relative h-64 bg-white flex items-center justify-center overflow-hidden flex-shrink-0">
-        {product.size && (
-          <span className="absolute top-2 left-2 text-xs bg-black/70 text-white px-2 py-1 rounded-full">
-            {product.size}
-          </span>
-        )}
-        {priceLabel && (
-          <span className="absolute top-2 right-2 text-xs bg-[var(--color-secondary)] text-white px-2 py-1 rounded-full font-bold flex items-center">
-            {priceLabel}
-            <span className="text-[10px] text-gray-200 font-normal ml-1">
-              + IVA
+        {hasDiscount ? (
+          <>
+            <span className="absolute top-2 right-2 z-10 text-xs bg-white/85 text-black px-2 py-1 rounded-full font-bold flex items-baseline gap-2 border border-black/10 backdrop-blur">
+              {showOriginal && candidateOriginal !== undefined && (
+                <span className="text-black/50 line-through font-semibold">
+                  {candidateOriginal.toFixed(2)} €
+                </span>
+              )}
+              <span className="text-[var(--color-secondary)]">
+                {finalPrice !== undefined ? `${finalPrice.toFixed(2)} €` : ""}
+              </span>
+              <span className="text-[10px] text-black/50 font-normal">
+                + IVA
+              </span>
             </span>
+            <span className="absolute top-2 left-2 z-10 text-xs bg-[var(--color-secondary)] text-white px-2 py-1 rounded-full font-bold">
+              {t("product.clearance")}
+            </span>
+          </>
+        ) : (
+          priceLabel && (
+            <span className="absolute top-2 right-2 z-10 text-xs bg-[var(--color-secondary)] text-white px-2 py-1 rounded-full font-bold flex items-center">
+              {priceLabel}
+              <span className="text-[10px] text-gray-200 font-normal ml-1">
+                + IVA
+              </span>
+            </span>
+          )
+        )}
+        {product.size && (
+          <span
+            className={`absolute left-2 z-10 text-xs bg-black/70 text-white px-2 py-1 rounded-full ${
+              hasDiscount ? "top-10" : "top-2"
+            }`}
+          >
+            {product.size}
           </span>
         )}
         <img
           src={product.image}
           alt={name}
-          className="w-full h-full object-cover"
+          className="relative z-0 w-full h-full object-cover"
           onError={(e) => {
             const target = e.currentTarget;
             target.style.display = "none";
@@ -142,6 +223,13 @@ const ProductCard: React.FC<Props> = ({
             }
           }}
         />
+        {!product.available && (
+          <div className="absolute inset-0 z-20 bg-black/60 backdrop-blur-[2px] flex items-center justify-center">
+            <span className="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+              {t("products.outOfStock") || "Agotado"}
+            </span>
+          </div>
+        )}
       </div>
 
       <div className="p-6 flex-grow flex flex-col justify-between">

@@ -5,6 +5,7 @@ import React, {
   useState,
   useRef,
   useCallback,
+  useMemo,
 } from "react";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
@@ -50,6 +51,7 @@ const ProductDetailPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [checkoutOpenGlobal, setCheckoutOpenGlobal] = useState<boolean>(false);
   const [menuOpenGlobal, setMenuOpenGlobal] = useState<boolean>(false);
   const [faqItems, setFaqItems] = useState<
@@ -67,6 +69,14 @@ const ProductDetailPage: React.FC = () => {
     { type: "image" | "video"; src: string; path: string }[]
   >([]);
   const [activeMediaIndex, setActiveMediaIndex] = useState(0);
+  const colorOptions = useMemo(() => {
+    const list = (product?.color?.[currentLanguage] ??
+      product?.color?.es ??
+      []) as string[];
+    return Array.isArray(list) ? list : [];
+  }, [product, currentLanguage]);
+  const displayColor =
+    selectedColor ?? (colorOptions.length > 0 ? colorOptions[0] : null);
 
   const observerRef = useRef<IntersectionObserver | null>(null);
   const [areMainButtonsVisible, setAreMainButtonsVisible] = useState(true);
@@ -361,7 +371,7 @@ const ProductDetailPage: React.FC = () => {
       }
     };
     loadMedia();
-  }, [product]);
+  }, [product, currentLanguage]);
 
   useEffect(() => {
     const current = mediaItems[activeMediaIndex];
@@ -421,6 +431,7 @@ const ProductDetailPage: React.FC = () => {
   useEffect(() => {
     if (!product) {
       setSelectedSize(null);
+      setSelectedColor(null);
       return;
     }
     const keys = product.amazonLinks
@@ -432,9 +443,26 @@ const ProductDetailPage: React.FC = () => {
       const preferred = keys.find((k) => k.toLowerCase() === "100ml");
       setSelectedSize(preferred || keys[0]);
     } else {
-      setSelectedSize(null);
+      const sizes =
+        typeof product.size === "string"
+          ? product.size
+              .split(",")
+              .map((s) => s.trim())
+              .filter(Boolean)
+          : [];
+      if (sizes.length > 0) {
+        const preferred = sizes.find((s) => s.toLowerCase() === "100ml");
+        setSelectedSize(preferred || sizes[0]);
+      } else {
+        setSelectedSize(null);
+      }
     }
-  }, [product]);
+    if (colorOptions.length > 0) {
+      setSelectedColor(colorOptions[0]);
+    } else {
+      setSelectedColor(null);
+    }
+  }, [product, currentLanguage, colorOptions]);
 
   const handleBack = () => navigate(-1);
 
@@ -447,11 +475,20 @@ const ProductDetailPage: React.FC = () => {
   const handleAddToCart = () => {
     if (!product) return;
     const priceBySize = getPriceForSize(selectedSize || undefined);
+    const hasDiscount =
+      typeof product.discount_price === "number" &&
+      Number.isFinite(product.discount_price);
     const computedPrice =
-      typeof priceBySize === "number" ? priceBySize : product.price;
+      typeof priceBySize === "number"
+        ? priceBySize
+        : hasDiscount
+          ? product.discount_price
+          : product.price;
 
     let finalName = product.name[currentLanguage];
     let finalId = String(product.id);
+    const chosenColor =
+      selectedColor ?? (colorOptions.length > 0 ? colorOptions[0] : null);
 
     // Si es indumentaria y hay talla seleccionada, añadir al nombre y al ID
     if (
@@ -463,6 +500,9 @@ const ProductDetailPage: React.FC = () => {
     ) {
       finalName = `${finalName} (${selectedSize})`;
       finalId = `${finalId}-${selectedSize}`;
+    }
+    if (chosenColor) {
+      finalName = `${finalName} (${chosenColor})`;
     }
 
     const detail = {
@@ -478,11 +518,20 @@ const ProductDetailPage: React.FC = () => {
   const handleBuyNow = () => {
     if (!product) return;
     const priceBySize = getPriceForSize(selectedSize || undefined);
+    const hasDiscount =
+      typeof product.discount_price === "number" &&
+      Number.isFinite(product.discount_price);
     const computedPrice =
-      typeof priceBySize === "number" ? priceBySize : product.price;
+      typeof priceBySize === "number"
+        ? priceBySize
+        : hasDiscount
+          ? product.discount_price
+          : product.price;
 
     let finalName = product.name[currentLanguage];
     let finalId = String(product.id);
+    const chosenColor =
+      selectedColor ?? (colorOptions.length > 0 ? colorOptions[0] : null);
 
     // Si es indumentaria y hay talla seleccionada, añadir al nombre y al ID
     if (
@@ -494,6 +543,9 @@ const ProductDetailPage: React.FC = () => {
     ) {
       finalName = `${finalName} (${selectedSize})`;
       finalId = `${finalId}-${selectedSize}`;
+    }
+    if (chosenColor) {
+      finalName = `${finalName} (${chosenColor})`;
     }
 
     const detail = {
@@ -684,11 +736,13 @@ const ProductDetailPage: React.FC = () => {
 
                         zoomPendingRef.current = { x, y };
                         if (zoomRafRef.current !== null) return;
-                        zoomRafRef.current = window.requestAnimationFrame(() => {
-                          zoomRafRef.current = null;
-                          const next = zoomPendingRef.current;
-                          if (next) setZoomCoords(next);
-                        });
+                        zoomRafRef.current = window.requestAnimationFrame(
+                          () => {
+                            zoomRafRef.current = null;
+                            const next = zoomPendingRef.current;
+                            if (next) setZoomCoords(next);
+                          },
+                        );
                       }}
                     >
                       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -931,20 +985,55 @@ const ProductDetailPage: React.FC = () => {
                     </div>
                   )}
 
-                  <div className="flex items-baseline">
-                    <span className="text-4xl font-bold text-[var(--color-secondary)]">
-                      {(() => {
-                        const bySize = getPriceForSize(
-                          selectedSize || undefined,
+                  <div className="flex items-baseline gap-3">
+                    {(() => {
+                      const bySize = getPriceForSize(selectedSize || undefined);
+                      const discount =
+                        typeof product.discount_price === "number" &&
+                        Number.isFinite(product.discount_price)
+                          ? product.discount_price
+                          : undefined;
+                      const apiOriginal =
+                        typeof product.original_price === "number" &&
+                        Number.isFinite(product.original_price)
+                          ? product.original_price
+                          : undefined;
+                      const useDiscount =
+                        discount !== undefined && typeof bySize !== "number";
+                      const base =
+                        typeof bySize === "number"
+                          ? bySize
+                          : Number(product.price);
+                      const candidateOriginal = apiOriginal ?? base;
+
+                      if (useDiscount) {
+                        return (
+                          <>
+                            {candidateOriginal > discount + 0.0001 && (
+                              <span className="text-lg font-semibold line-through text-black/40">
+                                € {candidateOriginal.toFixed(2)}
+                              </span>
+                            )}
+                            <span className="text-4xl font-bold text-[var(--color-secondary)]">
+                              € {discount.toFixed(2)}
+                            </span>
+                          </>
                         );
-                        if (typeof bySize === "number") {
-                          return `€ ${bySize.toFixed(2)}`;
-                        }
-                        return product.price_formatted
-                          ? product.price_formatted
-                          : `€ ${Number(product.price).toFixed(2)}`;
-                      })()}
-                    </span>
+                      }
+
+                      return (
+                        <span className="text-4xl font-bold text-[var(--color-secondary)]">
+                          {(() => {
+                            if (typeof bySize === "number") {
+                              return `€ ${bySize.toFixed(2)}`;
+                            }
+                            return product.price_formatted
+                              ? product.price_formatted
+                              : `€ ${Number(product.price).toFixed(2)}`;
+                          })()}
+                        </span>
+                      );
+                    })()}
                     <span className="text-sm text-gray-500 ml-2 font-normal">
                       + IVA
                     </span>
@@ -967,9 +1056,25 @@ const ProductDetailPage: React.FC = () => {
                       {selectedSize || product.size}
                     </div>
                   )}
+                  {displayColor && (
+                    <div className="text-sm text-black/70">
+                      {currentLanguage === "es"
+                        ? "Color:"
+                        : currentLanguage === "ca"
+                          ? "Color:"
+                          : "Color:"}{" "}
+                      <span className="uppercase">{displayColor}</span>
+                    </div>
+                  )}
 
                   {product.available &&
-                    (product.amazonLinks || product.pricesBySize) && (
+                    (product.amazonLinks || product.pricesBySize) &&
+                    (() => {
+                      const sizes = product.amazonLinks
+                        ? Object.keys(product.amazonLinks)
+                        : Object.keys(product.pricesBySize || {});
+                      return sizes.length > 0;
+                    })() && (
                       <div className="flex flex-col gap-3">
                         <span className="text-sm text-black/60">
                           {t("product.selectSize")}
@@ -1004,6 +1109,28 @@ const ProductDetailPage: React.FC = () => {
                         </div>
                       </div>
                     )}
+                  {product.available && colorOptions.length > 0 && (
+                    <div className="flex flex-col gap-3">
+                      <span className="text-sm text-black/60">
+                        {t("product.selectColor")}
+                      </span>
+                      <div className="flex flex-wrap gap-2">
+                        {colorOptions.map((color) => (
+                          <button
+                            key={color}
+                            onClick={() => setSelectedColor(color)}
+                            className={`${
+                              selectedColor === color
+                                ? "bg-[var(--color-secondary)] text-white"
+                                : "bg-[var(--color-primary)] text-black hover:bg-black/5"
+                            } font-semibold px-3 py-1 rounded-lg border border-black/20 transition-colors uppercase`}
+                          >
+                            {color}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
 
                   {product.available &&
                     !product.amazonLinks &&
@@ -1012,7 +1139,8 @@ const ProductDetailPage: React.FC = () => {
                       ? product.category
                       : product.category.es
                     )?.toLowerCase() === "indumentaria" &&
-                    typeof product.size === "string" && (
+                    typeof product.size === "string" &&
+                    product.size.trim().length > 0 && (
                       <div className="flex flex-col gap-3">
                         <span className="text-sm text-black/60">
                           {t("product.selectSize")}
@@ -1408,15 +1536,49 @@ const ProductDetailPage: React.FC = () => {
         !areMainButtonsVisible && (
           <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
             <div className="bg-[var(--color-primary)]/95 backdrop-blur border-t border-black/10 px-4 py-3 flex items-center justify-between shadow-[0_-6px_20px_rgba(0,0,0,0.12)]">
-              <div className="font-bold text-2xl text-[var(--color-secondary)]">
+              <div className="font-bold text-2xl text-[var(--color-secondary)] flex items-baseline gap-2">
                 {(() => {
                   const bySize = getPriceForSize(selectedSize || undefined);
-                  if (typeof bySize === "number") {
-                    return `€ ${bySize.toFixed(2)}`;
+                  const discount =
+                    typeof product.discount_price === "number" &&
+                    Number.isFinite(product.discount_price)
+                      ? product.discount_price
+                      : undefined;
+                  const apiOriginal =
+                    typeof product.original_price === "number" &&
+                    Number.isFinite(product.original_price)
+                      ? product.original_price
+                      : undefined;
+                  const useDiscount =
+                    discount !== undefined && typeof bySize !== "number";
+                  const base =
+                    typeof bySize === "number" ? bySize : Number(product.price);
+                  const candidateOriginal = apiOriginal ?? base;
+
+                  if (useDiscount) {
+                    return (
+                      <>
+                        {candidateOriginal > discount + 0.0001 && (
+                          <span className="text-base line-through text-black/40 font-semibold">
+                            € {candidateOriginal.toFixed(2)}
+                          </span>
+                        )}
+                        <span>€ {discount.toFixed(2)}</span>
+                      </>
+                    );
                   }
-                  return product.price_formatted
-                    ? product.price_formatted
-                    : `€ ${Number(product.price).toFixed(2)}`;
+
+                  if (typeof bySize === "number") {
+                    return <span>€ {bySize.toFixed(2)}</span>;
+                  }
+
+                  return (
+                    <span>
+                      {product.price_formatted
+                        ? product.price_formatted
+                        : `€ ${Number(product.price).toFixed(2)}`}
+                    </span>
+                  );
                 })()}
               </div>
               <div className="flex gap-2">

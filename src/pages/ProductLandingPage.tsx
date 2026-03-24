@@ -67,9 +67,23 @@ const ProductLandingPage: React.FC = () => {
       : product.pricesBySize
         ? Object.keys(product.pricesBySize)
         : [];
-    if (keys.length > 0)
+    if (keys.length > 0) {
       setSelectedSize(keys.includes("100ml") ? "100ml" : keys[0]);
-    else setSelectedSize(null);
+      return;
+    }
+    const sizes =
+      typeof product.size === "string"
+        ? product.size
+            .split(",")
+            .map((s) => s.trim())
+            .filter(Boolean)
+        : [];
+    if (sizes.length > 0) {
+      const preferred = sizes.find((s) => s.toLowerCase() === "100ml");
+      setSelectedSize(preferred || sizes[0]);
+    } else {
+      setSelectedSize(null);
+    }
   }, [product]);
 
   useEffect(() => {
