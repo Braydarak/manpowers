@@ -208,15 +208,19 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
   }, [open]);
 
   useEffect(() => {
+    const html = document.documentElement;
+    const body = document.body;
     const shouldLock = open || checkoutOpen;
-    if (!shouldLock) return;
-    const prevBodyOverflow = document.body.style.overflow;
-    const prevHtmlOverflow = document.documentElement.style.overflow;
-    document.body.style.overflow = "hidden";
-    document.documentElement.style.overflow = "hidden";
+    if (shouldLock) {
+      html.style.overflow = "hidden";
+      body.style.overflow = "hidden";
+    } else {
+      html.style.overflow = "";
+      body.style.overflow = "";
+    }
     return () => {
-      document.body.style.overflow = prevBodyOverflow;
-      document.documentElement.style.overflow = prevHtmlOverflow;
+      html.style.overflow = "";
+      body.style.overflow = "";
     };
   }, [open, checkoutOpen]);
 
