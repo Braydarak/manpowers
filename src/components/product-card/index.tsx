@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { type Product } from "../../services/productsService";
 
@@ -11,6 +11,48 @@ type Props = {
   showAmazonLinks?: boolean;
   variant?: "full" | "compact";
   className?: string;
+};
+
+const CARD_IMAGE_ASSETS = import.meta.glob("/src/assets/**/*.{png,jpg,jpeg,webp}", {
+  eager: true,
+  query: "?url",
+  import: "default",
+}) as Record<string, string>;
+
+const folderImageCache = new Map<string, Array<{ path: string; url: string }>>();
+
+const listCardImages = (folder?: string, preferred?: string) => {
+  const list: Array<{ path: string; url: string }> = [];
+  if (folder) {
+    const cached = folderImageCache.get(folder);
+    if (cached) {
+      list.push(...cached);
+    } else {
+      const entries = Object.entries(CARD_IMAGE_ASSETS)
+        .filter(([p]) => p.includes(`/src/assets/${folder}/`))
+        .map(([path, url]) => ({ path, url }))
+        .sort((a, b) => a.path.localeCompare(b.path));
+      folderImageCache.set(folder, entries);
+      list.push(...entries);
+    }
+  }
+
+  if (preferred) {
+    const desiredName = preferred.split("/").pop() || "";
+    if (desiredName) {
+      const idx = list.findIndex((m) => (m.path.split("/").pop() || "") === desiredName);
+      if (idx > 0) {
+        const [item] = list.splice(idx, 1);
+        list.unshift(item);
+      } else if (idx === -1) {
+        list.unshift({ path: preferred, url: preferred });
+      }
+    } else if (!list.length) {
+      list.unshift({ path: preferred, url: preferred });
+    }
+  }
+
+  return list.map((m) => m.url).filter((u): u is string => typeof u === "string" && u.length > 0);
 };
 
 const ProductCard: React.FC<Props> = ({
@@ -74,6 +116,26 @@ const ProductCard: React.FC<Props> = ({
       : undefined
     : product.price_formatted || (finalPrice ? `${finalPrice} €` : undefined);
 
+  const cardImages = useMemo(
+    () => listCardImages(product.img_folder, product.image),
+    [product.img_folder, product.image],
+  );
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const activeImageSrc = cardImages[activeImageIndex] || product.image;
+  const hasCarousel = cardImages.length > 1;
+
+  const prevImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!hasCarousel) return;
+    setActiveImageIndex((i) => (i - 1 + cardImages.length) % cardImages.length);
+  };
+
+  const nextImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!hasCarousel) return;
+    setActiveImageIndex((i) => (i + 1) % cardImages.length);
+  };
+
   if (variant === "compact") {
     return (
       <div
@@ -85,24 +147,50 @@ const ProductCard: React.FC<Props> = ({
           if (e.key === "Enter" || e.key === " ") handleOpen();
         }}
       >
-        <div className="relative aspect-square bg-[var(--color-primary)] flex items-center justify-center overflow-hidden border-b border-black/5">
-          {product.image ? (
+        <div className="relative aspect-square bg-[var(--color-primary)] flex items-center justify-center overflow-hidden border-b border-black/5 group">
+          {activeImageSrc ? (
             <img
-              src={product.image}
+              src={activeImageSrc}
               alt={name}
               className="w-full h-full object-cover"
               onError={(e) => {
                 const target = e.currentTarget;
-                target.style.display = "none";
-                if (target.parentElement) {
-                  target.parentElement.innerHTML = `<span class="text-gray-400 text-xs">${t("sports.imageNot available")}</span>`;
+                if (hasCarousel && cardImages.length > 0) {
+                  const next = (activeImageIndex + 1) % cardImages.length;
+                  if (next !== activeImageIndex) {
+                    setActiveImageIndex(next);
+                    return;
+                  }
                 }
+                target.style.display = "none";
+                if (target.parentElement)
+                  target.parentElement.innerHTML = `<span class="text-gray-400 text-xs">${t("sports.imageNot available")}</span>`;
               }}
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center text-black/40 text-xs">
               {t("sports.imageNot available")}
             </div>
+          )}
+          {hasCarousel && (
+            <>
+              <button
+                type="button"
+                onClick={prevImage}
+                aria-label="Anterior"
+                className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-black/50 text-white w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                ‹
+              </button>
+              <button
+                type="button"
+                onClick={nextImage}
+                aria-label="Siguiente"
+                className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-black/50 text-white w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                ›
+              </button>
+            </>
           )}
           {!product.available && (
             <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px] flex items-center justify-center">
@@ -172,7 +260,7 @@ const ProductCard: React.FC<Props> = ({
         if (e.key === "Enter" || e.key === " ") handleOpen();
       }}
     >
-      <div className="relative h-64 bg-white flex items-center justify-center overflow-hidden flex-shrink-0">
+      <div className="relative h-64 bg-white flex items-center justify-center overflow-hidden flex-shrink-0 group">
         {hasDiscount ? (
           <>
             <span className="absolute top-2 right-2 z-10 text-xs bg-white/85 text-black px-2 py-1 rounded-full font-bold flex items-baseline gap-2 border border-black/10 backdrop-blur">
@@ -211,18 +299,48 @@ const ProductCard: React.FC<Props> = ({
             {product.size}
           </span>
         )}
-        <img
-          src={product.image}
-          alt={name}
-          className="relative z-0 w-full h-full object-cover"
-          onError={(e) => {
-            const target = e.currentTarget;
-            target.style.display = "none";
-            if (target.parentElement) {
-              target.parentElement.innerHTML = `<span class="text-gray-400">${t("sports.imageNot available")}</span>`;
-            }
-          }}
-        />
+        {activeImageSrc ? (
+          <img
+            src={activeImageSrc}
+            alt={name}
+            className="relative z-0 w-full h-full object-cover"
+            onError={(e) => {
+              const target = e.currentTarget;
+              if (hasCarousel && cardImages.length > 0) {
+                const next = (activeImageIndex + 1) % cardImages.length;
+                if (next !== activeImageIndex) {
+                  setActiveImageIndex(next);
+                  return;
+                }
+              }
+              target.style.display = "none";
+              if (target.parentElement)
+                target.parentElement.innerHTML = `<span class="text-gray-400">${t("sports.imageNot available")}</span>`;
+            }}
+          />
+        ) : (
+          <span className="text-gray-400">{t("sports.imageNot available")}</span>
+        )}
+        {hasCarousel && (
+          <>
+            <button
+              type="button"
+              onClick={prevImage}
+              aria-label="Anterior"
+              className="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-black/50 text-white w-9 h-9 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              onClick={nextImage}
+              aria-label="Siguiente"
+              className="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-black/50 text-white w-9 h-9 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+            >
+              ›
+            </button>
+          </>
+        )}
         {!product.available && (
           <div className="absolute inset-0 z-20 bg-black/60 backdrop-blur-[2px] flex items-center justify-center">
             <span className="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">

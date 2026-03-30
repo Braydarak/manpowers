@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import productsService, { type Product } from "../../services/productsService";
@@ -7,6 +7,124 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 type Props = {
   language: "es" | "en" | "ca";
   title?: string;
+};
+
+const SLIDER_IMAGE_ASSETS = import.meta.glob("/src/assets/**/*.{png,jpg,jpeg,webp}", {
+  eager: true,
+  query: "?url",
+  import: "default",
+}) as Record<string, string>;
+
+const sliderFolderImageCache = new Map<string, Array<{ path: string; url: string }>>();
+
+const listCardImages = (folder?: string, preferred?: string) => {
+  const list: Array<{ path: string; url: string }> = [];
+  if (folder) {
+    const cached = sliderFolderImageCache.get(folder);
+    if (cached) {
+      list.push(...cached);
+    } else {
+      const entries = Object.entries(SLIDER_IMAGE_ASSETS)
+        .filter(([p]) => p.includes(`/src/assets/${folder}/`))
+        .map(([path, url]) => ({ path, url }))
+        .sort((a, b) => a.path.localeCompare(b.path));
+      sliderFolderImageCache.set(folder, entries);
+      list.push(...entries);
+    }
+  }
+
+  if (preferred) {
+    const desiredName = preferred.split("/").pop() || "";
+    if (desiredName) {
+      const idx = list.findIndex((m) => (m.path.split("/").pop() || "") === desiredName);
+      if (idx > 0) {
+        const [item] = list.splice(idx, 1);
+        list.unshift(item);
+      } else if (idx === -1) {
+        list.unshift({ path: preferred, url: preferred });
+      }
+    } else if (!list.length) {
+      list.unshift({ path: preferred, url: preferred });
+    }
+  }
+
+  return list.map((m) => m.url).filter((u): u is string => typeof u === "string" && u.length > 0);
+};
+
+const ProductCardMedia: React.FC<{
+  product: Product;
+  alt: string;
+}> = ({ product, alt }) => {
+  const { t } = useTranslation();
+  const images = useMemo(
+    () => listCardImages(product.img_folder, product.image),
+    [product.img_folder, product.image],
+  );
+  const [idx, setIdx] = useState(0);
+  const src = images[idx] || product.image;
+  const hasCarousel = images.length > 1;
+
+  const prev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!hasCarousel) return;
+    setIdx((i) => (i - 1 + images.length) % images.length);
+  };
+
+  const next = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!hasCarousel) return;
+    setIdx((i) => (i + 1) % images.length);
+  };
+
+  if (!src) {
+    return (
+      <div className="w-full h-full flex items-center justify-center text-black/40 text-xs">
+        {t("sports.imageNot available")}
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <img
+        src={src}
+        alt={alt}
+        className="relative z-0 w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 ease-out"
+        loading="lazy"
+        onError={(e) => {
+          const target = e.currentTarget;
+          if (hasCarousel && images.length > 0) {
+            const nextIdx = (idx + 1) % images.length;
+            if (nextIdx !== idx) {
+              setIdx(nextIdx);
+              return;
+            }
+          }
+          target.style.display = "none";
+        }}
+      />
+      {hasCarousel && (
+        <>
+          <button
+            type="button"
+            onClick={prev}
+            aria-label="Anterior"
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-black/50 text-white w-9 h-9 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+          >
+            ‹
+          </button>
+          <button
+            type="button"
+            onClick={next}
+            aria-label="Siguiente"
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-black/50 text-white w-9 h-9 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+          >
+            ›
+          </button>
+        </>
+      )}
+    </>
+  );
 };
 
 const ProductSlider: React.FC<{
@@ -251,11 +369,9 @@ const ProductSlider: React.FC<{
                           {t("product.clearance")}
                         </span>
                       )}
-                      <img
-                        src={p.image}
+                      <ProductCardMedia
+                        product={p}
                         alt={p.name[language] || p.name.es}
-                        className="relative z-0 w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 ease-out"
-                        loading="lazy"
                       />
                       {!p.available && (
                         <div className="absolute inset-0 z-20 bg-black/60 backdrop-blur-[2px] flex items-center justify-center">
