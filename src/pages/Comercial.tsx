@@ -80,6 +80,109 @@ const Comercial: React.FC = () => {
   }>({});
   const [showManpowers, setShowManpowers] = useState(true);
   const [showTamd, setShowTamd] = useState(true);
+  const [showOrdersSummaryMobile, setShowOrdersSummaryMobile] = useState(false);
+  const [showAgentsSummary, setShowAgentsSummary] = useState(true);
+
+  const totalOrdersAmount = useMemo(() => {
+    return orders.reduce((sum, o) => {
+      if (typeof o.total === "number") return sum + o.total;
+      const subtotal =
+        o.products?.reduce((acc, p) => acc + p.price * p.quantity, 0) || 0;
+      const discountAmount =
+        typeof o.discount_amount === "number"
+          ? o.discount_amount
+          : ((typeof o.discount_percent === "number" ? o.discount_percent : 0) /
+              100) *
+            subtotal;
+      const taxableBase = subtotal - discountAmount;
+      const vatAmount = taxableBase * 0.21;
+      return sum + taxableBase + vatAmount;
+    }, 0);
+  }, [orders]);
+
+  const productsSoldSummary = useMemo(() => {
+    const map = new Map<
+      string,
+      { name: string; quantity: number; amount: number }
+    >();
+    orders.forEach((o) => {
+      o.products.forEach((p) => {
+        const key = p.name.trim();
+        const prev = map.get(key);
+        const addQty = p.quantity;
+        const addAmt = p.price * p.quantity;
+        if (prev) {
+          prev.quantity += addQty;
+          prev.amount += addAmt;
+        } else {
+          map.set(key, { name: key, quantity: addQty, amount: addAmt });
+        }
+      });
+    });
+    return Array.from(map.values()).sort(
+      (a, b) => b.quantity - a.quantity || a.name.localeCompare(b.name),
+    );
+  }, [orders]);
+
+  const agentsSummary = useMemo(() => {
+    const map = new Map<
+      string,
+      {
+        agent: string;
+        ordersCount: number;
+        totalUnits: number;
+        totalAmount: number;
+      }
+    >();
+    orders.forEach((o) => {
+      const agent = o.agent || "Desconocido";
+      const prev = map.get(agent) || {
+        agent,
+        ordersCount: 0,
+        totalUnits: 0,
+        totalAmount: 0,
+      };
+      prev.ordersCount += 1;
+      let orderAmount = 0;
+      if (typeof o.total === "number") {
+        orderAmount = o.total;
+      } else {
+        const subtotal =
+          o.products?.reduce((acc, p) => acc + p.price * p.quantity, 0) || 0;
+        const discountAmount =
+          typeof o.discount_amount === "number"
+            ? o.discount_amount
+            : ((typeof o.discount_percent === "number"
+                ? o.discount_percent
+                : 0) /
+                100) *
+              subtotal;
+        const taxableBase = subtotal - discountAmount;
+        const vatAmount = taxableBase * 0.21;
+        orderAmount = taxableBase + vatAmount;
+      }
+      prev.totalAmount += orderAmount;
+      prev.totalUnits +=
+        o.products?.reduce((acc, p) => acc + p.quantity, 0) || 0;
+      map.set(agent, prev);
+    });
+    return Array.from(map.values()).sort(
+      (a, b) => b.totalAmount - a.totalAmount || a.agent.localeCompare(b.agent),
+    );
+  }, [orders]);
+
+  const agentsTotals = useMemo(() => {
+    return agentsSummary.reduce(
+      (acc, ag) => {
+        acc.commercials += 1;
+        acc.orders += ag.ordersCount;
+        acc.units += ag.totalUnits;
+        acc.amount += ag.totalAmount;
+        return acc;
+      },
+      { commercials: 0, orders: 0, units: 0, amount: 0 },
+    );
+  }, [agentsSummary]);
 
   useEffect(() => {
     // Check if previously logged in (optional persistence)
@@ -624,17 +727,133 @@ const Comercial: React.FC = () => {
       <main className="flex-grow pt-28 pb-32 px-4 container mx-auto max-w-7xl">
         {view === "orders" ? (
           <div className="flex flex-col items-center py-10 min-h-[50vh] w-full">
-            <div className="w-full max-w-4xl mb-8 flex justify-between items-center">
-              <h2 className="text-3xl font-bold text-black flex items-center gap-3">
-                <History className="text-[var(--color-secondary)]" /> Historial
-                de Pedidos
-              </h2>
-              <button
-                onClick={() => setView("products")}
-                className="px-6 py-2 bg-[var(--color-secondary)] text-white rounded-lg hover:brightness-90 transition-all flex items-center gap-2"
-              >
-                <ArrowLeft size={18} /> Volver
-              </button>
+            <div className="w-full sticky top-24 z-10 mb-4 md:mb-8">
+              <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 border-b border-black/10 pb-3">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-full bg-[var(--color-secondary)]/10 flex items-center justify-center text-[var(--color-secondary)]">
+                    <History size={22} />
+                  </div>
+                  <div className="leading-tight">
+                    <h2 className="text-2xl md:text-3xl font-extrabold text-black tracking-tight">
+                      Historial de Pedidos
+                    </h2>
+                    <div className="text-xs md:text-sm text-black/60">
+                      Pedidos anteriores
+                    </div>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setView("products")}
+                  className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl border border-black/15 text-black hover:border-[var(--color-secondary)] hover:text-[var(--color-secondary)] transition-colors"
+                >
+                  <ArrowLeft size={18} /> Volver
+                </button>
+              </div>
+            </div>
+
+            {isAdmin && (
+              <div className="w-full mb-4">
+                <div className="border border-[var(--color-secondary)]/25 bg-[var(--color-secondary)]/5 rounded-xl p-4">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <div className="text-lg font-bold text-black">
+                        Resumen por comerciales
+                      </div>
+                      <div className="text-sm text-black/60">
+                        {agentsTotals.commercials} comerciales ·{" "}
+                        {agentsTotals.orders} pedidos · {agentsTotals.units} uds
+                        · {agentsTotals.amount.toFixed(2)} €
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setShowAgentsSummary((v) => !v)}
+                      className="shrink-0 px-3 py-2 rounded-lg border border-black/15 text-black hover:bg-black/5 transition-colors text-sm"
+                    >
+                      {showAgentsSummary ? "Ocultar" : "Ver"}
+                    </button>
+                  </div>
+                  {showAgentsSummary && (
+                    <div className="mt-3 space-y-2 max-h-72 overflow-y-auto pr-1 custom-scrollbar">
+                      {agentsSummary.map((ag) => (
+                        <div
+                          key={ag.agent}
+                          className="flex justify-between items-center text-sm bg-white/60 p-2 rounded border border-black/10"
+                        >
+                          <span className="truncate">{ag.agent}</span>
+                          <span className="ml-4 whitespace-nowrap text-right">
+                            {ag.ordersCount} pedidos · {ag.totalUnits} uds ·{" "}
+                            {ag.totalAmount.toFixed(2)} €
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            <div className="w-full max-w-4xl lg:hidden mb-4">
+              <div className="bg-[var(--color-primary)] border border-black/10 rounded-xl p-4 shadow-lg">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="text-xs text-black/60 uppercase font-bold">
+                      Total acumulado
+                    </div>
+                    <div className="text-xl font-bold text-[var(--color-secondary)]">
+                      {totalOrdersAmount.toFixed(2)} €
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setShowOrdersSummaryMobile((v) => !v)}
+                    className="px-3 py-2 rounded-lg border border-black/15 text-black hover:bg-black/5 transition-colors text-sm"
+                  >
+                    {showOrdersSummaryMobile ? "Ocultar" : "Ver detalles"}
+                  </button>
+                </div>
+                {showOrdersSummaryMobile && (
+                  <div className="mt-3 border-t border-black/10 pt-3">
+                    <div className="text-xs text-black/60 mb-2 uppercase font-bold">
+                      Productos vendidos
+                    </div>
+                    <div className="space-y-2 max-h-56 overflow-y-auto pr-1 custom-scrollbar">
+                      {productsSoldSummary.map((item) => (
+                        <div
+                          key={item.name}
+                          className="flex justify-between items-center text-sm bg-black/5 p-2 rounded border border-black/10"
+                        >
+                          <span className="truncate">{item.name}</span>
+                          <span className="ml-4 whitespace-nowrap">
+                            {item.quantity} uds
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                    {isAdmin && (
+                      <div className="mt-4">
+                        <div className="text-xs text-black/60 mb-2 uppercase font-bold">
+                          Por comercial
+                        </div>
+                        <div className="space-y-2 max-h-56 overflow-y-auto pr-1 custom-scrollbar">
+                          {agentsSummary.map((ag) => (
+                            <div
+                              key={ag.agent}
+                              className="flex justify-between items-center text-sm bg-black/5 p-2 rounded border border-black/10"
+                            >
+                              <span className="truncate">{ag.agent}</span>
+                              <span className="ml-4 whitespace-nowrap text-right">
+                                {ag.ordersCount} pedidos · {ag.totalUnits} uds ·{" "}
+                                {ag.totalAmount.toFixed(2)} €
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
 
             {isLoadingOrders ? (
@@ -664,226 +883,282 @@ const Comercial: React.FC = () => {
                 </button>
               </div>
             ) : (
-              <div className="w-full max-w-4xl space-y-4">
-                {orders.map((order, index) => {
-                  const subtotal =
-                    typeof order.subtotal === "number"
-                      ? order.subtotal
-                      : order.products.reduce(
-                          (acc, p) => acc + p.price * p.quantity,
-                          0,
-                        );
-                  const discountPercentValue =
-                    typeof order.discount_percent === "number"
-                      ? order.discount_percent
-                      : 0;
-                  const discountAmountValue =
-                    typeof order.discount_amount === "number"
-                      ? order.discount_amount
-                      : (subtotal * discountPercentValue) / 100;
-                  const taxableBase = subtotal - discountAmountValue;
-                  const vatAmount = taxableBase * 0.21;
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full">
+                <div className="lg:col-span-2 space-y-4">
+                  {orders.map((order, index) => {
+                    const subtotal =
+                      typeof order.subtotal === "number"
+                        ? order.subtotal
+                        : order.products.reduce(
+                            (acc, p) => acc + p.price * p.quantity,
+                            0,
+                          );
+                    const discountPercentValue =
+                      typeof order.discount_percent === "number"
+                        ? order.discount_percent
+                        : 0;
+                    const discountAmountValue =
+                      typeof order.discount_amount === "number"
+                        ? order.discount_amount
+                        : (subtotal * discountPercentValue) / 100;
+                    const taxableBase = subtotal - discountAmountValue;
+                    const vatAmount = taxableBase * 0.21;
 
-                  const isExpanded = !!expandedOrders[index];
+                    const isExpanded = !!expandedOrders[index];
 
-                  return (
-                    <div
-                      key={index}
-                      className="bg-[var(--color-primary)] border border-black/10 rounded-xl p-6 hover:border-[var(--color-secondary)] transition-all shadow-lg"
-                    >
-                      <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 border-b border-gray-800 pb-4 mb-4">
-                        <div>
-                          <div className="text-sm text-black/60 mb-1">
-                            {new Date(order.date).toLocaleDateString()} -{" "}
-                            {new Date(order.date).toLocaleTimeString()}
-                          </div>
-                          <h3 className="text-xl font-bold text-black">
-                            {order.customer.name}
-                          </h3>
-                          {order.customer.company && (
-                            <div className="text-sm text-[var(--color-secondary)]">
-                              {order.customer.company}
+                    return (
+                      <div
+                        key={index}
+                        className="bg-[var(--color-primary)] border border-black/10 rounded-xl p-6 hover:border-[var(--color-secondary)] transition-all shadow-lg"
+                      >
+                        <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 border-b border-gray-800 pb-4 mb-4">
+                          <div>
+                            <div className="text-sm text-black/60 mb-1">
+                              {new Date(order.date).toLocaleDateString()} -{" "}
+                              {new Date(order.date).toLocaleTimeString()}
                             </div>
-                          )}
-                        </div>
-                        <div className="text-right space-y-1">
-                          <div className="text-2xl font-bold text-[var(--color-secondary)]">
-                            {order.total.toFixed(2)} €
+                            <h3 className="text-xl font-bold text-black">
+                              {order.customer.name}
+                            </h3>
+                            {order.customer.company && (
+                              <div className="text-sm text-[var(--color-secondary)]">
+                                {order.customer.company}
+                              </div>
+                            )}
                           </div>
-                          {discountPercentValue > 0 && (
+                          <div className="text-right space-y-1">
+                            <div className="text-2xl font-bold text-[var(--color-secondary)]">
+                              {order.total.toFixed(2)} €
+                            </div>
+                            {discountPercentValue > 0 && (
+                              <div className="text-xs text-black/60">
+                                Descuento: {discountPercentValue.toFixed(0)}%{" "}
+                                {discountAmountValue > 0 && (
+                                  <span>
+                                    (-{discountAmountValue.toFixed(2)} €)
+                                  </span>
+                                )}
+                              </div>
+                            )}
                             <div className="text-xs text-black/60">
-                              Descuento: {discountPercentValue.toFixed(0)}%{" "}
-                              {discountAmountValue > 0 && (
-                                <span>
-                                  (-{discountAmountValue.toFixed(2)} €)
-                                </span>
-                              )}
+                              {order.products.length} productos
                             </div>
-                          )}
-                          <div className="text-xs text-black/60">
-                            {order.products.length} productos
                           </div>
                         </div>
-                      </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="space-y-2 text-sm text-black/70">
-                          <div className="flex items-center gap-2">
-                            <span>📞</span> {order.customer.phone}
-                          </div>
-                          {order.customer.email && (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div className="space-y-2 text-sm text-black/70">
                             <div className="flex items-center gap-2">
-                              <span>✉️</span> {order.customer.email}
+                              <span>📞</span> {order.customer.phone}
                             </div>
-                          )}
-                          <div className="flex items-center gap-2">
-                            <span>📍</span> {order.customer.address}
+                            {order.customer.email && (
+                              <div className="flex items-center gap-2">
+                                <span>✉️</span> {order.customer.email}
+                              </div>
+                            )}
+                            <div className="flex items-center gap-2">
+                              <span>📍</span> {order.customer.address}
+                            </div>
+                          </div>
+                          <div className="bg-black/5 p-3 rounded-lg max-h-32 overflow-y-auto custom-scrollbar border border-black/10">
+                            <div className="text-xs text-black/60 mb-2 uppercase font-bold">
+                              Resumen
+                            </div>
+                            {order.products.map((p, i) => (
+                              <div
+                                key={i}
+                                className="flex justify-between text-xs text-black/70 mb-1"
+                              >
+                                <span>
+                                  {p.quantity}x {p.name}
+                                </span>
+                                <span>
+                                  {(p.price * p.quantity).toFixed(2)}€
+                                </span>
+                              </div>
+                            ))}
                           </div>
                         </div>
-                        <div className="bg-black/5 p-3 rounded-lg max-h-32 overflow-y-auto custom-scrollbar border border-black/10">
-                          <div className="text-xs text-black/60 mb-2 uppercase font-bold">
-                            Resumen
+
+                        <div className="mt-4 flex justify-end">
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setExpandedOrders((prev) => ({
+                                ...prev,
+                                [index]: !prev[index],
+                              }))
+                            }
+                            className="text-xs md:text-sm px-4 py-2 rounded-lg border border-black/15 text-black hover:bg-black/5 transition-colors"
+                          >
+                            {isExpanded
+                              ? "Ocultar datos completos"
+                              : "Ver datos completos"}
+                          </button>
+                        </div>
+
+                        {isExpanded && (
+                          <div className="mt-4 border-t border-black/10 pt-4 text-xs md:text-sm text-black/70 space-y-2">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                              <div className="space-y-1">
+                                <div>
+                                  <span className="font-semibold">
+                                    Comercial:{" "}
+                                  </span>
+                                  <span>{order.agent}</span>
+                                </div>
+                                {order.customer.company && (
+                                  <div>
+                                    <span className="font-semibold">
+                                      Empresa:{" "}
+                                    </span>
+                                    <span>{order.customer.company}</span>
+                                  </div>
+                                )}
+                                <div>
+                                  <span className="font-semibold">Email: </span>
+                                  <span>{order.customer.email || "N/A"}</span>
+                                </div>
+                                <div>
+                                  <span className="font-semibold">
+                                    Teléfono:{" "}
+                                  </span>
+                                  <span>{order.customer.phone}</span>
+                                </div>
+                                <div>
+                                  <span className="font-semibold">
+                                    Dirección:{" "}
+                                  </span>
+                                  <span>{order.customer.address}</span>
+                                </div>
+                              </div>
+                              <div className="space-y-1">
+                                <div>
+                                  <span className="font-semibold">
+                                    Preferencia de contacto:{" "}
+                                  </span>
+                                  <span>
+                                    {order.customer.callPreference ||
+                                      "Indiferente"}
+                                  </span>
+                                </div>
+                                <div>
+                                  <span className="font-semibold">
+                                    Cuenta corriente:{" "}
+                                  </span>
+                                  <span>
+                                    {order.customer.accountNumber || "N/A"}
+                                  </span>
+                                </div>
+                                <div>
+                                  <span className="font-semibold">
+                                    Subtotal:{" "}
+                                  </span>
+                                  <span>{subtotal.toFixed(2)} €</span>
+                                </div>
+                                <div>
+                                  <span className="font-semibold">
+                                    Descuento aplicado:{" "}
+                                  </span>
+                                  <span>
+                                    {discountPercentValue.toFixed(2)}% (
+                                    {discountAmountValue.toFixed(2)} €)
+                                  </span>
+                                </div>
+                                <div>
+                                  <span className="font-semibold">
+                                    Base imponible:{" "}
+                                  </span>
+                                  <span>{taxableBase.toFixed(2)} €</span>
+                                </div>
+                                <div>
+                                  <span className="font-semibold">
+                                    IVA (21%):{" "}
+                                  </span>
+                                  <span>{vatAmount.toFixed(2)} €</span>
+                                </div>
+                                <div>
+                                  <span className="font-semibold">
+                                    Total final:{" "}
+                                  </span>
+                                  <span>{order.total.toFixed(2)} €</span>
+                                </div>
+                                {order.filename && (
+                                  <div>
+                                    <span className="font-semibold">
+                                      Archivo asociado:{" "}
+                                    </span>
+                                    <span>{order.filename}</span>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                            {order.customer.notes && (
+                              <div className="mt-3">
+                                <div className="font-semibold mb-1">Notas:</div>
+                                <div className="whitespace-pre-wrap">
+                                  {order.customer.notes}
+                                </div>
+                              </div>
+                            )}
                           </div>
-                          {order.products.map((p, i) => (
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="hidden lg:block">
+                  <div className="bg-[var(--color-primary)] border border-black/10 rounded-xl p-6 sticky top-32 shadow-2xl">
+                    <h2 className="text-xl font-bold mb-6 text-black">
+                      Resumen general
+                    </h2>
+                    <div className="space-y-1 mb-6">
+                      <div className="text-xs text-black/60 uppercase font-bold">
+                        Total acumulado
+                      </div>
+                      <div className="text-2xl font-bold text-[var(--color-secondary)]">
+                        {totalOrdersAmount.toFixed(2)} €
+                      </div>
+                    </div>
+                    <div className="text-xs text-black/60 mb-2 uppercase font-bold">
+                      Productos vendidos
+                    </div>
+                    <div className="space-y-2 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
+                      {productsSoldSummary.map((item) => (
+                        <div
+                          key={item.name}
+                          className="flex justify-between items-center text-sm bg-black/5 p-2 rounded border border-black/10"
+                        >
+                          <span className="truncate">{item.name}</span>
+                          <span className="ml-4 whitespace-nowrap">
+                            {item.quantity} uds
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                    {isAdmin && (
+                      <>
+                        <div className="text-xs text-black/60 mt-6 mb-2 uppercase font-bold">
+                          Por comercial
+                        </div>
+                        <div className="space-y-2 max-h-[40vh] overflow-y-auto pr-2 custom-scrollbar">
+                          {agentsSummary.map((ag) => (
                             <div
-                              key={i}
-                              className="flex justify-between text-xs text-black/70 mb-1"
+                              key={ag.agent}
+                              className="flex justify-between items-center text-sm bg-black/5 p-2 rounded border border-black/10"
                             >
-                              <span>
-                                {p.quantity}x {p.name}
+                              <span className="truncate">{ag.agent}</span>
+                              <span className="ml-4 whitespace-nowrap text-right">
+                                {ag.ordersCount} pedidos · {ag.totalUnits} uds ·{" "}
+                                {ag.totalAmount.toFixed(2)} €
                               </span>
-                              <span>{(p.price * p.quantity).toFixed(2)}€</span>
                             </div>
                           ))}
                         </div>
-                      </div>
-
-                      <div className="mt-4 flex justify-end">
-                        <button
-                          type="button"
-                          onClick={() =>
-                            setExpandedOrders((prev) => ({
-                              ...prev,
-                              [index]: !prev[index],
-                            }))
-                          }
-                          className="text-xs md:text-sm px-4 py-2 rounded-lg border border-black/15 text-black hover:bg-black/5 transition-colors"
-                        >
-                          {isExpanded
-                            ? "Ocultar datos completos"
-                            : "Ver datos completos"}
-                        </button>
-                      </div>
-
-                      {isExpanded && (
-                        <div className="mt-4 border-t border-black/10 pt-4 text-xs md:text-sm text-black/70 space-y-2">
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                            <div className="space-y-1">
-                              <div>
-                                <span className="font-semibold">
-                                  Comercial:{" "}
-                                </span>
-                                <span>{order.agent}</span>
-                              </div>
-                              {order.customer.company && (
-                                <div>
-                                  <span className="font-semibold">
-                                    Empresa:{" "}
-                                  </span>
-                                  <span>{order.customer.company}</span>
-                                </div>
-                              )}
-                              <div>
-                                <span className="font-semibold">Email: </span>
-                                <span>{order.customer.email || "N/A"}</span>
-                              </div>
-                              <div>
-                                <span className="font-semibold">
-                                  Teléfono:{" "}
-                                </span>
-                                <span>{order.customer.phone}</span>
-                              </div>
-                              <div>
-                                <span className="font-semibold">
-                                  Dirección:{" "}
-                                </span>
-                                <span>{order.customer.address}</span>
-                              </div>
-                            </div>
-                            <div className="space-y-1">
-                              <div>
-                                <span className="font-semibold">
-                                  Preferencia de contacto:{" "}
-                                </span>
-                                <span>
-                                  {order.customer.callPreference ||
-                                    "Indiferente"}
-                                </span>
-                              </div>
-                              <div>
-                                <span className="font-semibold">
-                                  Cuenta corriente:{" "}
-                                </span>
-                                <span>
-                                  {order.customer.accountNumber || "N/A"}
-                                </span>
-                              </div>
-                              <div>
-                                <span className="font-semibold">
-                                  Subtotal:{" "}
-                                </span>
-                                <span>{subtotal.toFixed(2)} €</span>
-                              </div>
-                              <div>
-                                <span className="font-semibold">
-                                  Descuento aplicado:{" "}
-                                </span>
-                                <span>
-                                  {discountPercentValue.toFixed(2)}% (
-                                  {discountAmountValue.toFixed(2)} €)
-                                </span>
-                              </div>
-                              <div>
-                                <span className="font-semibold">
-                                  Base imponible:{" "}
-                                </span>
-                                <span>{taxableBase.toFixed(2)} €</span>
-                              </div>
-                              <div>
-                                <span className="font-semibold">
-                                  IVA (21%):{" "}
-                                </span>
-                                <span>{vatAmount.toFixed(2)} €</span>
-                              </div>
-                              <div>
-                                <span className="font-semibold">
-                                  Total final:{" "}
-                                </span>
-                                <span>{order.total.toFixed(2)} €</span>
-                              </div>
-                              {order.filename && (
-                                <div>
-                                  <span className="font-semibold">
-                                    Archivo asociado:{" "}
-                                  </span>
-                                  <span>{order.filename}</span>
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                          {order.customer.notes && (
-                            <div className="mt-3">
-                              <div className="font-semibold mb-1">Notas:</div>
-                              <div className="whitespace-pre-wrap">
-                                {order.customer.notes}
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
+                      </>
+                    )}
+                  </div>
+                </div>
               </div>
             )}
           </div>
