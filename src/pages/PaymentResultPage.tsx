@@ -42,9 +42,7 @@ function PaymentResultPage() {
   const [resending, setResending] = useState(false);
   const [resendMsg, setResendMsg] = useState("");
 
-  useEffect(() => {
-    // Input de reenvío eliminado; usamos el email de sessionStorage directamente
-  }, [paymentSuccess]);
+  useEffect(() => {}, [paymentSuccess]);
 
   useEffect(() => {
     const id = requestAnimationFrame(() => setEnter(true));
@@ -332,120 +330,154 @@ function PaymentResultPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen mt-30 bg-[var(--color-primary)] text-black">
+    <div className="flex flex-col min-h-screen bg-[var(--color-primary)] text-black">
       <Header />
       <main
         className={`flex-grow pt-24 md:pt-28 transition-all duration-500 ${
           enter ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
         }`}
       >
-        <div className="max-w-4xl mx-auto px-4 md:px-8 lg:px-12 py-16">
-          {paymentSuccess ? (
-            <div className="bg-[var(--color-primary)] border border-green-500/60 rounded-xl p-8 shadow-[0_12px_36px_rgba(0,0,0,0.08)] text-center">
-              <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-500 mb-6">
-                <svg
-                  className="h-10 w-10 text-white"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
-              </div>
-              <h2 className="font-bold text-3xl mb-4 text-black">
-                {t("payment.success.title")}
-              </h2>
-              <p className="text-black/70 mb-6">
-                {t("payment.success.description")}
-              </p>
+        <div className="max-w-4xl mx-auto px-4 md:px-8 lg:px-12 py-12 md:py-16">
+          <div className="flex flex-col items-center text-center">
+            <img
+              src="/MAN-BLANCO.png"
+              alt="MΛN POWERS"
+              className="h-10 md:h-12 invert opacity-80 drop-shadow-[0_0_4px_rgba(0,0,0,0.15)]"
+            />
 
-              {/* Envío automático del correo en background */}
-              <AutoEmailTest />
-              <p className="text-black/60 mt-4">
-                {t("payment.success.emailInfo")}
-              </p>
-
-              {/* Reenvío manual */}
-              <div className="mt-6 bg-[var(--color-primary)] border border-black/10 rounded-lg p-4 text-left inline-block w-full max-w-lg mx-auto">
-                <h3 className="text-black font-semibold mb-2 text-center">
-                  {t("resend.title")}
-                </h3>
-                <div className="flex flex-col gap-3">
-                  <button
-                    onClick={handleManualResend}
-                    disabled={resending}
-                    className={`w-full px-4 py-2 rounded-md font-bold text-sm transition-all ${
-                      resending
-                        ? "bg-black/10 text-black/40 cursor-not-allowed"
-                        : "bg-[var(--color-secondary)] text-white hover:brightness-90"
-                    }`}
+            {paymentSuccess ? (
+              <>
+                <div className="mt-8 flex items-center justify-center h-14 w-14 rounded-full border border-green-700/20 text-green-700">
+                  <svg
+                    className="h-8 w-8"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
                   >
-                    {resending ? t("resend.loading") : t("resend.button")}
-                  </button>
-                  {resendMsg && (
-                    <p className="text-center text-sm text-black/70">
-                      {resendMsg}
-                    </p>
-                  )}
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2.5"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
                 </div>
-              </div>
+                <h2 className="mt-6 font-extrabold text-3xl md:text-5xl tracking-tight text-black">
+                  {t("payment.success.title")}
+                </h2>
+                <p className="mt-3 text-black/70 text-base md:text-lg max-w-2xl">
+                  {t("payment.success.description")}
+                </p>
+              </>
+            ) : (
+              <>
+                <div className="mt-8 flex items-center justify-center h-14 w-14 rounded-full border border-red-700/20 text-red-700">
+                  <svg
+                    className="h-8 w-8"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2.5"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </div>
+                <h2 className="mt-6 font-extrabold text-3xl md:text-5xl tracking-tight text-black">
+                  {t("payment.error.title")}
+                </h2>
+                <p className="mt-3 text-black/70 text-base md:text-lg max-w-2xl">
+                  {t("payment.error.description")}
+                </p>
+              </>
+            )}
+
+            <div className="mt-8 w-full flex justify-center">
+              <Link
+                to="/"
+                className="inline-flex w-full sm:w-auto items-center justify-center bg-[var(--color-secondary)] text-white font-bold py-3 px-10 rounded-lg hover:brightness-90 transition-all duration-300"
+              >
+                {t("cta.backHome")}
+              </Link>
             </div>
-          ) : (
-            <div className="bg-[var(--color-primary)] border border-red-500/70 rounded-xl p-8 shadow-[0_12px_36px_rgba(0,0,0,0.08)] text-center">
-              <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-red-500 mb-6">
-                <svg
-                  className="h-10 w-10 text-white"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </div>
-              <h2 className="font-bold text-3xl mb-4 text-black">
-                {t("payment.error.title")}
-              </h2>
-              <p className="text-black/70 mb-6">
-                {t("payment.error.description")}
-              </p>
-              <div className="bg-[var(--color-primary)] border border-black/10 rounded-lg p-4 text-left inline-block max-w-full overflow-x-auto">
+          </div>
+
+          <div className="mt-10 border-t border-black/10 pt-8 text-center">
+            <div className="text-sm md:text-base text-black/70">
+              {t("cta.tamdDiscover")}
+            </div>
+            <div className="mt-4 flex justify-center">
+              <a
+                href="https://www.tamdcosmetics.com"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex w-full sm:w-auto items-center justify-center border border-black/15 bg-transparent text-black font-bold py-3 px-10 rounded-lg hover:bg-black/5 transition-all duration-300"
+              >
+                {t("cta.visitTamd")}
+              </a>
+            </div>
+          </div>
+
+          {(decodedMessage || displayOrderId) && (
+            <div className="mt-10 border-t border-black/10 pt-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {decodedMessage && (
-                  <p className="text-black/70">
-                    <strong className="text-black">
+                  <div className="text-left">
+                    <div className="text-xs font-semibold text-black/60">
                       {t("payment.error.messageLabel")}
-                    </strong>{" "}
-                    {decodedMessage}
-                  </p>
+                    </div>
+                    <div className="mt-2 text-sm md:text-base text-black/80 break-words">
+                      {decodedMessage}
+                    </div>
+                  </div>
                 )}
                 {displayOrderId && (
-                  <p className="text-black/70">
-                    <strong className="text-black">
+                  <div className="text-left">
+                    <div className="text-xs font-semibold text-black/60">
                       {t("payment.error.orderLabel")}
-                    </strong>{" "}
-                    {displayOrderId}
-                  </p>
+                    </div>
+                    <code className="mt-2 inline-block text-sm md:text-base font-bold text-[var(--color-secondary)] bg-black/5 px-3 py-1.5 rounded-lg">
+                      {displayOrderId}
+                    </code>
+                  </div>
                 )}
               </div>
             </div>
           )}
-          <div className="mt-8 text-center">
-            <Link
-              to="/"
-              className="bg-[var(--color-secondary)] text-white font-bold py-3 px-8 rounded-lg hover:brightness-90 transition-all duration-300"
-            >
-              {t("cta.backHome")}
-            </Link>
-          </div>
+
+          {paymentSuccess && (
+            <div className="mt-10 border-t border-black/10 pt-8">
+              <div className="text-center">
+                <div className="text-sm md:text-base text-black/70">
+                  {t("payment.success.emailInfo")}
+                </div>
+              </div>
+
+              <div className="mt-6 max-w-lg mx-auto">
+                <button
+                  onClick={handleManualResend}
+                  disabled={resending}
+                  className={`w-full px-4 py-3 rounded-lg font-bold text-sm md:text-base transition-all ${
+                    resending
+                      ? "bg-black/10 text-black/40 cursor-not-allowed"
+                      : "bg-black text-white hover:brightness-90"
+                  }`}
+                >
+                  {resending ? t("resend.loading") : t("resend.button")}
+                </button>
+                {resendMsg && (
+                  <div className="mt-3 text-center text-sm text-black/70">
+                    {resendMsg}
+                  </div>
+                )}
+              </div>
+
+              <AutoEmailTest />
+            </div>
+          )}
         </div>
       </main>
       <Footer />

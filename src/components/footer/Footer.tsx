@@ -160,7 +160,7 @@ const Footer: React.FC = () => {
               </svg>
               <div className="flex items-center gap-2">
                 <span className="text-black/70">{t("shipping.tipsa")}</span>
-                <img src="/tipsa.png" alt="TIPSA" className="h-5 w-auto" />
+                <img src="/correos.png" alt="CORREOS" className="h-5 w-auto" />
               </div>
             </div>
             <div className="flex items-start">

@@ -2,10 +2,14 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import useAutoCarousel from "../../hooks/useAutoCarousel";
 
-type Props = { forceMobile?: boolean };
+type Props = {
+  forceMobile?: boolean;
+  variant?: "default" | "freeShippingOver30";
+};
 
-const InfoStripe: React.FC<Props> = ({ forceMobile }) => {
+const InfoStripe: React.FC<Props> = ({ forceMobile, variant = "default" }) => {
   const { t } = useTranslation();
+  const itemCount = variant === "default" ? 3 : 1;
   const {
     currentIndex,
     containerRef,
@@ -14,11 +18,25 @@ const InfoStripe: React.FC<Props> = ({ forceMobile }) => {
     handleTouchStart,
     handleTouchEnd,
   } = useAutoCarousel({
-    itemCount: 3,
+    itemCount,
     visibleItems: 1,
     autoScrollInterval: 3500,
     pauseOnHover: false,
   });
+
+  if (variant === "freeShippingOver30") {
+    return (
+      <div className="w-full bg-[var(--color-primary)] text-black border-b border-black/10">
+        <div className="max-w-full mx-auto px-2 sm:px-4 md:px-8 py-1.5">
+          <div className="w-full flex items-center justify-center px-2">
+            <span className="text-xs sm:text-sm font-semibold text-black text-center">
+              {t("shipping.freeOver30")}
+            </span>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const mobileContainerClass = forceMobile
     ? "block"
@@ -51,8 +69,8 @@ const InfoStripe: React.FC<Props> = ({ forceMobile }) => {
                   {t("shipping.tipsa")}
                 </span>
                 <img
-                  src="/tipsa.png"
-                  alt="TIPSA"
+                  src="/correos.png"
+                  alt="CORREOS"
                   className="h-5 sm:h-6 w-auto invert brightness-0"
                 />
               </div>
@@ -168,8 +186,8 @@ const InfoStripe: React.FC<Props> = ({ forceMobile }) => {
               {t("shipping.tipsa")}
             </span>
             <img
-              src="/tipsa.png"
-              alt="TIPSA"
+              src="/correos.png"
+              alt="CORREOS"
               className="h-7 w-auto invert brightness-0"
             />
           </div>

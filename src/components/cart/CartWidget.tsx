@@ -686,6 +686,13 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
             </div>
 
             <div className="px-5 py-4 border-t border-black/10">
+              <div className="w-full mb-3">
+                <div className="w-full border-b border-black/10 px-3 pb-4 flex items-center justify-center text-center">
+                  <span className="text-sm font-semibold text-black">
+                    {t("shipping.freeOver30")}
+                  </span>
+                </div>
+              </div>
               <div className="flex items-center justify-between mb-3">
                 <span className="text-black/70">
                   {t("cart.total")} <span className="text-xs">(incl. IVA)</span>
@@ -816,6 +823,7 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                                 </span>
                               </div>
                             )}
+                         
                           <div className="font-semibold flex justify-between text-black">
                             <span>
                               {t("cart.total")}{" "}

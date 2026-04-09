@@ -89,6 +89,7 @@ const resources = {
       },
       shipping: {
         tipsa: "Envíos realizados a través de",
+        freeOver30: "Envío gratis en pedidos superiores a €30",
       },
       returns: {
         fourteenDays: "Devoluciones en 14 días naturales",
@@ -378,15 +379,20 @@ const resources = {
       "payment.error.messageLabel": "Mensaje:",
       "payment.error.orderLabel": "Número de pedido:",
       "cta.backHome": "Volver al inicio",
+      "cta.visitTamd": "Visitar tamdcosmetics.com",
+      "cta.continueManpowers": "Seguir en manpowers.es",
+      "cta.tamdDiscover": "Conoce más marcas de TAMD en tamdcosmetics.com",
 
       // Reenvío manual de correo
-      "resend.title": "¿No te llegó el correo?",
-      "resend.placeholder": "Escribí tu email para reenviar",
+      "resend.title": "¿No has recibido el correo?",
+      "resend.placeholder": "Escribe tu email para reenviar",
       "resend.button": "Reenviar correo",
       "resend.loading": "Reenviando…",
-      "resend.success": "Correo reenviado. Revisá bandeja de entrada y spam.",
-      "resend.invalidEmail": "Ingresá un email válido.",
-      "resend.fail": "No pudimos reenviar el correo. Probá de nuevo más tarde.",
+      "resend.success":
+        "Correo reenviado. Revisa la bandeja de entrada y la carpeta de spam.",
+      "resend.invalidEmail": "Introduce un email válido.",
+      "resend.fail":
+        "No hemos podido reenviar el correo. Inténtalo de nuevo más tarde.",
       "resend.throttle": "Debes esperar {{seconds}}s para reenviar.",
 
       // Legacy translations (keeping for compatibility)
@@ -415,7 +421,7 @@ const resources = {
         "Compartimos datos con proveedores esenciales para la operativa (pasarela de pago, logística, alojamiento) y, cuando aceptás cookies no esenciales, con herramientas de analítica y marketing. Firmamos acuerdos para garantizar su correcta protección.",
       "privacy.rightsTitle": "Derechos",
       "privacy.rightsText":
-        "Podés ejercer tus derechos de acceso, rectificación, supresión, limitación, oposición y portabilidad escribiendo a info@manpowers.es. Respondemos tus solicitudes en los plazos previstos por la normativa.",
+        "Puedes ejercer tus derechos de acceso, rectificación, supresión, limitación, oposición y portabilidad escribiendo a info@manpowers.es. Respondemos tus solicitudes en los plazos previstos por la normativa.",
       "privacy.retentionTitle": "Conservación",
       "privacy.retentionText":
         "Conservamos tus datos solo el tiempo necesario para cumplir con las finalidades del tratamiento y los plazos legales aplicables. Luego los eliminamos o los anonimizamos de forma segura.",
@@ -454,10 +460,10 @@ const resources = {
         "Marketing: personalizan contenido y publicidad según tus intereses.",
       "cookies.manageTitle": "Gestión de cookies",
       "cookies.manageText":
-        "Podés gestionar tus preferencias desde el banner de cookies o la configuración del navegador. Algunas funciones pueden verse afectadas si desactivás determinadas cookies.",
+        "Puedes gestionar tus preferencias desde el banner de cookies o la configuración del navegador. Algunas funciones pueden verse afectadas si desactivas determinadas cookies.",
       "cookies.revokeTitle": "Revocar consentimiento",
       "cookies.revokeText":
-        "Podés borrar el almacenamiento del navegador para restablecer el banner de consentimiento o escribirnos a info@manpowers.es si necesitás ayuda.",
+        "Puedes borrar el almacenamiento del navegador para restablecer el banner de consentimiento o escribirnos a info@manpowers.es si necesitas ayuda.",
       "cookies.detailCookiesTitle": "Información detallada",
       "cookies.functionalTitle": "Cookies funcionales",
       "cookies.functionalText":
@@ -563,6 +569,7 @@ const resources = {
       },
       shipping: {
         tipsa: "Enviaments realitzats a través de",
+        freeOver30: "Enviament gratuït en comandes superiors a €30",
       },
       returns: {
         fourteenDays: "Devolucions en 14 dies naturals",
@@ -817,6 +824,8 @@ const resources = {
       "payment.error.messageLabel": "Missatge:",
       "payment.error.orderLabel": "Número de comanda:",
       "cta.backHome": "Tornar a l'inici",
+      "cta.visitTamd": "Visitar tamdcosmetics.com",
+      "cta.tamdDiscover": "Coneix més marques nostres a tamdcosmetics.com",
       "resend.title": "No t'ha arribat el correu?",
       "resend.placeholder": "Escriu el teu email per reenviar",
       "resend.button": "Reenviar correu",
@@ -826,6 +835,7 @@ const resources = {
       "resend.invalidEmail": "Introdueix un email vàlid.",
       "resend.fail":
         "No hem pogut reenviar el correu. Torna-ho a provar més tard.",
+      "resend.throttle": "Has d'esperar {{seconds}}s per reenviar.",
       "search.placeholder": "Cerca productes",
       "search.suggestions": "Suggeriments",
       "search.loading": "Carregant…",
@@ -926,6 +936,7 @@ const resources = {
       },
       shipping: {
         tipsa: "Shipping handled by",
+        freeOver30: "Free shipping on orders over €30",
       },
       returns: {
         fourteenDays: "Returns within 14 calendar days",
@@ -1228,6 +1239,9 @@ const resources = {
       "payment.error.messageLabel": "Message:",
       "payment.error.orderLabel": "Order number:",
       "cta.backHome": "Back to home",
+      "cta.visitTamd": "Visit tamdcosmetics.com",
+      "cta.continueManpowers": "Continue on manpowers.es",
+      "cta.tamdDiscover": "Discover more of our brands at tamdcosmetics.com",
 
       // Resend UI
       "resend.title": "Didn’t receive the email?",
@@ -1237,6 +1251,7 @@ const resources = {
       "resend.success": "Email resent. Check inbox and spam.",
       "resend.invalidEmail": "Enter a valid email.",
       "resend.fail": "We couldn’t resend the email. Please try again later.",
+      "resend.throttle": "Please wait {{seconds}}s before resending.",
 
       // Legacy translations (keeping for compatibility)
       imageNotAvailable: "Image not available",

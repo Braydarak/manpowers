@@ -668,6 +668,13 @@ const ProductDetailPage: React.FC = () => {
           ) : product ? (
             <>
               <section className="py-6 mt-15 md:mt-24">
+                <div className="w-full mb-5">
+                  <div className="w-full border border-black/10 rounded-xl px-4 py-2.5 flex items-center justify-center text-center">
+                    <span className="text-sm md:text-base font-semibold text-black">
+                      {t("shipping.freeOver30")}
+                    </span>
+                  </div>
+                </div>
                 <div className="flex items-center justify-between gap-4">
                   <button
                     onClick={goToSport}
@@ -1439,8 +1446,8 @@ const ProductDetailPage: React.FC = () => {
                         {t("shipping.tipsa")}
                       </span>
                       <img
-                        src="/tipsa.png"
-                        alt="TIPSA"
+                        src="/correos.png"
+                        alt="CORREOS"
                         className="h-6 md:h-7 w-auto"
                       />
                     </div>
