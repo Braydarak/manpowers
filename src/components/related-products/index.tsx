@@ -270,9 +270,6 @@ const RelatedProducts: React.FC<Props> = ({
                       {p.price_formatted
                         ? p.price_formatted
                         : `€ ${Number(p.price).toFixed(2)}`}
-                      <span className="text-xs text-gray-500 font-normal ml-1">
-                        + IVA
-                      </span>
                     </div>
                     {typeof p.rating === "number" &&
                       typeof p.votes === "number" &&

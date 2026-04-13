@@ -49,6 +49,8 @@ interface Order {
   filename?: string;
 }
 
+const VAT_FACTOR = 1.21;
+
 const Comercial: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -530,10 +532,11 @@ const Comercial: React.FC = () => {
   };
 
   const getEffectivePrice = (product: Product) => {
+    let price = product.price / VAT_FACTOR;
     if (product.id === 10006) {
-      return product.price * 0.65; // 35% discount
+      price = price * 0.65; // 35% discount
     }
-    return product.price;
+    return price;
   };
 
   const calculateTotal = () => {
@@ -848,7 +851,7 @@ const Comercial: React.FC = () => {
                         {product.price.toFixed(2)} €
                       </span>
                       <span className="text-lg font-bold text-red-600">
-                        {getEffectivePrice(product).toFixed(2)} €
+                        {(product.price * 0.65).toFixed(2)} €
                       </span>
                     </div>
                   ) : (
@@ -1669,7 +1672,12 @@ const Comercial: React.FC = () => {
                           </div>
                         </div>
                         <div className="text-[var(--color-secondary)] font-bold whitespace-nowrap">
-                          {(getEffectivePrice(p) * p.quantity).toFixed(2)} €
+                          {(
+                            getEffectivePrice(p) *
+                            VAT_FACTOR *
+                            p.quantity
+                          ).toFixed(2)}{" "}
+                          €
                         </div>
                       </div>
                     ))}
@@ -1677,9 +1685,9 @@ const Comercial: React.FC = () => {
 
                   <div className="border-t border-gray-200 pt-4 space-y-3">
                     <div className="flex justify-between items-center text-sm">
-                      <span className="text-black/60">Subtotal</span>
+                      <span className="text-black/60">Subtotal (IVA incl.)</span>
                       <span className="text-black">
-                        {calculateTotal().toFixed(2)} €
+                        {(calculateTotal() * VAT_FACTOR).toFixed(2)} €
                       </span>
                     </div>
                     <div className="flex items-center justify-between gap-3">
@@ -1872,7 +1880,12 @@ const Comercial: React.FC = () => {
                           </div>
                           <div className="flex flex-col items-end gap-1">
                             <span className="text-[var(--color-secondary)] font-bold">
-                              {(getEffectivePrice(p) * p.quantity).toFixed(2)} €
+                              {(
+                                getEffectivePrice(p) *
+                                VAT_FACTOR *
+                                p.quantity
+                              ).toFixed(2)}{" "}
+                              €
                             </span>
                             <button
                               onClick={() => handleQuantityChange(p.id, 0)}
@@ -1900,9 +1913,11 @@ const Comercial: React.FC = () => {
                       <span className="text-black font-bold">{totalItems}</span>
                     </div>
                     <div className="flex justify-between items-center text-xl">
-                      <span className="text-black font-bold">Total</span>
+                      <span className="text-black font-bold">
+                        Total (IVA incl.)
+                      </span>
                       <span className="text-[var(--color-secondary)] font-bold">
-                        {calculateTotal().toFixed(2)} €
+                        {calculateFinalTotal().toFixed(2)} €
                       </span>
                     </div>
                     <button
@@ -1953,7 +1968,12 @@ const Comercial: React.FC = () => {
                           </div>
                         </div>
                         <div className="text-[var(--color-secondary)] font-bold whitespace-nowrap">
-                          {(getEffectivePrice(p) * p.quantity).toFixed(2)} €
+                          {(
+                            getEffectivePrice(p) *
+                            VAT_FACTOR *
+                            p.quantity
+                          ).toFixed(2)}{" "}
+                          €
                         </div>
                       </div>
                     ))
@@ -1982,7 +2002,7 @@ const Comercial: React.FC = () => {
                       />
                     </span>
                     <span className="font-bold text-lg text-[var(--color-secondary)]">
-                      {calculateTotal().toFixed(2)} €
+                      {calculateFinalTotal().toFixed(2)} €
                     </span>
                   </div>
                 </button>

@@ -472,9 +472,6 @@ const ProductSlider: React.FC<{
                                 {finalPrice !== undefined
                                   ? finalPrice.toFixed(2)
                                   : "0.00"}
-                                <span className="text-xs text-gray-500 font-normal ml-1">
-                                  + IVA
-                                </span>
                               </span>
                             </div>
                           ) : (
@@ -482,9 +479,6 @@ const ProductSlider: React.FC<{
                               {p.price_formatted
                                 ? p.price_formatted
                                 : `€ ${Number(p.price).toFixed(2)}`}
-                              <span className="text-xs text-gray-500 font-normal ml-1">
-                                + IVA
-                              </span>
                             </span>
                           )}
                         </div>

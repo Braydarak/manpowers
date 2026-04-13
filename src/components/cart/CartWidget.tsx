@@ -331,7 +331,7 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
     let newEligibleSubtotal = 0;
 
     checkoutList.forEach((item) => {
-      const itemTotal = parsePrice(item.price) * 1.21 * item.quantity;
+      const itemTotal = parsePrice(item.price) * item.quantity;
       newSubtotal += itemTotal;
 
       if (!promoSet) {
@@ -633,17 +633,10 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                           {item.price !== undefined ? (
                             <div className="flex flex-col items-end">
                               <span className="text-black font-semibold">
-                                €{(parsePrice(item.price) * 1.21).toFixed(2)}
+                                €{parsePrice(item.price).toFixed(2)}
                               </span>
                               <span className="text-[10px] text-gray-500">
                                 IVA incluido
-                              </span>
-                              <span className="text-[10px] text-gray-400">
-                                (sin IVA: €
-                                {(
-                                  parsePrice(item.price) * item.quantity
-                                ).toFixed(2)}
-                                )
                               </span>
                             </div>
                           ) : (
@@ -771,7 +764,7 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                       </h4>
                       <div className="space-y-1 text-sm">
                         {checkoutList.map((item) => {
-                          const itemPrice = parsePrice(item.price) * 1.21;
+                          const itemPrice = parsePrice(item.price);
                           const itemTotal = itemPrice * item.quantity;
                           return (
                             <div
@@ -785,13 +778,6 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                                 <span>€{itemTotal.toFixed(2)}</span>
                                 <span className="text-[10px] text-gray-500">
                                   IVA incluido
-                                </span>
-                                <span className="text-[10px] text-gray-400">
-                                  (sin IVA: €
-                                  {(
-                                    parsePrice(item.price) * item.quantity
-                                  ).toFixed(2)}
-                                  )
                                 </span>
                               </div>
                             </div>
@@ -823,7 +809,7 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                                 </span>
                               </div>
                             )}
-                         
+
                           <div className="font-semibold flex justify-between text-black">
                             <span>
                               {t("cart.total")}{" "}

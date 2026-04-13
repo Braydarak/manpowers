@@ -1041,9 +1041,6 @@ const ProductDetailPage: React.FC = () => {
                         </span>
                       );
                     })()}
-                    <span className="text-sm text-gray-500 ml-2 font-normal">
-                      + IVA
-                    </span>
                   </div>
                   <div className="text-xs text-black/60">
                     {currentLanguage === "es"

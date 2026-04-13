@@ -13,13 +13,19 @@ type Props = {
   className?: string;
 };
 
-const CARD_IMAGE_ASSETS = import.meta.glob("/src/assets/**/*.{png,jpg,jpeg,webp}", {
-  eager: true,
-  query: "?url",
-  import: "default",
-}) as Record<string, string>;
+const CARD_IMAGE_ASSETS = import.meta.glob(
+  "/src/assets/**/*.{png,jpg,jpeg,webp}",
+  {
+    eager: true,
+    query: "?url",
+    import: "default",
+  },
+) as Record<string, string>;
 
-const folderImageCache = new Map<string, Array<{ path: string; url: string }>>();
+const folderImageCache = new Map<
+  string,
+  Array<{ path: string; url: string }>
+>();
 
 const listCardImages = (folder?: string, preferred?: string) => {
   const list: Array<{ path: string; url: string }> = [];
@@ -40,7 +46,9 @@ const listCardImages = (folder?: string, preferred?: string) => {
   if (preferred) {
     const desiredName = preferred.split("/").pop() || "";
     if (desiredName) {
-      const idx = list.findIndex((m) => (m.path.split("/").pop() || "") === desiredName);
+      const idx = list.findIndex(
+        (m) => (m.path.split("/").pop() || "") === desiredName,
+      );
       if (idx > 0) {
         const [item] = list.splice(idx, 1);
         list.unshift(item);
@@ -52,7 +60,9 @@ const listCardImages = (folder?: string, preferred?: string) => {
     }
   }
 
-  return list.map((m) => m.url).filter((u): u is string => typeof u === "string" && u.length > 0);
+  return list
+    .map((m) => m.url)
+    .filter((u): u is string => typeof u === "string" && u.length > 0);
 };
 
 const ProductCard: React.FC<Props> = ({
@@ -226,14 +236,10 @@ const ProductCard: React.FC<Props> = ({
                   {finalPrice.toFixed(2)} €
                 </span>
               )}
-              <span className="text-[10px] text-gray-400 ml-1">+ IVA</span>
             </div>
           ) : (
             <div className="text-xs text-black/70 flex items-center">
               {priceLabel}
-              {priceLabel && (
-                <span className="text-[10px] text-gray-400 ml-1">+ IVA</span>
-              )}
             </div>
           )}
         </div>
@@ -272,9 +278,6 @@ const ProductCard: React.FC<Props> = ({
               <span className="text-[var(--color-secondary)]">
                 {finalPrice !== undefined ? `${finalPrice.toFixed(2)} €` : ""}
               </span>
-              <span className="text-[10px] text-black/50 font-normal">
-                + IVA
-              </span>
             </span>
             <span className="absolute top-2 left-2 z-10 text-xs bg-[var(--color-secondary)] text-white px-2 py-1 rounded-full font-bold">
               {t("product.clearance")}
@@ -284,9 +287,6 @@ const ProductCard: React.FC<Props> = ({
           priceLabel && (
             <span className="absolute top-2 right-2 z-10 text-xs bg-[var(--color-secondary)] text-white px-2 py-1 rounded-full font-bold flex items-center">
               {priceLabel}
-              <span className="text-[10px] text-gray-200 font-normal ml-1">
-                + IVA
-              </span>
             </span>
           )
         )}
@@ -319,7 +319,9 @@ const ProductCard: React.FC<Props> = ({
             }}
           />
         ) : (
-          <span className="text-gray-400">{t("sports.imageNot available")}</span>
+          <span className="text-gray-400">
+            {t("sports.imageNot available")}
+          </span>
         )}
         {hasCarousel && (
           <>

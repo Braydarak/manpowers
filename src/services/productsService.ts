@@ -147,6 +147,8 @@ type RawProduct = {
 let _cache: Product[] | null = null;
 let _inflight: Promise<Product[]> | null = null;
 
+const IVA_FACTOR = 1.21;
+
 class ProductsService {
   constructor() {}
 
@@ -202,6 +204,41 @@ class ProductsService {
                 }
               : undefined;
 
+          const basePrice = parseMoney(p.price) ?? 0;
+          const finalPrice = basePrice * IVA_FACTOR;
+          const discountPrice = parseMoney(p.discount_price);
+          const finalDiscountPrice =
+            discountPrice !== undefined
+              ? discountPrice * IVA_FACTOR
+              : undefined;
+          const originalPrice = parseMoney(p.original_price);
+          const finalOriginalPrice =
+            originalPrice !== undefined
+              ? originalPrice * IVA_FACTOR
+              : undefined;
+          const comercialPrice =
+            p.comercial_price !== undefined
+              ? (parseMoney(p.comercial_price) ?? basePrice)
+              : basePrice;
+          const finalComercialPrice = comercialPrice * IVA_FACTOR;
+
+          const pricesBySize = p.pricesBySize;
+          const finalPricesBySize: { [key: string]: string } | undefined =
+            pricesBySize
+              ? Object.entries(pricesBySize).reduce(
+                  (acc, [size, priceStr]) => {
+                    const pVal = parseMoney(priceStr);
+                    if (pVal !== undefined) {
+                      acc[size] = (pVal * IVA_FACTOR).toFixed(2);
+                    } else {
+                      acc[size] = priceStr;
+                    }
+                    return acc;
+                  },
+                  {} as { [key: string]: string },
+                )
+              : undefined;
+
           return {
             id:
               typeof p.id === "number"
@@ -212,18 +249,13 @@ class ProductsService {
             name: p.name || { es: "", en: "" },
             description: p.description || { es: "", en: "" },
             objectives: p.objectives,
-            discount_price: parseMoney(p.discount_price),
-            original_price: parseMoney(p.original_price),
-            price:
-              parseMoney(p.price) ?? 0,
-            comercial_price:
-              p.comercial_price !== undefined
-                ? parseMoney(p.comercial_price) ?? (parseMoney(p.price) ?? 0)
-                : parseMoney(p.price) ?? 0,
-            price_formatted:
-              typeof p.price_formatted === "string" ? p.price_formatted : "",
+            discount_price: finalDiscountPrice,
+            original_price: finalOriginalPrice,
+            price: finalPrice,
+            comercial_price: finalComercialPrice,
+            price_formatted: `€ ${finalPrice.toFixed(2)}`,
             size: typeof p.size === "string" ? p.size : "",
-            pricesBySize: p.pricesBySize,
+            pricesBySize: finalPricesBySize,
             image: typeof p.image === "string" ? p.image : "",
             category:
               typeof p.category === "string"
@@ -283,45 +315,71 @@ class ProductsService {
       const response = await fetch("/tamdProducts.json");
       const data = await response.json();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const arr = ((data.products || []) as any[]).map((p) => ({
-        id: p.id + 10000, // Offset IDs to avoid collision
-        name: p.name,
-        description: p.description,
-        story: p.story,
-        ingredients: p.ingredients,
-        price:
+      const arr = ((data.products || []) as any[]).map((p) => {
+        const rawPrice =
           typeof p.price === "string"
             ? parseFloat((p.price as string).replace(",", "."))
-            : p.price,
-        comercial_price:
+            : p.price;
+        const finalPrice = (rawPrice || 0) * IVA_FACTOR;
+
+        const rawComercialPrice =
           p.comercial_price !== undefined
             ? typeof p.comercial_price === "string"
               ? parseFloat((p.comercial_price as string).replace(",", "."))
               : p.comercial_price
-            : typeof p.price === "string"
-              ? parseFloat((p.price as string).replace(",", "."))
-              : p.price,
-        price_formatted: p.price_formatted ?? "",
-        size: p.size || "",
-        pricesBySize: p.pricesBySize,
-        image: p.image,
-        category:
-          typeof p.category === "string"
-            ? { es: p.category, en: p.category }
-            : p.category,
-        sportId: p.sportId || "cosmetics",
-        available: p.available,
-        sku: p.sku ?? "",
-        amazonLinks: p.amazonLinks,
-        nutritionalValues: p.nutritionalValues,
-        application: p.application,
-        recommendations: p.recommendations,
-        cautions: p.cautions,
-        rating: p.rating,
-        votes: p.votes,
-        brand: p.brand || "TAMD Cosmetics",
-        source: "tamd" as const,
-      })) as Product[];
+            : rawPrice;
+        const finalComercialPrice = (rawComercialPrice || 0) * IVA_FACTOR;
+
+        const pricesBySize = p.pricesBySize;
+        const finalPricesBySize: { [key: string]: string } | undefined =
+          pricesBySize
+            ? Object.entries(pricesBySize).reduce(
+                (acc, [size, priceStr]) => {
+                  const cleaned = String(priceStr)
+                    .trim()
+                    .replace(/[^\d,.-]/g, "");
+                  const pVal = parseFloat(cleaned.replace(",", "."));
+                  if (Number.isFinite(pVal)) {
+                    acc[size] = (pVal * IVA_FACTOR).toFixed(2);
+                  } else {
+                    acc[size] = String(priceStr);
+                  }
+                  return acc;
+                },
+                {} as { [key: string]: string },
+              )
+            : undefined;
+
+        return {
+          id: p.id + 10000, // Offset IDs to avoid collision
+          name: p.name,
+          description: p.description,
+          story: p.story,
+          ingredients: p.ingredients,
+          price: finalPrice,
+          comercial_price: finalComercialPrice,
+          price_formatted: `€ ${finalPrice.toFixed(2)}`,
+          size: p.size || "",
+          pricesBySize: finalPricesBySize,
+          image: p.image,
+          category:
+            typeof p.category === "string"
+              ? { es: p.category, en: p.category }
+              : p.category,
+          sportId: p.sportId || "cosmetics",
+          available: p.available,
+          sku: p.sku ?? "",
+          amazonLinks: p.amazonLinks,
+          nutritionalValues: p.nutritionalValues,
+          application: p.application,
+          recommendations: p.recommendations,
+          cautions: p.cautions,
+          rating: p.rating,
+          votes: p.votes,
+          brand: p.brand || "TAMD Cosmetics",
+          source: "tamd" as const,
+        };
+      }) as Product[];
 
       return arr;
     } catch {
