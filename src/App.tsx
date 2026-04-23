@@ -6,8 +6,9 @@ import {
   useLocation,
 } from "react-router-dom";
 import HomePage from "./pages/HomePage";
-import SportsPage from "./pages/SportsPage";
+import AllProductsPage from "./pages/AllProductsPage";
 import ProductsPage from "./pages/ProductsPage";
+import ProductsTypePage from "./pages/ProductsTypePage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import PaymentResultPage from "./pages/PaymentResultPage";
 import CookieConsent from "./components/cookieConsent";
@@ -30,8 +31,12 @@ function AppInner() {
       <CookieConsent />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/sports" element={<SportsPage />} />
+        <Route path="/products" element={<AllProductsPage />} />
         <Route path="/products/:sportId" element={<ProductsPage />} />
+        <Route
+          path="/products/category/:categorySlug"
+          element={<ProductsTypePage />}
+        />
         <Route
           path="/products/:sportId/:slug"
           element={<ProductDetailPage />}

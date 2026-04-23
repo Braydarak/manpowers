@@ -13,18 +13,13 @@ const Hero: React.FC = () => {
     useScrollAnimation();
   const { ref: buttonRef } = useScrollAnimation();
 
-  // Función para navegar a la página de deportes
-  const navigateToSports = () => {
-    navigate("/sports");
-  };
-
   const desktopFlyers = useMemo(
     () => ["/flyer-maca.avif", "/flyer-tiro.avif"],
-    []
+    [],
   );
   const mobileFlyers = useMemo(
     () => ["/flyer-maca-mobile.avif", "/flyer-tiro-mobile.avif"],
-    []
+    [],
   );
   const [idx, setIdx] = useState(0);
   const autoIntervalRef = useRef<number | null>(null);
@@ -190,12 +185,13 @@ const Hero: React.FC = () => {
               ref={buttonRef as React.RefObject<HTMLDivElement>}
               className="flex flex-col items-center gap-4 mb-30 sm:gap-6 lg:gap-8 xl:gap-10 justify-center transition-all duration-1000 delay-500 z-50 w-full max-w-md sm:max-w-lg lg:max-w-2xl xl:max-w-4xl mx-auto"
             >
-              {/* Botón principal de deportes */}
               <button
-                onClick={navigateToSports}
-                className="bg-white text-black cursor-pointer font-bold py-3 px-6 sm:py-4 sm:px-8 md:py-5 md:px-12 lg:py-6 lg:px-16 rounded-full text-base sm:text-lg md:text-xl lg:text-2xl transition-all duration-300 hover:bg-gray-100 hover:scale-105 shadow-lg"
+                onClick={() => {
+                  navigate("/products");
+                }}
+                className="bg-white text-black cursor-pointer font-bold px-6 py-3 min-h-[48px] rounded-lg text-sm sm:text-lg transition-all duration-300 hover:bg-gray-100 sm:hover:scale-105 active:scale-[0.99] shadow-lg uppercase w-full sm:w-auto text-center leading-tight"
               >
-                {t("heroSportsButton")}
+                {t("heroAllProductsButton")}
               </button>
             </div>
           </div>

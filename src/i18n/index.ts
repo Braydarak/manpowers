@@ -15,6 +15,7 @@ const resources = {
       heroDescription:
         "Explora nuestra gama de suplementos deportivos adaptados a tu disciplina. Descubre abajo los productos especializados para tu deporte y maximiza tu rendimiento",
       heroSportsButton: "Ver todos los deportes",
+      heroAllProductsButton: "Ver todos los productos",
       heroDirectToSport: "O entra directamente a tu deporte",
 
       // About Us Section
@@ -503,6 +504,7 @@ const resources = {
       heroDescription:
         "Explora la nostra gamma de suplements esportius adaptats a la teva disciplina. Descobreix a continuació els productes especialitzats per al teu esport i maximitza el teu rendiment",
       heroSportsButton: "Veure tots els esports",
+      heroAllProductsButton: "Veure tots els productes",
       heroDirectToSport: "O entra directament al teu esport",
       aboutTitle: "La nostra Història",
       aboutSubtitle:
@@ -863,6 +865,7 @@ const resources = {
         "Discover our premium line of sports supplements designed to maximize your athletic performance. Specialized products for athletes committed to excellence from Madrid, Spain.",
       heroButton: "Learn Our Story",
       heroSportsButton: "View Sports",
+      heroAllProductsButton: "View All Products",
       heroDirectToSport: "Or go directly to your sport",
 
       // About Us Section

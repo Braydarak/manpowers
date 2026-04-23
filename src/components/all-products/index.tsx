@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import productsService, { type Product } from "../../services/productsService";
@@ -9,13 +15,49 @@ type Props = {
   title?: string;
 };
 
-const SLIDER_IMAGE_ASSETS = import.meta.glob("/src/assets/**/*.{png,jpg,jpeg,webp}", {
-  eager: true,
-  query: "?url",
-  import: "default",
-}) as Record<string, string>;
+const toSlug = (s: string) =>
+  s
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .replace(/-{2,}/g, "-");
 
-const sliderFolderImageCache = new Map<string, Array<{ path: string; url: string }>>();
+const normalizeCategorySlug = (slug: string) =>
+  slug === "deportes" ? "rendimiento" : slug;
+
+const getCategoryCandidates = (category: Product["category"]): string[] => {
+  if (typeof category === "string") return [category];
+  return [category.es, category.en, category.ca].filter(
+    (v): v is string => typeof v === "string" && v.trim() !== "",
+  );
+};
+
+const getCategoryDisplayLabel = (
+  rawLabel: string,
+  lang: "es" | "en" | "ca",
+): string => {
+  const rawSlug = normalizeCategorySlug(toSlug(rawLabel));
+  if (rawSlug !== "rendimiento") return rawLabel;
+  if (lang === "en") return "Performance";
+  if (lang === "ca") return "Rendiment";
+  return "Rendimiento";
+};
+
+const SLIDER_IMAGE_ASSETS = import.meta.glob(
+  "/src/assets/**/*.{png,jpg,jpeg,webp}",
+  {
+    eager: true,
+    query: "?url",
+    import: "default",
+  },
+) as Record<string, string>;
+
+const sliderFolderImageCache = new Map<
+  string,
+  Array<{ path: string; url: string }>
+>();
 
 const listCardImages = (folder?: string, preferred?: string) => {
   const list: Array<{ path: string; url: string }> = [];
@@ -36,7 +78,9 @@ const listCardImages = (folder?: string, preferred?: string) => {
   if (preferred) {
     const desiredName = preferred.split("/").pop() || "";
     if (desiredName) {
-      const idx = list.findIndex((m) => (m.path.split("/").pop() || "") === desiredName);
+      const idx = list.findIndex(
+        (m) => (m.path.split("/").pop() || "") === desiredName,
+      );
       if (idx > 0) {
         const [item] = list.splice(idx, 1);
         list.unshift(item);
@@ -48,7 +92,9 @@ const listCardImages = (folder?: string, preferred?: string) => {
     }
   }
 
-  return list.map((m) => m.url).filter((u): u is string => typeof u === "string" && u.length > 0);
+  return list
+    .map((m) => m.url)
+    .filter((u): u is string => typeof u === "string" && u.length > 0);
 };
 
 const ProductCardMedia: React.FC<{
@@ -232,19 +278,9 @@ const ProductSlider: React.FC<{
     scrollByAmount(dir);
   };
 
-  const toSlug = (s: string) =>
-    s
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-+|-+$/g, "")
-      .replace(/-{2,}/g, "-");
-
   const openDetail = (p: Product) => {
-    if (!p?.sportId) return;
     const slug = toSlug(p.name[language] || p.name.es);
-    navigate(`/products/${p.sportId}/${slug}`);
+    navigate(`/product/${slug}`);
   };
 
   const addToCart = (p: Product) => {
@@ -385,9 +421,12 @@ const ProductSlider: React.FC<{
                     <div className="flex-1 flex flex-col gap-3">
                       <div className="space-y-1.5">
                         <div className="text-xs font-medium text-[var(--color-secondary)] uppercase tracking-wider">
-                          {typeof p.category === "string"
-                            ? p.category
-                            : p.category[language] || p.category.es}
+                          {getCategoryDisplayLabel(
+                            typeof p.category === "string"
+                              ? p.category
+                              : p.category[language] || p.category.es,
+                            language,
+                          )}
                         </div>
 
                         <div className="text-lg font-bold text-black leading-tight line-clamp-2">
@@ -555,27 +594,57 @@ const AllProducts: React.FC<Props> = ({ language }) => {
     load();
   }, []);
 
-  const cosmetics = items.filter((p) => {
-    const cat = typeof p.category === "string" ? p.category : p.category.es;
-    const lowerCat = cat.toLowerCase();
-    return (
-      lowerCat.includes("cuidado") ||
-      lowerCat.includes("suplementos") ||
-      lowerCat.includes("deportes") ||
-      (p.sportId === "multisport" && !lowerCat.includes("indumentaria"))
-    );
-  });
+  const buckets = useMemo(() => {
+    const contains = (p: Product, tokens: string[]) => {
+      const candidates = getCategoryCandidates(p.category).map((c) =>
+        c.toLowerCase(),
+      );
+      return tokens.some((t) => candidates.some((c) => c.includes(t)));
+    };
 
-  const apparel = items.filter((p) => {
-    const cat = typeof p.category === "string" ? p.category : p.category.es;
-    return cat.toLowerCase().includes("indumentaria");
-  });
+    const apparel = items.filter((p) =>
+      contains(p, ["indumentaria", "apparel", "indumentària"]),
+    );
+    const care = items.filter((p) => contains(p, ["cuidado", "care", "cura"]));
+    const supplements = items.filter((p) =>
+      contains(p, ["suplementos", "supplements", "suplements"]),
+    );
+
+    const used = new Set<number>([
+      ...apparel.map((p) => p.id),
+      ...care.map((p) => p.id),
+      ...supplements.map((p) => p.id),
+    ]);
+
+    const performance = items.filter((p) => {
+      if (used.has(p.id)) return false;
+      const candidates = getCategoryCandidates(p.category);
+      const slugs = candidates.map((c) => normalizeCategorySlug(toSlug(c)));
+      const hasPerformance = slugs.some((s) =>
+        ["rendimiento", "performance", "sports"].includes(s),
+      );
+      if (hasPerformance) return true;
+      return p.sportId === "multisport";
+    });
+
+    return { performance, care, supplements, apparel };
+  }, [items]);
 
   const titles = {
-    cosmetics: {
-      es: "Cosmética",
-      en: "Cosmetics",
-      ca: "Cosmètica",
+    performance: {
+      es: "Rendimiento Deportivo",
+      en: "Performance",
+      ca: "Rendiment Esportiu",
+    },
+    care: {
+      es: "Cuidado",
+      en: "Care",
+      ca: "Cura",
+    },
+    supplements: {
+      es: "Suplementos",
+      en: "Supplements",
+      ca: "Suplements",
     },
     apparel: {
       es: "Indumentaria",
@@ -587,22 +656,32 @@ const AllProducts: React.FC<Props> = ({ language }) => {
   return (
     <div className="flex flex-col gap-12">
       <ProductSlider
-        title={titles.cosmetics[language] || titles.cosmetics.es}
-        items={cosmetics}
+        title={titles.performance[language] || titles.performance.es}
+        items={buckets.performance}
         loading={loading}
         error={error}
         language={language}
       />
 
-      {cosmetics.length > 0 && apparel.length > 0 && (
-        <div className="w-full px-4 md:px-0">
-          <div className="w-full h-px bg-gradient-to-r from-transparent via-black/10 to-transparent" />
-        </div>
-      )}
+      <ProductSlider
+        title={titles.supplements[language] || titles.supplements.es}
+        items={buckets.supplements}
+        loading={loading}
+        error={error}
+        language={language}
+      />
+
+      <ProductSlider
+        title={titles.care[language] || titles.care.es}
+        items={buckets.care}
+        loading={loading}
+        error={error}
+        language={language}
+      />
 
       <ProductSlider
         title={titles.apparel[language] || titles.apparel.es}
-        items={apparel}
+        items={buckets.apparel}
         loading={loading}
         error={error}
         language={language}

@@ -95,7 +95,7 @@ const HomePage: React.FC = () => {
       >
         <Hero />
         <div className="w-full">
-          <div className="">
+          <div id="all-products" className="">
             <AllProducts
               language={currentLanguage}
               title={t("allProducts.title")}
