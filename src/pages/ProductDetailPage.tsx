@@ -16,6 +16,7 @@ import useLanguageUpdater from "../hooks/useLanguageUpdater";
 import useIsMobile from "../hooks/useIsMobile";
 import productsService, { type Product } from "../services/productsService";
 import { updateSEOTags } from "../utils/seoConfig";
+import { PUBLIC_MEDIA_MANIFEST } from "../generated/publicMediaManifest";
 import Accordion from "../components/accordion";
 import RecommendedTogether from "../components/recommended-together";
 import Faq from "../components/faq";
@@ -23,6 +24,58 @@ import RelatedProducts from "../components/related-products";
 import InfoStripe from "../components/info/InfoStripe";
 
 const Shops = lazy(() => import("../sections/shops"));
+
+const PUBLIC_DIR_KEY_BY_LOWER = new Map<string, string>(
+  Object.keys(PUBLIC_MEDIA_MANIFEST).map((k) => [k.toLowerCase(), k]),
+);
+
+const normalizeFolderKey = (input: string) => {
+  return input.replace(/\\/g, "/").replace(/^\/+|\/+$/g, "");
+};
+
+const normalizeFolderSegment = (input: string) => {
+  return input
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+};
+
+const resolvePublicUrl = (relativePath: string) => {
+  const base = import.meta.env.BASE_URL || "/";
+  const clean = relativePath.replace(/^\/+/, "");
+  return `${base}${encodeURI(clean)}`;
+};
+
+const tryResolveColorDirKey = (baseFolder: string, color: string) => {
+  const base = normalizeFolderKey(baseFolder);
+  const colorRaw = normalizeFolderKey(color);
+  const colorSlug = normalizeFolderSegment(color);
+
+  const candidates = [
+    `${base}/${colorRaw}`,
+    `${base}/${colorRaw.toLowerCase()}`,
+    `${base}/${colorSlug}`,
+  ]
+    .map((c) => c.replace(/\/+/g, "/"))
+    .filter(Boolean);
+
+  for (const candidate of candidates) {
+    const resolved = PUBLIC_DIR_KEY_BY_LOWER.get(candidate.toLowerCase());
+    if (resolved) return resolved;
+  }
+
+  const desired = normalizeFolderSegment(color);
+  const prefixLower = `${base}/`.toLowerCase();
+  for (const [lowerKey, originalKey] of PUBLIC_DIR_KEY_BY_LOWER.entries()) {
+    if (!lowerKey.startsWith(prefixLower)) continue;
+    const remainder = originalKey.slice(prefixLower.length);
+    if (!remainder || remainder.includes("/")) continue;
+    if (normalizeFolderSegment(remainder) === desired) return originalKey;
+  }
+  return null;
+};
 
 const ProductDetailPage: React.FC = () => {
   const [enter, setEnter] = useState(false);
@@ -241,8 +294,11 @@ const ProductDetailPage: React.FC = () => {
       try {
         const all = await productsService.getProducts();
         let found: Product | null = null;
-        if (id) {
-          found = all.find((p) => String(p.id) === String(id)) || null;
+        const numericSlugId =
+          !id && slug && /^\d+$/.test(slug) ? String(parseInt(slug, 10)) : null;
+        if (id || numericSlugId) {
+          const targetId = id ? String(id) : numericSlugId;
+          found = all.find((p) => String(p.id) === targetId) || null;
         }
         if (!found && slug) {
           const base = sportParam
@@ -259,6 +315,14 @@ const ProductDetailPage: React.FC = () => {
             ) || null;
         }
         if (found) {
+          const foundColors = (found.color?.[currentLanguage] ??
+            found.color?.es ??
+            []) as string[];
+          const initialColor =
+            Array.isArray(foundColors) && foundColors.length > 0
+              ? foundColors[0]
+              : null;
+          setSelectedColor(initialColor);
           setProduct(found);
         } else {
           setError("Producto no encontrado");
@@ -272,7 +336,7 @@ const ProductDetailPage: React.FC = () => {
     };
 
     loadProduct();
-  }, [id, slug, sportParam]);
+  }, [currentLanguage, id, slug, sportParam]);
 
   useEffect(() => {
     const loadMedia = async () => {
@@ -284,27 +348,48 @@ const ProductDetailPage: React.FC = () => {
       try {
         const folder = product.img_folder;
         if (folder) {
-          const all = import.meta.glob(
-            "/src/assets/**/*.{png,jpg,jpeg,webp,mp4,webm}",
-            {
-              eager: true,
-              query: "?url",
-              import: "default",
-            },
-          ) as Record<string, string>;
-          const entries = Object.entries(all).filter(([p]) =>
-            p.includes(`/src/assets/${folder}/`),
-          );
-          const isImage = (p: string) =>
-            /\.(png|jpe?g|webp)$/i.test(p.split("?")[0] || p);
-          const isVideo = (p: string) =>
-            /\.(mp4|webm)$/i.test(p.split("?")[0] || p);
-          const mapped = entries
-            .map(([path, url]) => {
-              if (isImage(path))
-                return { type: "image" as const, src: url, path };
-              if (isVideo(path))
-                return { type: "video" as const, src: url, path };
+          const baseFolder = normalizeFolderKey(folder);
+          const selected = displayColor ? String(displayColor) : "";
+          const colorDirKey =
+            selected && colorOptions.length > 0
+              ? tryResolveColorDirKey(baseFolder, selected)
+              : null;
+          const baseDirKey =
+            PUBLIC_DIR_KEY_BY_LOWER.get(baseFolder.toLowerCase()) || null;
+          const manifest = PUBLIC_MEDIA_MANIFEST as Record<
+            string,
+            readonly string[]
+          >;
+          const colorFiles = colorDirKey ? manifest[colorDirKey] || [] : [];
+          const baseFiles = baseDirKey ? manifest[baseDirKey] || [] : [];
+          const isColorScoped = Boolean(colorDirKey && colorFiles.length > 0);
+          const isFirstColorSelected =
+            colorOptions.length > 0 &&
+            selected.trim().toLowerCase() ===
+              String(colorOptions[0]).trim().toLowerCase();
+          const shouldPrependMainImage = !isColorScoped || isFirstColorSelected;
+          const files = isColorScoped ? colorFiles : baseFiles;
+
+          const isImagePath = (p: string) =>
+            /\.(png|jpe?g|webp|avif)$/i.test(p);
+          const isVideoPath = (p: string) => /\.(mp4|webm)$/i.test(p);
+
+          const mapped = files
+            .map((relPath) => {
+              if (isImagePath(relPath)) {
+                return {
+                  type: "image" as const,
+                  src: resolvePublicUrl(relPath),
+                  path: relPath,
+                };
+              }
+              if (isVideoPath(relPath)) {
+                return {
+                  type: "video" as const,
+                  src: resolvePublicUrl(relPath),
+                  path: relPath,
+                };
+              }
               return null;
             })
             .filter(Boolean) as {
@@ -312,12 +397,9 @@ const ProductDetailPage: React.FC = () => {
             src: string;
             path: string;
           }[];
-          const images = mapped
-            .filter((m) => m.type === "image")
-            .sort((a, b) => a.path.localeCompare(b.path));
-          const videos = mapped
-            .filter((m) => m.type === "video")
-            .sort((a, b) => a.path.localeCompare(b.path));
+
+          const images = mapped.filter((m) => m.type === "image");
+          const videos = mapped.filter((m) => m.type === "video");
           let finalList = [...images, ...videos];
           if (product.image) {
             const desiredName = product.image.split("/").pop();
@@ -329,7 +411,7 @@ const ProductDetailPage: React.FC = () => {
               if (idx > 0) {
                 const [item] = finalList.splice(idx, 1);
                 finalList = [item, ...finalList];
-              } else if (idx === -1) {
+              } else if (idx === -1 && shouldPrependMainImage) {
                 finalList = [
                   {
                     type: "image",
@@ -371,7 +453,7 @@ const ProductDetailPage: React.FC = () => {
       }
     };
     loadMedia();
-  }, [product, currentLanguage]);
+  }, [product, displayColor, colorOptions]);
 
   useEffect(() => {
     const current = mediaItems[activeMediaIndex];
@@ -490,7 +572,6 @@ const ProductDetailPage: React.FC = () => {
     const chosenColor =
       selectedColor ?? (colorOptions.length > 0 ? colorOptions[0] : null);
 
-    // Si es indumentaria y hay talla seleccionada, añadir al nombre y al ID
     if (
       (typeof product.category === "string"
         ? product.category

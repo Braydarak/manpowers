@@ -147,8 +147,6 @@ type RawProduct = {
 let _cache: Product[] | null = null;
 let _inflight: Promise<Product[]> | null = null;
 
-const IVA_FACTOR = 1.21;
-
 class ProductsService {
   constructor() {}
 
@@ -205,22 +203,18 @@ class ProductsService {
               : undefined;
 
           const basePrice = parseMoney(p.price) ?? 0;
-          const finalPrice = basePrice * IVA_FACTOR;
+          const finalPrice = basePrice;
           const discountPrice = parseMoney(p.discount_price);
           const finalDiscountPrice =
-            discountPrice !== undefined
-              ? discountPrice * IVA_FACTOR
-              : undefined;
+            discountPrice !== undefined ? discountPrice : undefined;
           const originalPrice = parseMoney(p.original_price);
           const finalOriginalPrice =
-            originalPrice !== undefined
-              ? originalPrice * IVA_FACTOR
-              : undefined;
+            originalPrice !== undefined ? originalPrice : undefined;
           const comercialPrice =
             p.comercial_price !== undefined
               ? (parseMoney(p.comercial_price) ?? basePrice)
               : basePrice;
-          const finalComercialPrice = comercialPrice * IVA_FACTOR;
+          const finalComercialPrice = comercialPrice;
 
           const pricesBySize = p.pricesBySize;
           const finalPricesBySize: { [key: string]: string } | undefined =
@@ -229,7 +223,7 @@ class ProductsService {
                   (acc, [size, priceStr]) => {
                     const pVal = parseMoney(priceStr);
                     if (pVal !== undefined) {
-                      acc[size] = (pVal * IVA_FACTOR).toFixed(2);
+                      acc[size] = pVal.toFixed(2);
                     } else {
                       acc[size] = priceStr;
                     }
@@ -320,7 +314,7 @@ class ProductsService {
           typeof p.price === "string"
             ? parseFloat((p.price as string).replace(",", "."))
             : p.price;
-        const finalPrice = (rawPrice || 0) * IVA_FACTOR;
+        const finalPrice = rawPrice || 0;
 
         const rawComercialPrice =
           p.comercial_price !== undefined
@@ -328,7 +322,7 @@ class ProductsService {
               ? parseFloat((p.comercial_price as string).replace(",", "."))
               : p.comercial_price
             : rawPrice;
-        const finalComercialPrice = (rawComercialPrice || 0) * IVA_FACTOR;
+        const finalComercialPrice = rawComercialPrice || 0;
 
         const pricesBySize = p.pricesBySize;
         const finalPricesBySize: { [key: string]: string } | undefined =
@@ -340,7 +334,7 @@ class ProductsService {
                     .replace(/[^\d,.-]/g, "");
                   const pVal = parseFloat(cleaned.replace(",", "."));
                   if (Number.isFinite(pVal)) {
-                    acc[size] = (pVal * IVA_FACTOR).toFixed(2);
+                    acc[size] = pVal.toFixed(2);
                   } else {
                     acc[size] = String(priceStr);
                   }

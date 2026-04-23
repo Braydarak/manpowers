@@ -116,7 +116,7 @@ export const productSeoConfigs: Record<number, SEOConfig> = {
     ogTitle: "MΛN POWERS Maca Forte 10:1 - 5000 | MΛN POWERS",
     ogDescription:
       "Suplemento premium elaborado a partir de raíz de Maca Andina concentrada, que ofrece una potencia de 5000mg por cápsula. Su fórmula está diseñada para brindarte energía explosiva, resistencia física y un mayor enfoque mental.",
-    ogImage: "/products/MACA-500.jpg",
+    ogImage: "/products/MACA-500.avif",
   },
   2: {
     title: "Omega 3 - Puro aceite de pescado | MΛN POWERS",
@@ -126,7 +126,7 @@ export const productSeoConfigs: Record<number, SEOConfig> = {
     ogTitle: "Omega 3 - Puro aceite de pescado | MΛN POWERS",
     ogDescription:
       "Omega 3 puro aceite de pescado, enriquecido con Vitamina E. Esencial para la salud cardiovascular, función cerebral y bienestar general.",
-    ogImage: "/products/OMEGA-3.jpg",
+    ogImage: "/products/OMEGA-3.avif",
   },
   3: {
     title: "MΛN POWERS Protector Solar Facial y Corporal SPF 50+ | MΛN POWERS",
@@ -137,7 +137,7 @@ export const productSeoConfigs: Record<number, SEOConfig> = {
       "MΛN POWERS Protector Solar Facial y Corporal SPF 50+ | MΛN POWERS",
     ogDescription:
       "Tu aliado perfecto para el verano. Este innovador protector solar SPF 50+ te ofrece una protección total frente a los rayos UVA/UVB, combinada con un acelerador del bronceado. Su fórmula avanzada está enriquecida con Ácido Hialurónico.",
-    ogImage: "/products/MAN-PROTECTOR-SOLAR.jpg",
+    ogImage: "/products/MAN-PROTECTOR-SOLAR.avif",
   },
   4: {
     title: "Creatina Monohidrato Premium | MΛN POWERS",
@@ -147,7 +147,7 @@ export const productSeoConfigs: Record<number, SEOConfig> = {
     ogTitle: "Creatina Monohidrato Premium | MΛN POWERS",
     ogDescription:
       "Creatina monohidrato de máxima pureza para aumentar la fuerza, potencia y masa muscular. Ideal para entrenamientos de alta intensidad y deportes de fuerza.",
-    ogImage: "/products/CREATINA.jpg",
+    ogImage: "/products/CREATINA.avif",
   },
   5: {
     title: "Crema Anti-Rozaduras | MΛN POWERS",
@@ -157,7 +157,7 @@ export const productSeoConfigs: Record<number, SEOConfig> = {
     ogTitle: "Crema Anti-Rozaduras | MΛN POWERS",
     ogDescription:
       "Antes de enfundarte la chaqueta y el plastrón, prepara la piel para los asaltos. Esta crema anti‑rozaduras crea una barrera invisible que reduce la fricción en axilas, ingles y cintura, incluso bajo el calor de la máscara. Se mantiene firme con el sudor y permite moverte con libertad en cada finta y desplazamiento.",
-    ogImage: "/products/CREMA-ANTI-ROZADURAS.jpg",
+    ogImage: "/products/CREMA-ANTI-ROZADURAS.avif",
   },
   6: {
     title: "Gel de Aloe Vera Puro | MΛN POWERS",
@@ -167,7 +167,7 @@ export const productSeoConfigs: Record<number, SEOConfig> = {
     ogTitle: "Gel de Aloe Vera Puro | MΛN POWERS",
     ogDescription:
       "Gel de aloe vera 100% puro para hidratar, calmar y regenerar la piel. Ideal para quemaduras solares, irritaciones y cuidado diario de la piel.",
-    ogImage: "/products/GEL-DE-ALOE-VERA.jpg",
+    ogImage: "/products/GEL-DE-ALOE-VERA.avif",
   },
   7: {
     title: "Champú Anti-Caída Fortalecedor | MΛN POWERS",
@@ -177,7 +177,7 @@ export const productSeoConfigs: Record<number, SEOConfig> = {
     ogTitle: "Champú Anti-Caída Fortalecedor | MΛN POWERS",
     ogDescription:
       'El Champú Anticaída Manpowers - Anti Hair Loss, con la fórmula "Hair Denseer", es un tratamiento capilar de uso diario diseñado para combatir las principales causas de la caída del cabello masculino. Su mezcla de ingredientes activos estimula la raíz y fortalece la estructura capilar. No solo limpia, sino que trata el cuero cabelludo, ofreciendo un cabello más fuerte, denso y con mayor vitalidad.',
-    ogImage: "/products/CHAMPU-ANTI-CAIDA-TIRADORES.jpg",
+    ogImage: "/products/CHAMPU-ANTI-CAIDA-TIRADORES.avif",
   },
   8: {
     title: "Crema para Masajes Relajante | MΛN POWERS",
@@ -187,7 +187,7 @@ export const productSeoConfigs: Record<number, SEOConfig> = {
     ogTitle: "Crema para Masajes Relajante | MΛN POWERS",
     ogDescription:
       "Termina la regata y notas hombros y zona lumbar cargados. Esta crema de masaje se desliza con facilidad y ayuda a descomprimir la tensión tras las maniobras y las horas de mar. Textura cómoda, aroma discreto y una sensación de descanso que te prepara para la siguiente salida.",
-    ogImage: "/products/CREMA-MASAJE.jpg",
+    ogImage: "/products/CREMA-MASAJE.avif",
   },
   9: {
     title: "Crema para Pies con Aceite de Espliego | MΛN POWERS",
@@ -197,7 +197,7 @@ export const productSeoConfigs: Record<number, SEOConfig> = {
     ogTitle: "Crema para Pies con Aceite de Espliego | MΛN POWERS",
     ogDescription:
       "Tras jornadas en cubierta —con zapato náutico o descalzo—, los pies piden alivio. Esta crema con aceite de espliego hidrata, calma y ayuda a neutralizar el olor, dejando una sensación fresca para el próximo bordo. Ideal para talones y plantas que aguantan largas guardias.",
-    ogImage: "/products/CREMA-PIES.jpg",
+    ogImage: "/products/CREMA-PIES.avif",
   },
   10: {
     title: "Crema Anti-Rozaduras Deportivo | MΛN POWERS",
@@ -207,7 +207,7 @@ export const productSeoConfigs: Record<number, SEOConfig> = {
     ogTitle: "Crema Anti-Rozaduras Deportivo | MΛN POWERS",
     ogDescription:
       "Antes de salir, protege los puntos de contacto con el sillín. Nuestro stick anti‑rozaduras forma una película resistente al sudor y al agua que reduce la fricción en rutas largas, manteniendo la piel cómoda bajo el culotte. Ligero y de fácil aplicación para entrenos y marchas.",
-    ogImage: "/products/ANTI-ROZADURAS-CICLISMO.jpg",
+    ogImage: "/products/ANTI-ROZADURAS-CICLISMO.avif",
   },
   11: {
     title: "Agarre Táctico Profesional | MΛN POWERS",
@@ -228,7 +228,7 @@ export const productSeoConfigs: Record<number, SEOConfig> = {
     ogTitle: "Crema Efecto Frío | MΛN POWERS",
     ogDescription:
       "Entre tandas, un respiro para antebrazos y hombros. Nuestra crema efecto frío ofrece una sensación refrescante que ayuda a aliviar la carga tras las repeticiones de tiro, dejándote preparado para el siguiente end. Se absorbe rápido y no deja residuos, ideal para uso en campo.",
-    ogImage: "/products/CREMA-EFECTO-FRIO-TIRADORES.jpg",
+    ogImage: "/products/CREMA-EFECTO-FRIO-TIRADORES.avif",
   },
   13: {
     title: "Cremigel Masaje Muscular | MΛN POWERS",
@@ -238,7 +238,7 @@ export const productSeoConfigs: Record<number, SEOConfig> = {
     ogTitle: "Cremigel Masaje Muscular | MΛN POWERS",
     ogDescription:
       "Después de la práctica, trabaja la zona escapular y el manguito rotador con un masaje cómodo. Este cremigel ayuda a suavizar la tensión acumulada por el gesto del disparo, con deslizamiento justo y rápida absorción para recuperar sensaciones.",
-    ogImage: "/products/CREMIGEL-MASAJE-MUSCULAR-TIRADORES.jpg",
+    ogImage: "/products/CREMIGEL-MASAJE-MUSCULAR-TIRADORES.avif",
   },
   14: {
     title: "Gel efecto calor | MΛN POWERS",
@@ -248,7 +248,7 @@ export const productSeoConfigs: Record<number, SEOConfig> = {
     ogTitle: "Gel efecto calor | MΛN POWERS",
     ogDescription:
       "Calienta antes de la primera serie. Nuestro gel efecto calor proporciona una sensación térmica progresiva en hombros, espalda y muñecas para activar antes de entrar a tirar. Integra el calentamiento en tu ritual, con textura que no molesta al agarre.",
-    ogImage: "/products/CREMA-EFECTO-CALOR.jpg",
+    ogImage: "/products/CREMA-EFECTO-CALOR.avif",
   },
   15: {
     title: "Gel efecto calor | MΛN POWERS",
@@ -258,7 +258,7 @@ export const productSeoConfigs: Record<number, SEOConfig> = {
     ogTitle: "Gel efecto calor | MΛN POWERS",
     ogDescription:
       "En la sala, antes del asalto, activa piernas y brazos. El gel efecto calor despierta gemelos, cuádriceps y antebrazos con una sensación térmica suave que acompaña tu calentamiento sin saturar la piel. Ideal para reaccionar rápido desde el primer toque.",
-    ogImage: "/products/CREMA-EFECTO-CALOR.jpg",
+    ogImage: "/products/CREMA-EFECTO-CALOR.avif",
   },
   16: {
     title: "Cremigel | MΛN POWERS",
@@ -268,7 +268,7 @@ export const productSeoConfigs: Record<number, SEOConfig> = {
     ogTitle: "Cremigel | MΛN POWERS",
     ogDescription:
       "Tras paradas y ripostas, los antebrazos quedan tensos. Este cremigel de masaje ayuda a soltar la carga y recuperar movilidad en muñecas y codos, con una textura cómoda que se integra en tu rutina de vuelta a la calma.",
-    ogImage: "/products/CREMIGEL-MASAJE-MUSCULAR.jpg",
+    ogImage: "/products/CREMIGEL-MASAJE-MUSCULAR.avif", 
   },
   17: {
     title: "Calcio + Magnesio Vitamina K | MΛN POWERS",
@@ -278,7 +278,7 @@ export const productSeoConfigs: Record<number, SEOConfig> = {
     ogTitle: "Calcio + Magnesio Vitamina K | MΛN POWERS",
     ogDescription:
       "Calcio + Magnesio Vitamina K es una combinación de nutrientes esenciales para el bienestar del cuerpo. El calcio ayuda a fortalecer los músculos y las articulaciones, mientras que el magnesio mejora la función muscular y la sensación de cuerpo. La vitamina K es crucial para el funcionamiento del sistema nervioso y muscular, y ayuda a prevenir lesiones y enfermedades. Esta combinación nutricional es esencial para mejorar el rendimiento deportivo y prevenir lesiones en atletas profesionales.",
-    ogImage: "/products/CALCIO-MAGNESIO-VITAMINA-K-MAN-POWERS.jpg",
+    ogImage: "/products/CALCIO-MAGNESIO-VITAMINA-K-MAN-POWERS.avif",
   },
   18: {
     title: "Crema Efecto Frío | MΛN POWERS",
@@ -288,7 +288,7 @@ export const productSeoConfigs: Record<number, SEOConfig> = {
     ogTitle: "Crema Efecto Frío | MΛN POWERS",
     ogDescription:
       "Termina el asalto y dedica un minuto a bajar pulsaciones. Nuestra crema efecto frío aporta una sensación refrescante que ayuda a aliviar la fatiga en antebrazos, hombros y piernas después de tirar. Se absorbe rápido y acompaña la recuperación entre combates.",
-    ogImage: "/products/CREMA-EFECTO-FRIO.jpg",
+    ogImage: "/products/CREMA-EFECTO-FRIO.avif",
   },
   19: {
     title: "Agarre técnico Profesional | MΛN POWERS",
@@ -299,7 +299,7 @@ export const productSeoConfigs: Record<number, SEOConfig> = {
     ogTitle: "Agarre técnico Profesional | MΛN POWERS",
     ogDescription:
       "Gel de agarre técnico para golf, diseñado para mejorar la sujeción del palo en condiciones de humedad, sudor o tensión competitiva. Su fórmula crea una película antideslizante que mantiene las manos firmes y secas, incrementando el control del swing y la precisión en el impacto.",
-    ogImage: "/products/GEL-AGARRE-TECNICO.jpg",
+    ogImage: "/products/GEL-AGARRE-TECNICO.avif",
   },
   20: {
     title: "Crema Efecto Frío | MΛN POWERS",
@@ -309,7 +309,7 @@ export const productSeoConfigs: Record<number, SEOConfig> = {
     ogTitle: "Crema Efecto Frío | MΛN POWERS",
     ogDescription:
       "Tras el campo de prácticas o los últimos nueve hoyos, refresca antebrazos y hombros. Esta crema efecto frío ayuda a aliviar la fatiga del swing repetido, dejando la piel cómoda y lista para seguir.",
-    ogImage: "/products/CREMA-EFECTO-FRIO-GOLF.jpg",
+    ogImage: "/products/CREMA-EFECTO-FRIO-GOLF.avif",
   },
   21: {
     title: "Cremigel | MΛN POWERS",
@@ -319,7 +319,7 @@ export const productSeoConfigs: Record<number, SEOConfig> = {
     ogTitle: "Cremigel | MΛN POWERS",
     ogDescription:
       "Al terminar la vuelta, mima zona lumbar, hombros y antebrazos. Este cremigel de masaje ofrece el deslizamiento justo para trabajar la tensión del swing, con absorción rápida para una recuperación cómoda antes de la siguiente ronda.",
-    ogImage: "/products/CREMIGEL-MASAJE-MUSCULAR-GOLF.jpg",
+    ogImage: "/products/CREMIGEL-MASAJE-MUSCULAR-GOLF.avif",
   },
   22: {
     title: "Gel efecto calor | MΛN POWERS",
@@ -329,7 +329,7 @@ export const productSeoConfigs: Record<number, SEOConfig> = {
     ogTitle: "Gel efecto calor | MΛN POWERS",
     ogDescription:
       "Antes de salir al tee 1, activa la movilidad. El gel efecto calor aporta una sensación térmica gradual en hombros, muñecas y espalda para preparar el cuerpo, sin dejar sensación pegajosa ni molestar el agarre.",
-    ogImage: "/products/GEL-EFECTO-CALOR-GOLF.jpg",
+    ogImage: "/products/GEL-EFECTO-CALOR-GOLF.avif",
   },
   23: {
     title: "Champú Anti-Caída Fortalecedor | MΛN POWERS",
@@ -339,7 +339,7 @@ export const productSeoConfigs: Record<number, SEOConfig> = {
     ogTitle: "Champú Anti-Caída Fortalecedor | MΛN POWERS",
     ogDescription:
       "Sol, viento y horas en el campo pueden castigar el cabello. Este champú fortalecedor limpia sudor y residuos con suavidad, dejando el cuero cabelludo fresco tras la ronda.",
-    ogImage: "/products/CHAMPÚ-ANTICAIDA-GOLF.jpg",
+    ogImage: "/products/CHAMPÚ-ANTICAIDA-GOLF.avif",
   },
 };
 

@@ -23,9 +23,10 @@ import Comercial from "./pages/Comercial";
 function AppInner() {
   const location = useLocation();
   const isLanding = location.pathname.startsWith("/landing");
+  const isComercial = location.pathname.startsWith("/comercial");
   return (
     <>
-      {!isLanding && <ChatWidget />}
+      {!isLanding && !isComercial && <ChatWidget />}
       <CookieConsent />
       <Routes>
         <Route path="/" element={<HomePage />} />

@@ -635,9 +635,6 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                               <span className="text-black font-semibold">
                                 €{parsePrice(item.price).toFixed(2)}
                               </span>
-                              <span className="text-[10px] text-gray-500">
-                                IVA incluido
-                              </span>
                             </div>
                           ) : (
                             <span className="text-black/50 text-sm">
@@ -688,7 +685,7 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
               </div>
               <div className="flex items-center justify-between mb-3">
                 <span className="text-black/70">
-                  {t("cart.total")} <span className="text-xs">(incl. IVA)</span>
+                  {t("cart.total")}
                 </span>
                 <span className="text-2xl font-bold">
                   €{totalPrice.toFixed(2)}
@@ -776,9 +773,6 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                               </span>
                               <div className="flex flex-col items-end">
                                 <span>€{itemTotal.toFixed(2)}</span>
-                                <span className="text-[10px] text-gray-500">
-                                  IVA incluido
-                                </span>
                               </div>
                             </div>
                           );
@@ -813,9 +807,6 @@ const CartWidget: React.FC<{ className?: string; hideSidebar?: boolean }> = ({
                           <div className="font-semibold flex justify-between text-black">
                             <span>
                               {t("cart.total")}{" "}
-                              <span className="text-xs font-normal">
-                                (IVA incluido)
-                              </span>
                               :
                             </span>
                             <span>€{totalPrice.toFixed(2)}</span>

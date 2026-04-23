@@ -1,5 +1,10 @@
 User-agent: *
 Allow: /
 Disallow: /backend/
+Disallow: /colaboradores/
+Disallow: /payment-result
+Disallow: /pago-ok
+Disallow: /pago-ko
+Disallow: /comercial
 
 Sitemap: https://manpowers.es/sitemap.xml
