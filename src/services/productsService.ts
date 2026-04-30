@@ -10,6 +10,7 @@ interface Product {
     en: string;
     ca?: string;
   };
+  ficha_tecnica?: string;
   objectives?: {
     es: string[];
     en: string[];
@@ -112,6 +113,7 @@ type RawProduct = {
   id?: unknown;
   name?: Product["name"];
   description?: Product["description"];
+  ficha_tecnica?: unknown;
   objectives?: Product["objectives"];
   nutritionalValues?: Product["nutritionalValues"];
   application?: Product["application"];
@@ -242,6 +244,10 @@ class ProductsService {
                   : 0,
             name: p.name || { es: "", en: "" },
             description: p.description || { es: "", en: "" },
+            ficha_tecnica:
+              typeof p.ficha_tecnica === "string" && p.ficha_tecnica.trim()
+                ? p.ficha_tecnica.trim()
+                : undefined,
             objectives: p.objectives,
             discount_price: finalDiscountPrice,
             original_price: finalOriginalPrice,
@@ -348,6 +354,10 @@ class ProductsService {
           id: p.id + 10000, // Offset IDs to avoid collision
           name: p.name,
           description: p.description,
+          ficha_tecnica:
+            typeof p.ficha_tecnica === "string" && p.ficha_tecnica.trim()
+              ? p.ficha_tecnica.trim()
+              : undefined,
           story: p.story,
           ingredients: p.ingredients,
           price: finalPrice,

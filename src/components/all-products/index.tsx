@@ -185,7 +185,6 @@ const ProductSlider: React.FC<{
   const { t } = useTranslation();
   const [canLeft, setCanLeft] = useState<boolean>(false);
   const [canRight, setCanRight] = useState<boolean>(false);
-  const [pageWidth, setPageWidth] = useState<number | undefined>(undefined);
   const [perPage, setPerPage] = useState<number>(4);
   const [scrollProgress, setScrollProgress] = useState<number>(0);
 
@@ -218,12 +217,8 @@ const ProductSlider: React.FC<{
     const firstCard = el.querySelector<HTMLElement>(".rp-card");
     if (firstCard) cardWidthRef.current = firstCard.offsetWidth || 256;
 
-    const GAP = 24;
     const pp = window.innerWidth < 768 ? 1 : 4;
-    const width = cardWidthRef.current * pp + GAP * (pp - 1);
-
     setPerPage(pp);
-    setPageWidth(width);
     updateScrollState();
   }, [updateScrollState]);
 
@@ -337,8 +332,7 @@ const ProductSlider: React.FC<{
       <div className="relative group/carousel">
         <div
           ref={containerRef}
-          className="overflow-x-auto no-scrollbar mx-auto snap-x snap-mandatory px-4 md:px-0 pb-8"
-          style={pageWidth ? { width: pageWidth } : undefined}
+          className="overflow-x-auto no-scrollbar max-w-7xl mx-auto snap-x snap-mandatory px-4 md:px-0 pb-8"
         >
           <div className="flex gap-6">
             {loading ? (

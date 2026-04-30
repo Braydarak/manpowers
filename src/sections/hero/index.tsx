@@ -13,14 +13,8 @@ const Hero: React.FC = () => {
     useScrollAnimation();
   const { ref: buttonRef } = useScrollAnimation();
 
-  const desktopFlyers = useMemo(
-    () => ["/flyer-maca.avif", "/flyer-tiro.avif"],
-    [],
-  );
-  const mobileFlyers = useMemo(
-    () => ["/flyer-maca-mobile.avif", "/flyer-tiro-mobile.avif"],
-    [],
-  );
+  const desktopFlyers = useMemo(() => ["/flyer-maca.avif"], []);
+  const mobileFlyers = useMemo(() => ["/flyer-maca-mobile.avif"], []);
   const [idx, setIdx] = useState(0);
   const autoIntervalRef = useRef<number | null>(null);
   const restartTimeoutRef = useRef<number | null>(null);
@@ -125,25 +119,27 @@ const Hero: React.FC = () => {
           </picture>
         </div>
 
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-[120] hidden md:flex items-center gap-2">
-          {desktopFlyers.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              onClick={() => handleDotClick(i)}
-              aria-label={`Cambiar a slide ${i + 1}`}
-              aria-current={i === idx}
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") handleDotClick(i);
-              }}
-              className={
-                `h-3 w-3 rounded-full transition-all duration-300 cursor-pointer ` +
-                (i === idx ? "bg-white" : "bg-white/50 hover:bg-white/80")
-              }
-            />
-          ))}
-        </div>
+        {desktopFlyers.length > 1 && (
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-[120] hidden md:flex items-center gap-2">
+            {desktopFlyers.map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => handleDotClick(i)}
+                aria-label={`Cambiar a slide ${i + 1}`}
+                aria-current={i === idx}
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") handleDotClick(i);
+                }}
+                className={
+                  `h-3 w-3 rounded-full transition-all duration-300 cursor-pointer ` +
+                  (i === idx ? "bg-white" : "bg-white/50 hover:bg-white/80")
+                }
+              />
+            ))}
+          </div>
+        )}
 
         {/* Contenido del Hero */}
         <div className="relative z-30 flex flex-col items-center justify-center min-h-screen text-white px-4 sm:px-6 lg:px-8 xl:px-12 pt-16 sm:pt-50 w-full lg:w-[60%] lg:ml-auto">

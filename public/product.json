@@ -1,0 +1,90 @@
+{
+  "id": 2,
+  "name": {
+    "es": "Omega 3 + Vitamina E Premium",
+    "en": "Omega 3 + Vitamin E Premium",
+    "ca": "Omega 3 + Vitamina E Premium"
+  },
+  "url": "https://manpowers.es/product/omega-3",
+  "description": {
+    "es": "El Omega 3 de MΛN POWERS es una fuente concentrada de ácidos grasos esenciales EPA y DHA, extraídos de aceite de pescado de máxima pureza. Esta fórmula avanzada está reforzada con Vitamina E natural, que no solo garantiza la estabilidad del aceite frente a la oxidación, sino que potencia su efecto protector a nivel celular.",
+    "en": "MΛN POWERS Omega 3 is a concentrated source of essential fatty acids EPA and DHA, extracted from high-purity fish oil. This advanced formula is reinforced with natural Vitamin E, which helps stabilize the oil against oxidation and enhances its protective effect at the cellular level.",
+    "ca": "L’Omega 3 de MΛN POWERS és una font concentrada d’àcids grassos essencials EPA i DHA, extrets d’oli de peix de màxima puresa. Aquesta fórmula avançada està reforçada amb vitamina E natural, que ajuda a estabilitzar l’oli davant l’oxidació i potencia el seu efecte protector a nivell cel·lular."
+  },
+  "application": {
+    "es": "Tomar 1 perla al día, preferiblemente con la cena para maximizar su absorción.",
+    "en": "Take 1 softgel daily, preferably with dinner to maximize absorption.",
+    "ca": "Prendre 1 perla al dia, preferiblement amb el sopar per maximitzar-ne l’absorció."
+  },
+  "recommendations": {
+    "es": "Contiene pescado. No es apto para veganos ni vegetarianos. El proceso de fabricación incluye procedimientos de limpieza validados para minimizar el riesgo de contaminación cruzada.",
+    "en": "Contains fish. Not suitable for vegans or vegetarians. The manufacturing process includes validated cleaning procedures to minimize the risk of cross-contamination.",
+    "ca": "Conté peix. No és apte per a vegans ni vegetarians. El procés de fabricació inclou procediments de neteja validats per minimitzar el risc de contaminació creuada."
+  },
+  "category": { "es": "suplementos", "en": "supplements", "ca": "suplements" },
+  "image": "/products/OMEGA-3.avif",
+  "ficha_tecnica": "ficha-tecnica/omega-3.pdf",
+  "price": "8.50",
+  "size": "30 perlas",
+  "sportId": "multisport",
+  "available": true,
+  "rating": 4.0,
+  "votes": 64,
+  "pricesBySize": { "30 perlas": "8.50", "90 perlas": "21.80" },
+  "faqs": {
+    "es": [
+      {
+        "question": "¿Para qué sirve Omega 3 + Vitamina E?",
+        "answer": "Aporta EPA y DHA a partir de aceite de pescado, y se refuerza con vitamina E para apoyar el bienestar general y la protección celular."
+      },
+      {
+        "question": "¿Cómo contribuye a la salud cardiovascular?",
+        "answer": "El EPA y el DHA contribuyen al funcionamiento normal del corazón y la salud arterial."
+      },
+      {
+        "question": "¿Qué beneficios aporta para cerebro y visión?",
+        "answer": "El DHA es un componente estructural clave del cerebro y contribuye al mantenimiento de la visión en condiciones normales."
+      },
+      {
+        "question": "¿Cuál es la composición por dosis diaria (1 perla)?",
+        "answer": "Aceite de pescado 1000 mg, EPA 350 mg, DHA 250 mg y vitamina E 5 mg (42% VRN)."
+      }
+    ],
+    "en": [
+      {
+        "question": "What is Omega 3 + Vitamin E for?",
+        "answer": "It provides EPA and DHA from fish oil and is reinforced with vitamin E to support overall wellbeing and cellular protection."
+      },
+      {
+        "question": "How does it support cardiovascular health?",
+        "answer": "EPA and DHA contribute to normal heart function and arterial health."
+      },
+      {
+        "question": "How does it support cognition and vision?",
+        "answer": "DHA is a key structural component of the brain and contributes to the maintenance of normal vision."
+      },
+      {
+        "question": "What is the composition per daily serving (1 softgel)?",
+        "answer": "Fish oil 1000 mg, EPA 350 mg, DHA 250 mg, and vitamin E 5 mg (42% NRV)."
+      }
+    ],
+    "ca": [
+      {
+        "question": "Per a què serveix Omega 3 + Vitamina E?",
+        "answer": "Aporta EPA i DHA a partir d’oli de peix, i s’enriqueix amb vitamina E per donar suport al benestar general i la protecció cel·lular."
+      },
+      {
+        "question": "Com contribueix a la salut cardiovascular?",
+        "answer": "L’EPA i el DHA contribueixen al funcionament normal del cor i a la salut arterial."
+      },
+      {
+        "question": "Quins beneficis aporta per al cervell i la visió?",
+        "answer": "El DHA és un component estructural clau del cervell i contribueix al manteniment de la visió en condicions normals."
+      },
+      {
+        "question": "Quina és la composició per dosi diària (1 perla)?",
+        "answer": "Oli de peix 1000 mg, EPA 350 mg, DHA 250 mg i vitamina E 5 mg (42% VRN)."
+      }
+    ]
+  }
+}

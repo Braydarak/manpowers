@@ -5,8 +5,6 @@ export const PUBLIC_MEDIA_MANIFEST = {
     "esgrima.avif",
     "flyer-maca-mobile.avif",
     "flyer-maca.avif",
-    "flyer-tiro-mobile.avif",
-    "flyer-tiro.avif",
     "golf.avif",
     "MAN-BLANCO.png",
     "MAN-LOGO-BLANCO.png",
@@ -32,14 +30,11 @@ export const PUBLIC_MEDIA_MANIFEST = {
   "champu-tiro": [
     "champu-tiro/champu-shooting.jpeg"
   ],
-  "cinturon-piel": [
-    "cinturon-piel/CINTURÓN 3.png",
-    "cinturon-piel/CINTURÓN 4.png"
+  "cinturon-cuero/marron": [
+    "cinturon-cuero/marron/cinturon-cuero-marron.png"
   ],
-  "cinturon-tactico": [
-    "cinturon-tactico/CINTURÓN 1.png",
-    "cinturon-tactico/CINTURÓN 2.png",
-    "cinturon-tactico/CINTURÓN 5.png"
+  "cinturon-tactico/verde": [
+    "cinturon-tactico/verde/cinturon-tactico-verde.png"
   ],
   "gorras/azul": [
     "gorras/azul/GORRA AZUL.png"

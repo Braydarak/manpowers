@@ -10,7 +10,7 @@ type SectionId =
   | "recomendaciones";
 
 export interface AccordionProps {
-  description: string | React.ReactNode;
+  description?: string | React.ReactNode;
   objectives?: string | React.ReactNode;
   nutritionalValues?: string | React.ReactNode;
   application?: string | React.ReactNode;

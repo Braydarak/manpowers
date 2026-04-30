@@ -11,7 +11,7 @@ import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ShoppingCart } from "lucide-react";
+import { Download, ShoppingCart } from "lucide-react";
 import useLanguageUpdater from "../hooks/useLanguageUpdater";
 import useIsMobile from "../hooks/useIsMobile";
 import productsService, { type Product } from "../services/productsService";
@@ -130,6 +130,93 @@ const ProductDetailPage: React.FC = () => {
   }, [product, currentLanguage]);
   const displayColor =
     selectedColor ?? (colorOptions.length > 0 ? colorOptions[0] : null);
+
+  const accordionDescription = useMemo(() => {
+    const val =
+      product?.description?.[currentLanguage] ?? product?.description?.es;
+    return typeof val === "string" && val.trim() ? val : undefined;
+  }, [product, currentLanguage]);
+
+  const accordionNutritionalValues = useMemo(() => {
+    const val =
+      product?.nutritionalValues?.[currentLanguage] ??
+      product?.nutritionalValues?.es;
+    return typeof val === "string" && val.trim() ? val : undefined;
+  }, [product, currentLanguage]);
+
+  const accordionApplication = useMemo(() => {
+    const val =
+      product?.application?.[currentLanguage] ?? product?.application?.es;
+    return typeof val === "string" && val.trim() ? val : undefined;
+  }, [product, currentLanguage]);
+
+  const accordionRecommendations = useMemo(() => {
+    const val =
+      product?.recommendations?.[currentLanguage] ??
+      product?.recommendations?.es;
+    return typeof val === "string" && val.trim() ? val : undefined;
+  }, [product, currentLanguage]);
+
+  const accordionCautions = useMemo(() => {
+    const val = product?.cautions?.[currentLanguage] ?? product?.cautions?.es;
+    return typeof val === "string" && val.trim() ? val : undefined;
+  }, [product, currentLanguage]);
+
+  const accordionObjectives = useMemo(() => {
+    const list =
+      product?.objectives?.[currentLanguage] ?? product?.objectives?.es;
+    if (!Array.isArray(list) || list.length === 0) return undefined;
+    const normalized = list.filter((o) => typeof o === "string" && o.trim());
+    if (normalized.length === 0) return undefined;
+    return (
+      <ul className="list-disc ml-5 space-y-1">
+        {normalized.map((o, i) => (
+          <li key={i}>{o}</li>
+        ))}
+      </ul>
+    );
+  }, [product, currentLanguage]);
+
+  const accordionDefaultOpenId = useMemo(() => {
+    return accordionDescription
+      ? "descripcion"
+      : accordionObjectives
+        ? "objetivos"
+        : accordionNutritionalValues
+          ? "valores"
+          : accordionApplication
+            ? "aplicacion"
+            : accordionRecommendations
+              ? "recomendaciones"
+              : accordionCautions
+                ? "cautions"
+                : undefined;
+  }, [
+    accordionApplication,
+    accordionCautions,
+    accordionDescription,
+    accordionNutritionalValues,
+    accordionObjectives,
+    accordionRecommendations,
+  ]);
+
+  const hasAccordionContent =
+    accordionDescription !== undefined ||
+    accordionObjectives !== undefined ||
+    accordionNutritionalValues !== undefined ||
+    accordionApplication !== undefined ||
+    accordionRecommendations !== undefined ||
+    accordionCautions !== undefined;
+
+  const techSheetHref = useMemo(() => {
+    const raw = product?.ficha_tecnica;
+    if (typeof raw !== "string") return null;
+    const trimmed = raw.trim();
+    if (!trimmed) return null;
+    if (/^https?:\/\//i.test(trimmed)) return trimmed;
+    const normalized = trimmed.startsWith("/") ? trimmed : `/${trimmed}`;
+    return resolvePublicUrl(normalized);
+  }, [product]);
 
   const observerRef = useRef<IntersectionObserver | null>(null);
   const [areMainButtonsVisible, setAreMainButtonsVisible] = useState(true);
@@ -1291,6 +1378,18 @@ const ProductDetailPage: React.FC = () => {
                         {t("sports.addToCart")}
                       </button>
                     )}
+                    {techSheetHref && (
+                      <a
+                        href={techSheetHref}
+                        download
+                        className="sm:hidden inline-flex items-center justify-center gap-2 w-full rounded-lg bg-[var(--color-primary)] text-black border border-black/20 hover:shadow-md transition-all cursor-pointer px-5 py-3 font-semibold"
+                      >
+                        <Download className="w-4 h-4" aria-hidden="true" />
+                        <span className="text-sm whitespace-nowrap">
+                          Descargar ficha técnica
+                        </span>
+                      </a>
+                    )}
                   </div>
                   <button
                     type="button"
@@ -1310,64 +1409,78 @@ const ProductDetailPage: React.FC = () => {
                       )}
                     </span>
                   </button>
-                  <div className="flex items-center gap-3">
-                    <span className="text-xs sm:text-sm text-black/70">
-                      Compartir en
-                    </span>
-                    <button
-                      onClick={handleShareInstagram}
-                      className="flex md:hidden items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[var(--color-primary)] text-black border border-black/20 hover:shadow-md transition-all cursor-pointer"
-                      aria-label="Compartir en Instagram"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        viewBox="0 0 24 24"
-                        className="w-4 h-4 sm:w-5 sm:h-5"
-                        fill="none"
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <div className="flex items-center gap-3">
+                      <span className="text-xs sm:text-sm text-black/70">
+                        Compartir en
+                      </span>
+                      <button
+                        onClick={handleShareInstagram}
+                        className="flex md:hidden items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[var(--color-primary)] text-black border border-black/20 hover:shadow-md transition-all cursor-pointer"
+                        aria-label="Compartir en Instagram"
                       >
-                        <rect
-                          x="2"
-                          y="2"
-                          width="20"
-                          height="20"
-                          rx="6"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                        />
-                        <circle
-                          cx="12"
-                          cy="12"
-                          r="5"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                        />
-                        <circle cx="17" cy="7" r="1.2" fill="currentColor" />
-                      </svg>
-                    </button>
-                    <button
-                      onClick={handleShareWhatsApp}
-                      className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[var(--color-primary)] text-black border border-black/20 hover:shadow-md transition-all cursor-pointer"
-                      aria-label="Compartir en WhatsApp"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        viewBox="0 0 24 24"
-                        className="w-4 h-4 sm:w-5 sm:h-5"
-                        fill="none"
+                        <svg
+                          aria-hidden="true"
+                          viewBox="0 0 24 24"
+                          className="w-4 h-4 sm:w-5 sm:h-5"
+                          fill="none"
+                        >
+                          <rect
+                            x="2"
+                            y="2"
+                            width="20"
+                            height="20"
+                            rx="6"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          />
+                          <circle
+                            cx="12"
+                            cy="12"
+                            r="5"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          />
+                          <circle cx="17" cy="7" r="1.2" fill="currentColor" />
+                        </svg>
+                      </button>
+                      <button
+                        onClick={handleShareWhatsApp}
+                        className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[var(--color-primary)] text-black border border-black/20 hover:shadow-md transition-all cursor-pointer"
+                        aria-label="Compartir en WhatsApp"
                       >
-                        <path
-                          d="M12 3.2a8.3 8.3 0 00-7.2 12.5L4 21l5.5-1.7A8.3 8.3 0 1012 3.2z"
-                          stroke="currentColor"
-                          strokeWidth="1.6"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M9.8 9.5c.2-.4.3-.6.6-.6.2 0 .4 0 .6.1.2.2.5.7.6.9.1.2.1.3 0 .5s-.2.3-.3.4-.2.2-.1.3c.1.2.4.7.9 1.1.6.5 1.1.6 1.3.7.1 0 .3 0 .4-.2l.3-.3c.1-.1.2-.2.4-.1l1 .5c.2.1.5.2.5.4 0 .3-.2.9-.6 1.2-.4.3-.9.4-1.5.4-.4 0-.8 0-1.2-.1-.4-.1-1-.3-1.6-.7a7.2 7.2 0 01-2.2-2.1c-.2-.3-.6-.8-.8-1.4-.2-.6-.3-1-.3-1.4 0-.4.2-.8.4-1.1.2-.3.5-.4.7-.4.2 0 .5 0 .6.1z"
-                          fill="currentColor"
-                        />
-                      </svg>
-                    </button>
+                        <svg
+                          aria-hidden="true"
+                          viewBox="0 0 24 24"
+                          className="w-4 h-4 sm:w-5 sm:h-5"
+                          fill="none"
+                        >
+                          <path
+                            d="M12 3.2a8.3 8.3 0 00-7.2 12.5L4 21l5.5-1.7A8.3 8.3 0 1012 3.2z"
+                            stroke="currentColor"
+                            strokeWidth="1.6"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                          <path
+                            d="M9.8 9.5c.2-.4.3-.6.6-.6.2 0 .4 0 .6.1.2.2.5.7.6.9.1.2.1.3 0 .5s-.2.3-.3.4-.2.2-.1.3c.1.2.4.7.9 1.1.6.5 1.1.6 1.3.7.1 0 .3 0 .4-.2l.3-.3c.1-.1.2-.2.4-.1l1 .5c.2.1.5.2.5.4 0 .3-.2.9-.6 1.2-.4.3-.9.4-1.5.4-.4 0-.8 0-1.2-.1-.4-.1-1-.3-1.6-.7a7.2 7.2 0 01-2.2-2.1c-.2-.3-.6-.8-.8-1.4-.2-.6-.3-1-.3-1.4 0-.4.2-.8.4-1.1.2-.3.5-.4.7-.4.2 0 .5 0 .6.1z"
+                            fill="currentColor"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                    {techSheetHref && (
+                      <a
+                        href={techSheetHref}
+                        download
+                        className="hidden sm:inline-flex items-center gap-2 rounded-lg bg-[var(--color-primary)] text-black border border-black/20 hover:shadow-md transition-all cursor-pointer px-4 py-2"
+                      >
+                        <Download className="w-4 h-4" aria-hidden="true" />
+                        <span className="text-xs sm:text-sm font-semibold whitespace-nowrap">
+                          Descargar ficha técnica
+                        </span>
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
@@ -1379,52 +1492,17 @@ const ProductDetailPage: React.FC = () => {
                     : "opacity-0 translate-y-3"
                 }`}
               >
-                <Accordion
-                  description={
-                    product.description[currentLanguage] ||
-                    product.description.es
-                  }
-                  objectives={
-                    product.objectives &&
-                    (
-                      product.objectives[currentLanguage] ||
-                      product.objectives.es
-                    )?.length ? (
-                      <ul className="list-disc ml-5 space-y-1">
-                        {(
-                          product.objectives[currentLanguage] ||
-                          product.objectives.es
-                        )?.map((o, i) => (
-                          <li key={i}>{o}</li>
-                        ))}
-                      </ul>
-                    ) : undefined
-                  }
-                  nutritionalValues={
-                    product.nutritionalValues
-                      ? product.nutritionalValues[currentLanguage] ||
-                        product.nutritionalValues.es
-                      : undefined
-                  }
-                  application={
-                    product.application
-                      ? product.application[currentLanguage] ||
-                        product.application.es
-                      : undefined
-                  }
-                  recommendations={
-                    product.recommendations
-                      ? product.recommendations[currentLanguage] ||
-                        product.recommendations.es
-                      : undefined
-                  }
-                  cautions={
-                    product.cautions
-                      ? product.cautions[currentLanguage] || product.cautions.es
-                      : undefined
-                  }
-                  defaultOpenId="descripcion"
-                />
+                {hasAccordionContent && (
+                  <Accordion
+                    description={accordionDescription}
+                    objectives={accordionObjectives}
+                    nutritionalValues={accordionNutritionalValues}
+                    application={accordionApplication}
+                    recommendations={accordionRecommendations}
+                    cautions={accordionCautions}
+                    defaultOpenId={accordionDefaultOpenId}
+                  />
+                )}
                 <div className="hidden">
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                     <div className="flex items-center gap-2">
