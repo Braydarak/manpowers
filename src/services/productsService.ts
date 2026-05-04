@@ -1,3 +1,17 @@
+type NutritionalFactsRow = {
+  label: string;
+  value: string;
+};
+
+type NutritionalFactsByLang = {
+  es?: NutritionalFactsRow[];
+  en?: NutritionalFactsRow[];
+  ca?: NutritionalFactsRow[];
+  [key: string]: NutritionalFactsRow[] | undefined;
+};
+
+type NutritionalFactsValue = string | NutritionalFactsRow[] | NutritionalFactsByLang;
+
 interface Product {
   id: number;
   name: {
@@ -21,6 +35,7 @@ interface Product {
     en: string;
     ca?: string;
   };
+  nutritionalFacts?: NutritionalFactsValue;
   application?: {
     es: string;
     en: string;
@@ -116,6 +131,9 @@ type RawProduct = {
   ficha_tecnica?: unknown;
   objectives?: Product["objectives"];
   nutritionalValues?: Product["nutritionalValues"];
+  nutritionalFacts?: unknown;
+  nutritional_facts_json?: unknown;
+  nutritional_facts?: unknown;
   application?: Product["application"];
   recommendations?: Product["recommendations"];
   cautions?: Product["cautions"];
@@ -189,6 +207,50 @@ class ProductsService {
           if (cleaned === "") return undefined;
           const num = parseFloat(cleaned.replace(",", "."));
           return Number.isFinite(num) ? num : undefined;
+        };
+        const normalizeFactsRow = (row: unknown): NutritionalFactsRow | null => {
+          if (!row || typeof row !== "object") return null;
+          const r = row as Record<string, unknown>;
+          const label = typeof r.label === "string" ? r.label.trim() : "";
+          const value = typeof r.value === "string" ? r.value.trim() : "";
+          if (!label) return null;
+          return { label, value };
+        };
+        const parseFacts = (val: unknown): NutritionalFactsValue | undefined => {
+          if (val === null || val === undefined) return undefined;
+          if (typeof val === "string") {
+            const trimmed = val.trim();
+            if (!trimmed) return undefined;
+            if (trimmed.startsWith("{") || trimmed.startsWith("[")) {
+              try {
+                const parsed = JSON.parse(trimmed) as unknown;
+                return parseFacts(parsed) ?? trimmed;
+              } catch {
+                return trimmed;
+              }
+            }
+            return trimmed;
+          }
+          if (Array.isArray(val)) {
+            const rows = val
+              .map((r) => normalizeFactsRow(r))
+              .filter((r): r is NutritionalFactsRow => !!r);
+            return rows.length ? rows : undefined;
+          }
+          if (typeof val === "object") {
+            const obj = val as Record<string, unknown>;
+            const out: NutritionalFactsByLang = {};
+            (["es", "en", "ca"] as const).forEach((lang) => {
+              const rawList = obj[lang];
+              if (!Array.isArray(rawList)) return;
+              const rows = rawList
+                .map((r) => normalizeFactsRow(r))
+                .filter((r): r is NutritionalFactsRow => !!r);
+              if (rows.length) out[lang] = rows;
+            });
+            return Object.keys(out).length ? out : undefined;
+          }
+          return undefined;
         };
 
         const arr = raw.map((p) => {
@@ -266,6 +328,9 @@ class ProductsService {
             sku: typeof p.sku === "string" ? p.sku : "",
             amazonLinks: p.amazonLinks,
             nutritionalValues: p.nutritionalValues,
+            nutritionalFacts: parseFacts(
+              p.nutritionalFacts ?? p.nutritional_facts_json ?? p.nutritional_facts,
+            ),
             application: p.application,
             recommendations: p.recommendations,
             cautions: p.cautions,

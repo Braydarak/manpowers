@@ -562,7 +562,7 @@ const Shops: React.FC<Props> = ({ id }) => {
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 drop-shadow-[0_0_20px_rgba(0,0,0,0.15)]">
             {t("shops.sectionTitle")}
           </h2>
-          <div className="w-24 h-1 bg-[var(--color-secondary)] mx-auto mb-6" />
+          <div className="w-24 h-0.5 bg-[var(--color-secondary)] mx-auto mb-6" />
           <p className="text-xl md:text-2xl text-black/70 max-w-3xl mx-auto leading-relaxed">
             {t("shops.sectionDescription")}
           </p>

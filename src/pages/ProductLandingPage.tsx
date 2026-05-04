@@ -5,6 +5,7 @@ import productsService, { type Product } from "../services/productsService";
 import CartWidget from "../components/cart/CartWidget";
 import Accordion from "../components/accordion";
 import InfoStripe from "../components/info/InfoStripe";
+import NutricionalTable from "../components/nutricionalTable";
 
 const ProductLandingPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -301,10 +302,22 @@ const ProductLandingPage: React.FC = () => {
                         ) : undefined
                       }
                       nutritionalValues={
-                        product.nutritionalValues
-                          ? product.nutritionalValues[currentLanguage] ||
-                            product.nutritionalValues.es
-                          : undefined
+                        (typeof product.nutritionalFacts === "string"
+                          ? product.nutritionalFacts.trim()
+                          : Array.isArray(product.nutritionalFacts)
+                            ? product.nutritionalFacts.length > 0
+                            : product.nutritionalFacts &&
+                                typeof product.nutritionalFacts === "object"
+                              ? Object.keys(product.nutritionalFacts).length > 0
+                              : false) ? (
+                          <NutricionalTable
+                            data={product.nutritionalFacts}
+                            language={currentLanguage}
+                          />
+                        ) : product.nutritionalValues ? (
+                          product.nutritionalValues[currentLanguage] ||
+                          product.nutritionalValues.es
+                        ) : undefined
                       }
                       application={
                         product.application

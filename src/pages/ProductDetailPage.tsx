@@ -18,10 +18,12 @@ import productsService, { type Product } from "../services/productsService";
 import { updateSEOTags } from "../utils/seoConfig";
 import { PUBLIC_MEDIA_MANIFEST } from "../generated/publicMediaManifest";
 import Accordion from "../components/accordion";
+import NutricionalTable from "../components/nutricionalTable";
 import RecommendedTogether from "../components/recommended-together";
 import Faq from "../components/faq";
 import RelatedProducts from "../components/related-products";
 import InfoStripe from "../components/info/InfoStripe";
+import SuplementsDetails from "./SuplementsDetails";
 
 const Shops = lazy(() => import("../sections/shops"));
 
@@ -144,6 +146,30 @@ const ProductDetailPage: React.FC = () => {
     return typeof val === "string" && val.trim() ? val : undefined;
   }, [product, currentLanguage]);
 
+  const nutritionalFacts = useMemo(() => {
+    const v = product?.nutritionalFacts;
+    if (v === null || v === undefined) return undefined;
+    if (typeof v === "string") {
+      const t = v.trim();
+      return t ? t : undefined;
+    }
+    if (Array.isArray(v)) {
+      return v.length ? v : undefined;
+    }
+    if (typeof v === "object") {
+      return Object.keys(v).length ? v : undefined;
+    }
+    return undefined;
+  }, [product?.nutritionalFacts]);
+
+  const accordionNutritionalContent = useMemo(() => {
+    if (nutritionalFacts)
+      return (
+        <NutricionalTable data={nutritionalFacts} language={currentLanguage} />
+      );
+    return accordionNutritionalValues;
+  }, [accordionNutritionalValues, currentLanguage, nutritionalFacts]);
+
   const accordionApplication = useMemo(() => {
     const val =
       product?.application?.[currentLanguage] ?? product?.application?.es;
@@ -182,7 +208,7 @@ const ProductDetailPage: React.FC = () => {
       ? "descripcion"
       : accordionObjectives
         ? "objetivos"
-        : accordionNutritionalValues
+        : accordionNutritionalContent
           ? "valores"
           : accordionApplication
             ? "aplicacion"
@@ -195,7 +221,7 @@ const ProductDetailPage: React.FC = () => {
     accordionApplication,
     accordionCautions,
     accordionDescription,
-    accordionNutritionalValues,
+    accordionNutritionalContent,
     accordionObjectives,
     accordionRecommendations,
   ]);
@@ -203,7 +229,7 @@ const ProductDetailPage: React.FC = () => {
   const hasAccordionContent =
     accordionDescription !== undefined ||
     accordionObjectives !== undefined ||
-    accordionNutritionalValues !== undefined ||
+    accordionNutritionalContent !== undefined ||
     accordionApplication !== undefined ||
     accordionRecommendations !== undefined ||
     accordionCautions !== undefined;
@@ -802,6 +828,19 @@ const ProductDetailPage: React.FC = () => {
     return names[s] || s;
   })();
 
+  const isSupplement = useMemo(() => {
+    if (!product) return false;
+    const category = product.category;
+    if (!category) return false;
+    const candidates =
+      typeof category === "string"
+        ? [category]
+        : [category.es, category.en, category.ca].filter(
+            (v) => typeof v === "string",
+          );
+    return candidates.some((c) => c?.toLowerCase().includes("suplement"));
+  }, [product]);
+
   return (
     <div className="flex flex-col min-h-screen bg-[var(--color-primary)] text-black">
       <Header />
@@ -810,8 +849,8 @@ const ProductDetailPage: React.FC = () => {
           enter ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
-          {loading ? (
+        {loading ? (
+          <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
             <div className="py-24">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div className="animate-pulse bg-black/5 rounded-xl h-[360px]"></div>
@@ -823,7 +862,9 @@ const ProductDetailPage: React.FC = () => {
                 </div>
               </div>
             </div>
-          ) : error ? (
+          </div>
+        ) : error ? (
+          <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
             <div className="py-20 text-center">
               <h2 className="text-2xl font-bold mb-4">{error}</h2>
               <button
@@ -833,8 +874,21 @@ const ProductDetailPage: React.FC = () => {
                 {t("cart.back")}
               </button>
             </div>
-          ) : product ? (
-            <>
+          </div>
+        ) : product && isSupplement ? (
+          <SuplementsDetails
+            product={product}
+            currentLanguage={currentLanguage}
+            mediaItems={mediaItems}
+            activeMediaIndex={activeMediaIndex}
+            setActiveMediaIndex={setActiveMediaIndex}
+            selectedSize={selectedSize}
+            setSelectedSize={setSelectedSize}
+            getPriceForSize={getPriceForSize}
+          />
+        ) : product ? (
+          <>
+            <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
               <section className="py-6 mt-15 md:mt-24">
                 <div className="w-full mb-5">
                   <div className="w-full border border-black/10 rounded-xl px-4 py-2.5 flex items-center justify-center text-center">
@@ -1496,7 +1550,7 @@ const ProductDetailPage: React.FC = () => {
                   <Accordion
                     description={accordionDescription}
                     objectives={accordionObjectives}
-                    nutritionalValues={accordionNutritionalValues}
+                    nutritionalValues={accordionNutritionalContent}
                     application={accordionApplication}
                     recommendations={accordionRecommendations}
                     cautions={accordionCautions}
@@ -1646,12 +1700,8 @@ const ProductDetailPage: React.FC = () => {
                     {/* Placeholder for removed sticky bar */}
                   </div>
                 )}
-            </>
-          ) : null}
-        </div>
-        <InfoStripe />
-        {product && (
-          <>
+            </div>
+            <InfoStripe />
             <div className="w-full border-t border-black/10">
               <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-8">
                 <div className="text-2xl md:text-3xl font-extrabold mb-6 text-center text-[var(--color-secondary)]">
@@ -1690,9 +1740,10 @@ const ProductDetailPage: React.FC = () => {
               </div>
             </div>
           </>
-        )}
+        ) : null}
       </main>
       {product &&
+        !isSupplement &&
         product.available &&
         !checkoutOpenGlobal &&
         !menuOpenGlobal &&
